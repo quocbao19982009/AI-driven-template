@@ -1,0 +1,19 @@
+{
+  "cSpell.words": ["Serilog"],
+  "files.readonlyInclude": {
+    "**/routeTree.gen.ts": true,
+    "**/api/generated/**": true
+  },
+  "files.watcherExclude": {
+    "**/routeTree.gen.ts": true
+  },
+  "search.exclude": {
+    "**/routeTree.gen.ts": true
+  },
+  "i18n-ally.localesPaths": ["frontend/src/locales"],
+  "i18n-ally.keystyle": "nested",
+  "i18n-ally.sourceLanguage": "en",
+  "i18n-ally.displayLanguage": "en",
+  "i18n-ally.enabledFrameworks": ["react-i18next"],
+  "i18n-ally.namespace": false
+}

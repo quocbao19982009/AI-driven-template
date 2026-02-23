@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "editorconfig.editorconfig",
+    "streetsidesoftware.code-spell-checker",
+    "mikestead.dotenv",
+    "dbaeumer.vscode-eslint",
+    "lokalise.i18n-ally",
+    "esbenp.prettier-vscode",
+    "rvest.vs-code-prettier-eslint",
+    "bradlc.vscode-tailwindcss"
+  ]
+}

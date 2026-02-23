@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dotnet build:*)",
+      "Bash(dotnet new:*)",
+      "Bash(dotnet sln:*)",
+      "Bash(dotnet add reference:*)",
+      "Bash(dotnet restore:*)",
+      "Bash(cd:*)",
+      "Bash(npx tsc:*)",
+      "mcp__shadcn__get_add_command_for_items",
+      "Bash(npx shadcn@latest add:*)",
+      "Bash(npx vitest run)",
+      "Bash(cat:*)",
+      "Bash(npm run build:*)",
+      "Bash(date:*)",
+      "Bash(npm run test:run:*)",
+      "Bash(npm install:*)",
+      "Bash(npm run lint:*)"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "shadcn",
+    "context7"
+  ]
+}

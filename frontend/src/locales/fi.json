@@ -1,0 +1,117 @@
+{
+  "common": {
+    "cancel": "Peruuta",
+    "save": "Tallenna muutokset",
+    "create": "Luo",
+    "delete": "Poista",
+    "edit": "Muokkaa",
+    "saving": "Tallennetaan...",
+    "deleting": "Poistetaan...",
+    "previous": "Edellinen",
+    "next": "Seuraava",
+    "page": "Sivu {{page}} / {{total}}"
+  },
+  "nav": {
+    "home": "Etusivu",
+    "about": "Tietoja",
+    "features": "Ominaisuudet",
+    "todos": "Tehtävät"
+  },
+  "features": {
+    "title": "Ominaisuudet",
+    "description": "Hallinnoi sovelluksesi ominaisuuksia.",
+    "newFeature": "Uusi ominaisuus",
+    "table": {
+      "id": "ID",
+      "name": "Nimi",
+      "createdAt": "Luotu",
+      "empty": "Ei ominaisuuksia. Luo ensimmäinen aloittaaksesi."
+    },
+    "form": {
+      "createTitle": "Luo ominaisuus",
+      "editTitle": "Muokkaa ominaisuutta",
+      "createDescription": "Täytä tiedot luodaksesi uuden ominaisuuden.",
+      "editDescription": "Päivitä ominaisuuden tiedot alla.",
+      "nameLabel": "Nimi",
+      "namePlaceholder": "Ominaisuuden nimi"
+    },
+    "delete": {
+      "title": "Poista ominaisuus",
+      "description": "Haluatko varmasti poistaa <strong>{{name}}</strong>? Tätä toimintoa ei voi peruuttaa."
+    },
+    "toast": {
+      "created": "Ominaisuus luotu onnistuneesti.",
+      "createError": "Ominaisuuden luominen epäonnistui.",
+      "updated": "Ominaisuus päivitetty onnistuneesti.",
+      "updateError": "Ominaisuuden päivittäminen epäonnistui.",
+      "deleted": "Ominaisuus poistettu onnistuneesti.",
+      "deleteError": "Ominaisuuden poistaminen epäonnistui."
+    }
+  },
+  "todos": {
+    "title": "Tehtävät",
+    "description": "Hallinnoi tehtäviäsi ja to-do-listasi.",
+    "newTodo": "Uusi tehtävä",
+    "searchPlaceholder": "Hae tehtäviä...",
+    "table": {
+      "id": "ID",
+      "title": "Otsikko",
+      "description": "Kuvaus",
+      "priority": "Prioriteetti",
+      "dueDate": "Määräpäivä",
+      "status": "Tila",
+      "createdAt": "Luotu",
+      "empty": "Ei tehtäviä. Luo ensimmäinen aloittaaksesi."
+    },
+    "priority": {
+      "low": "Matala",
+      "medium": "Keskitaso",
+      "high": "Korkea"
+    },
+    "filter": {
+      "status": {
+        "all": "Kaikki",
+        "active": "Aktiiviset",
+        "completed": "Valmiit"
+      },
+      "priority": {
+        "all": "Kaikki prioriteetit",
+        "low": "Matala",
+        "medium": "Keskitaso",
+        "high": "Korkea"
+      }
+    },
+    "form": {
+      "createTitle": "Luo tehtävä",
+      "editTitle": "Muokkaa tehtävää",
+      "createDescription": "Täytä tiedot luodaksesi uuden tehtävän.",
+      "editDescription": "Päivitä tehtävän tiedot alla.",
+      "titleLabel": "Otsikko",
+      "titlePlaceholder": "Mitä pitää tehdä?",
+      "descriptionLabel": "Kuvaus",
+      "descriptionPlaceholder": "Valinnaiset lisätiedot...",
+      "priorityLabel": "Prioriteetti",
+      "dueDateLabel": "Määräpäivä"
+    },
+    "delete": {
+      "title": "Poista tehtävä",
+      "description": "Haluatko varmasti poistaa <strong>{{title}}</strong>? Tätä toimintoa ei voi peruuttaa.",
+      "confirmPrefix": "Haluatko varmasti poistaa",
+      "confirmSuffix": "Tätä toimintoa ei voi peruuttaa."
+    },
+    "actions": {
+      "markDone": "Merkitse valmiiksi",
+      "markActive": "Merkitse aktiiviseksi"
+    },
+    "toast": {
+      "created": "Tehtävä luotu onnistuneesti.",
+      "createError": "Tehtävän luominen epäonnistui.",
+      "updated": "Tehtävä päivitetty onnistuneesti.",
+      "updateError": "Tehtävän päivittäminen epäonnistui.",
+      "deleted": "Tehtävä poistettu onnistuneesti.",
+      "deleteError": "Tehtävän poistaminen epäonnistui.",
+      "toggled": "Tehtävän tila päivitetty.",
+      "toggleError": "Tehtävän tilan päivittäminen epäonnistui."
+    }
+  }
+}

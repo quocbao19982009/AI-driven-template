@@ -1,0 +1,117 @@
+{
+  "common": {
+    "cancel": "Cancel",
+    "save": "Save Changes",
+    "create": "Create",
+    "delete": "Delete",
+    "edit": "Edit",
+    "saving": "Saving...",
+    "deleting": "Deleting...",
+    "previous": "Previous",
+    "next": "Next",
+    "page": "Page {{page}} of {{total}}"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "features": "Features",
+    "todos": "Todos"
+  },
+  "features": {
+    "title": "Features",
+    "description": "Manage your application features.",
+    "newFeature": "New Feature",
+    "table": {
+      "id": "ID",
+      "name": "Name",
+      "createdAt": "Created At",
+      "empty": "No features found. Create one to get started."
+    },
+    "form": {
+      "createTitle": "Create Feature",
+      "editTitle": "Edit Feature",
+      "createDescription": "Fill in the details to create a new feature.",
+      "editDescription": "Update the feature details below.",
+      "nameLabel": "Name",
+      "namePlaceholder": "Feature name"
+    },
+    "delete": {
+      "title": "Delete Feature",
+      "description": "Are you sure you want to delete <strong>{{name}}</strong>? This action cannot be undone."
+    },
+    "toast": {
+      "created": "Feature created successfully.",
+      "createError": "Failed to create feature.",
+      "updated": "Feature updated successfully.",
+      "updateError": "Failed to update feature.",
+      "deleted": "Feature deleted successfully.",
+      "deleteError": "Failed to delete feature."
+    }
+  },
+  "todos": {
+    "title": "Todos",
+    "description": "Manage your tasks and to-do items.",
+    "newTodo": "New Todo",
+    "searchPlaceholder": "Search todos...",
+    "table": {
+      "id": "ID",
+      "title": "Title",
+      "description": "Description",
+      "priority": "Priority",
+      "dueDate": "Due Date",
+      "status": "Status",
+      "createdAt": "Created At",
+      "empty": "No todos found. Create one to get started."
+    },
+    "priority": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High"
+    },
+    "filter": {
+      "status": {
+        "all": "All",
+        "active": "Active",
+        "completed": "Completed"
+      },
+      "priority": {
+        "all": "All Priorities",
+        "low": "Low",
+        "medium": "Medium",
+        "high": "High"
+      }
+    },
+    "form": {
+      "createTitle": "Create Todo",
+      "editTitle": "Edit Todo",
+      "createDescription": "Fill in the details to create a new todo.",
+      "editDescription": "Update the todo details below.",
+      "titleLabel": "Title",
+      "titlePlaceholder": "What needs to be done?",
+      "descriptionLabel": "Description",
+      "descriptionPlaceholder": "Optional details...",
+      "priorityLabel": "Priority",
+      "dueDateLabel": "Due Date"
+    },
+    "delete": {
+      "title": "Delete Todo",
+      "description": "Are you sure you want to delete <strong>{{title}}</strong>? This action cannot be undone.",
+      "confirmPrefix": "Are you sure you want to delete",
+      "confirmSuffix": "This action cannot be undone."
+    },
+    "actions": {
+      "markDone": "Mark as Done",
+      "markActive": "Mark as Active"
+    },
+    "toast": {
+      "created": "Todo created successfully.",
+      "createError": "Failed to create todo.",
+      "updated": "Todo updated successfully.",
+      "updateError": "Failed to update todo.",
+      "deleted": "Todo deleted successfully.",
+      "deleteError": "Failed to delete todo.",
+      "toggled": "Todo status updated.",
+      "toggleError": "Failed to update todo status."
+    }
+  }
+}
