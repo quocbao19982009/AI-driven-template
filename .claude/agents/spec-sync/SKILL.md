@@ -58,7 +58,7 @@ Map changed files to feature names.
 
 For each affected feature, read:
 ```
-feature_docs/feature-spec-[feature-name].md
+feature_docs/[feature-name]/feature-spec-[feature-name].md
 ```
 
 If no spec exists, note this — you can create one using `feature-spec-feature-example.md` as the template.

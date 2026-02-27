@@ -16,10 +16,10 @@ Scaffold the complete backend for the `$ARGUMENTS` feature.
 
 Read the feature spec:
 ```
-feature_docs/feature-spec-$ARGUMENTS.md
+feature_docs/$ARGUMENTS/feature-spec-$ARGUMENTS.md
 ```
 If this file does not exist, **stop immediately** and tell the user:
-> "No spec found at `feature_docs/feature-spec-$ARGUMENTS.md`. Create one first with `/create-spec $ARGUMENTS`."
+> "No spec found at `feature_docs/$ARGUMENTS/feature-spec-$ARGUMENTS.md`. Create one first with `/create-spec $ARGUMENTS`."
 
 ### Step P2: Completeness gate — scan for unresolved markers
 
@@ -35,7 +35,7 @@ If ANY markers are found, **stop immediately** with this refusal (do NOT proceed
 >
 > [List every found marker verbatim, one per line, prefixed with the nearest `##` or `###` heading it appears under]
 >
-> Run `/clarify-spec $ARGUMENTS` to resolve them interactively, or edit `feature_docs/feature-spec-$ARGUMENTS.md` directly.
+> Run `/clarify-spec $ARGUMENTS` to resolve them interactively, or edit `feature_docs/$ARGUMENTS/feature-spec-$ARGUMENTS.md` directly.
 
 Only proceed to Step 1 when no markers remain.
 

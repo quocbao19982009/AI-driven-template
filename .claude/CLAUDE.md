@@ -87,7 +87,7 @@ Ask all questions in a single message. Do not start coding until requirements ar
 
 ## Feature Spec Sync (ALWAYS DO THIS)
 
-Specs live in `feature_docs/` — one file per feature, no separate `architectures/` folder. Each spec is the single source of truth combining behavior and architecture.
+Specs live in `feature_docs/` — one subfolder per feature (e.g. `feature_docs/factories/feature-spec-factories.md`). Templates live in `feature_docs/_templates/`. Each spec is the single source of truth combining behavior and architecture.
 
 **Spec section order:**
 
@@ -95,7 +95,7 @@ Specs live in `feature_docs/` — one file per feature, no separate `architectur
 
 **Workflow for every request (DO NOT SKIP):**
 
-1. Read `feature_docs/FEATURES.md` — identify the feature
+1. Read `feature_docs/FEATURES.md` — identify the feature and its spec path
 2. **If the feature is NEW (no spec file exists yet):**
    - Use the `/create-spec` skill to create the spec file first
    - **Do NOT write any code until the spec file exists and is complete**

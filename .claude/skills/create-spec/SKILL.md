@@ -59,12 +59,12 @@ Merge overlapping questions. Do not exceed 3.
 
 ### 3a. Read the template and example
 
-- Read `feature_docs/feature-spec-template.md` for structure
+- Read `feature_docs/_templates/feature-spec-template.md` for structure
 - Read `feature_docs/feature-spec-feature-example.md` for a filled-in reference
 
 ### 3b. Create the spec file
 
-- Create `feature_docs/feature-spec-$ARGUMENTS.md` based on the template
+- Create `feature_docs/$ARGUMENTS/feature-spec-$ARGUMENTS.md` based on the template (create the subfolder if it doesn't exist)
 - Replace all `[FeatureName]` placeholders with the proper PascalCase entity name
 - Replace all `[features]` route placeholders with the kebab-case plural
 - Set `Last Updated` to today's date
@@ -103,6 +103,6 @@ The skill does not block on incomplete sections — it finishes and flags. The s
 
 After the spec file is created and self-check is complete, tell the user:
 
-> Spec created at `feature_docs/feature-spec-$ARGUMENTS.md`.
+> Spec created at `feature_docs/$ARGUMENTS/feature-spec-$ARGUMENTS.md`.
 >
 > Resolve all `<!-- TODO: -->` and `[NEEDS CLARIFICATION: ]` markers before running `/scaffold-feature $ARGUMENTS` — the scaffold skill will refuse while any markers remain. Run `/clarify-spec $ARGUMENTS` to resolve them interactively.

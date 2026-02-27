@@ -17,7 +17,7 @@ Add or update translation keys for the `$ARGUMENTS` feature in both locale files
    - `frontend/src/locales/fi.json`
 
 2. **Read the feature spec** (if it exists) for context on what keys are needed:
-   - `feature_docs/feature-spec-$ARGUMENTS.md`
+   - `feature_docs/$ARGUMENTS/feature-spec-$ARGUMENTS.md`
 
 3. **Read the `features` namespace** in both locale files as the reference pattern for key structure.
 

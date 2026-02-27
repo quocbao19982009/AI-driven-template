@@ -8,7 +8,7 @@ allowed-tools: "Read, Write, Edit, Glob"
 
 # Clarify Feature Specification
 
-Resolve all unresolved markers in `feature_docs/feature-spec-$ARGUMENTS.md`.
+Resolve all unresolved markers in `feature_docs/$ARGUMENTS/feature-spec-$ARGUMENTS.md`.
 
 ## Steps
 1. Read the spec and collect all markers
@@ -22,7 +22,7 @@ Resolve all unresolved markers in `feature_docs/feature-spec-$ARGUMENTS.md`.
 
 ## Phase 1 — Read and Collect Markers
 
-Read `feature_docs/feature-spec-$ARGUMENTS.md` in full.
+Read `feature_docs/$ARGUMENTS/feature-spec-$ARGUMENTS.md` in full.
 
 If it does not exist, stop:
 > "No spec found. Create one with `/create-spec $ARGUMENTS`."
@@ -98,6 +98,6 @@ Scan full file again for remaining markers (pre-existing + newly added).
 
 > **Spec is complete.**
 >
-> `feature_docs/feature-spec-$ARGUMENTS.md` has no unresolved markers.
+> `feature_docs/$ARGUMENTS/feature-spec-$ARGUMENTS.md` has no unresolved markers.
 >
 > Next step: run `/scaffold-feature $ARGUMENTS` to generate the backend.

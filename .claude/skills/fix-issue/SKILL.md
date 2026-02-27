@@ -25,7 +25,7 @@ If the description is too vague, ask the user for:
 
 ## Step 2: Read Context
 
-- Read the relevant feature spec from `feature_docs/feature-spec-[feature].md` if one exists
+- Read the relevant feature spec from `feature_docs/[feature]/feature-spec-[feature].md` if one exists
 - Read the affected source files to understand current behavior
 - Read CLAUDE.md conventions that apply to the affected area
 
