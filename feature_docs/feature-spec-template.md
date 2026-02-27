@@ -10,7 +10,10 @@ HOW TO USE THIS TEMPLATE
 4. Hand this file to AI with the prompt:
    "Scaffold this feature end-to-end following the project patterns in CLAUDE.md.
     Use feature-spec-products.md as the source of truth."
-5. After scaffolding, run: npm run api:sync (from repo root)
+5. If AI annotated any section with `<!-- TODO: ... -->` or `[NEEDS CLARIFICATION: ...]`,
+   resolve those before running /scaffold-feature — the skill will refuse to proceed while
+   any such markers exist.
+6. After scaffolding, run: npm run api:sync (from repo root)
 -->
 
 ---
@@ -125,6 +128,8 @@ Options:
 
 [Paste Figma link or attach image here]
 
+[NEEDS CLARIFICATION: design reference not provided — attach a Figma link, image path, or write "none"]
+
 ### Description
 
 <!--
@@ -141,7 +146,7 @@ Examples:
    Right side renders the active category form. Save button is sticky at the bottom."
 -->
 
-[Describe the UI here]
+[NEEDS CLARIFICATION: UI description is missing — describe what the page looks like, key interactions, and empty state behavior]
 
 ### Redux UI state
 
@@ -167,6 +172,10 @@ Used in: dotnet ef migrations add [MigrationName]
 `Add[FeatureName]Entity`
 
 ---
+
+> **Marker convention:** Both marker types must be resolved before running `/scaffold-feature`:
+> - `<!-- TODO: [what is missing] -->` — AI flags missing info that may have a reasonable default
+> - `[NEEDS CLARIFICATION: [question] ]` — requires a specific human answer before scaffolding
 
 ## Checklist
 

@@ -12,17 +12,37 @@ Scaffold the complete frontend for the `$ARGUMENTS` feature.
 
 ## Prerequisites
 
-1. **Verify Orval output exists.** Check for files at:
-   ```
-   frontend/src/api/generated/$ARGUMENTS/
-   ```
-   If this directory does not exist or is empty, **stop immediately** and tell the user:
-   > "No Orval output found at `frontend/src/api/generated/$ARGUMENTS/`. Run `/api-sync` first."
+### Step P1: Verify Orval output exists
 
-2. **Read the feature spec:**
-   ```
-   feature_docs/feature-spec-$ARGUMENTS.md
-   ```
+Check for files at:
+```
+frontend/src/api/generated/$ARGUMENTS/
+```
+If missing or empty, **stop immediately**:
+> "No Orval output found at `frontend/src/api/generated/$ARGUMENTS/`. Run `/api-sync` first."
+
+### Step P2: Read the feature spec
+```
+feature_docs/feature-spec-$ARGUMENTS.md
+```
+
+### Step P3: Completeness gate — scan for unresolved markers
+
+Scan the full spec text for:
+- `<!-- TODO:`
+- `[NEEDS CLARIFICATION:`
+
+If ANY markers are found, **stop immediately** with this refusal (do NOT proceed to Step 1):
+
+> **Cannot scaffold frontend: the spec has unresolved markers.**
+>
+> Resolve each of the following before re-running `/scaffold-feature-frontend $ARGUMENTS`:
+>
+> [List every found marker verbatim, one per line, prefixed with the nearest `##` or `###` heading it appears under]
+>
+> Run `/clarify-spec $ARGUMENTS` to resolve them interactively, or edit `feature_docs/feature-spec-$ARGUMENTS.md` directly.
+
+Only proceed to Step 1 when no markers remain.
 
 ## Step 1: Read the Templates
 

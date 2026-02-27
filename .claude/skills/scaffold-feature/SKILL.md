@@ -12,14 +12,32 @@ Scaffold the complete backend for the `$ARGUMENTS` feature.
 
 ## Prerequisites
 
-Read the feature spec first:
+### Step P1: Verify the spec file exists
 
+Read the feature spec:
 ```
 feature_docs/feature-spec-$ARGUMENTS.md
 ```
-
 If this file does not exist, **stop immediately** and tell the user:
 > "No spec found at `feature_docs/feature-spec-$ARGUMENTS.md`. Create one first with `/create-spec $ARGUMENTS`."
+
+### Step P2: Completeness gate — scan for unresolved markers
+
+After reading the spec, scan its full text for:
+- `<!-- TODO:`
+- `[NEEDS CLARIFICATION:`
+
+If ANY markers are found, **stop immediately** with this refusal (do NOT proceed to Step 1):
+
+> **Cannot scaffold: the spec has unresolved markers.**
+>
+> Resolve each of the following before re-running `/scaffold-feature $ARGUMENTS`:
+>
+> [List every found marker verbatim, one per line, prefixed with the nearest `##` or `###` heading it appears under]
+>
+> Run `/clarify-spec $ARGUMENTS` to resolve them interactively, or edit `feature_docs/feature-spec-$ARGUMENTS.md` directly.
+
+Only proceed to Step 1 when no markers remain.
 
 ## Step 1: Read the Templates
 

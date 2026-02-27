@@ -84,12 +84,25 @@ Self-check:
 - [ ] Every endpoint in API Endpoints has an auth status (yes/no, not blank)
 - [ ] Business Rules has at least one Acceptance Scenario (or explicitly says "none — standard CRUD")
 - [ ] Frontend UI description is specific enough that two developers would build the same UI
+- [ ] Authorization section is not blank — write "none" explicitly or state the auth requirement
 ```
 
-For any item that fails, append a visible annotation to that section in the spec file:
+For any item that fails, use the appropriate marker type:
 
-```markdown
-<!-- TODO: [specific thing missing — e.g., "add constraints for the Price field"] -->
-```
+- Use `<!-- TODO: ... -->` when info is missing but a default can be inferred from context
+- Use `[NEEDS CLARIFICATION: ...]` when the info cannot be inferred and requires a human answer
+
+If Authorization is blank, append:
+`[NEEDS CLARIFICATION: is any endpoint restricted to authenticated users or specific roles? Write "none" if all endpoints are public.]`
 
 The skill does not block on incomplete sections — it finishes and flags. The spec file is always created.
+
+---
+
+## Phase 4 — Remind User
+
+After the spec file is created and self-check is complete, tell the user:
+
+> Spec created at `feature_docs/feature-spec-$ARGUMENTS.md`.
+>
+> Resolve all `<!-- TODO: -->` and `[NEEDS CLARIFICATION: ]` markers before running `/scaffold-feature $ARGUMENTS` — the scaffold skill will refuse while any markers remain. Run `/clarify-spec $ARGUMENTS` to resolve them interactively.

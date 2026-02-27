@@ -31,6 +31,11 @@ entity fields, API endpoints, validation rules, UI description, Redux state.
 
 The more detail you provide, the fewer revision cycles you need.
 
+#### Resolving incomplete specs
+If the spec has `<!-- TODO: -->` or `[NEEDS CLARIFICATION: ]` markers, both scaffold skills
+will **refuse to proceed**. Run `/clarify-spec [feature-name]` to resolve them interactively,
+or edit the spec file directly and remove the markers.
+
 ---
 
 ### Step 2 — Scaffold the backend
@@ -122,6 +127,24 @@ All hardcoded UI strings in components must use `t()` from `useTranslation()`. A
 ```
 
 Mirror the same keys with translated values in `fi.json`. Use the `features` namespace in `en.json` / `fi.json` as the reference pattern.
+
+---
+
+## Workflow 6: Clarify an Incomplete Spec
+
+Use when `/scaffold-feature` refused because of unresolved markers.
+
+### Step 1 — Run the clarify skill
+```
+/clarify-spec [feature-name]
+```
+
+### Step 2 — Answer questions in batches
+The skill finds all markers, asks up to 3 targeted questions at a time,
+updates the spec with your answers, and repeats until no markers remain.
+
+### Step 3 — Proceed to scaffold
+When complete, the skill confirms: "Spec is complete — run `/scaffold-feature [feature-name]`."
 
 ---
 
@@ -291,3 +314,4 @@ then run `npm run api:sync` once before switching to the frontend.
 | Forgetting to register Redux slice in `store/index.ts`    | Redux state silently missing                           | Do this manually after frontend scaffold            |
 | Hardcoding UI strings instead of using `t()`              | Strings not translatable, i18n Ally shows missing keys | Always use `useTranslation` + `t()` in components   |
 | Adding translation keys to only one locale file           | App crashes or falls back to key name in Finnish       | Always update both `en.json` and `fi.json` together |
+| Running `/scaffold-feature` on a spec with TODO markers   | Skill refuses — lists specific unresolved markers      | Resolve with `/clarify-spec` or edit spec directly  |

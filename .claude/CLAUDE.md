@@ -119,3 +119,4 @@ Specs live in `feature_docs/` — one file per feature, no separate `architectur
 ## Tooling
 
 - Always use Context7 MCP when library/API documentation, code generation, or configuration steps are needed — do not ask, just use it if available
+- Convention history and change rationale: see `docs/changelog.md`
