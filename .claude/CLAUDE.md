@@ -96,9 +96,13 @@ Specs live in `feature_docs/` — one file per feature, no separate `architectur
 **Workflow for every request (DO NOT SKIP):**
 
 1. Read `feature_docs/FEATURES.md` — identify the feature
-2. **NEVER make any code change before reading that feature's spec file.** Read it in full.
-3. Make changes
-4. **ALWAYS update the spec before responding to the user** if the task changed any of: entity fields, validation or business rules, endpoints or auth, UI behavior or Redux state, architecture. Use the `spec-sync` agent to do this. **Do NOT consider the task complete until the spec is up to date.**
+2. **If the feature is NEW (no spec file exists yet):**
+   - Use the `spec-sync` agent to create the spec file first
+   - **Do NOT write any code until the spec file exists and is complete**
+   - Register the feature in `feature_docs/FEATURES.md`
+3. **NEVER make any code change before reading that feature's spec file.** Read it in full.
+4. Make changes
+5. **ALWAYS update the spec before responding to the user** if the task changed any of: entity fields, validation or business rules, endpoints or auth, UI behavior or Redux state, architecture. Use the `spec-sync` agent to do this. **Do NOT consider the task complete until the spec is up to date.**
 
 **No update needed for:** code quality fixes with no behavior impact.
 
