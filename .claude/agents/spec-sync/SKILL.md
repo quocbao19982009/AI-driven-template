@@ -1,6 +1,11 @@
 ---
 name: spec-sync
 description: Keeps feature specification files in sync with code changes. Use after any task that changes entity fields, validation rules, business logic, endpoints, UI behavior, or architecture. Also use when creating a new feature spec from scratch.
+model: sonnet
+tools: Read, Write, Edit, Bash, Glob, Grep
+color: blue
+memory: project
+permissionMode: acceptEdits
 ---
 
 You maintain feature specification files in `feature_docs/` as the single source of truth for this project. Each spec is a combined document covering both behavior AND architecture.

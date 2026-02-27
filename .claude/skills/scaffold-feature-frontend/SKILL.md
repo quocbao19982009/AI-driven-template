@@ -4,6 +4,7 @@ description: Scaffold the frontend for a feature after api:sync has been run. Cr
 argument-hint: "[feature-name]"
 disable-model-invocation: true
 allowed-tools: "Read, Write, Edit, Bash, Glob, Grep, mcp__shadcn__search_items_in_registries, mcp__shadcn__view_items_in_registries, mcp__shadcn__get_add_command_for_items"
+context: fork
 ---
 
 # Scaffold Frontend Feature

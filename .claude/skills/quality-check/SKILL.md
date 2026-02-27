@@ -3,6 +3,7 @@ name: quality-check
 description: Run full quality checks — backend build, frontend lint, TypeScript check, tests, and translation validation. Use after completing code changes.
 disable-model-invocation: true
 allowed-tools: "Bash, Read, Grep, Glob"
+context: fork
 ---
 
 # Quality Check

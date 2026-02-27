@@ -4,6 +4,7 @@ description: Scaffold the backend for a new feature from a feature spec file. Cr
 argument-hint: "[feature-name]"
 disable-model-invocation: true
 allowed-tools: "Read, Write, Edit, Bash, Glob, Grep, mcp__context7__resolve-library-id, mcp__context7__query-docs"
+context: fork
 ---
 
 # Scaffold Backend Feature

@@ -4,6 +4,7 @@ description: Fix a bug or issue from a description. Identifies affected code, im
 argument-hint: "[issue description]"
 disable-model-invocation: true
 allowed-tools: "Read, Write, Edit, Bash, Glob, Grep, mcp__context7__resolve-library-id, mcp__context7__query-docs"
+context: fork
 ---
 
 # Fix Issue
