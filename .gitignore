@@ -1,5 +1,5 @@
 .mcp.json
 .cursor
-
-/claude-plans
+node_modules
+claude-plans/*
 /templates/*
