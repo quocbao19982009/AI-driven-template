@@ -10,6 +10,10 @@ import {
   getGetApiReservationsQueryKey,
 } from "@/api/generated/reservations/reservations";
 import {
+  getGetApiSchedulingByPersonQueryKey,
+  getGetApiSchedulingByFactoryQueryKey,
+} from "@/api/generated/scheduling/scheduling";
+import {
   PostApiReservationsWithJsonBody,
   PutApiReservationsIdWithJsonBody,
 } from "@/api/generated/reservations/reservations.zod";
@@ -124,6 +128,8 @@ export function ReservationFormDialog({
     mutation: {
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: getGetApiReservationsQueryKey() });
+        queryClient.invalidateQueries({ queryKey: getGetApiSchedulingByPersonQueryKey() });
+        queryClient.invalidateQueries({ queryKey: getGetApiSchedulingByFactoryQueryKey() });
         onOpenChange(false);
         toast.success(t("reservations.toast.created"));
       },
@@ -137,6 +143,8 @@ export function ReservationFormDialog({
     mutation: {
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: getGetApiReservationsQueryKey() });
+        queryClient.invalidateQueries({ queryKey: getGetApiSchedulingByPersonQueryKey() });
+        queryClient.invalidateQueries({ queryKey: getGetApiSchedulingByFactoryQueryKey() });
         onOpenChange(false);
         toast.success(t("reservations.toast.updated"));
       },

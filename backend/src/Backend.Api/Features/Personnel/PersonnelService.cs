@@ -112,6 +112,18 @@ public class PersonnelService : IPersonnelService
         entity.AllowedFactories = allowedFactories;
 
         await _repository.UpdateAsync(entity, cancellationToken);
+
+        // Cascade name update to all reservation-person entries linked to this person
+        var reservationPersonnel = await _context.ReservationPersonnel
+            .Where(rp => rp.PersonId == entity.Id)
+            .ToListAsync(cancellationToken);
+
+        foreach (var rp in reservationPersonnel)
+            rp.PersonDisplayName = request.FullName;
+
+        if (reservationPersonnel.Count > 0)
+            await _context.SaveChangesAsync(cancellationToken);
+
         _logger.LogInformation("Updated Person {PersonId}", entity.Id);
         return MapToDto(entity);
     }

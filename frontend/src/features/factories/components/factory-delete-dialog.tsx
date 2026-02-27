@@ -3,7 +3,12 @@ import type { FactoryDto } from "@/api/generated/models";
 import {
   useDeleteApiFactoriesId,
   getGetApiFactoriesQueryKey,
+  getGetApiFactoriesAllQueryKey,
 } from "@/api/generated/factories/factories";
+import {
+  getGetApiPersonnelQueryKey,
+  getGetApiPersonnelAllQueryKey,
+} from "@/api/generated/personnel/personnel";
 import {
   Dialog,
   DialogContent,
@@ -34,6 +39,9 @@ export function FactoryDeleteDialog({
     mutation: {
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: getGetApiFactoriesQueryKey() });
+        queryClient.invalidateQueries({ queryKey: getGetApiFactoriesAllQueryKey() });
+        queryClient.invalidateQueries({ queryKey: getGetApiPersonnelQueryKey() });
+        queryClient.invalidateQueries({ queryKey: getGetApiPersonnelAllQueryKey() });
         onOpenChange(false);
         toast.success(t("factories.toast.deleted"));
       },

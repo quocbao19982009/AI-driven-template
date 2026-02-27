@@ -1,23 +1,28 @@
 using Backend.Common.Exceptions;
 using Backend.Common.Models;
+using Backend.Data;
 using FluentValidation;
+using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Features.Factories;
 
 public class FactoriesService : IFactoriesService
 {
     private readonly IFactoriesRepository _repository;
+    private readonly ApplicationDbContext _context;
     private readonly IValidator<CreateFactoryRequest> _createValidator;
     private readonly IValidator<UpdateFactoryRequest> _updateValidator;
     private readonly ILogger<FactoriesService> _logger;
 
     public FactoriesService(
         IFactoriesRepository repository,
+        ApplicationDbContext context,
         IValidator<CreateFactoryRequest> createValidator,
         IValidator<UpdateFactoryRequest> updateValidator,
         ILogger<FactoriesService> logger)
     {
         _repository = repository;
+        _context = context;
         _createValidator = createValidator;
         _updateValidator = updateValidator;
         _logger = logger;
@@ -89,6 +94,18 @@ public class FactoriesService : IFactoriesService
         entity.TimeZone = request.TimeZone;
 
         await _repository.UpdateAsync(entity, cancellationToken);
+
+        // Cascade name update to all reservations linked to this factory
+        var reservations = await _context.Reservations
+            .Where(r => r.FactoryId == entity.Id)
+            .ToListAsync(cancellationToken);
+
+        foreach (var reservation in reservations)
+            reservation.FactoryDisplayName = request.Name;
+
+        if (reservations.Count > 0)
+            await _context.SaveChangesAsync(cancellationToken);
+
         _logger.LogInformation("Updated Factory {FactoryId}", entity.Id);
         return MapToDto(entity);
     }

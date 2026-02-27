@@ -3,7 +3,9 @@ import type { PersonDto } from "@/api/generated/models";
 import {
   useDeleteApiPersonnelId,
   getGetApiPersonnelQueryKey,
+  getGetApiPersonnelAllQueryKey,
 } from "@/api/generated/personnel/personnel";
+import { getGetApiReservationsQueryKey } from "@/api/generated/reservations/reservations";
 import {
   Dialog,
   DialogContent,
@@ -34,6 +36,8 @@ export function PersonDeleteDialog({
     mutation: {
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: getGetApiPersonnelQueryKey() });
+        queryClient.invalidateQueries({ queryKey: getGetApiPersonnelAllQueryKey() });
+        queryClient.invalidateQueries({ queryKey: getGetApiReservationsQueryKey() });
         onOpenChange(false);
         toast.success(t("personnel.toast.deleted"));
       },

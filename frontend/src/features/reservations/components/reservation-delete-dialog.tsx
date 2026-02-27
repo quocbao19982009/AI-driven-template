@@ -5,6 +5,10 @@ import {
   getGetApiReservationsQueryKey,
 } from "@/api/generated/reservations/reservations";
 import {
+  getGetApiSchedulingByPersonQueryKey,
+  getGetApiSchedulingByFactoryQueryKey,
+} from "@/api/generated/scheduling/scheduling";
+import {
   Dialog,
   DialogContent,
   DialogDescription,
@@ -34,6 +38,8 @@ export function ReservationDeleteDialog({
     mutation: {
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: getGetApiReservationsQueryKey() });
+        queryClient.invalidateQueries({ queryKey: getGetApiSchedulingByPersonQueryKey() });
+        queryClient.invalidateQueries({ queryKey: getGetApiSchedulingByFactoryQueryKey() });
         onOpenChange(false);
         toast.success(t("reservations.toast.deleted"));
       },

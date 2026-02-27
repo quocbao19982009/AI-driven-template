@@ -8,7 +8,13 @@ import {
   usePostApiFactoriesWithJson,
   usePutApiFactoriesIdWithJson,
   getGetApiFactoriesQueryKey,
+  getGetApiFactoriesAllQueryKey,
 } from "@/api/generated/factories/factories";
+import {
+  getGetApiPersonnelQueryKey,
+  getGetApiPersonnelAllQueryKey,
+} from "@/api/generated/personnel/personnel";
+import { getGetApiReservationsQueryKey } from "@/api/generated/reservations/reservations";
 import {
   PostApiFactoriesWithJsonBody,
   PutApiFactoriesIdWithJsonBody,
@@ -79,6 +85,7 @@ export function FactoryFormDialog({
     mutation: {
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: getGetApiFactoriesQueryKey() });
+        queryClient.invalidateQueries({ queryKey: getGetApiFactoriesAllQueryKey() });
         onOpenChange(false);
         toast.success(t("factories.toast.created"));
       },
@@ -92,6 +99,10 @@ export function FactoryFormDialog({
     mutation: {
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: getGetApiFactoriesQueryKey() });
+        queryClient.invalidateQueries({ queryKey: getGetApiFactoriesAllQueryKey() });
+        queryClient.invalidateQueries({ queryKey: getGetApiPersonnelQueryKey() });
+        queryClient.invalidateQueries({ queryKey: getGetApiPersonnelAllQueryKey() });
+        queryClient.invalidateQueries({ queryKey: getGetApiReservationsQueryKey() });
         onOpenChange(false);
         toast.success(t("factories.toast.updated"));
       },

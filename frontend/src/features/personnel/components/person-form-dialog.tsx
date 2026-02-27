@@ -8,12 +8,14 @@ import {
   usePostApiPersonnelWithJson,
   usePutApiPersonnelIdWithJson,
   getGetApiPersonnelQueryKey,
+  getGetApiPersonnelAllQueryKey,
 } from "@/api/generated/personnel/personnel";
 import {
   PostApiPersonnelWithJsonBody,
   PutApiPersonnelIdWithJsonBody,
 } from "@/api/generated/personnel/personnel.zod";
 import { useGetApiFactoriesAll } from "@/api/generated/factories/factories";
+import { getGetApiReservationsQueryKey } from "@/api/generated/reservations/reservations";
 import {
   Dialog,
   DialogContent,
@@ -99,6 +101,7 @@ export function PersonFormDialog({
     mutation: {
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: getGetApiPersonnelQueryKey() });
+        queryClient.invalidateQueries({ queryKey: getGetApiPersonnelAllQueryKey() });
         onOpenChange(false);
         toast.success(t("personnel.toast.created"));
       },
@@ -112,6 +115,8 @@ export function PersonFormDialog({
     mutation: {
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: getGetApiPersonnelQueryKey() });
+        queryClient.invalidateQueries({ queryKey: getGetApiPersonnelAllQueryKey() });
+        queryClient.invalidateQueries({ queryKey: getGetApiReservationsQueryKey() });
         onOpenChange(false);
         toast.success(t("personnel.toast.updated"));
       },
