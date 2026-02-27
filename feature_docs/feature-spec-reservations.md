@@ -262,52 +262,32 @@ Server state lives exclusively in React Query. Redux holds UI-only filter state.
 ## 11. File Locations
 
 ### Backend
-```
-Features/
-  Reservations/
-    ReservationsController.cs
-    IReservationsService.cs
-    ReservationsService.cs
-    IReservationsRepository.cs
-    ReservationsRepository.cs
-    Dtos/
-      ReservationDto.cs
-      ReservationPersonDto.cs
-      CreateReservationRequest.cs
-      UpdateReservationRequest.cs
-    Validators/
-      CreateReservationRequestValidator.cs
-      UpdateReservationRequestValidator.cs
-```
+
+| File | Path |
+|------|------|
+| Entity | `backend/src/Backend.Api/Features/Reservations/Reservation.cs` |
+| DTOs | `backend/src/Backend.Api/Features/Reservations/ReservationDtos.cs` |
+| Validator | `backend/src/Backend.Api/Features/Reservations/ReservationsValidator.cs` |
+| Repository interface | `backend/src/Backend.Api/Features/Reservations/IReservationsRepository.cs` |
+| Repository | `backend/src/Backend.Api/Features/Reservations/ReservationsRepository.cs` |
+| Service interface | `backend/src/Backend.Api/Features/Reservations/IReservationsService.cs` |
+| Service | `backend/src/Backend.Api/Features/Reservations/ReservationsService.cs` |
+| Controller | `backend/src/Backend.Api/Features/Reservations/ReservationsController.cs` |
 
 ### Frontend
-```
-src/
-  features/
-    reservations/
-      ReservationsPage.tsx
-      ReservationsTable.tsx
-      ReservationFormDialog.tsx
-      DeleteReservationDialog.tsx
-      ReservationsFilterBar.tsx
-      hooks/
-        useReservationsQuery.ts       (wraps Orval-generated hook)
-        useReservationMutations.ts
-  store/
-    slices/
-      reservationsSlice.ts
-  locales/
-    en.json                           (reservations.* keys)
-    fi.json                           (reservations.* keys)
-```
 
-### Generated (do not edit)
-```
-src/
-  api/
-    generated/
-      reservations.ts                 (Orval-generated — never edit manually)
-```
+| File | Path |
+|------|------|
+| Page component | `frontend/src/features/reservations/components/reservations-page.tsx` |
+| Table component | `frontend/src/features/reservations/components/reservations-table.tsx` |
+| Form dialog | `frontend/src/features/reservations/components/reservation-form-dialog.tsx` |
+| Delete dialog | `frontend/src/features/reservations/components/reservation-delete-dialog.tsx` |
+| Page test | `frontend/src/features/reservations/components/__tests__/reservations-page.test.tsx` |
+| Slice test | `frontend/src/features/reservations/store/__tests__/reservations-slice.test.ts` |
+| Pagination hook | `frontend/src/features/reservations/hooks/use-reservations-pagination.ts` |
+| Redux slice | `frontend/src/features/reservations/store/reservations-slice.ts` |
+| Route | `frontend/src/routes/reservations/index.tsx` |
+| Generated API | `frontend/src/api/generated/reservations/` |
 
 ---
 

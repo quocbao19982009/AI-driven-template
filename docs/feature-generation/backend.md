@@ -14,7 +14,7 @@
    ```
 7. Create and apply the migration:
    ```sh
-   dotnet ef migrations add AddEntityName --project backend/src/Backend.Api
+   cd backend && dotnet ef migrations add AddEntityName
    ```
 
 ---

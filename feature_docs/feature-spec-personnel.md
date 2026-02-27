@@ -225,50 +225,31 @@ Server state (person list, single person, factories list for picker) lives exclu
 ## 11. File Locations
 
 ### Backend
-```
-Features/
-  Personnel/
-    PersonnelController.cs
-    IPersonnelService.cs
-    PersonnelService.cs
-    IPersonnelRepository.cs
-    PersonnelRepository.cs
-    Dtos/
-      PersonDto.cs
-      CreatePersonRequest.cs
-      UpdatePersonRequest.cs
-    Validators/
-      CreatePersonRequestValidator.cs
-      UpdatePersonRequestValidator.cs
-```
+
+| File | Path |
+|------|------|
+| Entity | `backend/src/Backend.Api/Features/Personnel/Person.cs` |
+| DTOs | `backend/src/Backend.Api/Features/Personnel/PersonDtos.cs` |
+| Validator | `backend/src/Backend.Api/Features/Personnel/PersonnelValidator.cs` |
+| Repository interface | `backend/src/Backend.Api/Features/Personnel/IPersonnelRepository.cs` |
+| Repository | `backend/src/Backend.Api/Features/Personnel/PersonnelRepository.cs` |
+| Service interface | `backend/src/Backend.Api/Features/Personnel/IPersonnelService.cs` |
+| Service | `backend/src/Backend.Api/Features/Personnel/PersonnelService.cs` |
+| Controller | `backend/src/Backend.Api/Features/Personnel/PersonnelController.cs` |
 
 ### Frontend
-```
-src/
-  features/
-    personnel/
-      PersonnelPage.tsx
-      PersonnelTable.tsx
-      PersonFormDialog.tsx
-      DeletePersonDialog.tsx
-      hooks/
-        usePersonnelQuery.ts        (wraps Orval-generated hook)
-        usePersonnelMutations.ts
-  store/
-    slices/
-      personnelSlice.ts
-  locales/
-    en.json                         (personnel.* keys)
-    fi.json                         (personnel.* keys)
-```
 
-### Generated (do not edit)
-```
-src/
-  api/
-    generated/
-      personnel.ts                  (Orval-generated — never edit manually)
-```
+| File | Path |
+|------|------|
+| Page component | `frontend/src/features/personnel/components/personnel-page.tsx` |
+| Table component | `frontend/src/features/personnel/components/personnel-table.tsx` |
+| Form dialog | `frontend/src/features/personnel/components/person-form-dialog.tsx` |
+| Delete dialog | `frontend/src/features/personnel/components/person-delete-dialog.tsx` |
+| Page test | `frontend/src/features/personnel/components/__tests__/personnel-page.test.tsx` |
+| Pagination hook | `frontend/src/features/personnel/hooks/use-personnel-pagination.ts` |
+| Redux slice | `frontend/src/features/personnel/store/personnel-slice.ts` |
+| Route | `frontend/src/routes/personnel/index.tsx` |
+| Generated API | `frontend/src/api/generated/personnel/` |
 
 ---
 

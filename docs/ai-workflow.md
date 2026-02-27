@@ -23,10 +23,10 @@ This is the primary workflow. Use it whenever you need a new entity with full CR
 Copy `feature_docs/feature-spec-template.md` and fill it in:
 
 ```
-cp feature_docs/feature-spec-template.md docs/feature-spec-products.md
+cp feature_docs/feature-spec-template.md feature_docs/feature-spec-products.md
 ```
 
-Open `feature-spec-products.md` and fill in every section:
+Open `feature_docs/feature-spec-products.md` and fill in every section:
 entity fields, API endpoints, validation rules, UI description, Redux state.
 
 The more detail you provide, the fewer revision cycles you need.
@@ -44,7 +44,7 @@ Hand the spec to AI:
 
 ```
 Scaffold the Products feature backend following CLAUDE.md conventions.
-Use docs/feature-spec-products.md as the source of truth.
+Use feature_docs/feature-spec-products.md as the source of truth.
 ```
 
 **What AI will generate:**
@@ -91,7 +91,7 @@ If the folder doesn't appear, the backend didn't build — fix errors before con
 
 ```
 Scaffold the Products frontend feature following CLAUDE.md conventions.
-Use docs/feature-spec-products.md for the UI description and Redux state.
+Use feature_docs/feature-spec-products.md for the UI description and Redux state.
 The Orval hooks are already generated in api/generated/products/.
 ```
 
@@ -152,7 +152,7 @@ When complete, the skill confirms: "Spec is complete — run `/scaffold-feature 
 
 ### Step 1 — Update the feature spec first
 
-Open `docs/feature-spec-products.md` and add the new field to the **Fields** table,
+Open `feature_docs/feature-spec-products.md` and add the new field to the **Fields** table,
 **Validation Rules**, and **Form fields** sections before touching any code.
 The spec is the source of truth — keep it current so future AI prompts stay accurate.
 
@@ -160,7 +160,7 @@ The spec is the source of truth — keep it current so future AI prompts stay ac
 
 ```
 Add a Description field (string, optional, max 500 chars) to the Product entity.
-The spec has been updated in docs/feature-spec-products.md.
+The spec has been updated in feature_docs/feature-spec-products.md.
 Follow CLAUDE.md conventions.
 ```
 
@@ -185,7 +185,7 @@ npm run api:sync          # from repo root — regenerates Orval output
 ```
 The Description field has been added to the backend and api:sync has been run.
 Update the Products frontend form and table to include it.
-Refer to docs/feature-spec-products.md for the field details.
+Refer to feature_docs/feature-spec-products.md for the field details.
 ```
 
 If the new field adds a new label or placeholder, add the corresponding keys to both `en.json` and `fi.json` under the feature's namespace (e.g. `products.form.descriptionLabel`).

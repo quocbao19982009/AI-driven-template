@@ -99,8 +99,8 @@ Create all files under `frontend/src/features/[feature-name]/`:
 - **Redux slices** hold UI-only state: searchQuery, selectedIds, activeTab, etc.
 - **Use typed hooks:** `useAppDispatch` and `useAppSelector` from `store/hooks.ts` — never raw `useDispatch`/`useSelector`
 - **Import Orval hooks** from `@/api/generated/$ARGUMENTS/` — never from `api/generated/feature/`
-- **Use `cn()`** from `@/lib/cn` for Tailwind class merging
-- **Use `useDebounce`** from `@/hooks/useDebounce` for search input debouncing
+- **Use `cn()`** from `@/lib/utils` for Tailwind class merging
+- **Use `useDebounce`** from `@/hooks/use-debounce` for search input debouncing
 
 ## Step 4: Register Redux Slice
 

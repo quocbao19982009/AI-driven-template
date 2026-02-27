@@ -249,69 +249,45 @@ Frontend enforcement: role-aware UI (hide/disable write actions for Employee rol
 
 ### Backend (planned)
 
-```
-Features/
-  Auth/
-    AuthController.cs
-    IAuthService.cs
-    AuthService.cs
-    IAuthRepository.cs
-    AuthRepository.cs
-    Dtos/
-      LoginRequest.cs
-      LoginResponse.cs
-    Validators/
-      LoginRequestValidator.cs
-  Users/
-    UsersController.cs
-    IUsersService.cs
-    UsersService.cs
-    IUsersRepository.cs
-    UsersRepository.cs
-    Dtos/
-      UserDto.cs
-      CreateUserRequest.cs
-      UpdateUserRequest.cs
-    Validators/
-      CreateUserRequestValidator.cs
-      UpdateUserRequestValidator.cs
-Common/
-  Models/
-    User.cs                    (entity)
-    UserRole.cs                (enum)
-    RefreshToken.cs            (entity for DB-stored refresh tokens)
-```
+| File | Path |
+|------|------|
+| Auth Controller | `backend/src/Backend.Api/Features/Auth/AuthController.cs` |
+| Auth Service interface | `backend/src/Backend.Api/Features/Auth/IAuthService.cs` |
+| Auth Service | `backend/src/Backend.Api/Features/Auth/AuthService.cs` |
+| Auth Repository interface | `backend/src/Backend.Api/Features/Auth/IAuthRepository.cs` |
+| Auth Repository | `backend/src/Backend.Api/Features/Auth/AuthRepository.cs` |
+| Auth DTOs | `backend/src/Backend.Api/Features/Auth/AuthDtos.cs` |
+| Auth Validator | `backend/src/Backend.Api/Features/Auth/AuthValidator.cs` |
+| Users Controller | `backend/src/Backend.Api/Features/Users/UsersController.cs` |
+| Users Service interface | `backend/src/Backend.Api/Features/Users/IUsersService.cs` |
+| Users Service | `backend/src/Backend.Api/Features/Users/UsersService.cs` |
+| Users Repository interface | `backend/src/Backend.Api/Features/Users/IUsersRepository.cs` |
+| Users Repository | `backend/src/Backend.Api/Features/Users/UsersRepository.cs` |
+| Users DTOs | `backend/src/Backend.Api/Features/Users/UserDtos.cs` |
+| Users Validator | `backend/src/Backend.Api/Features/Users/UsersValidator.cs` |
+| User entity | `backend/src/Backend.Api/Common/Models/User.cs` |
+| UserRole enum | `backend/src/Backend.Api/Common/Models/UserRole.cs` |
+| RefreshToken entity | `backend/src/Backend.Api/Common/Models/RefreshToken.cs` |
 
 ### Frontend (planned)
 
-```
-src/
-  features/
-    auth/
-      LoginPage.tsx
-      hooks/
-        useLoginMutation.ts
-        useLogoutMutation.ts
-    users/
-      UsersPage.tsx
-      UsersTable.tsx
-      UserFormDialog.tsx
-      DeleteUserDialog.tsx
-      hooks/
-        useUsersQuery.ts
-        useUserMutations.ts
-  store/
-    slices/
-      authSlice.ts
-      usersSlice.ts
-  router/
-    guards/
-      RequireAuth.tsx           (redirect to /login if not authenticated)
-      RequireRole.tsx           (redirect to /unauthorized if role insufficient)
-  locales/
-    en.json                     (auth.*, users.* keys)
-    fi.json                     (auth.*, users.* keys)
-```
+| File | Path |
+|------|------|
+| Login page | `frontend/src/features/auth/components/login-page.tsx` |
+| Login hooks | `frontend/src/features/auth/hooks/use-login-mutation.ts` |
+| Logout hooks | `frontend/src/features/auth/hooks/use-logout-mutation.ts` |
+| Users page | `frontend/src/features/users/components/users-page.tsx` |
+| Users table | `frontend/src/features/users/components/users-table.tsx` |
+| User form dialog | `frontend/src/features/users/components/user-form-dialog.tsx` |
+| User delete dialog | `frontend/src/features/users/components/user-delete-dialog.tsx` |
+| Auth Redux slice | `frontend/src/features/auth/store/auth-slice.ts` |
+| Users Redux slice | `frontend/src/features/users/store/users-slice.ts` |
+| Auth route guard | `frontend/src/router/guards/require-auth.tsx` |
+| Role route guard | `frontend/src/router/guards/require-role.tsx` |
+| Auth route | `frontend/src/routes/auth/index.tsx` |
+| Users route | `frontend/src/routes/users/index.tsx` |
+| Generated API (auth) | `frontend/src/api/generated/auth/` |
+| Generated API (users) | `frontend/src/api/generated/users/` |
 
 ### New Backend Registrations in `Program.cs` (planned)
 

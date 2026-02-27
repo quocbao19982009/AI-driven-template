@@ -96,7 +96,7 @@ This is the single source of truth for coding style across the project. All rule
 ### Naming
 | Symbol | Convention | Example |
 |---|---|---|
-| Components | `PascalCase`, `.tsx` | `TodosPage.tsx`, `TodoFormDialog.tsx` |
+| Components | `kebab-case`, `.tsx` | `todos-page.tsx`, `todo-form-dialog.tsx` |
 | Hooks | `camelCase` starting with `use` | `useTodoPagination`, `useDebounce` |
 | Types & Interfaces | `PascalCase` | `TodoFormDialogProps`, `PaginationState` |
 | Variables & functions | `camelCase` | `searchQuery`, `onSubmit` |

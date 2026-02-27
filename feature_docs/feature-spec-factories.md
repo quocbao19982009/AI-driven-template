@@ -180,50 +180,31 @@ Server state (factory list, single factory) lives exclusively in React Query via
 ## 11. File Locations
 
 ### Backend
-```
-Features/
-  Factories/
-    FactoriesController.cs
-    IFactoriesService.cs
-    FactoriesService.cs
-    IFactoriesRepository.cs
-    FactoriesRepository.cs
-    Dtos/
-      FactoryDto.cs
-      CreateFactoryRequest.cs
-      UpdateFactoryRequest.cs
-    Validators/
-      CreateFactoryRequestValidator.cs
-      UpdateFactoryRequestValidator.cs
-```
+
+| File | Path |
+|------|------|
+| Entity | `backend/src/Backend.Api/Features/Factories/Factory.cs` |
+| DTOs | `backend/src/Backend.Api/Features/Factories/FactoryDtos.cs` |
+| Validator | `backend/src/Backend.Api/Features/Factories/FactoriesValidator.cs` |
+| Repository interface | `backend/src/Backend.Api/Features/Factories/IFactoriesRepository.cs` |
+| Repository | `backend/src/Backend.Api/Features/Factories/FactoriesRepository.cs` |
+| Service interface | `backend/src/Backend.Api/Features/Factories/IFactoriesService.cs` |
+| Service | `backend/src/Backend.Api/Features/Factories/FactoriesService.cs` |
+| Controller | `backend/src/Backend.Api/Features/Factories/FactoriesController.cs` |
 
 ### Frontend
-```
-src/
-  features/
-    factories/
-      FactoriesPage.tsx
-      FactoriesTable.tsx
-      FactoryFormDialog.tsx
-      DeleteFactoryDialog.tsx
-      hooks/
-        useFactoriesQuery.ts      (wraps Orval-generated hook)
-        useFactoryMutations.ts
-  store/
-    slices/
-      factoriesSlice.ts
-  locales/
-    en.json                       (factories.* keys)
-    fi.json                       (factories.* keys)
-```
 
-### Generated (do not edit)
-```
-src/
-  api/
-    generated/
-      factories.ts                (Orval-generated — never edit manually)
-```
+| File | Path |
+|------|------|
+| Page component | `frontend/src/features/factories/components/factories-page.tsx` |
+| Table component | `frontend/src/features/factories/components/factories-table.tsx` |
+| Form dialog | `frontend/src/features/factories/components/factory-form-dialog.tsx` |
+| Delete dialog | `frontend/src/features/factories/components/factory-delete-dialog.tsx` |
+| Page test | `frontend/src/features/factories/components/__tests__/factories-page.test.tsx` |
+| Pagination hook | `frontend/src/features/factories/hooks/use-factories-pagination.ts` |
+| Redux slice | `frontend/src/features/factories/store/factories-slice.ts` |
+| Route | `frontend/src/routes/factories/index.tsx` |
+| Generated API | `frontend/src/api/generated/factories/` |
 
 ---
 

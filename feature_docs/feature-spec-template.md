@@ -1,6 +1,7 @@
 # Feature Specification: [FeatureName]
 
 **Last Updated:** `[YYYY-MM-DD]`
+**Tests written:** no
 
 <!--
 HOW TO USE THIS TEMPLATE
@@ -18,7 +19,7 @@ HOW TO USE THIS TEMPLATE
 
 ---
 
-## Entity
+## 1. Entity
 
 **Name:** `[FeatureName]` *(e.g. Product)*
 **Table name (plural):** `[FeatureNames]` *(e.g. Products)*
@@ -29,7 +30,7 @@ HOW TO USE THIS TEMPLATE
 |----------|---------|----------|-------------|-------|
 | `Name`   | `string` | yes | max 200 chars | |
 
-> `Id` (Guid), `CreatedAt`, `UpdatedAt` are inherited from `BaseEntity` — do not add them.
+> `Id` (int), `CreatedAt`, `UpdatedAt` are inherited from `BaseEntity` — do not add them.
 
 ---
 
@@ -46,7 +47,52 @@ Examples:
 
 ---
 
-## API Endpoints
+## 2. Core Values & Principles
+
+<!--
+What is this feature's core purpose? What invariants must hold?
+Examples:
+- "Factory names must be globally unique to prevent ambiguity"
+- "Deletion is soft — historical data must never be lost"
+-->
+
+- [Describe the feature's purpose and key invariants]
+
+---
+
+## 3. Architecture Decisions
+
+<!--
+Note any deviations from the standard pattern or important design choices.
+If standard (Controller → Service → Repository → EF Core), just say "Standard layered pattern."
+-->
+
+- Standard layered pattern: Controller → Service → Repository → EF Core
+
+---
+
+## 4. Data Flow
+
+<!--
+Describe how data moves through the layers for each operation.
+Delete this section for simple CRUD features where the flow is obvious.
+-->
+
+### Create
+1. Client POST `/api/[features]` with request body
+2. Controller calls Service
+3. Service validates, maps to entity, calls Repository
+4. Repository saves, returns entity
+5. Service maps to DTO, returns ApiResponse
+
+### Read (list)
+1. Client GET `/api/[features]?page=1&pageSize=10`
+2. Repository applies filters, OrderBy, Skip/Take, returns PagedResult
+3. Service maps to DTOs
+
+---
+
+## 5. API Endpoints
 
 | Method | Route | Description | Auth required |
 |--------|-------|-------------|---------------|
@@ -58,7 +104,7 @@ Examples:
 
 ---
 
-## Validation Rules
+## 6. Validation Rules
 
 <!--
 These map directly to FluentValidation rules in [Feature]sValidator.cs
@@ -68,7 +114,7 @@ These map directly to FluentValidation rules in [Feature]sValidator.cs
 
 ---
 
-## Business Rules
+## 7. Business Rules
 
 <!--
 Logic that goes in the Service layer, not just validation.
@@ -102,7 +148,7 @@ Fill these in before running /scaffold-feature — they become the test targets.
 
 ---
 
-## Authorization
+## 8. Authorization
 
 <!--
 Leave blank or write "none" if no role-based rules apply.
@@ -112,7 +158,7 @@ Leave blank or write "none" if no role-based rules apply.
 
 ---
 
-## Frontend UI
+## 9. Frontend UI
 
 ### Design reference
 
@@ -148,7 +194,7 @@ Examples:
 
 [NEEDS CLARIFICATION: UI description is missing — describe what the page looks like, key interactions, and empty state behavior]
 
-### Redux UI state
+### 10. Redux UI state
 
 <!--
 Only UI-only state belongs here (not server data — that's React Query).
@@ -159,6 +205,61 @@ Examples: searchQuery, selectedIds, activeTab, isFilterOpen, sortDirection
 
 - `searchQuery: string`
 - `selectedIds: string[]`
+
+---
+
+## 11. File Locations
+
+### Backend
+
+| File | Path |
+|------|------|
+| Entity | `backend/src/Backend.Api/Features/[FeatureName]s/[FeatureName].cs` |
+| DTOs | `backend/src/Backend.Api/Features/[FeatureName]s/[FeatureName]Dtos.cs` |
+| Validator | `backend/src/Backend.Api/Features/[FeatureName]s/[FeatureName]sValidator.cs` |
+| Repository interface | `backend/src/Backend.Api/Features/[FeatureName]s/I[FeatureName]sRepository.cs` |
+| Repository | `backend/src/Backend.Api/Features/[FeatureName]s/[FeatureName]sRepository.cs` |
+| Service interface | `backend/src/Backend.Api/Features/[FeatureName]s/I[FeatureName]sService.cs` |
+| Service | `backend/src/Backend.Api/Features/[FeatureName]s/[FeatureName]sService.cs` |
+| Controller | `backend/src/Backend.Api/Features/[FeatureName]s/[FeatureName]sController.cs` |
+
+### Frontend
+
+| File | Path |
+|------|------|
+| Page component | `frontend/src/features/[feature-name]/components/[feature-name]-page.tsx` |
+| Table component | `frontend/src/features/[feature-name]/components/[feature-name]-table.tsx` |
+| Form dialog | `frontend/src/features/[feature-name]/components/[singular]-form-dialog.tsx` |
+| Delete dialog | `frontend/src/features/[feature-name]/components/[singular]-delete-dialog.tsx` |
+| Pagination hook | `frontend/src/features/[feature-name]/hooks/use-[feature-name]-pagination.ts` |
+| Redux slice | `frontend/src/features/[feature-name]/store/[feature-name]-slice.ts` |
+| Route | `frontend/src/routes/[feature-name]/index.tsx` |
+| Generated API | `frontend/src/api/generated/[feature-name]/` |
+
+---
+
+## 12. Tests
+
+<!--
+List the test scenarios for this feature. Update this section as tests are written.
+-->
+
+**Tests written:** no
+
+### Backend Unit Tests
+
+| Test | Description |
+| ---- | ----------- |
+| `CreateAsync_WithValidData_Returns[FeatureName]Dto` | Happy path |
+| `GetAllAsync_ReturnsPaginatedResult` | Correct page and total |
+| `GetByIdAsync_WithInvalidId_ThrowsNotFoundException` | 404 for missing entity |
+
+### Frontend Tests
+
+| Test | Description |
+| ---- | ----------- |
+| `[FeatureName]sPage renders table` | Integration: table populated from mocked query |
+| `Form dialog submits create request` | Correct payload sent |
 
 ---
 

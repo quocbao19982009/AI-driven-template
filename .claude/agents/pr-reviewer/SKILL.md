@@ -45,8 +45,8 @@ Check each of these **project-specific conventions** (from CLAUDE.md and `docs/c
 - [ ] Server data in React Query, UI-only state in Redux
 - [ ] Uses `useAppDispatch` / `useAppSelector` (not raw `useDispatch` / `useSelector`)
 - [ ] No manual edits to files under `api/generated/`
-- [ ] Uses `cn()` from `@/lib/cn` for class merging
-- [ ] Uses `useDebounce` from `@/hooks/useDebounce` for search debouncing
+- [ ] Uses `cn()` from `@/lib/utils` for class merging
+- [ ] Uses `useDebounce` from `@/hooks/use-debounce` for search debouncing
 
 **Coding Style** (from `docs/coding-style.md`):
 - [ ] C# naming conventions followed (PascalCase methods/classes, `_camelCase` private fields, `I` prefix on interfaces)

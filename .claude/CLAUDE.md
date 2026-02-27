@@ -50,8 +50,8 @@
 | ----------------------------------- | ------------------------- | -------------------------------------------------------------------------------------- |
 | `useAppDispatch` / `useAppSelector` | `store/hooks.ts`          | Typed Redux hooks — always use these, never raw `useDispatch`/`useSelector`            |
 | `apiFetch`                          | `api/mutator/apiFetch.ts` | All HTTP calls go through this — Orval uses it automatically                           |
-| `cn()`                              | `lib/cn.ts`               | Tailwind class merging utility                                                         |
-| `useDebounce`                       | `hooks/useDebounce.ts`    | Debounce input values before triggering queries                                        |
+| `cn()`                              | `lib/utils.ts`            | Tailwind class merging utility                                                         |
+| `useDebounce`                       | `hooks/use-debounce.ts`   | Debounce input values before triggering queries                                        |
 | `useTranslation`                    | `react-i18next`           | All UI strings must use `const { t } = useTranslation()` — never hardcode visible text |
 
 ---
@@ -97,7 +97,7 @@ Specs live in `feature_docs/` — one file per feature, no separate `architectur
 
 1. Read `feature_docs/FEATURES.md` — identify the feature
 2. **If the feature is NEW (no spec file exists yet):**
-   - Use the `spec-sync` agent to create the spec file first
+   - Use the `/create-spec` skill to create the spec file first
    - **Do NOT write any code until the spec file exists and is complete**
    - Register the feature in `feature_docs/FEATURES.md`
 3. **NEVER make any code change before reading that feature's spec file.** Read it in full.

@@ -188,45 +188,23 @@ The scheduling feature is purely read-only with no user-driven filter or selecti
 ## 11. File Locations
 
 ### Backend
-```
-Features/
-  Scheduling/
-    SchedulingController.cs
-    SchedulingQueryService.cs         (optional service; controller may query DbContext directly)
-    Dtos/
-      PersonScheduleDto.cs
-      FactoryScheduleDto.cs
-      ReservationSummaryDto.cs
-```
 
-No repository file — `SchedulingQueryService` or the controller uses `ApplicationDbContext` directly.
+| File | Path |
+|------|------|
+| DTOs | `backend/src/Backend.Api/Features/Scheduling/SchedulingDtos.cs` |
+| Controller | `backend/src/Backend.Api/Features/Scheduling/SchedulingController.cs` |
+
+No service or repository files — the controller queries `ApplicationDbContext` directly.
 
 ### Frontend
-```
-src/
-  features/
-    scheduling/
-      SchedulingPage.tsx
-      ByPersonTab.tsx
-      ByFactoryTab.tsx
-      PersonScheduleCard.tsx
-      hooks/
-        useSchedulingByPersonQuery.ts     (wraps Orval-generated hook)
-        useSchedulingByFactoryQuery.ts    (wraps Orval-generated hook)
-  locales/
-    en.json                               (scheduling.* keys)
-    fi.json                               (scheduling.* keys)
-```
 
-No Redux slice file — no UI state needed.
+| File | Path |
+|------|------|
+| Page component | `frontend/src/features/scheduling/components/scheduling-page.tsx` |
+| Page test | `frontend/src/features/scheduling/components/__tests__/scheduling-page.test.tsx` |
+| Generated API | `frontend/src/api/generated/scheduling/` |
 
-### Generated (do not edit)
-```
-src/
-  api/
-    generated/
-      scheduling.ts                       (Orval-generated — never edit manually)
-```
+No Redux slice — no UI state needed. Tab state managed via local `useState`.
 
 ---
 
