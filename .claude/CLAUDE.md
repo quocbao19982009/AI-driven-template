@@ -98,10 +98,7 @@ Specs live in `feature_docs/` — one file per feature, no separate `architectur
 1. Read `feature_docs/FEATURES.md` — identify the feature
 2. **NEVER make any code change before reading that feature's spec file.** Read it in full.
 3. Make changes
-
-**Update the spec automatically after any task that changes:**
-
-- Entity fields · Validation or business rules · Endpoints or auth · UI behavior or Redux state · Architecture
+4. **ALWAYS update the spec before responding to the user** if the task changed any of: entity fields, validation or business rules, endpoints or auth, UI behavior or Redux state, architecture. Use the `spec-sync` agent to do this. **Do NOT consider the task complete until the spec is up to date.**
 
 **No update needed for:** code quality fixes with no behavior impact.
 

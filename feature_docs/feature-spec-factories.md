@@ -62,7 +62,9 @@
 1. Client PUT `/api/factories/{id}` with `UpdateFactoryRequest { Name, TimeZone }`.
 2. Service loads entity. Throws `NotFoundException` if not found.
 3. Service checks uniqueness of new Name excluding current entity. Throws `ValidationException` if duplicate.
-4. Service updates fields, calls repository `UpdateAsync`, returns updated `FactoryDto`.
+4. Service updates fields, calls repository `UpdateAsync`.
+5. Service queries all `Reservation` rows where `FactoryId == entity.Id` and sets `FactoryDisplayName = request.Name` on each. Calls `_context.SaveChangesAsync` if any rows were updated.
+6. Returns updated `FactoryDto`.
 
 ### Delete
 1. Client DELETE `/api/factories/{id}`.
@@ -117,7 +119,7 @@ public record FactoryDto(int Id, string Name, string TimeZone, DateTime CreatedA
 ## 7. Business Rules
 
 1. **Name uniqueness:** Factory names must be unique across the system, enforced case-insensitively (e.g., `"Factory A"` and `"factory a"` are considered duplicates).
-2. **Soft-delete impact on Reservations:** When a factory is deleted, all `Reservation` records that reference this factory have their `FactoryId` set to `null`. The `FactoryDisplayName` column on each `Reservation` is a snapshot written at reservation-creation time and is never modified during factory deletion — it serves as the permanent historical record.
+2. **Soft-delete impact on Reservations:** When a factory is deleted, all `Reservation` records that reference this factory have their `FactoryId` set to `null`. The `FactoryDisplayName` column on each `Reservation` is kept in sync with the factory's current name: `FactoriesService.UpdateAsync` cascades renames to all linked reservations. On factory deletion, the last known name is preserved (frozen) as the permanent historical record.
 3. **TimeZone validity:** The `TimeZone` field is stored as-provided. The system does not validate that the IANA ID maps to a known timezone at the API layer, but the frontend restricts input to a known IANA timezone list.
 4. **Cascade null on delete:** Implemented via EF Core's `OnDelete(DeleteBehavior.SetNull)` on `Reservation.FactoryId` foreign key configuration.
 
@@ -154,6 +156,7 @@ All factory endpoints are **public** — no authentication or authorization is r
 - Submit button: "Create" or "Save"
 - Cancel button
 - Displays server-side validation errors inline
+- On successful update, React Query invalidates factories, personnel, **and reservations** queries to reflect the renamed factory in the reservations table immediately.
 
 ### Delete Dialog
 - Confirmation dialog: "Are you sure you want to delete {Name}? All reservations associated with this factory will lose the factory link but will retain the display name."

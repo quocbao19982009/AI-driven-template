@@ -78,7 +78,8 @@
 4. Service checks `Email` uniqueness excluding current entity.
 5. Service resolves new `AllowedFactoryIds` to factory entities, replaces the collection.
 6. Repository updates entity, calls `SaveChangesAsync`.
-7. Returns updated `PersonDto`.
+7. Service queries all `ReservationPerson` rows where `PersonId == entity.Id` and sets `PersonDisplayName = request.FullName` on each. Calls `_context.SaveChangesAsync` if any rows were updated.
+8. Returns updated `PersonDto`.
 
 ### Delete
 1. Client DELETE `/api/personnel/{id}`.
@@ -160,7 +161,7 @@ public record PersonDto(
 4. **Reservation filtering:** When creating or editing a reservation, only persons whose `AllowedFactories` includes the selected factory are eligible to be assigned.
 5. **Soft-delete impact on ReservationPerson:** When a person is deleted:
    - All `ReservationPerson` records where `PersonId = deletedPersonId` have `PersonId` set to `null`.
-   - The `PersonDisplayName` snapshot stored on each `ReservationPerson` is never modified — it remains as the permanent historical record.
+   - The `PersonDisplayName` on each `ReservationPerson` is kept in sync with the person's current `FullName`: `PersonnelService.UpdateAsync` cascades renames to all linked records. On person deletion, the last known name is preserved (frozen) as the permanent historical record.
    - The `PersonFactory` join table rows are removed automatically by EF cascade on entity deletion.
 6. **No reservation cascade delete:** Deleting a person does NOT delete any reservations or `ReservationPerson` records — only the `PersonId` foreign key is nulled.
 
@@ -200,6 +201,7 @@ All personnel endpoints are **public** — no authentication or authorization is
 - Submit button: "Create" or "Save"
 - Cancel button
 - Server-side validation errors displayed inline
+- On successful update, React Query invalidates personnel **and reservations** queries to reflect the renamed person in the reservations table immediately.
 
 ### Delete Dialog
 - Confirmation dialog: "Are you sure you want to delete {FullName}? This person will be removed from all reservations but reservation history will be preserved."

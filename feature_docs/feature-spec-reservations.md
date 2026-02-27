@@ -39,7 +39,7 @@ Extends `BaseEntity` (`Id: int`, `CreatedAt: DateTime`, `UpdatedAt: DateTime`)
 ## 2. Core Values & Principles
 
 - A reservation represents a time-bounded booking of one or more personnel at a factory.
-- Display name snapshots (`FactoryDisplayName`, `PersonDisplayName`) ensure historical reporting accuracy regardless of deletions or renames.
+- Display name snapshots (`FactoryDisplayName`, `PersonDisplayName`) are kept live — they are updated whenever a factory or person is renamed, so the reservation always reflects the current name. Snapshots are only preserved (frozen) when the factory or person is deleted.
 - The system prevents double-booking: no person may have overlapping reservations.
 - Personnel eligibility is factory-scoped: only persons with the target factory in their `AllowedFactories` may be assigned.
 - Soft-delete cascades from Factory and Person are handled at the FK level — reservation records themselves are never silently destroyed.
@@ -191,8 +191,8 @@ public record ReservationDto(
    existingReservation.EndTime > newStartTime AND existingReservation.StartTime < newEndTime
    ```
    On update, the current reservation is excluded from the overlap check.
-5. **FactoryDisplayName snapshot:** Written once at creation time from `Factory.Name`. Never updated, even if the factory is renamed. This preserves the historical record.
-6. **PersonDisplayName snapshot:** Written once at creation time from `Person.FullName`. Never updated, even if the person's name changes.
+5. **FactoryDisplayName snapshot:** Written at creation time from `Factory.Name`. Updated automatically when the factory is renamed (via cascade in `FactoriesService.UpdateAsync`). Preserved (frozen) only when the factory is deleted.
+6. **PersonDisplayName snapshot:** Written at creation time from `Person.FullName`. Updated automatically when the person's name changes (via cascade in `PersonnelService.UpdateAsync`). Preserved (frozen) only when the person is deleted.
 7. **Soft-delete from Factory:** When a factory is deleted, EF sets `Reservation.FactoryId = null` via `DeleteBehavior.SetNull`. `FactoryDisplayName` is preserved.
 8. **Soft-delete from Person:** When a person is deleted, the service sets `ReservationPerson.PersonId = null` for all their records. `PersonDisplayName` is preserved.
 9. **Hard-delete of Reservation:** When a reservation itself is deleted, all child `ReservationPerson` rows are cascade-deleted (no soft behaviour — the reservation and its assignments are permanently removed).
