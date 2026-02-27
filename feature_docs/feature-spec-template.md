@@ -75,6 +75,28 @@ Delete this section if there are none.
 
 - none
 
+### Acceptance Scenarios
+
+<!--
+One happy-path + one failure scenario per endpoint or business rule.
+Fill these in before running /scaffold-feature — they become the test targets.
+-->
+
+**Scenario: Create with valid data**
+- Given: a POST /api/[features] with all required fields valid
+- When: the request is processed
+- Then: returns 201 with the created entity wrapped in ApiResponse<T>
+
+**Scenario: Create with empty name**
+- Given: a POST /api/[features] with Name = "" or whitespace
+- When: the request is processed
+- Then: returns 400 with a validation error listing the Name field
+
+**Scenario: Get by non-existent ID**
+- Given: a GET /api/[features]/{id} where the ID does not exist
+- When: the request is processed
+- Then: returns 404 with NotFoundException message
+
 ---
 
 ## Authorization

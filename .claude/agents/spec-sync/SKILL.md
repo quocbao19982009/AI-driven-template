@@ -118,3 +118,19 @@ Tell the user what was updated:
 - Which spec file(s) were modified
 - Which sections were changed and why
 - Any specs that should exist but don't
+
+### Step 6: Spec Consistency Check
+
+After updating all sections, verify cross-section consistency (non-blocking — report warnings but do not refuse to complete):
+
+1. **Entity → Validation Rules**: Every field in the Entity Fields table appears in at least one Validation Rule, or has "no validation" explicitly noted in its Notes column.
+
+2. **API Endpoints → Acceptance Scenarios**: Every API endpoint in the API Endpoints table appears in at least one Acceptance Scenario in Business Rules, or Business Rules explicitly says "none — standard CRUD".
+
+3. **Redux UI State → Frontend UI Description**: Every field listed in Redux UI State (section 10) has a corresponding interaction described in Frontend UI Description (section 9). Orphaned Redux fields with no UI element are flagged.
+
+4. **File Locations → API Endpoints**: The File Locations section lists a controller file for every endpoint that was added or modified. Missing controller or service entries are flagged.
+
+Include any warnings in the Step 5 report under a **"⚠ Consistency Warnings"** heading. If no issues are found, omit the heading entirely.
+
+These checks are **warnings only** — the agent always finishes its updates. The workflow is never blocked by consistency issues.

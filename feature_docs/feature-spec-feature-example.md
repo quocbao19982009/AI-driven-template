@@ -104,6 +104,23 @@ sequenceDiagram
 
 - none
 
+### Acceptance Scenarios
+
+**Scenario: Create with valid data**
+- Given: a POST /api/features with Name = "My Feature" (≤ 200 chars)
+- When: the request is processed
+- Then: returns 201 with the created Feature entity wrapped in ApiResponse<FeatureDto>
+
+**Scenario: Create with empty name**
+- Given: a POST /api/features with Name = "" or whitespace only
+- When: the request is processed
+- Then: returns 400 with a validation error identifying the Name field
+
+**Scenario: Get by non-existent ID**
+- Given: a GET /api/features/{id} where no Feature with that ID exists
+- When: the request is processed
+- Then: returns 404 with NotFoundException message ("Feature {id} not found")
+
 ---
 
 ## Authorization

@@ -165,6 +165,33 @@ sequenceDiagram
 - Filtering by `search`, `isCompleted`, and `priority` is done at the database level (not in-memory)
 - All list queries apply `.OrderBy(t => t.Id)` before `.Skip().Take()` to ensure deterministic pagination
 
+### Acceptance Scenarios
+
+**Scenario: Create with valid data**
+- Given: a POST /api/todos with Title = "Buy milk", Priority = 1, no DueDate
+- When: the request is processed
+- Then: returns 201 with the created TodoDto wrapped in ApiResponse<TodoDto>, and IsCompleted = false regardless of any value passed
+
+**Scenario: Create with invalid data**
+- Given: a POST /api/todos with Title = "" (empty string)
+- When: the request is processed
+- Then: returns 400 with a validation error identifying the Title field
+
+**Scenario: Toggle active → completed**
+- Given: a PATCH /api/todos/{id}/toggle where the todo exists with IsCompleted = false
+- When: the request is processed
+- Then: returns 200 with the updated TodoDto where IsCompleted = true
+
+**Scenario: Toggle completed → active**
+- Given: a PATCH /api/todos/{id}/toggle where the todo exists with IsCompleted = true
+- When: the request is processed
+- Then: returns 200 with the updated TodoDto where IsCompleted = false
+
+**Scenario: Get by unknown ID**
+- Given: a GET /api/todos/{id} where no Todo with that ID exists in the database
+- When: the request is processed
+- Then: returns 404 with NotFoundException message ("Todo {id} not found")
+
 ---
 
 ## File Locations
