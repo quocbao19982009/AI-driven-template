@@ -4,6 +4,9 @@ using Backend.Common.Middleware;
 using Backend.Common.Swagger;
 using Backend.Features.Users;
 using Backend.Features._FeatureTemplate;
+using Backend.Features.Factories;
+using Backend.Features.Personnel;
+using Backend.Features.Reservations;
 using Backend.Features.Todos;
 using Backend.Identity;
 using Microsoft.OpenApi;
@@ -35,9 +38,12 @@ builder.Services.AddScoped<IFeatureRepository, FeatureRepository>();
 builder.Services.AddScoped<IFeatureService, FeatureService>();
 builder.Services.AddScoped<ITodosRepository, TodosRepository>();
 builder.Services.AddScoped<ITodosService, TodosService>();
-// TODO: Register new feature services here
-// builder.Services.AddScoped<IProductsRepository, ProductsRepository>();
-// builder.Services.AddScoped<IProductsService, ProductsService>();
+builder.Services.AddScoped<IFactoriesRepository, FactoriesRepository>();
+builder.Services.AddScoped<IFactoriesService, FactoriesService>();
+builder.Services.AddScoped<IPersonnelRepository, PersonnelRepository>();
+builder.Services.AddScoped<IPersonnelService, PersonnelService>();
+builder.Services.AddScoped<IReservationsRepository, ReservationsRepository>();
+builder.Services.AddScoped<IReservationsService, ReservationsService>();
 
 // Logging
 builder.Host.UseSerilog((context, loggerConfig) => loggerConfig.ReadFrom.Configuration(context.Configuration));

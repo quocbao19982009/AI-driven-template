@@ -15,7 +15,11 @@
     "home": "Etusivu",
     "about": "Tietoja",
     "features": "Ominaisuudet",
-    "todos": "Tehtävät"
+    "todos": "Tehtävät",
+    "factories": "Tehtaat",
+    "personnel": "Henkilöstö",
+    "reservations": "Varaukset",
+    "scheduling": "Aikataulutus"
   },
   "features": {
     "title": "Ominaisuudet",
@@ -112,6 +116,150 @@
       "deleteError": "Tehtävän poistaminen epäonnistui.",
       "toggled": "Tehtävän tila päivitetty.",
       "toggleError": "Tehtävän tilan päivittäminen epäonnistui."
+    }
+  },
+  "factories": {
+    "title": "Tehtaat",
+    "description": "Hallinnoi tuotantolaitoksiasi.",
+    "newFactory": "Uusi tehdas",
+    "searchPlaceholder": "Hae tehtaita...",
+    "table": {
+      "id": "ID",
+      "name": "Nimi",
+      "timeZone": "Aikavyöhyke",
+      "createdAt": "Luotu",
+      "empty": "Ei tehtaita. Luo ensimmäinen aloittaaksesi."
+    },
+    "form": {
+      "createTitle": "Luo tehdas",
+      "editTitle": "Muokkaa tehdasta",
+      "createDescription": "Täytä tiedot luodaksesi uuden tehtaan.",
+      "editDescription": "Päivitä tehtaan tiedot alla.",
+      "nameLabel": "Nimi",
+      "namePlaceholder": "Tehtaan nimi",
+      "timeZoneLabel": "Aikavyöhyke",
+      "timeZonePlaceholder": "esim. Europe/Helsinki"
+    },
+    "delete": {
+      "title": "Poista tehdas",
+      "confirmPrefix": "Haluatko varmasti poistaa",
+      "confirmSuffix": "Tätä toimintoa ei voi peruuttaa. Olemassa olevat varaukset säilyvät, mutta menettävät tehdaslinkin."
+    },
+    "toast": {
+      "created": "Tehdas luotu onnistuneesti.",
+      "createError": "Tehtaan luominen epäonnistui.",
+      "updated": "Tehdas päivitetty onnistuneesti.",
+      "updateError": "Tehtaan päivittäminen epäonnistui.",
+      "deleted": "Tehdas poistettu onnistuneesti.",
+      "deleteError": "Tehtaan poistaminen epäonnistui."
+    }
+  },
+  "personnel": {
+    "title": "Henkilöstö",
+    "description": "Hallinnoi työvoimaasi ja tehdaskiinnityksiä.",
+    "newPerson": "Uusi henkilö",
+    "searchPlaceholder": "Hae henkilöstöä...",
+    "table": {
+      "id": "ID",
+      "personalId": "Henkilötunnus",
+      "fullName": "Koko nimi",
+      "email": "Sähköposti",
+      "allowedFactories": "Sallitut tehtaat",
+      "empty": "Ei henkilöstöä. Luo ensimmäinen aloittaaksesi."
+    },
+    "form": {
+      "createTitle": "Luo henkilö",
+      "editTitle": "Muokkaa henkilöä",
+      "createDescription": "Täytä tiedot luodaksesi uuden henkilön.",
+      "editDescription": "Päivitä henkilön tiedot alla.",
+      "personalIdLabel": "Henkilötunnus",
+      "personalIdPlaceholder": "esim. HLÖ-001",
+      "fullNameLabel": "Koko nimi",
+      "fullNamePlaceholder": "Etu- ja sukunimi",
+      "emailLabel": "Sähköposti",
+      "emailPlaceholder": "henkilo@yritys.fi",
+      "allowedFactoriesLabel": "Sallitut tehtaat",
+      "noFactories": "Ei tehtaita saatavilla. Luo tehdas ensin."
+    },
+    "delete": {
+      "title": "Poista henkilö",
+      "confirmPrefix": "Haluatko varmasti poistaa",
+      "confirmSuffix": "Tätä toimintoa ei voi peruuttaa. Olemassa olevat varaukset säilyvät, mutta menettävät henkilölinkin."
+    },
+    "toast": {
+      "created": "Henkilö luotu onnistuneesti.",
+      "createError": "Henkilön luominen epäonnistui.",
+      "updated": "Henkilö päivitetty onnistuneesti.",
+      "updateError": "Henkilön päivittäminen epäonnistui.",
+      "deleted": "Henkilö poistettu onnistuneesti.",
+      "deleteError": "Henkilön poistaminen epäonnistui."
+    }
+  },
+  "reservations": {
+    "title": "Varaukset",
+    "description": "Hallinnoi henkilöstövarauksia ja aikataulutusta.",
+    "newReservation": "Uusi varaus",
+    "table": {
+      "id": "ID",
+      "factory": "Tehdas",
+      "startTime": "Alkuaika",
+      "endTime": "Loppuaika",
+      "duration": "Kesto",
+      "personnel": "Henkilöstö",
+      "empty": "Ei varauksia. Luo ensimmäinen aloittaaksesi."
+    },
+    "filter": {
+      "allFactories": "Kaikki tehtaat",
+      "allPersonnel": "Kaikki henkilöstö"
+    },
+    "form": {
+      "createTitle": "Luo varaus",
+      "editTitle": "Muokkaa varausta",
+      "createDescription": "Aikatauluta henkilöstöä tehtaalle.",
+      "editDescription": "Päivitä varauksen tiedot alla.",
+      "factoryLabel": "Tehdas",
+      "factoryPlaceholder": "Valitse tehdas",
+      "startTimeLabel": "Alkuaika",
+      "endTimeLabel": "Loppuaika",
+      "personnelLabel": "Henkilöstö",
+      "selectFactoryFirst": "Valitse tehdas ensin nähdäksesi saatavilla olevan henkilöstön.",
+      "noPersonnelForFactory": "Ei henkilöstöä kiinnitetty tähän tehtaaseen."
+    },
+    "delete": {
+      "title": "Poista varaus",
+      "confirmMessage": "Haluatko varmasti poistaa varauksen tehtaalle {{factory}} {{date}}? Tätä toimintoa ei voi peruuttaa."
+    },
+    "toast": {
+      "created": "Varaus luotu onnistuneesti.",
+      "createError": "Varauksen luominen epäonnistui.",
+      "updated": "Varaus päivitetty onnistuneesti.",
+      "updateError": "Varauksen päivittäminen epäonnistui.",
+      "deleted": "Varaus poistettu onnistuneesti.",
+      "deleteError": "Varauksen poistaminen epäonnistui."
+    }
+  },
+  "scheduling": {
+    "title": "Aikataulutuksen yleiskatsaus",
+    "description": "Näytä resurssien jako henkilöittäin ja tehtaittain.",
+    "tabs": {
+      "byPerson": "Henkilöittäin",
+      "byFactory": "Tehtaittain"
+    },
+    "deleted": "Poistettu",
+    "totalHours": "{{hours}}h yhteensä",
+    "byPerson": {
+      "empty": "Ei aikataulutustietoja saatavilla.",
+      "factory": "Tehdas",
+      "startTime": "Alku",
+      "endTime": "Loppu",
+      "duration": "Kesto",
+      "noReservations": "Ei varauksia."
+    },
+    "byFactory": {
+      "empty": "Ei aikataulutustietoja saatavilla.",
+      "factory": "Tehdas",
+      "reservationCount": "Varaukset",
+      "totalHours": "Tunnit yhteensä"
     }
   }
 }

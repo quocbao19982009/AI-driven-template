@@ -15,7 +15,11 @@
     "home": "Home",
     "about": "About",
     "features": "Features",
-    "todos": "Todos"
+    "todos": "Todos",
+    "factories": "Factories",
+    "personnel": "Personnel",
+    "reservations": "Reservations",
+    "scheduling": "Scheduling"
   },
   "features": {
     "title": "Features",
@@ -112,6 +116,150 @@
       "deleteError": "Failed to delete todo.",
       "toggled": "Todo status updated.",
       "toggleError": "Failed to update todo status."
+    }
+  },
+  "factories": {
+    "title": "Factories",
+    "description": "Manage your production facilities.",
+    "newFactory": "New Factory",
+    "searchPlaceholder": "Search factories...",
+    "table": {
+      "id": "ID",
+      "name": "Name",
+      "timeZone": "Time Zone",
+      "createdAt": "Created At",
+      "empty": "No factories found. Create one to get started."
+    },
+    "form": {
+      "createTitle": "Create Factory",
+      "editTitle": "Edit Factory",
+      "createDescription": "Fill in the details to create a new factory.",
+      "editDescription": "Update the factory details below.",
+      "nameLabel": "Name",
+      "namePlaceholder": "Factory name",
+      "timeZoneLabel": "Time Zone",
+      "timeZonePlaceholder": "e.g. Europe/Helsinki"
+    },
+    "delete": {
+      "title": "Delete Factory",
+      "confirmPrefix": "Are you sure you want to delete",
+      "confirmSuffix": "This action cannot be undone. Existing reservations will remain but will lose the factory link."
+    },
+    "toast": {
+      "created": "Factory created successfully.",
+      "createError": "Failed to create factory.",
+      "updated": "Factory updated successfully.",
+      "updateError": "Failed to update factory.",
+      "deleted": "Factory deleted successfully.",
+      "deleteError": "Failed to delete factory."
+    }
+  },
+  "personnel": {
+    "title": "Personnel",
+    "description": "Manage your workforce and factory assignments.",
+    "newPerson": "New Person",
+    "searchPlaceholder": "Search personnel...",
+    "table": {
+      "id": "ID",
+      "personalId": "Personal ID",
+      "fullName": "Full Name",
+      "email": "Email",
+      "allowedFactories": "Allowed Factories",
+      "empty": "No personnel found. Create one to get started."
+    },
+    "form": {
+      "createTitle": "Create Person",
+      "editTitle": "Edit Person",
+      "createDescription": "Fill in the details to create a new person.",
+      "editDescription": "Update the person details below.",
+      "personalIdLabel": "Personal ID",
+      "personalIdPlaceholder": "e.g. EMP-001",
+      "fullNameLabel": "Full Name",
+      "fullNamePlaceholder": "First and last name",
+      "emailLabel": "Email",
+      "emailPlaceholder": "person@company.com",
+      "allowedFactoriesLabel": "Allowed Factories",
+      "noFactories": "No factories available. Create a factory first."
+    },
+    "delete": {
+      "title": "Delete Person",
+      "confirmPrefix": "Are you sure you want to delete",
+      "confirmSuffix": "This action cannot be undone. Existing reservations will remain but will lose the person link."
+    },
+    "toast": {
+      "created": "Person created successfully.",
+      "createError": "Failed to create person.",
+      "updated": "Person updated successfully.",
+      "updateError": "Failed to update person.",
+      "deleted": "Person deleted successfully.",
+      "deleteError": "Failed to delete person."
+    }
+  },
+  "reservations": {
+    "title": "Reservations",
+    "description": "Manage personnel reservations and scheduling.",
+    "newReservation": "New Reservation",
+    "table": {
+      "id": "ID",
+      "factory": "Factory",
+      "startTime": "Start Time",
+      "endTime": "End Time",
+      "duration": "Duration",
+      "personnel": "Personnel",
+      "empty": "No reservations found. Create one to get started."
+    },
+    "filter": {
+      "allFactories": "All Factories",
+      "allPersonnel": "All Personnel"
+    },
+    "form": {
+      "createTitle": "Create Reservation",
+      "editTitle": "Edit Reservation",
+      "createDescription": "Schedule personnel at a factory.",
+      "editDescription": "Update the reservation details below.",
+      "factoryLabel": "Factory",
+      "factoryPlaceholder": "Select a factory",
+      "startTimeLabel": "Start Time",
+      "endTimeLabel": "End Time",
+      "personnelLabel": "Personnel",
+      "selectFactoryFirst": "Select a factory first to see available personnel.",
+      "noPersonnelForFactory": "No personnel assigned to this factory."
+    },
+    "delete": {
+      "title": "Delete Reservation",
+      "confirmMessage": "Are you sure you want to delete the reservation at {{factory}} on {{date}}? This action cannot be undone."
+    },
+    "toast": {
+      "created": "Reservation created successfully.",
+      "createError": "Failed to create reservation.",
+      "updated": "Reservation updated successfully.",
+      "updateError": "Failed to update reservation.",
+      "deleted": "Reservation deleted successfully.",
+      "deleteError": "Failed to delete reservation."
+    }
+  },
+  "scheduling": {
+    "title": "Scheduling Overview",
+    "description": "View resource allocation summaries by person and factory.",
+    "tabs": {
+      "byPerson": "By Person",
+      "byFactory": "By Factory"
+    },
+    "deleted": "Deleted",
+    "totalHours": "{{hours}}h total",
+    "byPerson": {
+      "empty": "No scheduling data available.",
+      "factory": "Factory",
+      "startTime": "Start",
+      "endTime": "End",
+      "duration": "Duration",
+      "noReservations": "No reservations."
+    },
+    "byFactory": {
+      "empty": "No scheduling data available.",
+      "factory": "Factory",
+      "reservationCount": "Reservations",
+      "totalHours": "Total Hours"
     }
   }
 }

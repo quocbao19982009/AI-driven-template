@@ -19,6 +19,18 @@ export function AppLayout() {
         </Link>{" "}
         <Link to="/todos" className="[&.active]:font-bold">
           {t("nav.todos")}
+        </Link>{" "}
+        <Link to="/factories" className="[&.active]:font-bold">
+          {t("nav.factories")}
+        </Link>{" "}
+        <Link to="/personnel" className="[&.active]:font-bold">
+          {t("nav.personnel")}
+        </Link>{" "}
+        <Link to="/reservations" className="[&.active]:font-bold">
+          {t("nav.reservations")}
+        </Link>{" "}
+        <Link to="/scheduling" className="[&.active]:font-bold">
+          {t("nav.scheduling")}
         </Link>
         <div className="ml-auto">
           <LanguageSwitcher />
