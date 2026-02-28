@@ -19,7 +19,8 @@
     "factories": "Tehtaat",
     "personnel": "Henkilöstö",
     "reservations": "Varaukset",
-    "scheduling": "Aikataulutus"
+    "scheduling": "Aikataulutus",
+    "flashcards": "Sanakortit"
   },
   "features": {
     "title": "Ominaisuudet",
@@ -236,6 +237,65 @@
       "updateError": "Varauksen päivittäminen epäonnistui.",
       "deleted": "Varaus poistettu onnistuneesti.",
       "deleteError": "Varauksen poistaminen epäonnistui."
+    }
+  },
+  "flashcards": {
+    "title": "Sanakortit",
+    "description": "Opi suomen sanastoa sanakorteilla.",
+    "newFlashcard": "Uusi sanakortti",
+    "searchPlaceholder": "Hae sanakortteja...",
+    "tabs": {
+      "manage": "Hallinnoi",
+      "study": "Opiskele"
+    },
+    "filter": {
+      "allCategories": "Kaikki kategoriat"
+    },
+    "table": {
+      "id": "ID",
+      "finnishWord": "Suomi",
+      "englishTranslation": "Englanti",
+      "category": "Kategoria",
+      "lastReviewed": "Viimeksi kertaattu",
+      "empty": "Ei sanakortteja. Luo ensimmäinen aloittaaksesi."
+    },
+    "form": {
+      "createTitle": "Luo sanakortti",
+      "editTitle": "Muokkaa sanakorttia",
+      "createDescription": "Lisää uusi suomen sanastokortti.",
+      "editDescription": "Päivitä sanakortin tiedot alla.",
+      "finnishWordLabel": "Suomenkielinen sana",
+      "finnishWordPlaceholder": "esim. koira",
+      "englishTranslationLabel": "Englanninkielinen käännös",
+      "englishTranslationPlaceholder": "esim. dog",
+      "categoryLabel": "Kategoria",
+      "categoryPlaceholder": "esim. Eläimet"
+    },
+    "delete": {
+      "title": "Poista sanakortti",
+      "confirmPrefix": "Haluatko varmasti poistaa",
+      "confirmSuffix": "Tätä toimintoa ei voi peruuttaa."
+    },
+    "study": {
+      "selectCategory": "Valitse kategoria...",
+      "selectCategoryPrompt": "Valitse kategoria yllä aloittaaksesi opiskelun.",
+      "loading": "Ladataan kortteja...",
+      "noCards": "Ei kortteja tässä kategoriassa.",
+      "finnish": "Suomi",
+      "english": "Englanti",
+      "clickToFlip": "Klikkaa kääntääksesi",
+      "restart": "Aloita alusta",
+      "markReviewed": "Merkitse kertaatuksi"
+    },
+    "toast": {
+      "created": "Sanakortti luotu onnistuneesti.",
+      "createError": "Sanakortin luominen epäonnistui.",
+      "updated": "Sanakortti päivitetty onnistuneesti.",
+      "updateError": "Sanakortin päivittäminen epäonnistui.",
+      "deleted": "Sanakortti poistettu onnistuneesti.",
+      "deleteError": "Sanakortin poistaminen epäonnistui.",
+      "reviewed": "Sanakortti merkitty kertaatuksi.",
+      "reviewError": "Sanakortin merkitseminen kertaatuksi epäonnistui."
     }
   },
   "scheduling": {

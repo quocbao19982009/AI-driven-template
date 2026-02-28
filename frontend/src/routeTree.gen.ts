@@ -15,6 +15,7 @@ import { Route as TodosIndexRouteImport } from './routes/todos/index'
 import { Route as SchedulingIndexRouteImport } from './routes/scheduling/index'
 import { Route as ReservationsIndexRouteImport } from './routes/reservations/index'
 import { Route as PersonnelIndexRouteImport } from './routes/personnel/index'
+import { Route as FlashcardsIndexRouteImport } from './routes/flashcards/index'
 import { Route as FeaturesIndexRouteImport } from './routes/features/index'
 import { Route as FactoriesIndexRouteImport } from './routes/factories/index'
 
@@ -48,6 +49,11 @@ const PersonnelIndexRoute = PersonnelIndexRouteImport.update({
   path: '/personnel/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FlashcardsIndexRoute = FlashcardsIndexRouteImport.update({
+  id: '/flashcards/',
+  path: '/flashcards/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FeaturesIndexRoute = FeaturesIndexRouteImport.update({
   id: '/features/',
   path: '/features/',
@@ -64,6 +70,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/factories/': typeof FactoriesIndexRoute
   '/features/': typeof FeaturesIndexRoute
+  '/flashcards/': typeof FlashcardsIndexRoute
   '/personnel/': typeof PersonnelIndexRoute
   '/reservations/': typeof ReservationsIndexRoute
   '/scheduling/': typeof SchedulingIndexRoute
@@ -74,6 +81,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/factories': typeof FactoriesIndexRoute
   '/features': typeof FeaturesIndexRoute
+  '/flashcards': typeof FlashcardsIndexRoute
   '/personnel': typeof PersonnelIndexRoute
   '/reservations': typeof ReservationsIndexRoute
   '/scheduling': typeof SchedulingIndexRoute
@@ -85,6 +93,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/factories/': typeof FactoriesIndexRoute
   '/features/': typeof FeaturesIndexRoute
+  '/flashcards/': typeof FlashcardsIndexRoute
   '/personnel/': typeof PersonnelIndexRoute
   '/reservations/': typeof ReservationsIndexRoute
   '/scheduling/': typeof SchedulingIndexRoute
@@ -97,6 +106,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/factories/'
     | '/features/'
+    | '/flashcards/'
     | '/personnel/'
     | '/reservations/'
     | '/scheduling/'
@@ -107,6 +117,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/factories'
     | '/features'
+    | '/flashcards'
     | '/personnel'
     | '/reservations'
     | '/scheduling'
@@ -117,6 +128,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/factories/'
     | '/features/'
+    | '/flashcards/'
     | '/personnel/'
     | '/reservations/'
     | '/scheduling/'
@@ -128,6 +140,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   FactoriesIndexRoute: typeof FactoriesIndexRoute
   FeaturesIndexRoute: typeof FeaturesIndexRoute
+  FlashcardsIndexRoute: typeof FlashcardsIndexRoute
   PersonnelIndexRoute: typeof PersonnelIndexRoute
   ReservationsIndexRoute: typeof ReservationsIndexRoute
   SchedulingIndexRoute: typeof SchedulingIndexRoute
@@ -178,6 +191,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PersonnelIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/flashcards/': {
+      id: '/flashcards/'
+      path: '/flashcards'
+      fullPath: '/flashcards/'
+      preLoaderRoute: typeof FlashcardsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/features/': {
       id: '/features/'
       path: '/features'
@@ -200,6 +220,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   FactoriesIndexRoute: FactoriesIndexRoute,
   FeaturesIndexRoute: FeaturesIndexRoute,
+  FlashcardsIndexRoute: FlashcardsIndexRoute,
   PersonnelIndexRoute: PersonnelIndexRoute,
   ReservationsIndexRoute: ReservationsIndexRoute,
   SchedulingIndexRoute: SchedulingIndexRoute,

@@ -31,6 +31,9 @@ export function AppLayout() {
         </Link>{" "}
         <Link to="/scheduling" className="[&.active]:font-bold">
           {t("nav.scheduling")}
+        </Link>{" "}
+        <Link to="/flashcards" className="[&.active]:font-bold">
+          {t("nav.flashcards")}
         </Link>
         <div className="ml-auto">
           <LanguageSwitcher />

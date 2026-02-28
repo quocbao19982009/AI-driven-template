@@ -4,6 +4,7 @@ import { todosReducer } from "@/features/todos/store";
 import { factoriesReducer } from "@/features/factories/store";
 import { personnelReducer } from "@/features/personnel/store";
 import { reservationsReducer } from "@/features/reservations/store";
+import { flashcardsReducer } from "@/features/flashcards/store";
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     factories: factoriesReducer,
     personnel: personnelReducer,
     reservations: reservationsReducer,
+    flashcards: flashcardsReducer,
   },
 });
 

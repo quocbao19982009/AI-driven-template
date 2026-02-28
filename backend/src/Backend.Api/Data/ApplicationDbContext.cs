@@ -3,6 +3,7 @@ using Backend.Features.Users;
 using Backend.Features._FeatureTemplate;
 using Backend.Features.Factories;
 using Backend.Features.Personnel;
+using Backend.Features.Flashcards;
 using Backend.Features.Reservations;
 using Backend.Features.Todos;
 using Microsoft.EntityFrameworkCore;
@@ -24,6 +25,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<Person> Personnel => Set<Person>();
     public DbSet<Reservation> Reservations => Set<Reservation>();
     public DbSet<ReservationPerson> ReservationPersonnel => Set<ReservationPerson>();
+    public DbSet<Flashcard> Flashcards => Set<Flashcard>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -19,7 +19,8 @@
     "factories": "Factories",
     "personnel": "Personnel",
     "reservations": "Reservations",
-    "scheduling": "Scheduling"
+    "scheduling": "Scheduling",
+    "flashcards": "Flashcards"
   },
   "features": {
     "title": "Features",
@@ -236,6 +237,65 @@
       "updateError": "Failed to update reservation.",
       "deleted": "Reservation deleted successfully.",
       "deleteError": "Failed to delete reservation."
+    }
+  },
+  "flashcards": {
+    "title": "Flashcards",
+    "description": "Learn Finnish vocabulary with flashcards.",
+    "newFlashcard": "New Flashcard",
+    "searchPlaceholder": "Search flashcards...",
+    "tabs": {
+      "manage": "Manage",
+      "study": "Study"
+    },
+    "filter": {
+      "allCategories": "All Categories"
+    },
+    "table": {
+      "id": "ID",
+      "finnishWord": "Finnish",
+      "englishTranslation": "English",
+      "category": "Category",
+      "lastReviewed": "Last Reviewed",
+      "empty": "No flashcards found. Create one to get started."
+    },
+    "form": {
+      "createTitle": "Create Flashcard",
+      "editTitle": "Edit Flashcard",
+      "createDescription": "Add a new Finnish vocabulary card.",
+      "editDescription": "Update the flashcard details below.",
+      "finnishWordLabel": "Finnish Word",
+      "finnishWordPlaceholder": "e.g. koira",
+      "englishTranslationLabel": "English Translation",
+      "englishTranslationPlaceholder": "e.g. dog",
+      "categoryLabel": "Category",
+      "categoryPlaceholder": "e.g. Animals"
+    },
+    "delete": {
+      "title": "Delete Flashcard",
+      "confirmPrefix": "Are you sure you want to delete",
+      "confirmSuffix": "This action cannot be undone."
+    },
+    "study": {
+      "selectCategory": "Select a category...",
+      "selectCategoryPrompt": "Select a category above to start studying.",
+      "loading": "Loading cards...",
+      "noCards": "No cards in this category.",
+      "finnish": "Finnish",
+      "english": "English",
+      "clickToFlip": "Click to flip",
+      "restart": "Restart",
+      "markReviewed": "Mark as Reviewed"
+    },
+    "toast": {
+      "created": "Flashcard created successfully.",
+      "createError": "Failed to create flashcard.",
+      "updated": "Flashcard updated successfully.",
+      "updateError": "Failed to update flashcard.",
+      "deleted": "Flashcard deleted successfully.",
+      "deleteError": "Failed to delete flashcard.",
+      "reviewed": "Flashcard marked as reviewed.",
+      "reviewError": "Failed to mark flashcard as reviewed."
     }
   },
   "scheduling": {
