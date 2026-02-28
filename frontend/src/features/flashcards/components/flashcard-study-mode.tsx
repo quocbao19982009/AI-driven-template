@@ -2,6 +2,7 @@ import { useState, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
+import type { FlashcardCategoryDto } from "@/api/generated/models";
 import {
   useGetApiFlashcards,
   usePatchApiFlashcardsIdReview,
@@ -13,7 +14,7 @@ import { ChevronLeft, ChevronRight, RotateCcw } from "lucide-react";
 import { toast } from "sonner";
 
 interface FlashcardStudyModeProps {
-  categories: string[];
+  categories: FlashcardCategoryDto[];
 }
 
 export function FlashcardStudyMode({ categories }: FlashcardStudyModeProps) {
@@ -24,11 +25,13 @@ export function FlashcardStudyMode({ categories }: FlashcardStudyModeProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
 
+  const categoryId = studyCategory ? parseInt(studyCategory, 10) : undefined;
+
   const { data: response, isLoading } = useGetApiFlashcards(
     {
       page: 1,
       pageSize: 100,
-      category: studyCategory || undefined,
+      categoryId: categoryId || undefined,
     },
     { query: { enabled: !!studyCategory } },
   );
@@ -81,8 +84,8 @@ export function FlashcardStudyMode({ categories }: FlashcardStudyModeProps) {
         >
           <option value="">{t("flashcards.study.selectCategory")}</option>
           {categories.map((cat) => (
-            <option key={cat} value={cat}>
-              {cat}
+            <option key={cat.id} value={String(cat.id)}>
+              {cat.name}
             </option>
           ))}
         </select>

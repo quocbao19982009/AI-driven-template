@@ -12,6 +12,7 @@ import {
 import { FlashcardsTable } from "./flashcards-table";
 import { FlashcardFormDialog } from "./flashcard-form-dialog";
 import { FlashcardStudyMode } from "./flashcard-study-mode";
+import { FlashcardCategoryManager } from "@/features/flashcard-categories/components/flashcard-category-manager";
 import { useFlashcardsPagination, useFlashcardCategories } from "../hooks";
 
 export function FlashcardsPage() {
@@ -75,8 +76,8 @@ export function FlashcardsPage() {
               >
                 <option value="">{t("flashcards.filter.allCategories")}</option>
                 {categories.map((cat) => (
-                  <option key={cat} value={cat}>
-                    {cat}
+                  <option key={cat.id} value={String(cat.id)}>
+                    {cat.name}
                   </option>
                 ))}
               </select>
@@ -100,6 +101,8 @@ export function FlashcardsPage() {
             onOpenChange={setCreateOpen}
             categories={categories}
           />
+
+          <FlashcardCategoryManager />
         </>
       ) : (
         <FlashcardStudyMode categories={categories} />

@@ -4,7 +4,8 @@ public record FlashcardDto(
     int Id,
     string FinnishWord,
     string EnglishTranslation,
-    string Category,
+    int? CategoryId,
+    string? CategoryName,
     DateTime? NextReviewDate,
     DateTime? LastReviewedAt,
     DateTime CreatedAt,
@@ -15,12 +16,12 @@ public class CreateFlashcardRequest
 {
     public string FinnishWord { get; set; } = string.Empty;
     public string EnglishTranslation { get; set; } = string.Empty;
-    public string Category { get; set; } = string.Empty;
+    public int? CategoryId { get; set; }
 }
 
 public class UpdateFlashcardRequest
 {
     public string FinnishWord { get; set; } = string.Empty;
     public string EnglishTranslation { get; set; } = string.Empty;
-    public string Category { get; set; } = string.Empty;
+    public int? CategoryId { get; set; }
 }

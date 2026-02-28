@@ -10,7 +10,10 @@ export interface FlashcardDto {
   id: number;
   finnishWord: string;
   englishTranslation: string;
-  category: string;
+  /** @nullable */
+  categoryId?: number | null;
+  /** @nullable */
+  categoryName?: string | null;
   /** @nullable */
   nextReviewDate?: string | null;
   /** @nullable */

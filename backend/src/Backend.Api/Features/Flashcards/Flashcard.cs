@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using Backend.Common.Models;
+using Backend.Features.FlashcardCategories;
 
 namespace Backend.Features.Flashcards;
 
@@ -13,9 +14,8 @@ public class Flashcard : BaseEntity
     [MaxLength(500)]
     public string EnglishTranslation { get; set; } = string.Empty;
 
-    [Required]
-    [MaxLength(100)]
-    public string Category { get; set; } = string.Empty;
+    public int? CategoryId { get; set; }
+    public FlashcardCategory? Category { get; set; }
 
     public DateTime? NextReviewDate { get; set; }
 

@@ -6,6 +6,7 @@ using Backend.Features.Users;
 using Backend.Features._FeatureTemplate;
 using Backend.Features.Factories;
 using Backend.Features.Personnel;
+using Backend.Features.FlashcardCategories;
 using Backend.Features.Flashcards;
 using Backend.Features.Reservations;
 using Backend.Features.Todos;
@@ -45,6 +46,8 @@ builder.Services.AddScoped<IPersonnelRepository, PersonnelRepository>();
 builder.Services.AddScoped<IPersonnelService, PersonnelService>();
 builder.Services.AddScoped<IReservationsRepository, ReservationsRepository>();
 builder.Services.AddScoped<IReservationsService, ReservationsService>();
+builder.Services.AddScoped<IFlashcardCategoriesRepository, FlashcardCategoriesRepository>();
+builder.Services.AddScoped<IFlashcardCategoriesService, FlashcardCategoriesService>();
 builder.Services.AddScoped<IFlashcardsRepository, FlashcardsRepository>();
 builder.Services.AddScoped<IFlashcardsService, FlashcardsService>();
 

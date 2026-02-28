@@ -3,16 +3,12 @@ import { useQueryClient } from "@tanstack/react-query";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import type { FlashcardDto } from "@/api/generated/models";
+import type { FlashcardDto, FlashcardCategoryDto } from "@/api/generated/models";
 import {
   usePostApiFlashcardsWithJson,
   usePutApiFlashcardsIdWithJson,
   getGetApiFlashcardsQueryKey,
 } from "@/api/generated/flashcards/flashcards";
-import {
-  PostApiFlashcardsWithJsonBody,
-  PutApiFlashcardsIdWithJsonBody,
-} from "@/api/generated/flashcards/flashcards.zod";
 import {
   Dialog,
   DialogContent,
@@ -34,14 +30,19 @@ import { Input } from "@/components/ui/input";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 
-type CreateFormValues = z.infer<typeof PostApiFlashcardsWithJsonBody>;
-type UpdateFormValues = z.infer<typeof PutApiFlashcardsIdWithJsonBody>;
+const flashcardFormSchema = z.object({
+  finnishWord: z.string().min(1),
+  englishTranslation: z.string().min(1),
+  categoryId: z.number().nullable().optional(),
+});
+
+type FormValues = z.infer<typeof flashcardFormSchema>;
 
 interface FlashcardFormDialogProps {
   flashcard?: FlashcardDto | null;
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  categories: string[];
+  categories: FlashcardCategoryDto[];
 }
 
 export function FlashcardFormDialog({
@@ -54,37 +55,32 @@ export function FlashcardFormDialog({
   const isEditing = !!flashcard;
   const queryClient = useQueryClient();
 
-  const createForm = useForm<CreateFormValues>({
-    resolver: zodResolver(PostApiFlashcardsWithJsonBody),
-    defaultValues: { finnishWord: "", englishTranslation: "", category: "" },
-  });
-
-  const updateForm = useForm<UpdateFormValues>({
-    resolver: zodResolver(PutApiFlashcardsIdWithJsonBody),
+  const form = useForm<FormValues>({
+    resolver: zodResolver(flashcardFormSchema),
     defaultValues: {
-      finnishWord: flashcard?.finnishWord ?? "",
-      englishTranslation: flashcard?.englishTranslation ?? "",
-      category: flashcard?.category ?? "",
+      finnishWord: "",
+      englishTranslation: "",
+      categoryId: null,
     },
   });
 
   useEffect(() => {
     if (open) {
       if (isEditing && flashcard) {
-        updateForm.reset({
+        form.reset({
           finnishWord: flashcard.finnishWord,
           englishTranslation: flashcard.englishTranslation,
-          category: flashcard.category,
+          categoryId: flashcard.categoryId ?? null,
         });
       } else {
-        createForm.reset({
+        form.reset({
           finnishWord: "",
           englishTranslation: "",
-          category: "",
+          categoryId: null,
         });
       }
     }
-  }, [open, flashcard, isEditing, createForm, updateForm]);
+  }, [open, flashcard, isEditing, form]);
 
   const createMutation = usePostApiFlashcardsWithJson({
     mutation: {
@@ -126,13 +122,17 @@ export function FlashcardFormDialog({
 
   const isPending = createMutation.isPending || updateMutation.isPending;
 
-  function onSubmitCreate(values: CreateFormValues) {
-    createMutation.mutate({ data: values });
-  }
+  function onSubmit(values: FormValues) {
+    const payload = {
+      finnishWord: values.finnishWord,
+      englishTranslation: values.englishTranslation,
+      categoryId: values.categoryId,
+    };
 
-  function onSubmitUpdate(values: UpdateFormValues) {
-    if (flashcard?.id) {
-      updateMutation.mutate({ id: flashcard.id, data: values });
+    if (isEditing && flashcard?.id) {
+      updateMutation.mutate({ id: flashcard.id, data: payload });
+    } else {
+      createMutation.mutate({ data: payload });
     }
   }
 
@@ -152,146 +152,109 @@ export function FlashcardFormDialog({
           </DialogDescription>
         </DialogHeader>
 
-        {isEditing ? (
-          <Form {...updateForm}>
-            <form onSubmit={updateForm.handleSubmit(onSubmitUpdate)}>
-              <FlashcardFormFields
-                form={updateForm}
-                t={t}
-                categories={categories}
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)}>
+            <div className="grid gap-4 py-4">
+              <FormField
+                control={form.control}
+                name="finnishWord"
+                render={({
+                  field,
+                }: {
+                  field: React.InputHTMLAttributes<HTMLInputElement>;
+                }) => (
+                  <FormItem>
+                    <FormLabel>
+                      {t("flashcards.form.finnishWordLabel")}
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder={t(
+                          "flashcards.form.finnishWordPlaceholder",
+                        )}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
               />
-              <DialogFooter className="mt-4">
-                <Button
-                  type="button"
-                  variant="outline"
-                  onClick={() => onOpenChange(false)}
-                  disabled={isPending}
-                >
-                  {t("common.cancel")}
-                </Button>
-                <Button type="submit" disabled={isPending}>
-                  {isPending ? t("common.saving") : t("common.save")}
-                </Button>
-              </DialogFooter>
-            </form>
-          </Form>
-        ) : (
-          <Form {...createForm}>
-            <form onSubmit={createForm.handleSubmit(onSubmitCreate)}>
-              <FlashcardFormFields
-                form={createForm}
-                t={t}
-                categories={categories}
+
+              <FormField
+                control={form.control}
+                name="englishTranslation"
+                render={({
+                  field,
+                }: {
+                  field: React.InputHTMLAttributes<HTMLInputElement>;
+                }) => (
+                  <FormItem>
+                    <FormLabel>
+                      {t("flashcards.form.englishTranslationLabel")}
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder={t(
+                          "flashcards.form.englishTranslationPlaceholder",
+                        )}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
               />
-              <DialogFooter className="mt-4">
-                <Button
-                  type="button"
-                  variant="outline"
-                  onClick={() => onOpenChange(false)}
-                  disabled={isPending}
-                >
-                  {t("common.cancel")}
-                </Button>
-                <Button type="submit" disabled={isPending}>
-                  {isPending ? t("common.saving") : t("common.create")}
-                </Button>
-              </DialogFooter>
-            </form>
-          </Form>
-        )}
+
+              <FormField
+                control={form.control}
+                name="categoryId"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{t("flashcards.form.categoryLabel")}</FormLabel>
+                    <FormControl>
+                      <select
+                        className="flex h-9 w-full rounded-md border border-input bg-background px-3 py-1 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+                        value={field.value ?? ""}
+                        onChange={(e) => {
+                          const val = e.target.value;
+                          field.onChange(val ? parseInt(val, 10) : null);
+                        }}
+                      >
+                        <option value="">
+                          {t("flashcards.form.categoryPlaceholder")}
+                        </option>
+                        {categories.map((cat) => (
+                          <option key={cat.id} value={cat.id}>
+                            {cat.name}
+                          </option>
+                        ))}
+                      </select>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <DialogFooter className="mt-4">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => onOpenChange(false)}
+                disabled={isPending}
+              >
+                {t("common.cancel")}
+              </Button>
+              <Button type="submit" disabled={isPending}>
+                {isPending
+                  ? t("common.saving")
+                  : isEditing
+                    ? t("common.save")
+                    : t("common.create")}
+              </Button>
+            </DialogFooter>
+          </form>
+        </Form>
       </DialogContent>
     </Dialog>
-  );
-}
-
-interface FlashcardFormFieldsProps {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  form: any;
-  t: (key: string) => string;
-  categories: string[];
-}
-
-function FlashcardFormFields({
-  form,
-  t,
-  categories,
-}: FlashcardFormFieldsProps) {
-  return (
-    <div className="grid gap-4 py-4">
-      <FormField
-        control={form.control}
-        name="finnishWord"
-        render={({
-          field,
-        }: {
-          field: React.InputHTMLAttributes<HTMLInputElement>;
-        }) => (
-          <FormItem>
-            <FormLabel>{t("flashcards.form.finnishWordLabel")}</FormLabel>
-            <FormControl>
-              <Input
-                placeholder={t("flashcards.form.finnishWordPlaceholder")}
-                {...field}
-              />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-
-      <FormField
-        control={form.control}
-        name="englishTranslation"
-        render={({
-          field,
-        }: {
-          field: React.InputHTMLAttributes<HTMLInputElement>;
-        }) => (
-          <FormItem>
-            <FormLabel>
-              {t("flashcards.form.englishTranslationLabel")}
-            </FormLabel>
-            <FormControl>
-              <Input
-                placeholder={t(
-                  "flashcards.form.englishTranslationPlaceholder",
-                )}
-                {...field}
-              />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-
-      <FormField
-        control={form.control}
-        name="category"
-        render={({
-          field,
-        }: {
-          field: React.InputHTMLAttributes<HTMLInputElement>;
-        }) => (
-          <FormItem>
-            <FormLabel>{t("flashcards.form.categoryLabel")}</FormLabel>
-            <FormControl>
-              <>
-                <Input
-                  placeholder={t("flashcards.form.categoryPlaceholder")}
-                  list="flashcard-categories"
-                  {...field}
-                />
-                <datalist id="flashcard-categories">
-                  {categories.map((cat) => (
-                    <option key={cat} value={cat} />
-                  ))}
-                </datalist>
-              </>
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-    </div>
   );
 }

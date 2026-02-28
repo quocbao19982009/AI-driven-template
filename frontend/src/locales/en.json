@@ -298,6 +298,27 @@
       "reviewError": "Failed to mark flashcard as reviewed."
     }
   },
+  "flashcardCategories": {
+    "title": "Categories",
+    "addCategory": "Add Category",
+    "empty": "No categories yet. Add one above.",
+    "form": {
+      "namePlaceholder": "Category name..."
+    },
+    "delete": {
+      "title": "Delete Category",
+      "confirmPrefix": "Are you sure you want to delete",
+      "confirmSuffix": "Flashcards in this category will become uncategorized."
+    },
+    "toast": {
+      "created": "Category created successfully.",
+      "createError": "Failed to create category.",
+      "updated": "Category updated successfully.",
+      "updateError": "Failed to update category.",
+      "deleted": "Category deleted successfully.",
+      "deleteError": "Failed to delete category."
+    }
+  },
   "scheduling": {
     "title": "Scheduling Overview",
     "description": "View resource allocation summaries by person and factory.",

@@ -10,5 +10,5 @@ export type GetApiFlashcardsParams = {
   page?: number;
   pageSize?: number;
   search?: string;
-  category?: string;
+  categoryId?: number;
 };

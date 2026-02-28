@@ -87,7 +87,7 @@ export function FlashcardsTable({
                   </TableCell>
                   <TableCell>{flashcard.englishTranslation}</TableCell>
                   <TableCell className="text-muted-foreground">
-                    {flashcard.category}
+                    {flashcard.categoryName ?? "—"}
                   </TableCell>
                   <TableCell className="hidden lg:table-cell text-muted-foreground">
                     {flashcard.lastReviewedAt

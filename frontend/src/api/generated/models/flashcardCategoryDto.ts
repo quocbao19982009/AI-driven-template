@@ -6,9 +6,10 @@
  * OpenAPI spec version: v1
  */
 
-export interface CreateFlashcardRequest {
-  finnishWord: string;
-  englishTranslation: string;
+export interface FlashcardCategoryDto {
+  id: number;
+  name: string;
+  createdAt: string;
   /** @nullable */
-  categoryId?: number | null;
+  updatedAt?: string | null;
 }

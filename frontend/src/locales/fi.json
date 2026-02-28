@@ -298,6 +298,27 @@
       "reviewError": "Sanakortin merkitseminen kertaatuksi epäonnistui."
     }
   },
+  "flashcardCategories": {
+    "title": "Kategoriat",
+    "addCategory": "Lisää kategoria",
+    "empty": "Ei kategorioita vielä. Lisää yksi yllä.",
+    "form": {
+      "namePlaceholder": "Kategorian nimi..."
+    },
+    "delete": {
+      "title": "Poista kategoria",
+      "confirmPrefix": "Haluatko varmasti poistaa",
+      "confirmSuffix": "Tämän kategorian sanakortit jäävät ilman kategoriaa."
+    },
+    "toast": {
+      "created": "Kategoria luotu onnistuneesti.",
+      "createError": "Kategorian luominen epäonnistui.",
+      "updated": "Kategoria päivitetty onnistuneesti.",
+      "updateError": "Kategorian päivittäminen epäonnistui.",
+      "deleted": "Kategoria poistettu onnistuneesti.",
+      "deleteError": "Kategorian poistaminen epäonnistui."
+    }
+  },
   "scheduling": {
     "title": "Aikataulutuksen yleiskatsaus",
     "description": "Näytä resurssien jako henkilöittäin ja tehtaittain.",

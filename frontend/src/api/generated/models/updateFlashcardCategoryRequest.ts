@@ -6,9 +6,6 @@
  * OpenAPI spec version: v1
  */
 
-export interface CreateFlashcardRequest {
-  finnishWord: string;
-  englishTranslation: string;
-  /** @nullable */
-  categoryId?: number | null;
+export interface UpdateFlashcardCategoryRequest {
+  name: string;
 }

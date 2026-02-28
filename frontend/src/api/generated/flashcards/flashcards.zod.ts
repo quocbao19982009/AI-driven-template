@@ -14,7 +14,7 @@ export const GetApiFlashcardsQueryParams = zod.object({
   "page": zod.number().default(getApiFlashcardsQueryPageDefault),
   "pageSize": zod.number().default(getApiFlashcardsQueryPageSizeDefault),
   "search": zod.string().optional(),
-  "category": zod.string().optional()
+  "categoryId": zod.number().optional()
 })
 
 export const GetApiFlashcardsResponse = zod.object({
@@ -24,7 +24,8 @@ export const GetApiFlashcardsResponse = zod.object({
   "id": zod.number(),
   "finnishWord": zod.string(),
   "englishTranslation": zod.string(),
-  "category": zod.string(),
+  "categoryId": zod.number().nullish(),
+  "categoryName": zod.string().nullish(),
   "nextReviewDate": zod.iso.datetime({}).nullish(),
   "lastReviewedAt": zod.iso.datetime({}).nullish(),
   "createdAt": zod.iso.datetime({}),
@@ -44,7 +45,7 @@ export const GetApiFlashcardsResponse = zod.object({
 export const PostApiFlashcardsWithJsonBody = zod.object({
   "finnishWord": zod.string(),
   "englishTranslation": zod.string(),
-  "category": zod.string()
+  "categoryId": zod.number().nullish()
 })
 
 export const PostApiFlashcardsWithJsonResponse = zod.object({
@@ -53,7 +54,8 @@ export const PostApiFlashcardsWithJsonResponse = zod.object({
   "id": zod.number(),
   "finnishWord": zod.string(),
   "englishTranslation": zod.string(),
-  "category": zod.string(),
+  "categoryId": zod.number().nullish(),
+  "categoryName": zod.string().nullish(),
   "nextReviewDate": zod.iso.datetime({}).nullish(),
   "lastReviewedAt": zod.iso.datetime({}).nullish(),
   "createdAt": zod.iso.datetime({}),
@@ -66,7 +68,7 @@ export const PostApiFlashcardsWithJsonResponse = zod.object({
 export const PostApiFlashcardsWithTextJsonBody = zod.object({
   "finnishWord": zod.string(),
   "englishTranslation": zod.string(),
-  "category": zod.string()
+  "categoryId": zod.number().nullish()
 })
 
 export const PostApiFlashcardsWithTextJsonResponse = zod.object({
@@ -75,7 +77,8 @@ export const PostApiFlashcardsWithTextJsonResponse = zod.object({
   "id": zod.number(),
   "finnishWord": zod.string(),
   "englishTranslation": zod.string(),
-  "category": zod.string(),
+  "categoryId": zod.number().nullish(),
+  "categoryName": zod.string().nullish(),
   "nextReviewDate": zod.iso.datetime({}).nullish(),
   "lastReviewedAt": zod.iso.datetime({}).nullish(),
   "createdAt": zod.iso.datetime({}),
@@ -88,7 +91,7 @@ export const PostApiFlashcardsWithTextJsonResponse = zod.object({
 export const PostApiFlashcardsWithApplicationJsonBody = zod.object({
   "finnishWord": zod.string(),
   "englishTranslation": zod.string(),
-  "category": zod.string()
+  "categoryId": zod.number().nullish()
 })
 
 export const PostApiFlashcardsWithApplicationJsonResponse = zod.object({
@@ -97,7 +100,8 @@ export const PostApiFlashcardsWithApplicationJsonResponse = zod.object({
   "id": zod.number(),
   "finnishWord": zod.string(),
   "englishTranslation": zod.string(),
-  "category": zod.string(),
+  "categoryId": zod.number().nullish(),
+  "categoryName": zod.string().nullish(),
   "nextReviewDate": zod.iso.datetime({}).nullish(),
   "lastReviewedAt": zod.iso.datetime({}).nullish(),
   "createdAt": zod.iso.datetime({}),
@@ -117,7 +121,8 @@ export const GetApiFlashcardsIdResponse = zod.object({
   "id": zod.number(),
   "finnishWord": zod.string(),
   "englishTranslation": zod.string(),
-  "category": zod.string(),
+  "categoryId": zod.number().nullish(),
+  "categoryName": zod.string().nullish(),
   "nextReviewDate": zod.iso.datetime({}).nullish(),
   "lastReviewedAt": zod.iso.datetime({}).nullish(),
   "createdAt": zod.iso.datetime({}),
@@ -134,7 +139,7 @@ export const PutApiFlashcardsIdWithJsonParams = zod.object({
 export const PutApiFlashcardsIdWithJsonBody = zod.object({
   "finnishWord": zod.string(),
   "englishTranslation": zod.string(),
-  "category": zod.string()
+  "categoryId": zod.number().nullish()
 })
 
 export const PutApiFlashcardsIdWithJsonResponse = zod.object({
@@ -143,7 +148,8 @@ export const PutApiFlashcardsIdWithJsonResponse = zod.object({
   "id": zod.number(),
   "finnishWord": zod.string(),
   "englishTranslation": zod.string(),
-  "category": zod.string(),
+  "categoryId": zod.number().nullish(),
+  "categoryName": zod.string().nullish(),
   "nextReviewDate": zod.iso.datetime({}).nullish(),
   "lastReviewedAt": zod.iso.datetime({}).nullish(),
   "createdAt": zod.iso.datetime({}),
@@ -160,7 +166,7 @@ export const PutApiFlashcardsIdWithTextJsonParams = zod.object({
 export const PutApiFlashcardsIdWithTextJsonBody = zod.object({
   "finnishWord": zod.string(),
   "englishTranslation": zod.string(),
-  "category": zod.string()
+  "categoryId": zod.number().nullish()
 })
 
 export const PutApiFlashcardsIdWithTextJsonResponse = zod.object({
@@ -169,7 +175,8 @@ export const PutApiFlashcardsIdWithTextJsonResponse = zod.object({
   "id": zod.number(),
   "finnishWord": zod.string(),
   "englishTranslation": zod.string(),
-  "category": zod.string(),
+  "categoryId": zod.number().nullish(),
+  "categoryName": zod.string().nullish(),
   "nextReviewDate": zod.iso.datetime({}).nullish(),
   "lastReviewedAt": zod.iso.datetime({}).nullish(),
   "createdAt": zod.iso.datetime({}),
@@ -186,7 +193,7 @@ export const PutApiFlashcardsIdWithApplicationJsonParams = zod.object({
 export const PutApiFlashcardsIdWithApplicationJsonBody = zod.object({
   "finnishWord": zod.string(),
   "englishTranslation": zod.string(),
-  "category": zod.string()
+  "categoryId": zod.number().nullish()
 })
 
 export const PutApiFlashcardsIdWithApplicationJsonResponse = zod.object({
@@ -195,7 +202,8 @@ export const PutApiFlashcardsIdWithApplicationJsonResponse = zod.object({
   "id": zod.number(),
   "finnishWord": zod.string(),
   "englishTranslation": zod.string(),
-  "category": zod.string(),
+  "categoryId": zod.number().nullish(),
+  "categoryName": zod.string().nullish(),
   "nextReviewDate": zod.iso.datetime({}).nullish(),
   "lastReviewedAt": zod.iso.datetime({}).nullish(),
   "createdAt": zod.iso.datetime({}),
@@ -219,7 +227,8 @@ export const PatchApiFlashcardsIdReviewResponse = zod.object({
   "id": zod.number(),
   "finnishWord": zod.string(),
   "englishTranslation": zod.string(),
-  "category": zod.string(),
+  "categoryId": zod.number().nullish(),
+  "categoryName": zod.string().nullish(),
   "nextReviewDate": zod.iso.datetime({}).nullish(),
   "lastReviewedAt": zod.iso.datetime({}).nullish(),
   "createdAt": zod.iso.datetime({}),

@@ -3,6 +3,7 @@ using Backend.Features.Users;
 using Backend.Features._FeatureTemplate;
 using Backend.Features.Factories;
 using Backend.Features.Personnel;
+using Backend.Features.FlashcardCategories;
 using Backend.Features.Flashcards;
 using Backend.Features.Reservations;
 using Backend.Features.Todos;
@@ -25,6 +26,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<Person> Personnel => Set<Person>();
     public DbSet<Reservation> Reservations => Set<Reservation>();
     public DbSet<ReservationPerson> ReservationPersonnel => Set<ReservationPerson>();
+    public DbSet<FlashcardCategory> FlashcardCategories => Set<FlashcardCategory>();
     public DbSet<Flashcard> Flashcards => Set<Flashcard>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -55,6 +57,19 @@ public class ApplicationDbContext : DbContext
             entity.HasOne(r => r.Factory)
                   .WithMany()
                   .HasForeignKey(r => r.FactoryId)
+                  .OnDelete(DeleteBehavior.SetNull);
+        });
+
+        modelBuilder.Entity<FlashcardCategory>(entity =>
+        {
+            entity.HasIndex(c => c.Name).IsUnique();
+        });
+
+        modelBuilder.Entity<Flashcard>(entity =>
+        {
+            entity.HasOne(f => f.Category)
+                  .WithMany()
+                  .HasForeignKey(f => f.CategoryId)
                   .OnDelete(DeleteBehavior.SetNull);
         });
 

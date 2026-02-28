@@ -9,5 +9,6 @@
 export interface UpdateFlashcardRequest {
   finnishWord: string;
   englishTranslation: string;
-  category: string;
+  /** @nullable */
+  categoryId?: number | null;
 }

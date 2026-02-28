@@ -16,10 +16,12 @@ public class FlashcardsRepository : IFlashcardsRepository
         int page,
         int pageSize,
         string? search,
-        string? category,
+        int? categoryId,
         CancellationToken cancellationToken = default)
     {
-        var query = _context.Flashcards.AsNoTracking();
+        var query = _context.Flashcards
+            .Include(f => f.Category)
+            .AsNoTracking();
 
         if (!string.IsNullOrWhiteSpace(search))
         {
@@ -29,15 +31,15 @@ public class FlashcardsRepository : IFlashcardsRepository
                 f.EnglishTranslation.ToLower().Contains(lower));
         }
 
-        if (!string.IsNullOrWhiteSpace(category))
+        if (categoryId.HasValue)
         {
-            query = query.Where(f => f.Category == category);
+            query = query.Where(f => f.CategoryId == categoryId.Value);
         }
 
         var totalCount = await query.CountAsync(cancellationToken);
 
         var items = await query
-            .OrderBy(f => f.Category)
+            .OrderBy(f => f.Category!.Name)
             .ThenBy(f => f.FinnishWord)
             .Skip((page - 1) * pageSize)
             .Take(pageSize)
@@ -48,13 +50,15 @@ public class FlashcardsRepository : IFlashcardsRepository
 
     public async Task<Flashcard?> GetByIdAsync(int id, CancellationToken cancellationToken = default)
     {
-        return await _context.Flashcards.FindAsync([id], cancellationToken);
+        return await _context.Flashcards
+            .Include(f => f.Category)
+            .FirstOrDefaultAsync(f => f.Id == id, cancellationToken);
     }
 
-    public async Task<int> CountByCategoryAsync(string category, int? excludeId = null, CancellationToken cancellationToken = default)
+    public async Task<int> CountByCategoryAsync(int categoryId, int? excludeId = null, CancellationToken cancellationToken = default)
     {
         var query = _context.Flashcards.AsNoTracking()
-            .Where(f => f.Category == category);
+            .Where(f => f.CategoryId == categoryId);
 
         if (excludeId.HasValue)
             query = query.Where(f => f.Id != excludeId.Value);

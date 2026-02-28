@@ -19,11 +19,13 @@ export function useFlashcardsPagination(pageSize = DEFAULT_PAGE_SIZE) {
     setPage(1);
   }, [debouncedSearch, categoryFilter]);
 
+  const categoryId = categoryFilter ? parseInt(categoryFilter, 10) : undefined;
+
   const { data: response, isLoading } = useGetApiFlashcards({
     page,
     pageSize,
     search: debouncedSearch || undefined,
-    category: categoryFilter || undefined,
+    categoryId: categoryId || undefined,
   });
 
   const pagedResult = response?.data?.data;
