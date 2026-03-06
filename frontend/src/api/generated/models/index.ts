@@ -6,15 +6,35 @@
  * OpenAPI spec version: v1
  */
 
+export * from "./bookingDto";
+export * from "./bookingDtoApiResponse";
+export * from "./bookingDtoPagedResult";
+export * from "./bookingDtoPagedResultApiResponse";
+export * from "./createBookingRequest";
 export * from "./createFeatureRequest";
+export * from "./createLocationRequest";
 export * from "./createUserRequest";
 export * from "./featureDto";
 export * from "./featureDtoApiResponse";
 export * from "./featureDtoPagedResult";
 export * from "./featureDtoPagedResultApiResponse";
+export * from "./getApiBookingsParams";
 export * from "./getApiFeaturesParams";
+export * from "./getApiRoomsParams";
 export * from "./getApiUsersParams";
+export * from "./locationDto";
+export * from "./locationDtoApiResponse";
+export * from "./locationDtoListApiResponse";
+export * from "./postApiRoomsBody";
+export * from "./putApiRoomsIdBody";
+export * from "./roomDto";
+export * from "./roomDtoApiResponse";
+export * from "./roomDtoListApiResponse";
+export * from "./roomDtoPagedResult";
+export * from "./roomDtoPagedResultApiResponse";
+export * from "./updateBookingRequest";
 export * from "./updateFeatureRequest";
+export * from "./updateLocationRequest";
 export * from "./updateUserRequest";
 export * from "./userDto";
 export * from "./userDtoApiResponse";

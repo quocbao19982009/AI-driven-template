@@ -14,7 +14,127 @@
   "nav": {
     "home": "Etusivu",
     "about": "Tietoja",
-    "features": "Ominaisuudet"
+    "features": "Ominaisuudet",
+    "rooms": "Huoneet",
+    "bookings": "Varaukset"
+  },
+  "rooms": {
+    "title": "Kokoushuoneet",
+    "description": "Hallinnoi huoneita ja varaa kokoustiloja.",
+    "newRoom": "Uusi huone",
+    "manageLocations": "Hallinnoi sijainteja",
+    "tabs": {
+      "rooms": "Huoneet",
+      "calendar": "Kalenteri"
+    },
+    "search": {
+      "placeholder": "Hae huoneita...",
+      "allLocations": "Kaikki sijainnit"
+    },
+    "table": {
+      "image": "Kuva",
+      "name": "Nimi",
+      "capacity": "Kapasiteetti",
+      "location": "Sijainti",
+      "purpose": "Käyttötarkoitus",
+      "empty": "Huoneita ei löydy."
+    },
+    "form": {
+      "createTitle": "Luo huone",
+      "editTitle": "Muokkaa huonetta",
+      "createDescription": "Täytä tiedot luodaksesi uuden huoneen.",
+      "editDescription": "Päivitä huoneen tiedot alla.",
+      "nameLabel": "Nimi",
+      "namePlaceholder": "Huoneen nimi",
+      "capacityLabel": "Kapasiteetti",
+      "locationLabel": "Sijainti",
+      "locationPlaceholder": "Valitse sijainti",
+      "purposeLabel": "Käyttötarkoitus",
+      "purposePlaceholder": "Mihin tätä huonetta käytetään?",
+      "imageLabel": "Kuva",
+      "uploadImage": "Lataa kuva",
+      "removeImage": "Poista kuva"
+    },
+    "delete": {
+      "title": "Poista huone",
+      "description": "Haluatko varmasti poistaa <strong>{{name}}</strong>? Tätä toimintoa ei voi peruuttaa."
+    },
+    "toast": {
+      "created": "Huone luotu onnistuneesti.",
+      "createError": "Huoneen luominen epäonnistui.",
+      "updated": "Huone päivitetty onnistuneesti.",
+      "updateError": "Huoneen päivittäminen epäonnistui.",
+      "deleted": "Huone poistettu onnistuneesti.",
+      "deleteError": "Huoneen poistaminen epäonnistui."
+    },
+    "locations": {
+      "title": "Hallinnoi sijainteja",
+      "table": {
+        "name": "Nimi",
+        "newPlaceholder": "Uuden sijainnin nimi..."
+      },
+      "toast": {
+        "created": "Sijainti luotu.",
+        "createError": "Sijainnin luominen epäonnistui.",
+        "updated": "Sijainti päivitetty.",
+        "updateError": "Sijainnin päivittäminen epäonnistui.",
+        "deleted": "Sijainti poistettu.",
+        "deleteError": "Sijainnin poistaminen epäonnistui."
+      }
+    },
+    "calendar": {
+      "selectRoom": "Valitse huone",
+      "selectRoomPrompt": "Valitse huone nähdäksesi sen kalenterin.",
+      "today": "Tänään"
+    }
+  },
+  "bookings": {
+    "title": "Varaukset",
+    "description": "Tarkastele ja hallinnoi kaikkia huonevarauksia.",
+    "newBooking": "Uusi varaus",
+    "table": {
+      "room": "Huone",
+      "start": "Alkaa",
+      "end": "Päättyy",
+      "bookedBy": "Varaaja",
+      "purpose": "Tarkoitus",
+      "empty": "Varauksia ei löydy."
+    },
+    "filter": {
+      "room": "Huone",
+      "allRooms": "Kaikki huoneet",
+      "from": "Alkaen",
+      "to": "Päättyen"
+    },
+    "form": {
+      "createTitle": "Uusi varaus",
+      "editTitle": "Muokkaa varausta",
+      "createDescription": "Täytä tiedot luodaksesi uuden varauksen.",
+      "editDescription": "Päivitä varauksen tiedot alla.",
+      "roomLabel": "Huone",
+      "roomPlaceholder": "Valitse huone",
+      "startLabel": "Alkamisaika",
+      "endLabel": "Päättymisaika",
+      "bookedByLabel": "Varaaja",
+      "bookedByPlaceholder": "Nimesi",
+      "purposeLabel": "Tarkoitus",
+      "purposePlaceholder": "Kokouksen tarkoitus (valinnainen)"
+    },
+    "delete": {
+      "title": "Poista varaus",
+      "description": "Haluatko varmasti poistaa tämän varauksen huoneelle {{room}}?"
+    },
+    "detail": {
+      "title": "Varauksen tiedot"
+    },
+    "toast": {
+      "created": "Varaus luotu onnistuneesti.",
+      "createError": "Varauksen luominen epäonnistui.",
+      "updated": "Varaus päivitetty onnistuneesti.",
+      "updateError": "Varauksen päivittäminen epäonnistui.",
+      "deleted": "Varaus poistettu onnistuneesti.",
+      "deleteError": "Varauksen poistaminen epäonnistui."
+    }
   },
   "features": {
     "title": "Ominaisuudet",

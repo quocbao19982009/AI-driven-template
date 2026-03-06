@@ -16,6 +16,12 @@ export function AppLayout() {
         </Link>{" "}
         <Link to="/features" className="[&.active]:font-bold">
           {t("nav.features")}
+        </Link>{" "}
+        <Link to="/rooms" className="[&.active]:font-bold">
+          {t("nav.rooms")}
+        </Link>{" "}
+        <Link to="/bookings" className="[&.active]:font-bold">
+          {t("nav.bookings")}
         </Link>
         <div className="ml-auto">
           <LanguageSwitcher />

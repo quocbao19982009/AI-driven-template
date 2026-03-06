@@ -4,6 +4,9 @@ using Backend.Common.Middleware;
 using Backend.Common.Swagger;
 using Backend.Features.Users;
 using Backend.Features._FeatureTemplate;
+using Backend.Features.Locations;
+using Backend.Features.Rooms;
+using Backend.Features.Bookings;
 using Backend.Identity;
 using Microsoft.OpenApi;
 using Serilog;
@@ -32,6 +35,19 @@ builder.Services.AddScoped<IUsersRepository, UsersRepository>();
 builder.Services.AddScoped<IUsersService, UsersService>();
 builder.Services.AddScoped<IFeatureRepository, FeatureRepository>();
 builder.Services.AddScoped<IFeatureService, FeatureService>();
+
+// Locations
+builder.Services.AddScoped<ILocationsRepository, LocationsRepository>();
+builder.Services.AddScoped<ILocationsService, LocationsService>();
+
+// Rooms
+builder.Services.AddScoped<IRoomsRepository, RoomsRepository>();
+builder.Services.AddScoped<IRoomsService, RoomsService>();
+builder.Services.AddSingleton<IFileStorageService, FileStorageService>();
+
+// Bookings
+builder.Services.AddScoped<IBookingsRepository, BookingsRepository>();
+builder.Services.AddScoped<IBookingsService, BookingsService>();
 
 // Logging
 builder.Host.UseSerilog((context, loggerConfig) => loggerConfig.ReadFrom.Configuration(context.Configuration));
@@ -78,10 +94,15 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
 app.UseCors();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
+
+// Ensure upload directory exists
+var webRoot = app.Environment.WebRootPath ?? Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+Directory.CreateDirectory(Path.Combine(webRoot, "uploads", "rooms"));
 app.MapHealthChecks("/health");
 
 if (app.Environment.IsDevelopment())
