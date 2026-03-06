@@ -20,8 +20,9 @@
       "Bash(git diff:*)",
       "Bash(git log:*)",
       "Bash(git status:*)",
-      "ls -la *"
-    ]
+      "Ls -la *"
+    ],
+    "deny": ["Read(./.env*)"]
   },
   "enableAllProjectMcpServers": true,
   "plansDirectory": "./claude-plans",

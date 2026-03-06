@@ -16,12 +16,13 @@
       "Bash(date:*)",
       "Bash(npm run test:run:*)",
       "Bash(npm install:*)",
-      "Bash(npm run lint:*)"
-    ]
-  },
-  "enableAllProjectMcpServers": true,
-  "enabledMcpjsonServers": [
-    "shadcn",
-    "context7"
-  ]
+      "Bash(npm run lint:*)",
+      "Bash(xargs ls:*)",
+      "Bash(xargs head:*)",
+      "Bash(mkdir:*)",
+      "Bash(mv:*)",
+      "Bash(echo EXIT:$?:*)"
+    ],
+    "deny": ["Read(./.env*)"]
+  }
 }
