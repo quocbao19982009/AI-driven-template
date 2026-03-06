@@ -11,6 +11,7 @@ export default defineConfig({
       schemas: "./src/api/generated/models",
       client: "react-query",
       prettier: true,
+      clean: true,
       override: {
         mutator: {
           path: "./src/api/mutator/apiFetch.ts",

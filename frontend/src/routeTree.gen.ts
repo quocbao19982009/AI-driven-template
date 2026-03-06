@@ -11,13 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as TodosIndexRouteImport } from './routes/todos/index'
-import { Route as SchedulingIndexRouteImport } from './routes/scheduling/index'
-import { Route as ReservationsIndexRouteImport } from './routes/reservations/index'
-import { Route as PersonnelIndexRouteImport } from './routes/personnel/index'
-import { Route as FlashcardsIndexRouteImport } from './routes/flashcards/index'
 import { Route as FeaturesIndexRouteImport } from './routes/features/index'
-import { Route as FactoriesIndexRouteImport } from './routes/factories/index'
 
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
@@ -29,122 +23,40 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const TodosIndexRoute = TodosIndexRouteImport.update({
-  id: '/todos/',
-  path: '/todos/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SchedulingIndexRoute = SchedulingIndexRouteImport.update({
-  id: '/scheduling/',
-  path: '/scheduling/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ReservationsIndexRoute = ReservationsIndexRouteImport.update({
-  id: '/reservations/',
-  path: '/reservations/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PersonnelIndexRoute = PersonnelIndexRouteImport.update({
-  id: '/personnel/',
-  path: '/personnel/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FlashcardsIndexRoute = FlashcardsIndexRouteImport.update({
-  id: '/flashcards/',
-  path: '/flashcards/',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const FeaturesIndexRoute = FeaturesIndexRouteImport.update({
   id: '/features/',
   path: '/features/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FactoriesIndexRoute = FactoriesIndexRouteImport.update({
-  id: '/factories/',
-  path: '/factories/',
   getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/factories/': typeof FactoriesIndexRoute
   '/features/': typeof FeaturesIndexRoute
-  '/flashcards/': typeof FlashcardsIndexRoute
-  '/personnel/': typeof PersonnelIndexRoute
-  '/reservations/': typeof ReservationsIndexRoute
-  '/scheduling/': typeof SchedulingIndexRoute
-  '/todos/': typeof TodosIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/factories': typeof FactoriesIndexRoute
   '/features': typeof FeaturesIndexRoute
-  '/flashcards': typeof FlashcardsIndexRoute
-  '/personnel': typeof PersonnelIndexRoute
-  '/reservations': typeof ReservationsIndexRoute
-  '/scheduling': typeof SchedulingIndexRoute
-  '/todos': typeof TodosIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/factories/': typeof FactoriesIndexRoute
   '/features/': typeof FeaturesIndexRoute
-  '/flashcards/': typeof FlashcardsIndexRoute
-  '/personnel/': typeof PersonnelIndexRoute
-  '/reservations/': typeof ReservationsIndexRoute
-  '/scheduling/': typeof SchedulingIndexRoute
-  '/todos/': typeof TodosIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/about'
-    | '/factories/'
-    | '/features/'
-    | '/flashcards/'
-    | '/personnel/'
-    | '/reservations/'
-    | '/scheduling/'
-    | '/todos/'
+  fullPaths: '/' | '/about' | '/features/'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | '/about'
-    | '/factories'
-    | '/features'
-    | '/flashcards'
-    | '/personnel'
-    | '/reservations'
-    | '/scheduling'
-    | '/todos'
-  id:
-    | '__root__'
-    | '/'
-    | '/about'
-    | '/factories/'
-    | '/features/'
-    | '/flashcards/'
-    | '/personnel/'
-    | '/reservations/'
-    | '/scheduling/'
-    | '/todos/'
+  to: '/' | '/about' | '/features'
+  id: '__root__' | '/' | '/about' | '/features/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
-  FactoriesIndexRoute: typeof FactoriesIndexRoute
   FeaturesIndexRoute: typeof FeaturesIndexRoute
-  FlashcardsIndexRoute: typeof FlashcardsIndexRoute
-  PersonnelIndexRoute: typeof PersonnelIndexRoute
-  ReservationsIndexRoute: typeof ReservationsIndexRoute
-  SchedulingIndexRoute: typeof SchedulingIndexRoute
-  TodosIndexRoute: typeof TodosIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -163,53 +75,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/todos/': {
-      id: '/todos/'
-      path: '/todos'
-      fullPath: '/todos/'
-      preLoaderRoute: typeof TodosIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/scheduling/': {
-      id: '/scheduling/'
-      path: '/scheduling'
-      fullPath: '/scheduling/'
-      preLoaderRoute: typeof SchedulingIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/reservations/': {
-      id: '/reservations/'
-      path: '/reservations'
-      fullPath: '/reservations/'
-      preLoaderRoute: typeof ReservationsIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/personnel/': {
-      id: '/personnel/'
-      path: '/personnel'
-      fullPath: '/personnel/'
-      preLoaderRoute: typeof PersonnelIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/flashcards/': {
-      id: '/flashcards/'
-      path: '/flashcards'
-      fullPath: '/flashcards/'
-      preLoaderRoute: typeof FlashcardsIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/features/': {
       id: '/features/'
       path: '/features'
       fullPath: '/features/'
       preLoaderRoute: typeof FeaturesIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/factories/': {
-      id: '/factories/'
-      path: '/factories'
-      fullPath: '/factories/'
-      preLoaderRoute: typeof FactoriesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -218,13 +88,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
-  FactoriesIndexRoute: FactoriesIndexRoute,
   FeaturesIndexRoute: FeaturesIndexRoute,
-  FlashcardsIndexRoute: FlashcardsIndexRoute,
-  PersonnelIndexRoute: PersonnelIndexRoute,
-  ReservationsIndexRoute: ReservationsIndexRoute,
-  SchedulingIndexRoute: SchedulingIndexRoute,
-  TodosIndexRoute: TodosIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -4,10 +4,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import { featuresReducer } from "@/features/_template-feature/store";
-import { todosReducer } from "@/features/todos/store";
-import { factoriesReducer } from "@/features/factories/store";
-import { personnelReducer } from "@/features/personnel/store";
-import { reservationsReducer } from "@/features/reservations/store";
 
 function createTestQueryClient() {
   return new QueryClient({
@@ -22,10 +18,6 @@ function createTestStore() {
   return configureStore({
     reducer: {
       features: featuresReducer,
-      todos: todosReducer,
-      factories: factoriesReducer,
-      personnel: personnelReducer,
-      reservations: reservationsReducer,
     },
   });
 }
