@@ -49,7 +49,9 @@ function toLocalISOString(date: Date) {
 export function CalendarTab() {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const selectedRoomId = useAppSelector((s) => s.rooms.selectedRoomIdForCalendar);
+  const selectedRoomId = useAppSelector(
+    (s) => s.rooms.selectedRoomIdForCalendar,
+  );
   const [weekStart, setWeekStart] = useState(() => startOfWeek(new Date()));
 
   const [createOpen, setCreateOpen] = useState(false);
@@ -70,7 +72,7 @@ export function CalendarTab() {
       roomId: selectedRoomId ?? undefined,
       fromDate: weekStart.toISOString(),
       toDate: weekEnd.toISOString(),
-      pageSize: 200,
+      pageSize: 100,
     },
     { query: { enabled: !!selectedRoomId } },
   );
@@ -96,7 +98,9 @@ export function CalendarTab() {
     return bookings.filter((b) => {
       const start = new Date(b.startTime!);
       const end = new Date(b.endTime!);
-      return sameDay(start, day) && start.getHours() <= hour && end.getHours() > hour;
+      return (
+        sameDay(start, day) && start.getHours() <= hour && end.getHours() > hour
+      );
     });
   }
 
@@ -105,7 +109,9 @@ export function CalendarTab() {
       <div className="flex items-center gap-3 flex-wrap">
         <Select
           value={selectedRoomId ? String(selectedRoomId) : ""}
-          onValueChange={(v) => dispatch(setSelectedRoomIdForCalendar(v ? Number(v) : null))}
+          onValueChange={(v) =>
+            dispatch(setSelectedRoomIdForCalendar(v ? Number(v) : null))
+          }
         >
           <SelectTrigger className="w-56">
             <SelectValue placeholder={t("rooms.calendar.selectRoom")} />
@@ -128,7 +134,8 @@ export function CalendarTab() {
             <ChevronLeft className="h-4 w-4" />
           </Button>
           <span className="text-sm font-medium px-2">
-            {weekStart.toLocaleDateString()} – {addDays(weekStart, 6).toLocaleDateString()}
+            {weekStart.toLocaleDateString()} –{" "}
+            {addDays(weekStart, 6).toLocaleDateString()}
           </span>
           <Button
             variant="outline"
@@ -181,7 +188,10 @@ export function CalendarTab() {
                       <td
                         key={di}
                         className="border-b border-r p-0.5 align-top cursor-pointer hover:bg-muted/50 h-10"
-                        onClick={() => slotBookings.length === 0 && handleSlotClick(day, hour)}
+                        onClick={() =>
+                          slotBookings.length === 0 &&
+                          handleSlotClick(day, hour)
+                        }
                       >
                         {slotBookings.map((b) => (
                           <button

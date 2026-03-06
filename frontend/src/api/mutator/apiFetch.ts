@@ -18,7 +18,6 @@ export const apiFetch = async <T>(
   const response = await fetch(`${BASE_URL}${url}`, {
     ...options,
     headers: {
-      "Content-Type": "application/json", // Check if this need or empty
       ...options?.headers,
     },
   });

@@ -30,6 +30,7 @@ import { RoomFormDialog } from "./room-form-dialog";
 import { RoomDeleteDialog } from "./room-delete-dialog";
 import type { RoomDto } from "@/api/generated/models";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { assetUrl } from "@/lib/utils";
 import { setSortBy, setSortDir } from "../store";
 
 interface RoomTableProps {
@@ -97,7 +98,7 @@ export function RoomTable({ rooms, isLoading, page, totalPages, onPageChange }: 
                   <TableCell>
                     {room.imagePath ? (
                       <img
-                        src={room.imagePath}
+                        src={assetUrl(room.imagePath)}
                         alt={room.name ?? ""}
                         className="h-10 w-10 rounded object-cover"
                       />

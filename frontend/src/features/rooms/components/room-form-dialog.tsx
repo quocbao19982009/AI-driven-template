@@ -30,6 +30,7 @@ import {
 } from "@/api/generated/rooms/rooms";
 import { useGetApiLocations } from "@/api/generated/locations/locations";
 import type { PostApiRoomsBody, PutApiRoomsIdBody, RoomDto } from "@/api/generated/models";
+import { assetUrl } from "@/lib/utils";
 
 interface RoomFormDialogProps {
   room?: RoomDto | null;
@@ -65,7 +66,7 @@ function RoomFormContent({ room, open, onOpenChange }: RoomFormDialogProps) {
   );
   const [purpose, setPurpose] = useState(room?.purpose ?? "");
   const [imageFile, setImageFile] = useState<File | null>(null);
-  const [imagePreview, setImagePreview] = useState<string | null>(room?.imagePath ?? null);
+  const [imagePreview, setImagePreview] = useState<string | null>(assetUrl(room?.imagePath) ?? null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const invalidate = () => {
