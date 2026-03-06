@@ -276,6 +276,85 @@ When complete, the skill confirms: "Spec is complete — run `/scaffold-feature 
 
 ---
 
+## How to Enforce the CLAUDE.md Workflow
+
+CLAUDE.md defines mandatory steps (clarify → spec → code → spec sync). In practice, AI may skip
+these if your prompt sounds like a direct instruction. This section explains how to phrase prompts
+so the workflow is followed automatically — without you needing to police it.
+
+### Why AI skips the workflow
+
+When a prompt reads like a direct order ("implement X"), AI treats fulfilling that order as the
+primary goal and workflow gates as secondary. The fix is to phrase prompts that make the gates
+explicit, or to invoke the workflow steps directly.
+
+---
+
+### Prompting Patterns That Work
+
+#### New feature — full workflow enforced
+
+Instead of:
+> "Implement a meeting room booking feature"
+
+Write:
+> "I want a meeting room booking feature. Follow the CLAUDE.md workflow: ask clarifying questions first, then create the spec with `/create-spec`, then implement."
+
+Or split it into explicit steps across messages:
+1. "I want a meeting room booking feature. Ask me the clarifying questions from CLAUDE.md before doing anything."
+2. *(answer questions)*
+3. "Create the spec using `/create-spec`."
+4. *(review and approve spec)*
+5. "Implement the backend following the spec."
+6. "Implement the frontend following the spec."
+
+**Each step is a separate message.** This makes it impossible for AI to skip gates.
+
+#### Enforce spec sync at the end of each response
+
+Add this to any implementation prompt:
+> "Update the spec at the end of this response before you finish."
+
+Or as a standing instruction if you want it always on:
+> "For this session: always update the spec before closing each response."
+
+#### Use skill commands to trigger workflow steps
+
+| Goal | Command |
+|------|---------|
+| Create a spec for a new feature | `/create-spec [feature-name]` |
+| Resolve incomplete spec markers | `/clarify-spec [feature-name]` |
+| Scaffold backend from spec | `Scaffold the [Feature] backend using feature_docs/[feature]/feature-spec-[feature].md` |
+| Scaffold frontend from spec | `Scaffold the [Feature] frontend using feature_docs/[feature]/feature-spec-[feature].md` |
+
+Using explicit skill commands is more reliable than natural language because the skill has its own
+built-in checklist that it must satisfy before proceeding.
+
+---
+
+### Catching Skipped Steps Mid-Session
+
+If AI starts writing code without asking clarifying questions or without the spec existing, say:
+> "Stop. Follow the CLAUDE.md workflow — clarify first, then create the spec."
+
+AI will comply immediately. One message is all it takes to redirect.
+
+If AI finishes a response without updating the spec:
+> "You changed behavior in that response. Update the spec now before we continue."
+
+---
+
+### What You Should Never Need to Say
+
+If the workflow is followed correctly, you should never need to manually:
+- Ask "did you update the spec?"
+- Ask "did you ask clarifying questions?"
+- Ask "did you read FEATURES.md first?"
+
+If you find yourself saying these, the prompt phrasing needs adjustment — use the patterns above.
+
+---
+
 ## Prompting Tips
 
 ### Be specific about files
