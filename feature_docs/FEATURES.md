@@ -7,3 +7,4 @@
 | Feature | Spec File | Data Model | Summary | Status |
 |---|---|---|---|---|
 | **Feature (Example)** | `feature-spec-feature-example.md` | — | Template/example entity with a single `Name` field. Used as the canonical reference for generating new features. | Example only |
+| **Meeting Room Booking** | `meeting-room-booking/feature-spec-meeting-room-booking.md` | Location, Room, Booking | CRUD for locations (unpaged), rooms (paginated, image upload), and bookings (paginated, overlap check). Rooms page with table + calendar tab. Bookings page with filters. | Spec ready |
