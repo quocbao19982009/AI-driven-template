@@ -10,6 +10,12 @@ allowed-tools: "Read, Write, Edit, Glob"
 
 Resolve all unresolved markers in `feature_docs/$ARGUMENTS/feature-spec-$ARGUMENTS.md`.
 
+## Argument Normalization (DO THIS FIRST)
+
+Before any other step, normalize `$ARGUMENTS` to **lowercase-kebab-case plural** (e.g., `Todo` → `todos`, `MeetingRoom` → `meeting-rooms`). Use this normalized value as `{feature}` everywhere `$ARGUMENTS` appears below.
+
+> Example: `/clarify-spec Todo` → `{feature}` = `todos`
+
 ## Steps
 1. Read the spec and collect all markers
 2. Batch markers into question groups (max 3 per message)

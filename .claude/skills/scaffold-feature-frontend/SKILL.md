@@ -11,6 +11,12 @@ context: fork
 
 Scaffold the complete frontend for the `$ARGUMENTS` feature.
 
+## Argument Normalization (DO THIS FIRST)
+
+Before any other step, normalize `$ARGUMENTS` to **lowercase-kebab-case plural** (e.g., `Todo` → `todos`, `MeetingRoom` → `meeting-rooms`). Use this normalized value as `{feature}` everywhere `$ARGUMENTS` appears below.
+
+> Example: `/scaffold-feature-frontend Todo` → `{feature}` = `todos`
+
 ## Prerequisites
 
 ### Step P1: Verify Orval output exists

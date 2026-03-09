@@ -10,6 +10,13 @@ allowed-tools: "Read, Write, Edit, Glob"
 
 Create a new feature specification for `$ARGUMENTS`.
 
+## Argument Normalization (DO THIS FIRST)
+
+Before any other step, normalize `$ARGUMENTS` to **lowercase-kebab-case** (e.g., `Todo` → `todos`, `MeetingRoom` → `meeting-rooms`, `todo` → `todos`). Use this normalized value everywhere `$ARGUMENTS` appears below. If the argument is already singular, pluralize it (add `s`, or apply standard English pluralization). Store the result as `{feature}`.
+
+> Example: `/create-spec Todo` → `{feature}` = `todos`
+> Example: `/create-spec meeting-room` → `{feature}` = `meeting-rooms`
+
 ## Steps
 
 1. **Classify what is known vs. unknown** (5 categories)
