@@ -4,6 +4,7 @@ using Backend.Common.Middleware;
 using Backend.Common.Swagger;
 using Backend.Features.Users;
 using Backend.Features._FeatureTemplate;
+using Backend.Features.Todos;
 using Backend.Features.Locations;
 using Backend.Features.Rooms;
 using Backend.Features.Bookings;
@@ -35,6 +36,8 @@ builder.Services.AddScoped<IUsersRepository, UsersRepository>();
 builder.Services.AddScoped<IUsersService, UsersService>();
 builder.Services.AddScoped<IFeatureRepository, FeatureRepository>();
 builder.Services.AddScoped<IFeatureService, FeatureService>();
+builder.Services.AddScoped<ITodosRepository, TodosRepository>();
+builder.Services.AddScoped<ITodosService, TodosService>();
 
 // Locations
 builder.Services.AddScoped<ILocationsRepository, LocationsRepository>();

@@ -1,6 +1,7 @@
 using Backend.Common.Models;
 using Backend.Features.Users;
 using Backend.Features._FeatureTemplate;
+using Backend.Features.Todos;
 using Backend.Features.Locations;
 using Backend.Features.Rooms;
 using Backend.Features.Bookings;
@@ -18,6 +19,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<User> Users => Set<User>();
     // TODO: Mock remove this when we have real features
     public DbSet<Feature> Features => Set<Feature>();
+    public DbSet<Todo> Todos => Set<Todo>();
     public DbSet<Location> Locations => Set<Location>();
     public DbSet<Room> Rooms => Set<Room>();
     public DbSet<Booking> Bookings => Set<Booking>();
