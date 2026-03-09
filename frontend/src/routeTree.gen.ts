@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as TodosIndexRouteImport } from './routes/todos/index'
 import { Route as RoomsIndexRouteImport } from './routes/rooms/index'
 import { Route as FeaturesIndexRouteImport } from './routes/features/index'
 import { Route as BookingsIndexRouteImport } from './routes/bookings/index'
@@ -23,6 +24,11 @@ const AboutRoute = AboutRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TodosIndexRoute = TodosIndexRouteImport.update({
+  id: '/todos/',
+  path: '/todos/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RoomsIndexRoute = RoomsIndexRouteImport.update({
@@ -47,6 +53,7 @@ export interface FileRoutesByFullPath {
   '/bookings/': typeof BookingsIndexRoute
   '/features/': typeof FeaturesIndexRoute
   '/rooms/': typeof RoomsIndexRoute
+  '/todos/': typeof TodosIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -54,6 +61,7 @@ export interface FileRoutesByTo {
   '/bookings': typeof BookingsIndexRoute
   '/features': typeof FeaturesIndexRoute
   '/rooms': typeof RoomsIndexRoute
+  '/todos': typeof TodosIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -62,13 +70,27 @@ export interface FileRoutesById {
   '/bookings/': typeof BookingsIndexRoute
   '/features/': typeof FeaturesIndexRoute
   '/rooms/': typeof RoomsIndexRoute
+  '/todos/': typeof TodosIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/bookings/' | '/features/' | '/rooms/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/bookings/'
+    | '/features/'
+    | '/rooms/'
+    | '/todos/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/bookings' | '/features' | '/rooms'
-  id: '__root__' | '/' | '/about' | '/bookings/' | '/features/' | '/rooms/'
+  to: '/' | '/about' | '/bookings' | '/features' | '/rooms' | '/todos'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/bookings/'
+    | '/features/'
+    | '/rooms/'
+    | '/todos/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -77,6 +99,7 @@ export interface RootRouteChildren {
   BookingsIndexRoute: typeof BookingsIndexRoute
   FeaturesIndexRoute: typeof FeaturesIndexRoute
   RoomsIndexRoute: typeof RoomsIndexRoute
+  TodosIndexRoute: typeof TodosIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -93,6 +116,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/todos/': {
+      id: '/todos/'
+      path: '/todos'
+      fullPath: '/todos/'
+      preLoaderRoute: typeof TodosIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/rooms/': {
@@ -125,6 +155,7 @@ const rootRouteChildren: RootRouteChildren = {
   BookingsIndexRoute: BookingsIndexRoute,
   FeaturesIndexRoute: FeaturesIndexRoute,
   RoomsIndexRoute: RoomsIndexRoute,
+  TodosIndexRoute: TodosIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
