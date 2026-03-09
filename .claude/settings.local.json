@@ -21,8 +21,16 @@
       "Bash(xargs head:*)",
       "Bash(mkdir:*)",
       "Bash(mv:*)",
-      "Bash(echo EXIT:$?:*)"
+      "Bash(echo EXIT:$?:*)",
+      "Bash(head:*)",
+      "Bash(find:*)",
+      "Bash(grep:*)",
+      "WebSearch",
+      "WebFetch(domain:ieeexplore.ieee.org)"
     ],
-    "deny": ["Read(./.env*)"]
+    "deny": [
+      "Read(./.env*)"
+    ],
+    "mode": "bypassPermissions"
   }
 }
