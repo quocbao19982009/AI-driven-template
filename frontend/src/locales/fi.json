@@ -16,7 +16,8 @@
     "about": "Tietoja",
     "features": "Ominaisuudet",
     "rooms": "Huoneet",
-    "bookings": "Varaukset"
+    "bookings": "Varaukset",
+    "todos": "Tehtävät"
   },
   "rooms": {
     "title": "Kokoushuoneet",
@@ -134,6 +135,54 @@
       "updateError": "Varauksen päivittäminen epäonnistui.",
       "deleted": "Varaus poistettu onnistuneesti.",
       "deleteError": "Varauksen poistaminen epäonnistui."
+    }
+  },
+  "todos": {
+    "title": "Tehtävät",
+    "description": "Hallinnoi tehtävälistojasi.",
+    "newTodo": "Uusi tehtävä",
+    "search": {
+      "placeholder": "Hae tehtäviä..."
+    },
+    "table": {
+      "title": "Otsikko",
+      "description": "Kuvaus",
+      "dueDate": "Määräpäivä",
+      "status": "Tila",
+      "createdAt": "Luotu",
+      "empty": "Ei tehtäviä vielä. Luo ensimmäinen tehtäväsi aloittaaksesi."
+    },
+    "status": {
+      "completed": "Valmis",
+      "pending": "Kesken"
+    },
+    "actions": {
+      "toggleComplete": "Vaihda tila"
+    },
+    "form": {
+      "createTitle": "Luo tehtävä",
+      "editTitle": "Muokkaa tehtävää",
+      "createDescription": "Täytä tiedot luodaksesi uuden tehtävän.",
+      "editDescription": "Päivitä tehtävän tiedot alla.",
+      "titleLabel": "Otsikko",
+      "titlePlaceholder": "Tehtävän otsikko",
+      "descriptionLabel": "Kuvaus",
+      "descriptionPlaceholder": "Valinnainen kuvaus",
+      "dueDateLabel": "Määräpäivä"
+    },
+    "delete": {
+      "title": "Poista tehtävä",
+      "description": "Haluatko varmasti poistaa <strong>{{title}}</strong>? Tätä toimintoa ei voi peruuttaa."
+    },
+    "toast": {
+      "created": "Tehtävä luotu onnistuneesti.",
+      "createError": "Tehtävän luominen epäonnistui.",
+      "updated": "Tehtävä päivitetty onnistuneesti.",
+      "updateError": "Tehtävän päivittäminen epäonnistui.",
+      "deleted": "Tehtävä poistettu onnistuneesti.",
+      "deleteError": "Tehtävän poistaminen epäonnistui.",
+      "toggled": "Tehtävän tila vaihdettu.",
+      "toggleError": "Tehtävän tilan vaihtaminen epäonnistui."
     }
   },
   "features": {

@@ -16,7 +16,8 @@
     "about": "About",
     "features": "Features",
     "rooms": "Rooms",
-    "bookings": "Bookings"
+    "bookings": "Bookings",
+    "todos": "Todos"
   },
   "rooms": {
     "title": "Meeting Rooms",
@@ -134,6 +135,54 @@
       "updateError": "Failed to update booking.",
       "deleted": "Booking deleted successfully.",
       "deleteError": "Failed to delete booking."
+    }
+  },
+  "todos": {
+    "title": "Todos",
+    "description": "Manage your todo items.",
+    "newTodo": "New Todo",
+    "search": {
+      "placeholder": "Search todos..."
+    },
+    "table": {
+      "title": "Title",
+      "description": "Description",
+      "dueDate": "Due Date",
+      "status": "Status",
+      "createdAt": "Created At",
+      "empty": "No todos yet. Create your first todo to get started."
+    },
+    "status": {
+      "completed": "Completed",
+      "pending": "Pending"
+    },
+    "actions": {
+      "toggleComplete": "Toggle Complete"
+    },
+    "form": {
+      "createTitle": "Create Todo",
+      "editTitle": "Edit Todo",
+      "createDescription": "Fill in the details to create a new todo.",
+      "editDescription": "Update the todo details below.",
+      "titleLabel": "Title",
+      "titlePlaceholder": "Todo title",
+      "descriptionLabel": "Description",
+      "descriptionPlaceholder": "Optional description",
+      "dueDateLabel": "Due Date"
+    },
+    "delete": {
+      "title": "Delete Todo",
+      "description": "Are you sure you want to delete <strong>{{title}}</strong>? This action cannot be undone."
+    },
+    "toast": {
+      "created": "Todo created successfully.",
+      "createError": "Failed to create todo.",
+      "updated": "Todo updated successfully.",
+      "updateError": "Failed to update todo.",
+      "deleted": "Todo deleted successfully.",
+      "deleteError": "Failed to delete todo.",
+      "toggled": "Todo status toggled.",
+      "toggleError": "Failed to toggle todo status."
     }
   },
   "features": {
