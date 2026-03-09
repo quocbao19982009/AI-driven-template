@@ -12,8 +12,6 @@ globs: backend/**/*.cs
   > Why: SQL has no guaranteed row order unless ORDER BY is specified. Without it, different pages can return the same rows or skip rows entirely — users see duplicates or missing items depending on the query plan the database chooses.
 - Never put secrets in `appsettings.json` — use environment variables or `dotnet user-secrets`
   > Why: `appsettings.json` is committed to source control. Once a secret is in git history it is permanently exposed — even if you delete the file in a later commit, the secret remains accessible in the full commit log.
-- API docs use `AddSwaggerGen()` only — do NOT add `AddOpenApi()` alongside it
-  > Why: `AddSwaggerGen()` (Swashbuckle) and `AddOpenApi()` (.NET 9 minimal API docs) both register overlapping middleware and routes. Running both produces duplicate or broken API doc endpoints that cannot be resolved without removing one.
 - Always return `ApiResponse<T>` from controllers — never return a raw DTO or primitive
 - Always pass `CancellationToken` through every async method (controller → service → repository)
 - Register every new feature in `Program.cs`: `AddScoped<IProductsRepository, ProductsRepository>()` and `AddScoped<IProductsService, ProductsService>()`
