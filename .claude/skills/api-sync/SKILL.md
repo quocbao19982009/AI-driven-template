@@ -1,7 +1,6 @@
 ---
 name: api-sync
 description: Run the Swagger-to-Orval API sync pipeline. Use after any backend DTO or endpoint change before working on the frontend.
-disable-model-invocation: true
 allowed-tools: "Bash"
 ---
 

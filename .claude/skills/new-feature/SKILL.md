@@ -2,7 +2,7 @@
 name: new-feature
 description: Walk through the full end-to-end workflow to implement a new feature — from spec creation through quality check.
 argument-hint: "[feature-name]"
-disable-model-invocation: true
+allowed-tools: "create-spec, clarify-spec, scaffold-feature, add-migration, api-sync, scaffold-feature-frontend, quality-check"
 context: fork
 ---
 

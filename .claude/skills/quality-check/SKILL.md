@@ -1,7 +1,6 @@
 ---
 name: quality-check
 description: Run full quality checks — backend build, frontend lint, TypeScript check, tests, and translation validation. Use after completing code changes.
-disable-model-invocation: true
 allowed-tools: "Bash, Read, Grep, Glob"
 context: fork
 ---
@@ -80,5 +79,6 @@ After running all checks, output a summary:
 For any FAIL, include the specific errors below the table with file paths and line numbers where applicable.
 
 Categorize failures as:
+
 - **Blocking** — must fix before merging (build failures, test failures, type errors)
 - **Warning** — should fix (lint issues, missing translations)

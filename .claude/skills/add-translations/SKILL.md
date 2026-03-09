@@ -2,7 +2,6 @@
 name: add-translations
 description: Add translation keys to both en.json and fi.json locale files for a feature. Ensures both locales stay in sync.
 argument-hint: "[feature-name]"
-disable-model-invocation: true
 allowed-tools: "Read, Edit"
 ---
 
@@ -28,6 +27,7 @@ Add or update translation keys for the `$ARGUMENTS` feature in both locale files
 5. **Add keys to BOTH files:**
 
    **`en.json`** — Add under a namespace matching the feature name:
+
    ```json
    "[feature-name]": {
      "title": "...",

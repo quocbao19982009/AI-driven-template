@@ -2,7 +2,6 @@
 name: scaffold-feature-frontend
 description: Scaffold the frontend for a feature after api:sync has been run. Creates page, table, dialogs, hooks, Redux slice, route, navigation, translations, and tests. Second half of the full-stack workflow.
 argument-hint: "[feature-name]"
-disable-model-invocation: true
 allowed-tools: "Read, Write, Edit, Bash, Glob, Grep, mcp__shadcn__search_items_in_registries, mcp__shadcn__view_items_in_registries, mcp__shadcn__get_add_command_for_items"
 context: fork
 ---
@@ -22,13 +21,17 @@ Before any other step, normalize `$ARGUMENTS` to **lowercase-kebab-case plural**
 ### Step P1: Verify Orval output exists
 
 Check for files at:
+
 ```
 frontend/src/api/generated/$ARGUMENTS/
 ```
+
 If missing or empty, **stop immediately**:
+
 > "No Orval output found at `frontend/src/api/generated/$ARGUMENTS/`. Run `/api-sync` first."
 
 ### Step P2: Read the feature spec
+
 ```
 feature_docs/$ARGUMENTS/feature-spec-$ARGUMENTS.md
 ```
@@ -36,6 +39,7 @@ feature_docs/$ARGUMENTS/feature-spec-$ARGUMENTS.md
 ### Step P3: Completeness gate — scan for unresolved markers
 
 Scan the full spec text for:
+
 - `<!-- TODO:`
 - `[NEEDS CLARIFICATION:`
 
@@ -56,6 +60,7 @@ Only proceed to Step 1 when no markers remain.
 Read ALL of these files to understand the patterns:
 
 **Frontend feature template:**
+
 - `frontend/src/features/_template-feature/components/features-page.tsx`
 - `frontend/src/features/_template-feature/components/features-table.tsx`
 - `frontend/src/features/_template-feature/components/feature-form-dialog.tsx`
@@ -68,10 +73,12 @@ Read ALL of these files to understand the patterns:
 - `frontend/src/features/_template-feature/index.ts`
 
 **Test templates:**
+
 - `frontend/src/features/_template-feature/components/__tests__/features-page.test.tsx`
 - `frontend/src/features/_template-feature/hooks/__tests__/use-feature-form.test.ts`
 
 **Existing references:**
+
 - `frontend/src/locales/en.json` (for translation key structure)
 - `frontend/src/locales/fi.json`
 - `frontend/src/store/store.ts` (for Redux slice registration)
@@ -79,6 +86,7 @@ Read ALL of these files to understand the patterns:
 - `frontend/src/routes/features/index.tsx` (for route pattern)
 
 **Read the Orval-generated hooks** to understand available API functions:
+
 - `frontend/src/api/generated/$ARGUMENTS/` (all files)
 
 ## Step 2: Generate the Feature Module
@@ -86,6 +94,7 @@ Read ALL of these files to understand the patterns:
 Create all files under `frontend/src/features/[feature-name]/`:
 
 **Naming conventions (example: feature-name = "products"):**
+
 - `components/products-page.tsx` — page layout with header and action button
 - `components/products-table.tsx` — data table with skeleton loading and pagination
 - `components/product-form-dialog.tsx` — create/edit dialog (dual-mode)
@@ -112,12 +121,14 @@ Create all files under `frontend/src/features/[feature-name]/`:
 ## Step 4: Register Redux Slice
 
 Add the new slice to `frontend/src/store/store.ts`:
+
 - Import the reducer from the new feature's store
 - Add it to the `reducer` object in `configureStore`
 
 ## Step 5: Add Route
 
 Create a thin route file at `frontend/src/routes/[feature-name]/index.tsx`:
+
 - Import the page component from the feature module
 - Export it as the route component
 - Keep the route file thin — all logic stays in the feature module
@@ -125,6 +136,7 @@ Create a thin route file at `frontend/src/routes/[feature-name]/index.tsx`:
 ## Step 6: Add Navigation
 
 Add a navigation link in `frontend/src/components/layout/app-layout.tsx`:
+
 - Use `t("nav.[feature-name]")` for the link text
 - Follow the pattern of existing nav links
 
@@ -133,18 +145,21 @@ Add a navigation link in `frontend/src/components/layout/app-layout.tsx`:
 Add translation keys to BOTH locale files:
 
 **`frontend/src/locales/en.json`:**
+
 - Add a top-level namespace matching the feature name (e.g., `"products": { ... }`)
 - Mirror the structure used by the `"features"` namespace
 - Include keys for: title, description, new[Entity], table columns, form labels, delete dialog, toast messages
 - Add `"nav.[feature-name]"` key in the `"nav"` namespace
 
 **`frontend/src/locales/fi.json`:**
+
 - Add the same keys with actual Finnish translations (not English placeholders)
 - Use the `"features"` namespace in `fi.json` as reference for translation style
 
 ## Step 8: Summary
 
 After generating all files, provide a summary of:
+
 - All files created
 - All files modified (store, navigation, locales, routes)
 - Reminder to verify the UI by running `cd frontend && npm run dev`

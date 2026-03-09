@@ -2,7 +2,6 @@
 name: create-spec
 description: Create a new feature specification file from the template. Classifies what is known, asks targeted questions for missing details, then creates the spec with acceptance scenarios and a self-check.
 argument-hint: "[feature-name]"
-disable-model-invocation: true
 allowed-tools: "Read, Write, Edit, Glob"
 ---
 
@@ -32,13 +31,13 @@ Before any other step, normalize `$ARGUMENTS` to **lowercase-kebab-case** (e.g.,
 
 Before creating any file, scan the user's request against these 5 categories:
 
-| Category | Unclear if… | Maps to spec section |
-|----------|-------------|----------------------|
-| Entity shape | No fields mentioned, or fields lack types/constraints | Section 1: Entity |
-| Relationships | Another entity is mentioned but FK direction is unspecified | Section 1: Relationships |
-| Business rules & custom endpoints | Non-CRUD behavior exists but is unspecified | Sections 5, 7 |
-| Authorization | Not stated whether public or auth-required | Section 8 |
-| Frontend UI | Not described, or too vague to build from | Section 9 |
+| Category                          | Unclear if…                                                 | Maps to spec section     |
+| --------------------------------- | ----------------------------------------------------------- | ------------------------ |
+| Entity shape                      | No fields mentioned, or fields lack types/constraints       | Section 1: Entity        |
+| Relationships                     | Another entity is mentioned but FK direction is unspecified | Section 1: Relationships |
+| Business rules & custom endpoints | Non-CRUD behavior exists but is unspecified                 | Sections 5, 7            |
+| Authorization                     | Not stated whether public or auth-required                  | Section 8                |
+| Frontend UI                       | Not described, or too vague to build from                   | Section 9                |
 
 Mark each category as **known** or **unclear**.
 

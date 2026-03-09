@@ -2,7 +2,6 @@
 name: clarify-spec
 description: Iteratively resolve incomplete sections in an existing feature spec. Finds all TODO and NEEDS CLARIFICATION markers, asks targeted questions (max 3 at a time), and updates the spec until it is fully complete.
 argument-hint: "[feature-name]"
-disable-model-invocation: true
 allowed-tools: "Read, Write, Edit, Glob"
 ---
 
@@ -17,6 +16,7 @@ Before any other step, normalize `$ARGUMENTS` to **lowercase-kebab-case plural**
 > Example: `/clarify-spec Todo` → `{feature}` = `todos`
 
 ## Steps
+
 1. Read the spec and collect all markers
 2. Batch markers into question groups (max 3 per message)
 3. Ask the first batch — wait for answers
@@ -31,15 +31,18 @@ Before any other step, normalize `$ARGUMENTS` to **lowercase-kebab-case plural**
 Read `feature_docs/$ARGUMENTS/feature-spec-$ARGUMENTS.md` in full.
 
 If it does not exist, stop:
+
 > "No spec found. Create one with `/create-spec $ARGUMENTS`."
 
 Scan the full text for:
+
 - `<!-- TODO:`
 - `[NEEDS CLARIFICATION:`
 
 For each marker, record: marker text (verbatim), nearest preceding `##`/`###` heading, marker type.
 
 If NO markers found, stop:
+
 > "Spec is clean — no unresolved markers. Run `/scaffold-feature $ARGUMENTS` to proceed."
 
 ---
@@ -50,15 +53,15 @@ Group markers by section. Select up to 3 from the top (prioritize Entity → End
 
 Question templates by location:
 
-| Marker location | Question |
-|---|---|
-| Entity / Fields | "What fields does [FeatureName] need? For each: C# type, required/optional, constraints." |
-| Relationships | "Does [FeatureName] relate to another entity? Which one, and which side holds the FK?" |
-| API Endpoints auth | "Should any endpoints require authentication or a role? Or are all public?" |
+| Marker location            | Question                                                                                    |
+| -------------------------- | ------------------------------------------------------------------------------------------- |
+| Entity / Fields            | "What fields does [FeatureName] need? For each: C# type, required/optional, constraints."   |
+| Relationships              | "Does [FeatureName] relate to another entity? Which one, and which side holds the FK?"      |
+| API Endpoints auth         | "Should any endpoints require authentication or a role? Or are all public?"                 |
 | Business Rules / Scenarios | "What are the edge cases or failure scenarios? (duplicates, missing required fields, etc.)" |
-| Frontend UI | "What should the UI look like? Standard table + form dialog, or something different?" |
-| Authorization | "Is the feature public, auth-required, or role-restricted?" |
-| Other | Quote the marker verbatim and ask for the answer. |
+| Frontend UI                | "What should the UI look like? Standard table + form dialog, or something different?"       |
+| Authorization              | "Is the feature public, auth-required, or role-restricted?"                                 |
+| Other                      | Quote the marker verbatim and ask for the answer.                                           |
 
 Ask all batch questions in **one single message**.
 
@@ -67,6 +70,7 @@ Ask all batch questions in **one single message**.
 ## Phase 3 — Update the Spec
 
 For each answered question:
+
 1. Find the marker in the spec
 2. Replace it (and its placeholder line if present) with the actual answer, formatted for the section:
    - Entity fields → row in the Fields table
@@ -83,6 +87,7 @@ Update `Last Updated` date at the top to today's date.
 ## Phase 4 — Self-Check After Each Batch
 
 Re-run the full self-check:
+
 ```
 - [ ] Every field in Entity has C# type, required/optional, and at least one constraint
 - [ ] Every endpoint has an auth status (yes/no, not blank)

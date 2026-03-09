@@ -2,7 +2,6 @@
 name: scaffold-feature
 description: Scaffold the backend for a new feature from a feature spec file. Creates entity, DTOs, validator, repository, service, controller, and tests. First half of the full-stack workflow.
 argument-hint: "[feature-name]"
-disable-model-invocation: true
 allowed-tools: "Read, Write, Edit, Bash, Glob, Grep, mcp__context7__resolve-library-id, mcp__context7__query-docs"
 context: fork
 ---
@@ -22,15 +21,19 @@ Before any other step, normalize `$ARGUMENTS` to **lowercase-kebab-case plural**
 ### Step P1: Verify the spec file exists
 
 Read the feature spec:
+
 ```
 feature_docs/$ARGUMENTS/feature-spec-$ARGUMENTS.md
 ```
+
 If this file does not exist, **stop immediately** and tell the user:
+
 > "No spec found at `feature_docs/$ARGUMENTS/feature-spec-$ARGUMENTS.md`. Create one first with `/create-spec $ARGUMENTS`."
 
 ### Step P2: Completeness gate — scan for unresolved markers
 
 After reading the spec, scan its full text for:
+
 - `<!-- TODO:`
 - `[NEEDS CLARIFICATION:`
 
@@ -51,6 +54,7 @@ Only proceed to Step 1 when no markers remain.
 Read ALL of these files to understand the patterns:
 
 **Backend feature template (8 files):**
+
 - `backend/src/Backend.Api/Features/_FeatureTemplate/Feature.cs`
 - `backend/src/Backend.Api/Features/_FeatureTemplate/FeatureDtos.cs`
 - `backend/src/Backend.Api/Features/_FeatureTemplate/FeatureValidator.cs`
@@ -61,11 +65,13 @@ Read ALL of these files to understand the patterns:
 - `backend/src/Backend.Api/Features/_FeatureTemplate/FeatureController.cs`
 
 **Backend test template:**
+
 - `backend/tests/Backend.Tests/Features/_FeatureTemplate/FeatureServiceTests.cs`
 - `backend/tests/Backend.Tests/Features/_FeatureTemplate/FeatureControllerTests.cs`
 - `backend/tests/Backend.Tests/Features/_FeatureTemplate/FeatureValidatorTests.cs`
 
 **Infrastructure references:**
+
 - `backend/src/Backend.Api/Common/Models/BaseEntity.cs`
 - `backend/src/Backend.Api/Common/Models/ApiResponse.cs`
 - `backend/src/Backend.Api/Common/Models/PagedResult.cs`
@@ -76,6 +82,7 @@ Read ALL of these files to understand the patterns:
 Create all files under `backend/src/Backend.Api/Features/[PascalPluralName]/`:
 
 **Naming conventions (example: feature-name = "products"):**
+
 - Entity: `Product.cs` (singular PascalCase)
 - DTOs: `ProductDtos.cs`
 - Validator: `ProductsValidator.cs` (plural)
@@ -84,6 +91,7 @@ Create all files under `backend/src/Backend.Api/Features/[PascalPluralName]/`:
 - Controller: `ProductsController.cs` (plural)
 
 **Map fields from the spec's Entity Fields table** into:
+
 - Entity properties (with correct C# types)
 - DTO records (Create, Update, Response)
 - FluentValidation rules
@@ -107,6 +115,7 @@ These are non-negotiable — violating any of these is a bug:
 ## Step 4: Generate Tests
 
 Create test files under `backend/tests/Backend.Tests/Features/[PascalPluralName]/`:
+
 - `[Entity]ServiceTests.cs` — test CRUD operations, validation failures, not-found cases
 - `[Entity]ControllerTests.cs` — test HTTP responses and delegation to service
 - `[Entity]ValidatorTests.cs` — test each validation rule from the spec
