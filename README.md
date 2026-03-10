@@ -65,6 +65,7 @@ The default `VITE_API_URL=http://localhost:5054` matches the backend's default p
 ```bash
 cd backend/src/Backend.Api
 dotnet restore
+dotnet tool restore
 dotnet ef database update
 dotnet run
 ```
