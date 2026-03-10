@@ -13,7 +13,8 @@
     "format:frontend": "npm run format --prefix frontend",
     "format:frontend:check": "npm run format:check --prefix frontend",
     "format": "npm run format:backend && npm run format:frontend",
-    "format:check": "npm run format:backend:check && npm run format:frontend:check"
+    "format:check": "npm run format:backend:check && npm run format:frontend:check",
+    "prepare": "git config core.hooksPath .githooks"
   },
   "devDependencies": {
     "concurrently": "^9.2.1"

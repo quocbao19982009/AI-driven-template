@@ -1,0 +1,9 @@
+#!/bin/sh
+echo "Checking formatting..."
+npm run format:check
+if [ $? -ne 0 ]; then
+  echo ""
+  echo "Formatting issues found."
+  echo "Run 'npm run format', then commit and push again."
+  exit 1
+fi
