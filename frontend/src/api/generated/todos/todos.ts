@@ -61,7 +61,7 @@ export const getGetApiTodosUrl = (params?: GetApiTodosParams) => {
 
 export const getApiTodos = async (
   params?: GetApiTodosParams,
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<getApiTodosResponse> => {
   return apiFetch<getApiTodosResponse>(getGetApiTodosUrl(params), {
     ...options,
@@ -83,7 +83,7 @@ export const getGetApiTodosQueryOptions = <
       UseQueryOptions<Awaited<ReturnType<typeof getApiTodos>>, TError, TData>
     >;
     request?: SecondParameter<typeof apiFetch>;
-  },
+  }
 ) => {
   const { query: queryOptions, request: requestOptions } = options ?? {};
 
@@ -124,7 +124,7 @@ export function useGetApiTodos<
       >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): DefinedUseQueryResult<TData, TError> & {
   queryKey: DataTag<QueryKey, TData, TError>;
 };
@@ -147,7 +147,7 @@ export function useGetApiTodos<
       >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & {
   queryKey: DataTag<QueryKey, TData, TError>;
 };
@@ -162,7 +162,7 @@ export function useGetApiTodos<
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & {
   queryKey: DataTag<QueryKey, TData, TError>;
 };
@@ -178,7 +178,7 @@ export function useGetApiTodos<
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & {
   queryKey: DataTag<QueryKey, TData, TError>;
 } {
@@ -209,7 +209,7 @@ export const getPostApiTodosWithJsonUrl = () => {
 
 export const postApiTodosWithJson = async (
   createTodoRequest: CreateTodoRequest,
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<postApiTodosWithJsonResponse> => {
   return apiFetch<postApiTodosWithJsonResponse>(getPostApiTodosWithJsonUrl(), {
     ...options,
@@ -273,7 +273,7 @@ export const usePostApiTodosWithJson = <TError = unknown, TContext = unknown>(
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseMutationResult<
   Awaited<ReturnType<typeof postApiTodosWithJson>>,
   TError,
@@ -282,7 +282,7 @@ export const usePostApiTodosWithJson = <TError = unknown, TContext = unknown>(
 > => {
   return useMutation(
     getPostApiTodosWithJsonMutationOptions(options),
-    queryClient,
+    queryClient
   );
 };
 export type postApiTodosWithTextJsonResponse200 = {
@@ -302,14 +302,14 @@ export const getPostApiTodosWithTextJsonUrl = () => {
 };
 
 export const postApiTodosWithTextJson = async (
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<postApiTodosWithTextJsonResponse> => {
   return apiFetch<postApiTodosWithTextJsonResponse>(
     getPostApiTodosWithTextJsonUrl(),
     {
       ...options,
       method: "POST",
-    },
+    }
   );
 };
 
@@ -368,7 +368,7 @@ export const usePostApiTodosWithTextJson = <
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseMutationResult<
   Awaited<ReturnType<typeof postApiTodosWithTextJson>>,
   TError,
@@ -377,7 +377,7 @@ export const usePostApiTodosWithTextJson = <
 > => {
   return useMutation(
     getPostApiTodosWithTextJsonMutationOptions(options),
-    queryClient,
+    queryClient
   );
 };
 export type postApiTodosWithApplicationJsonResponse200 = {
@@ -397,14 +397,14 @@ export const getPostApiTodosWithApplicationJsonUrl = () => {
 };
 
 export const postApiTodosWithApplicationJson = async (
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<postApiTodosWithApplicationJsonResponse> => {
   return apiFetch<postApiTodosWithApplicationJsonResponse>(
     getPostApiTodosWithApplicationJsonUrl(),
     {
       ...options,
       method: "POST",
-    },
+    }
   );
 };
 
@@ -463,7 +463,7 @@ export const usePostApiTodosWithApplicationJson = <
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseMutationResult<
   Awaited<ReturnType<typeof postApiTodosWithApplicationJson>>,
   TError,
@@ -472,7 +472,7 @@ export const usePostApiTodosWithApplicationJson = <
 > => {
   return useMutation(
     getPostApiTodosWithApplicationJsonMutationOptions(options),
-    queryClient,
+    queryClient
   );
 };
 export type getApiTodosIdResponse200 = {
@@ -491,7 +491,7 @@ export const getGetApiTodosIdUrl = (id: number) => {
 
 export const getApiTodosId = async (
   id: number,
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<getApiTodosIdResponse> => {
   return apiFetch<getApiTodosIdResponse>(getGetApiTodosIdUrl(id), {
     ...options,
@@ -513,7 +513,7 @@ export const getGetApiTodosIdQueryOptions = <
       UseQueryOptions<Awaited<ReturnType<typeof getApiTodosId>>, TError, TData>
     >;
     request?: SecondParameter<typeof apiFetch>;
-  },
+  }
 ) => {
   const { query: queryOptions, request: requestOptions } = options ?? {};
 
@@ -559,7 +559,7 @@ export function useGetApiTodosId<
       >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): DefinedUseQueryResult<TData, TError> & {
   queryKey: DataTag<QueryKey, TData, TError>;
 };
@@ -582,7 +582,7 @@ export function useGetApiTodosId<
       >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & {
   queryKey: DataTag<QueryKey, TData, TError>;
 };
@@ -597,7 +597,7 @@ export function useGetApiTodosId<
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & {
   queryKey: DataTag<QueryKey, TData, TError>;
 };
@@ -613,7 +613,7 @@ export function useGetApiTodosId<
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & {
   queryKey: DataTag<QueryKey, TData, TError>;
 } {
@@ -646,7 +646,7 @@ export const getPutApiTodosIdWithJsonUrl = (id: number) => {
 export const putApiTodosIdWithJson = async (
   id: number,
   updateTodoRequest: UpdateTodoRequest,
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<putApiTodosIdWithJsonResponse> => {
   return apiFetch<putApiTodosIdWithJsonResponse>(
     getPutApiTodosIdWithJsonUrl(id),
@@ -655,7 +655,7 @@ export const putApiTodosIdWithJson = async (
       method: "PUT",
       headers: { "Content-Type": "application/json", ...options?.headers },
       body: JSON.stringify(updateTodoRequest),
-    },
+    }
   );
 };
 
@@ -713,7 +713,7 @@ export const usePutApiTodosIdWithJson = <TError = unknown, TContext = unknown>(
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseMutationResult<
   Awaited<ReturnType<typeof putApiTodosIdWithJson>>,
   TError,
@@ -722,7 +722,7 @@ export const usePutApiTodosIdWithJson = <TError = unknown, TContext = unknown>(
 > => {
   return useMutation(
     getPutApiTodosIdWithJsonMutationOptions(options),
-    queryClient,
+    queryClient
   );
 };
 export type putApiTodosIdWithTextJsonResponse200 = {
@@ -743,14 +743,14 @@ export const getPutApiTodosIdWithTextJsonUrl = (id: number) => {
 
 export const putApiTodosIdWithTextJson = async (
   id: number,
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<putApiTodosIdWithTextJsonResponse> => {
   return apiFetch<putApiTodosIdWithTextJsonResponse>(
     getPutApiTodosIdWithTextJsonUrl(id),
     {
       ...options,
       method: "PUT",
-    },
+    }
   );
 };
 
@@ -811,7 +811,7 @@ export const usePutApiTodosIdWithTextJson = <
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseMutationResult<
   Awaited<ReturnType<typeof putApiTodosIdWithTextJson>>,
   TError,
@@ -820,7 +820,7 @@ export const usePutApiTodosIdWithTextJson = <
 > => {
   return useMutation(
     getPutApiTodosIdWithTextJsonMutationOptions(options),
-    queryClient,
+    queryClient
   );
 };
 export type putApiTodosIdWithApplicationJsonResponse200 = {
@@ -841,14 +841,14 @@ export const getPutApiTodosIdWithApplicationJsonUrl = (id: number) => {
 
 export const putApiTodosIdWithApplicationJson = async (
   id: number,
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<putApiTodosIdWithApplicationJsonResponse> => {
   return apiFetch<putApiTodosIdWithApplicationJsonResponse>(
     getPutApiTodosIdWithApplicationJsonUrl(id),
     {
       ...options,
       method: "PUT",
-    },
+    }
   );
 };
 
@@ -909,7 +909,7 @@ export const usePutApiTodosIdWithApplicationJson = <
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseMutationResult<
   Awaited<ReturnType<typeof putApiTodosIdWithApplicationJson>>,
   TError,
@@ -918,7 +918,7 @@ export const usePutApiTodosIdWithApplicationJson = <
 > => {
   return useMutation(
     getPutApiTodosIdWithApplicationJsonMutationOptions(options),
-    queryClient,
+    queryClient
   );
 };
 export type deleteApiTodosIdResponse200 = {
@@ -937,7 +937,7 @@ export const getDeleteApiTodosIdUrl = (id: number) => {
 
 export const deleteApiTodosId = async (
   id: number,
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<deleteApiTodosIdResponse> => {
   return apiFetch<deleteApiTodosIdResponse>(getDeleteApiTodosIdUrl(id), {
     ...options,
@@ -999,7 +999,7 @@ export const useDeleteApiTodosId = <TError = unknown, TContext = unknown>(
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseMutationResult<
   Awaited<ReturnType<typeof deleteApiTodosId>>,
   TError,
@@ -1026,14 +1026,14 @@ export const getPatchApiTodosIdToggleUrl = (id: number) => {
 
 export const patchApiTodosIdToggle = async (
   id: number,
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<patchApiTodosIdToggleResponse> => {
   return apiFetch<patchApiTodosIdToggleResponse>(
     getPatchApiTodosIdToggleUrl(id),
     {
       ...options,
       method: "PATCH",
-    },
+    }
   );
 };
 
@@ -1091,7 +1091,7 @@ export const usePatchApiTodosIdToggle = <TError = unknown, TContext = unknown>(
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseMutationResult<
   Awaited<ReturnType<typeof patchApiTodosIdToggle>>,
   TError,
@@ -1100,6 +1100,6 @@ export const usePatchApiTodosIdToggle = <TError = unknown, TContext = unknown>(
 > => {
   return useMutation(
     getPatchApiTodosIdToggleMutationOptions(options),
-    queryClient,
+    queryClient
   );
 };

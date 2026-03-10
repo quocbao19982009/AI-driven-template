@@ -5,220 +5,237 @@
  * A simple ASP.NET Core Web API template with best practices for building scalable and maintainable applications.
  * OpenAPI spec version: v1
  */
-import * as zod from 'zod';
+import * as zod from "zod";
 
-
-export const getApiBookingsQueryPageDefault = 1;export const getApiBookingsQueryPageSizeDefault = 10;
+export const getApiBookingsQueryPageDefault = 1;
+export const getApiBookingsQueryPageSizeDefault = 10;
 
 export const GetApiBookingsQueryParams = zod.object({
-  "page": zod.number().default(getApiBookingsQueryPageDefault),
-  "pageSize": zod.number().default(getApiBookingsQueryPageSizeDefault),
-  "roomId": zod.number().optional(),
-  "fromDate": zod.iso.datetime({}).optional(),
-  "toDate": zod.iso.datetime({}).optional()
-})
+  page: zod.number().default(getApiBookingsQueryPageDefault),
+  pageSize: zod.number().default(getApiBookingsQueryPageSizeDefault),
+  roomId: zod.number().optional(),
+  fromDate: zod.iso.datetime({}).optional(),
+  toDate: zod.iso.datetime({}).optional(),
+});
 
 export const GetApiBookingsResponse = zod.object({
-  "success": zod.boolean(),
-  "data": zod.object({
-  "items": zod.array(zod.object({
-  "id": zod.number(),
-  "roomId": zod.number(),
-  "roomName": zod.string(),
-  "startTime": zod.iso.datetime({}),
-  "endTime": zod.iso.datetime({}),
-  "bookedBy": zod.string(),
-  "purpose": zod.string().nullish(),
-  "createdAt": zod.iso.datetime({})
-})),
-  "totalCount": zod.number(),
-  "page": zod.number(),
-  "pageSize": zod.number(),
-  "totalPages": zod.number(),
-  "hasNextPage": zod.boolean(),
-  "hasPreviousPage": zod.boolean()
-}).optional(),
-  "message": zod.string().nullish(),
-  "errors": zod.array(zod.string()).nullish()
-})
+  success: zod.boolean(),
+  data: zod
+    .object({
+      items: zod.array(
+        zod.object({
+          id: zod.number(),
+          roomId: zod.number(),
+          roomName: zod.string(),
+          startTime: zod.iso.datetime({}),
+          endTime: zod.iso.datetime({}),
+          bookedBy: zod.string(),
+          purpose: zod.string().nullish(),
+          createdAt: zod.iso.datetime({}),
+        })
+      ),
+      totalCount: zod.number(),
+      page: zod.number(),
+      pageSize: zod.number(),
+      totalPages: zod.number(),
+      hasNextPage: zod.boolean(),
+      hasPreviousPage: zod.boolean(),
+    })
+    .optional(),
+  message: zod.string().nullish(),
+  errors: zod.array(zod.string()).nullish(),
+});
 
 export const PostApiBookingsWithJsonBody = zod.object({
-  "roomId": zod.number(),
-  "startTime": zod.iso.datetime({}),
-  "endTime": zod.iso.datetime({}),
-  "bookedBy": zod.string(),
-  "purpose": zod.string().nullish()
-})
+  roomId: zod.number(),
+  startTime: zod.iso.datetime({}),
+  endTime: zod.iso.datetime({}),
+  bookedBy: zod.string(),
+  purpose: zod.string().nullish(),
+});
 
 export const PostApiBookingsWithJsonResponse = zod.object({
-  "success": zod.boolean(),
-  "data": zod.object({
-  "id": zod.number(),
-  "roomId": zod.number(),
-  "roomName": zod.string(),
-  "startTime": zod.iso.datetime({}),
-  "endTime": zod.iso.datetime({}),
-  "bookedBy": zod.string(),
-  "purpose": zod.string().nullish(),
-  "createdAt": zod.iso.datetime({})
-}).optional(),
-  "message": zod.string().nullish(),
-  "errors": zod.array(zod.string()).nullish()
-})
+  success: zod.boolean(),
+  data: zod
+    .object({
+      id: zod.number(),
+      roomId: zod.number(),
+      roomName: zod.string(),
+      startTime: zod.iso.datetime({}),
+      endTime: zod.iso.datetime({}),
+      bookedBy: zod.string(),
+      purpose: zod.string().nullish(),
+      createdAt: zod.iso.datetime({}),
+    })
+    .optional(),
+  message: zod.string().nullish(),
+  errors: zod.array(zod.string()).nullish(),
+});
 
 export const PostApiBookingsWithTextJsonBody = zod.object({
-  "roomId": zod.number(),
-  "startTime": zod.iso.datetime({}),
-  "endTime": zod.iso.datetime({}),
-  "bookedBy": zod.string(),
-  "purpose": zod.string().nullish()
-})
+  roomId: zod.number(),
+  startTime: zod.iso.datetime({}),
+  endTime: zod.iso.datetime({}),
+  bookedBy: zod.string(),
+  purpose: zod.string().nullish(),
+});
 
 export const PostApiBookingsWithTextJsonResponse = zod.object({
-  "success": zod.boolean(),
-  "data": zod.object({
-  "id": zod.number(),
-  "roomId": zod.number(),
-  "roomName": zod.string(),
-  "startTime": zod.iso.datetime({}),
-  "endTime": zod.iso.datetime({}),
-  "bookedBy": zod.string(),
-  "purpose": zod.string().nullish(),
-  "createdAt": zod.iso.datetime({})
-}).optional(),
-  "message": zod.string().nullish(),
-  "errors": zod.array(zod.string()).nullish()
-})
+  success: zod.boolean(),
+  data: zod
+    .object({
+      id: zod.number(),
+      roomId: zod.number(),
+      roomName: zod.string(),
+      startTime: zod.iso.datetime({}),
+      endTime: zod.iso.datetime({}),
+      bookedBy: zod.string(),
+      purpose: zod.string().nullish(),
+      createdAt: zod.iso.datetime({}),
+    })
+    .optional(),
+  message: zod.string().nullish(),
+  errors: zod.array(zod.string()).nullish(),
+});
 
 export const PostApiBookingsWithApplicationJsonBody = zod.object({
-  "roomId": zod.number(),
-  "startTime": zod.iso.datetime({}),
-  "endTime": zod.iso.datetime({}),
-  "bookedBy": zod.string(),
-  "purpose": zod.string().nullish()
-})
+  roomId: zod.number(),
+  startTime: zod.iso.datetime({}),
+  endTime: zod.iso.datetime({}),
+  bookedBy: zod.string(),
+  purpose: zod.string().nullish(),
+});
 
 export const PostApiBookingsWithApplicationJsonResponse = zod.object({
-  "success": zod.boolean(),
-  "data": zod.object({
-  "id": zod.number(),
-  "roomId": zod.number(),
-  "roomName": zod.string(),
-  "startTime": zod.iso.datetime({}),
-  "endTime": zod.iso.datetime({}),
-  "bookedBy": zod.string(),
-  "purpose": zod.string().nullish(),
-  "createdAt": zod.iso.datetime({})
-}).optional(),
-  "message": zod.string().nullish(),
-  "errors": zod.array(zod.string()).nullish()
-})
+  success: zod.boolean(),
+  data: zod
+    .object({
+      id: zod.number(),
+      roomId: zod.number(),
+      roomName: zod.string(),
+      startTime: zod.iso.datetime({}),
+      endTime: zod.iso.datetime({}),
+      bookedBy: zod.string(),
+      purpose: zod.string().nullish(),
+      createdAt: zod.iso.datetime({}),
+    })
+    .optional(),
+  message: zod.string().nullish(),
+  errors: zod.array(zod.string()).nullish(),
+});
 
 export const GetApiBookingsIdParams = zod.object({
-  "id": zod.number()
-})
+  id: zod.number(),
+});
 
 export const GetApiBookingsIdResponse = zod.object({
-  "success": zod.boolean(),
-  "data": zod.object({
-  "id": zod.number(),
-  "roomId": zod.number(),
-  "roomName": zod.string(),
-  "startTime": zod.iso.datetime({}),
-  "endTime": zod.iso.datetime({}),
-  "bookedBy": zod.string(),
-  "purpose": zod.string().nullish(),
-  "createdAt": zod.iso.datetime({})
-}).optional(),
-  "message": zod.string().nullish(),
-  "errors": zod.array(zod.string()).nullish()
-})
+  success: zod.boolean(),
+  data: zod
+    .object({
+      id: zod.number(),
+      roomId: zod.number(),
+      roomName: zod.string(),
+      startTime: zod.iso.datetime({}),
+      endTime: zod.iso.datetime({}),
+      bookedBy: zod.string(),
+      purpose: zod.string().nullish(),
+      createdAt: zod.iso.datetime({}),
+    })
+    .optional(),
+  message: zod.string().nullish(),
+  errors: zod.array(zod.string()).nullish(),
+});
 
 export const PutApiBookingsIdWithJsonParams = zod.object({
-  "id": zod.number()
-})
+  id: zod.number(),
+});
 
 export const PutApiBookingsIdWithJsonBody = zod.object({
-  "roomId": zod.number(),
-  "startTime": zod.iso.datetime({}),
-  "endTime": zod.iso.datetime({}),
-  "bookedBy": zod.string(),
-  "purpose": zod.string().nullish()
-})
+  roomId: zod.number(),
+  startTime: zod.iso.datetime({}),
+  endTime: zod.iso.datetime({}),
+  bookedBy: zod.string(),
+  purpose: zod.string().nullish(),
+});
 
 export const PutApiBookingsIdWithJsonResponse = zod.object({
-  "success": zod.boolean(),
-  "data": zod.object({
-  "id": zod.number(),
-  "roomId": zod.number(),
-  "roomName": zod.string(),
-  "startTime": zod.iso.datetime({}),
-  "endTime": zod.iso.datetime({}),
-  "bookedBy": zod.string(),
-  "purpose": zod.string().nullish(),
-  "createdAt": zod.iso.datetime({})
-}).optional(),
-  "message": zod.string().nullish(),
-  "errors": zod.array(zod.string()).nullish()
-})
+  success: zod.boolean(),
+  data: zod
+    .object({
+      id: zod.number(),
+      roomId: zod.number(),
+      roomName: zod.string(),
+      startTime: zod.iso.datetime({}),
+      endTime: zod.iso.datetime({}),
+      bookedBy: zod.string(),
+      purpose: zod.string().nullish(),
+      createdAt: zod.iso.datetime({}),
+    })
+    .optional(),
+  message: zod.string().nullish(),
+  errors: zod.array(zod.string()).nullish(),
+});
 
 export const PutApiBookingsIdWithTextJsonParams = zod.object({
-  "id": zod.number()
-})
+  id: zod.number(),
+});
 
 export const PutApiBookingsIdWithTextJsonBody = zod.object({
-  "roomId": zod.number(),
-  "startTime": zod.iso.datetime({}),
-  "endTime": zod.iso.datetime({}),
-  "bookedBy": zod.string(),
-  "purpose": zod.string().nullish()
-})
+  roomId: zod.number(),
+  startTime: zod.iso.datetime({}),
+  endTime: zod.iso.datetime({}),
+  bookedBy: zod.string(),
+  purpose: zod.string().nullish(),
+});
 
 export const PutApiBookingsIdWithTextJsonResponse = zod.object({
-  "success": zod.boolean(),
-  "data": zod.object({
-  "id": zod.number(),
-  "roomId": zod.number(),
-  "roomName": zod.string(),
-  "startTime": zod.iso.datetime({}),
-  "endTime": zod.iso.datetime({}),
-  "bookedBy": zod.string(),
-  "purpose": zod.string().nullish(),
-  "createdAt": zod.iso.datetime({})
-}).optional(),
-  "message": zod.string().nullish(),
-  "errors": zod.array(zod.string()).nullish()
-})
+  success: zod.boolean(),
+  data: zod
+    .object({
+      id: zod.number(),
+      roomId: zod.number(),
+      roomName: zod.string(),
+      startTime: zod.iso.datetime({}),
+      endTime: zod.iso.datetime({}),
+      bookedBy: zod.string(),
+      purpose: zod.string().nullish(),
+      createdAt: zod.iso.datetime({}),
+    })
+    .optional(),
+  message: zod.string().nullish(),
+  errors: zod.array(zod.string()).nullish(),
+});
 
 export const PutApiBookingsIdWithApplicationJsonParams = zod.object({
-  "id": zod.number()
-})
+  id: zod.number(),
+});
 
 export const PutApiBookingsIdWithApplicationJsonBody = zod.object({
-  "roomId": zod.number(),
-  "startTime": zod.iso.datetime({}),
-  "endTime": zod.iso.datetime({}),
-  "bookedBy": zod.string(),
-  "purpose": zod.string().nullish()
-})
+  roomId: zod.number(),
+  startTime: zod.iso.datetime({}),
+  endTime: zod.iso.datetime({}),
+  bookedBy: zod.string(),
+  purpose: zod.string().nullish(),
+});
 
 export const PutApiBookingsIdWithApplicationJsonResponse = zod.object({
-  "success": zod.boolean(),
-  "data": zod.object({
-  "id": zod.number(),
-  "roomId": zod.number(),
-  "roomName": zod.string(),
-  "startTime": zod.iso.datetime({}),
-  "endTime": zod.iso.datetime({}),
-  "bookedBy": zod.string(),
-  "purpose": zod.string().nullish(),
-  "createdAt": zod.iso.datetime({})
-}).optional(),
-  "message": zod.string().nullish(),
-  "errors": zod.array(zod.string()).nullish()
-})
+  success: zod.boolean(),
+  data: zod
+    .object({
+      id: zod.number(),
+      roomId: zod.number(),
+      roomName: zod.string(),
+      startTime: zod.iso.datetime({}),
+      endTime: zod.iso.datetime({}),
+      bookedBy: zod.string(),
+      purpose: zod.string().nullish(),
+      createdAt: zod.iso.datetime({}),
+    })
+    .optional(),
+  message: zod.string().nullish(),
+  errors: zod.array(zod.string()).nullish(),
+});
 
 export const DeleteApiBookingsIdParams = zod.object({
-  "id": zod.number()
-})
-
+  id: zod.number(),
+});

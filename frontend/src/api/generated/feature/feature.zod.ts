@@ -5,153 +5,170 @@
  * A simple ASP.NET Core Web API template with best practices for building scalable and maintainable applications.
  * OpenAPI spec version: v1
  */
-import * as zod from 'zod';
+import * as zod from "zod";
 
-
-export const getApiFeaturesQueryPageDefault = 1;export const getApiFeaturesQueryPageSizeDefault = 20;
+export const getApiFeaturesQueryPageDefault = 1;
+export const getApiFeaturesQueryPageSizeDefault = 20;
 
 export const GetApiFeaturesQueryParams = zod.object({
-  "page": zod.number().default(getApiFeaturesQueryPageDefault),
-  "pageSize": zod.number().default(getApiFeaturesQueryPageSizeDefault)
-})
+  page: zod.number().default(getApiFeaturesQueryPageDefault),
+  pageSize: zod.number().default(getApiFeaturesQueryPageSizeDefault),
+});
 
 export const GetApiFeaturesResponse = zod.object({
-  "success": zod.boolean(),
-  "data": zod.object({
-  "items": zod.array(zod.object({
-  "id": zod.number(),
-  "name": zod.string(),
-  "createdAt": zod.iso.datetime({})
-})),
-  "totalCount": zod.number(),
-  "page": zod.number(),
-  "pageSize": zod.number(),
-  "totalPages": zod.number(),
-  "hasNextPage": zod.boolean(),
-  "hasPreviousPage": zod.boolean()
-}).optional(),
-  "message": zod.string().nullish(),
-  "errors": zod.array(zod.string()).nullish()
-})
+  success: zod.boolean(),
+  data: zod
+    .object({
+      items: zod.array(
+        zod.object({
+          id: zod.number(),
+          name: zod.string(),
+          createdAt: zod.iso.datetime({}),
+        })
+      ),
+      totalCount: zod.number(),
+      page: zod.number(),
+      pageSize: zod.number(),
+      totalPages: zod.number(),
+      hasNextPage: zod.boolean(),
+      hasPreviousPage: zod.boolean(),
+    })
+    .optional(),
+  message: zod.string().nullish(),
+  errors: zod.array(zod.string()).nullish(),
+});
 
 export const PostApiFeaturesWithJsonBody = zod.object({
-  "name": zod.string()
-})
+  name: zod.string().min(1),
+});
 
 export const PostApiFeaturesWithJsonResponse = zod.object({
-  "success": zod.boolean(),
-  "data": zod.object({
-  "id": zod.number(),
-  "name": zod.string(),
-  "createdAt": zod.iso.datetime({})
-}).optional(),
-  "message": zod.string().nullish(),
-  "errors": zod.array(zod.string()).nullish()
-})
+  success: zod.boolean(),
+  data: zod
+    .object({
+      id: zod.number(),
+      name: zod.string(),
+      createdAt: zod.iso.datetime({}),
+    })
+    .optional(),
+  message: zod.string().nullish(),
+  errors: zod.array(zod.string()).nullish(),
+});
 
 export const PostApiFeaturesWithTextJsonBody = zod.object({
-  "name": zod.string()
-})
+  name: zod.string().min(1),
+});
 
 export const PostApiFeaturesWithTextJsonResponse = zod.object({
-  "success": zod.boolean(),
-  "data": zod.object({
-  "id": zod.number(),
-  "name": zod.string(),
-  "createdAt": zod.iso.datetime({})
-}).optional(),
-  "message": zod.string().nullish(),
-  "errors": zod.array(zod.string()).nullish()
-})
+  success: zod.boolean(),
+  data: zod
+    .object({
+      id: zod.number(),
+      name: zod.string(),
+      createdAt: zod.iso.datetime({}),
+    })
+    .optional(),
+  message: zod.string().nullish(),
+  errors: zod.array(zod.string()).nullish(),
+});
 
 export const PostApiFeaturesWithApplicationJsonBody = zod.object({
-  "name": zod.string()
-})
+  name: zod.string().min(1),
+});
 
 export const PostApiFeaturesWithApplicationJsonResponse = zod.object({
-  "success": zod.boolean(),
-  "data": zod.object({
-  "id": zod.number(),
-  "name": zod.string(),
-  "createdAt": zod.iso.datetime({})
-}).optional(),
-  "message": zod.string().nullish(),
-  "errors": zod.array(zod.string()).nullish()
-})
+  success: zod.boolean(),
+  data: zod
+    .object({
+      id: zod.number(),
+      name: zod.string(),
+      createdAt: zod.iso.datetime({}),
+    })
+    .optional(),
+  message: zod.string().nullish(),
+  errors: zod.array(zod.string()).nullish(),
+});
 
 export const GetApiFeaturesIdParams = zod.object({
-  "id": zod.number()
-})
+  id: zod.number(),
+});
 
 export const GetApiFeaturesIdResponse = zod.object({
-  "success": zod.boolean(),
-  "data": zod.object({
-  "id": zod.number(),
-  "name": zod.string(),
-  "createdAt": zod.iso.datetime({})
-}).optional(),
-  "message": zod.string().nullish(),
-  "errors": zod.array(zod.string()).nullish()
-})
+  success: zod.boolean(),
+  data: zod
+    .object({
+      id: zod.number(),
+      name: zod.string(),
+      createdAt: zod.iso.datetime({}),
+    })
+    .optional(),
+  message: zod.string().nullish(),
+  errors: zod.array(zod.string()).nullish(),
+});
 
 export const PutApiFeaturesIdWithJsonParams = zod.object({
-  "id": zod.number()
-})
+  id: zod.number(),
+});
 
 export const PutApiFeaturesIdWithJsonBody = zod.object({
-  "name": zod.string()
-})
+  name: zod.string().min(1),
+});
 
 export const PutApiFeaturesIdWithJsonResponse = zod.object({
-  "success": zod.boolean(),
-  "data": zod.object({
-  "id": zod.number(),
-  "name": zod.string(),
-  "createdAt": zod.iso.datetime({})
-}).optional(),
-  "message": zod.string().nullish(),
-  "errors": zod.array(zod.string()).nullish()
-})
+  success: zod.boolean(),
+  data: zod
+    .object({
+      id: zod.number(),
+      name: zod.string(),
+      createdAt: zod.iso.datetime({}),
+    })
+    .optional(),
+  message: zod.string().nullish(),
+  errors: zod.array(zod.string()).nullish(),
+});
 
 export const PutApiFeaturesIdWithTextJsonParams = zod.object({
-  "id": zod.number()
-})
+  id: zod.number(),
+});
 
 export const PutApiFeaturesIdWithTextJsonBody = zod.object({
-  "name": zod.string()
-})
+  name: zod.string().min(1),
+});
 
 export const PutApiFeaturesIdWithTextJsonResponse = zod.object({
-  "success": zod.boolean(),
-  "data": zod.object({
-  "id": zod.number(),
-  "name": zod.string(),
-  "createdAt": zod.iso.datetime({})
-}).optional(),
-  "message": zod.string().nullish(),
-  "errors": zod.array(zod.string()).nullish()
-})
+  success: zod.boolean(),
+  data: zod
+    .object({
+      id: zod.number(),
+      name: zod.string(),
+      createdAt: zod.iso.datetime({}),
+    })
+    .optional(),
+  message: zod.string().nullish(),
+  errors: zod.array(zod.string()).nullish(),
+});
 
 export const PutApiFeaturesIdWithApplicationJsonParams = zod.object({
-  "id": zod.number()
-})
+  id: zod.number(),
+});
 
 export const PutApiFeaturesIdWithApplicationJsonBody = zod.object({
-  "name": zod.string()
-})
+  name: zod.string().min(1),
+});
 
 export const PutApiFeaturesIdWithApplicationJsonResponse = zod.object({
-  "success": zod.boolean(),
-  "data": zod.object({
-  "id": zod.number(),
-  "name": zod.string(),
-  "createdAt": zod.iso.datetime({})
-}).optional(),
-  "message": zod.string().nullish(),
-  "errors": zod.array(zod.string()).nullish()
-})
+  success: zod.boolean(),
+  data: zod
+    .object({
+      id: zod.number(),
+      name: zod.string(),
+      createdAt: zod.iso.datetime({}),
+    })
+    .optional(),
+  message: zod.string().nullish(),
+  errors: zod.array(zod.string()).nullish(),
+});
 
 export const DeleteApiFeaturesIdParams = zod.object({
-  "id": zod.number()
-})
-
+  id: zod.number(),
+});

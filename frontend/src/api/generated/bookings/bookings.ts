@@ -61,7 +61,7 @@ export const getGetApiBookingsUrl = (params?: GetApiBookingsParams) => {
 
 export const getApiBookings = async (
   params?: GetApiBookingsParams,
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<getApiBookingsResponse> => {
   return apiFetch<getApiBookingsResponse>(getGetApiBookingsUrl(params), {
     ...options,
@@ -83,7 +83,7 @@ export const getGetApiBookingsQueryOptions = <
       UseQueryOptions<Awaited<ReturnType<typeof getApiBookings>>, TError, TData>
     >;
     request?: SecondParameter<typeof apiFetch>;
-  },
+  }
 ) => {
   const { query: queryOptions, request: requestOptions } = options ?? {};
 
@@ -124,7 +124,7 @@ export function useGetApiBookings<
       >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): DefinedUseQueryResult<TData, TError> & {
   queryKey: DataTag<QueryKey, TData, TError>;
 };
@@ -147,7 +147,7 @@ export function useGetApiBookings<
       >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & {
   queryKey: DataTag<QueryKey, TData, TError>;
 };
@@ -162,7 +162,7 @@ export function useGetApiBookings<
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & {
   queryKey: DataTag<QueryKey, TData, TError>;
 };
@@ -178,7 +178,7 @@ export function useGetApiBookings<
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & {
   queryKey: DataTag<QueryKey, TData, TError>;
 } {
@@ -210,7 +210,7 @@ export const getPostApiBookingsWithJsonUrl = () => {
 
 export const postApiBookingsWithJson = async (
   createBookingRequest: CreateBookingRequest,
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<postApiBookingsWithJsonResponse> => {
   return apiFetch<postApiBookingsWithJsonResponse>(
     getPostApiBookingsWithJsonUrl(),
@@ -219,7 +219,7 @@ export const postApiBookingsWithJson = async (
       method: "POST",
       headers: { "Content-Type": "application/json", ...options?.headers },
       body: JSON.stringify(createBookingRequest),
-    },
+    }
   );
 };
 
@@ -280,7 +280,7 @@ export const usePostApiBookingsWithJson = <
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseMutationResult<
   Awaited<ReturnType<typeof postApiBookingsWithJson>>,
   TError,
@@ -289,7 +289,7 @@ export const usePostApiBookingsWithJson = <
 > => {
   return useMutation(
     getPostApiBookingsWithJsonMutationOptions(options),
-    queryClient,
+    queryClient
   );
 };
 export type postApiBookingsWithTextJsonResponse200 = {
@@ -309,14 +309,14 @@ export const getPostApiBookingsWithTextJsonUrl = () => {
 };
 
 export const postApiBookingsWithTextJson = async (
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<postApiBookingsWithTextJsonResponse> => {
   return apiFetch<postApiBookingsWithTextJsonResponse>(
     getPostApiBookingsWithTextJsonUrl(),
     {
       ...options,
       method: "POST",
-    },
+    }
   );
 };
 
@@ -375,7 +375,7 @@ export const usePostApiBookingsWithTextJson = <
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseMutationResult<
   Awaited<ReturnType<typeof postApiBookingsWithTextJson>>,
   TError,
@@ -384,7 +384,7 @@ export const usePostApiBookingsWithTextJson = <
 > => {
   return useMutation(
     getPostApiBookingsWithTextJsonMutationOptions(options),
-    queryClient,
+    queryClient
   );
 };
 export type postApiBookingsWithApplicationJsonResponse200 = {
@@ -404,14 +404,14 @@ export const getPostApiBookingsWithApplicationJsonUrl = () => {
 };
 
 export const postApiBookingsWithApplicationJson = async (
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<postApiBookingsWithApplicationJsonResponse> => {
   return apiFetch<postApiBookingsWithApplicationJsonResponse>(
     getPostApiBookingsWithApplicationJsonUrl(),
     {
       ...options,
       method: "POST",
-    },
+    }
   );
 };
 
@@ -470,7 +470,7 @@ export const usePostApiBookingsWithApplicationJson = <
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseMutationResult<
   Awaited<ReturnType<typeof postApiBookingsWithApplicationJson>>,
   TError,
@@ -479,7 +479,7 @@ export const usePostApiBookingsWithApplicationJson = <
 > => {
   return useMutation(
     getPostApiBookingsWithApplicationJsonMutationOptions(options),
-    queryClient,
+    queryClient
   );
 };
 export type getApiBookingsIdResponse200 = {
@@ -498,7 +498,7 @@ export const getGetApiBookingsIdUrl = (id: number) => {
 
 export const getApiBookingsId = async (
   id: number,
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<getApiBookingsIdResponse> => {
   return apiFetch<getApiBookingsIdResponse>(getGetApiBookingsIdUrl(id), {
     ...options,
@@ -524,7 +524,7 @@ export const getGetApiBookingsIdQueryOptions = <
       >
     >;
     request?: SecondParameter<typeof apiFetch>;
-  },
+  }
 ) => {
   const { query: queryOptions, request: requestOptions } = options ?? {};
 
@@ -574,7 +574,7 @@ export function useGetApiBookingsId<
       >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): DefinedUseQueryResult<TData, TError> & {
   queryKey: DataTag<QueryKey, TData, TError>;
 };
@@ -601,7 +601,7 @@ export function useGetApiBookingsId<
       >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & {
   queryKey: DataTag<QueryKey, TData, TError>;
 };
@@ -620,7 +620,7 @@ export function useGetApiBookingsId<
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & {
   queryKey: DataTag<QueryKey, TData, TError>;
 };
@@ -640,7 +640,7 @@ export function useGetApiBookingsId<
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & {
   queryKey: DataTag<QueryKey, TData, TError>;
 } {
@@ -673,7 +673,7 @@ export const getPutApiBookingsIdWithJsonUrl = (id: number) => {
 export const putApiBookingsIdWithJson = async (
   id: number,
   updateBookingRequest: UpdateBookingRequest,
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<putApiBookingsIdWithJsonResponse> => {
   return apiFetch<putApiBookingsIdWithJsonResponse>(
     getPutApiBookingsIdWithJsonUrl(id),
@@ -682,7 +682,7 @@ export const putApiBookingsIdWithJson = async (
       method: "PUT",
       headers: { "Content-Type": "application/json", ...options?.headers },
       body: JSON.stringify(updateBookingRequest),
-    },
+    }
   );
 };
 
@@ -743,7 +743,7 @@ export const usePutApiBookingsIdWithJson = <
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseMutationResult<
   Awaited<ReturnType<typeof putApiBookingsIdWithJson>>,
   TError,
@@ -752,7 +752,7 @@ export const usePutApiBookingsIdWithJson = <
 > => {
   return useMutation(
     getPutApiBookingsIdWithJsonMutationOptions(options),
-    queryClient,
+    queryClient
   );
 };
 export type putApiBookingsIdWithTextJsonResponse200 = {
@@ -773,14 +773,14 @@ export const getPutApiBookingsIdWithTextJsonUrl = (id: number) => {
 
 export const putApiBookingsIdWithTextJson = async (
   id: number,
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<putApiBookingsIdWithTextJsonResponse> => {
   return apiFetch<putApiBookingsIdWithTextJsonResponse>(
     getPutApiBookingsIdWithTextJsonUrl(id),
     {
       ...options,
       method: "PUT",
-    },
+    }
   );
 };
 
@@ -841,7 +841,7 @@ export const usePutApiBookingsIdWithTextJson = <
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseMutationResult<
   Awaited<ReturnType<typeof putApiBookingsIdWithTextJson>>,
   TError,
@@ -850,7 +850,7 @@ export const usePutApiBookingsIdWithTextJson = <
 > => {
   return useMutation(
     getPutApiBookingsIdWithTextJsonMutationOptions(options),
-    queryClient,
+    queryClient
   );
 };
 export type putApiBookingsIdWithApplicationJsonResponse200 = {
@@ -871,14 +871,14 @@ export const getPutApiBookingsIdWithApplicationJsonUrl = (id: number) => {
 
 export const putApiBookingsIdWithApplicationJson = async (
   id: number,
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<putApiBookingsIdWithApplicationJsonResponse> => {
   return apiFetch<putApiBookingsIdWithApplicationJsonResponse>(
     getPutApiBookingsIdWithApplicationJsonUrl(id),
     {
       ...options,
       method: "PUT",
-    },
+    }
   );
 };
 
@@ -939,7 +939,7 @@ export const usePutApiBookingsIdWithApplicationJson = <
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseMutationResult<
   Awaited<ReturnType<typeof putApiBookingsIdWithApplicationJson>>,
   TError,
@@ -948,7 +948,7 @@ export const usePutApiBookingsIdWithApplicationJson = <
 > => {
   return useMutation(
     getPutApiBookingsIdWithApplicationJsonMutationOptions(options),
-    queryClient,
+    queryClient
   );
 };
 export type deleteApiBookingsIdResponse200 = {
@@ -968,7 +968,7 @@ export const getDeleteApiBookingsIdUrl = (id: number) => {
 
 export const deleteApiBookingsId = async (
   id: number,
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<deleteApiBookingsIdResponse> => {
   return apiFetch<deleteApiBookingsIdResponse>(getDeleteApiBookingsIdUrl(id), {
     ...options,
@@ -1030,7 +1030,7 @@ export const useDeleteApiBookingsId = <TError = unknown, TContext = unknown>(
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseMutationResult<
   Awaited<ReturnType<typeof deleteApiBookingsId>>,
   TError,
@@ -1039,6 +1039,6 @@ export const useDeleteApiBookingsId = <TError = unknown, TContext = unknown>(
 > => {
   return useMutation(
     getDeleteApiBookingsIdMutationOptions(options),
-    queryClient,
+    queryClient
   );
 };

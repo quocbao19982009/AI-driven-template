@@ -5,216 +5,235 @@
  * A simple ASP.NET Core Web API template with best practices for building scalable and maintainable applications.
  * OpenAPI spec version: v1
  */
-import * as zod from 'zod';
+import * as zod from "zod";
 
-
-export const getApiTodosQueryPageDefault = 1;export const getApiTodosQueryPageSizeDefault = 20;
+export const getApiTodosQueryPageDefault = 1;
+export const getApiTodosQueryPageSizeDefault = 20;
 
 export const GetApiTodosQueryParams = zod.object({
-  "page": zod.number().default(getApiTodosQueryPageDefault),
-  "pageSize": zod.number().default(getApiTodosQueryPageSizeDefault)
-})
+  page: zod.number().default(getApiTodosQueryPageDefault),
+  pageSize: zod.number().default(getApiTodosQueryPageSizeDefault),
+});
 
 export const GetApiTodosResponse = zod.object({
-  "success": zod.boolean(),
-  "data": zod.object({
-  "items": zod.array(zod.object({
-  "id": zod.number(),
-  "title": zod.string(),
-  "description": zod.string().nullish(),
-  "isCompleted": zod.boolean(),
-  "dueDate": zod.iso.datetime({}).nullish(),
-  "createdAt": zod.iso.datetime({}),
-  "updatedAt": zod.iso.datetime({}).nullish()
-})),
-  "totalCount": zod.number(),
-  "page": zod.number(),
-  "pageSize": zod.number(),
-  "totalPages": zod.number(),
-  "hasNextPage": zod.boolean(),
-  "hasPreviousPage": zod.boolean()
-}).optional(),
-  "message": zod.string().nullish(),
-  "errors": zod.array(zod.string()).nullish()
-})
+  success: zod.boolean(),
+  data: zod
+    .object({
+      items: zod.array(
+        zod.object({
+          id: zod.number(),
+          title: zod.string(),
+          description: zod.string().nullish(),
+          isCompleted: zod.boolean(),
+          dueDate: zod.iso.datetime({}).nullish(),
+          createdAt: zod.iso.datetime({}),
+          updatedAt: zod.iso.datetime({}).nullish(),
+        })
+      ),
+      totalCount: zod.number(),
+      page: zod.number(),
+      pageSize: zod.number(),
+      totalPages: zod.number(),
+      hasNextPage: zod.boolean(),
+      hasPreviousPage: zod.boolean(),
+    })
+    .optional(),
+  message: zod.string().nullish(),
+  errors: zod.array(zod.string()).nullish(),
+});
 
 export const PostApiTodosWithJsonBody = zod.object({
-  "title": zod.string(),
-  "description": zod.string().nullish(),
-  "dueDate": zod.iso.datetime({}).nullish()
-})
+  title: zod.string(),
+  description: zod.string().nullish(),
+  dueDate: zod.iso.datetime({}).nullish(),
+});
 
 export const PostApiTodosWithJsonResponse = zod.object({
-  "success": zod.boolean(),
-  "data": zod.object({
-  "id": zod.number(),
-  "title": zod.string(),
-  "description": zod.string().nullish(),
-  "isCompleted": zod.boolean(),
-  "dueDate": zod.iso.datetime({}).nullish(),
-  "createdAt": zod.iso.datetime({}),
-  "updatedAt": zod.iso.datetime({}).nullish()
-}).optional(),
-  "message": zod.string().nullish(),
-  "errors": zod.array(zod.string()).nullish()
-})
+  success: zod.boolean(),
+  data: zod
+    .object({
+      id: zod.number(),
+      title: zod.string(),
+      description: zod.string().nullish(),
+      isCompleted: zod.boolean(),
+      dueDate: zod.iso.datetime({}).nullish(),
+      createdAt: zod.iso.datetime({}),
+      updatedAt: zod.iso.datetime({}).nullish(),
+    })
+    .optional(),
+  message: zod.string().nullish(),
+  errors: zod.array(zod.string()).nullish(),
+});
 
 export const PostApiTodosWithTextJsonBody = zod.object({
-  "title": zod.string(),
-  "description": zod.string().nullish(),
-  "dueDate": zod.iso.datetime({}).nullish()
-})
+  title: zod.string(),
+  description: zod.string().nullish(),
+  dueDate: zod.iso.datetime({}).nullish(),
+});
 
 export const PostApiTodosWithTextJsonResponse = zod.object({
-  "success": zod.boolean(),
-  "data": zod.object({
-  "id": zod.number(),
-  "title": zod.string(),
-  "description": zod.string().nullish(),
-  "isCompleted": zod.boolean(),
-  "dueDate": zod.iso.datetime({}).nullish(),
-  "createdAt": zod.iso.datetime({}),
-  "updatedAt": zod.iso.datetime({}).nullish()
-}).optional(),
-  "message": zod.string().nullish(),
-  "errors": zod.array(zod.string()).nullish()
-})
+  success: zod.boolean(),
+  data: zod
+    .object({
+      id: zod.number(),
+      title: zod.string(),
+      description: zod.string().nullish(),
+      isCompleted: zod.boolean(),
+      dueDate: zod.iso.datetime({}).nullish(),
+      createdAt: zod.iso.datetime({}),
+      updatedAt: zod.iso.datetime({}).nullish(),
+    })
+    .optional(),
+  message: zod.string().nullish(),
+  errors: zod.array(zod.string()).nullish(),
+});
 
 export const PostApiTodosWithApplicationJsonBody = zod.object({
-  "title": zod.string(),
-  "description": zod.string().nullish(),
-  "dueDate": zod.iso.datetime({}).nullish()
-})
+  title: zod.string(),
+  description: zod.string().nullish(),
+  dueDate: zod.iso.datetime({}).nullish(),
+});
 
 export const PostApiTodosWithApplicationJsonResponse = zod.object({
-  "success": zod.boolean(),
-  "data": zod.object({
-  "id": zod.number(),
-  "title": zod.string(),
-  "description": zod.string().nullish(),
-  "isCompleted": zod.boolean(),
-  "dueDate": zod.iso.datetime({}).nullish(),
-  "createdAt": zod.iso.datetime({}),
-  "updatedAt": zod.iso.datetime({}).nullish()
-}).optional(),
-  "message": zod.string().nullish(),
-  "errors": zod.array(zod.string()).nullish()
-})
+  success: zod.boolean(),
+  data: zod
+    .object({
+      id: zod.number(),
+      title: zod.string(),
+      description: zod.string().nullish(),
+      isCompleted: zod.boolean(),
+      dueDate: zod.iso.datetime({}).nullish(),
+      createdAt: zod.iso.datetime({}),
+      updatedAt: zod.iso.datetime({}).nullish(),
+    })
+    .optional(),
+  message: zod.string().nullish(),
+  errors: zod.array(zod.string()).nullish(),
+});
 
 export const GetApiTodosIdParams = zod.object({
-  "id": zod.number()
-})
+  id: zod.number(),
+});
 
 export const GetApiTodosIdResponse = zod.object({
-  "success": zod.boolean(),
-  "data": zod.object({
-  "id": zod.number(),
-  "title": zod.string(),
-  "description": zod.string().nullish(),
-  "isCompleted": zod.boolean(),
-  "dueDate": zod.iso.datetime({}).nullish(),
-  "createdAt": zod.iso.datetime({}),
-  "updatedAt": zod.iso.datetime({}).nullish()
-}).optional(),
-  "message": zod.string().nullish(),
-  "errors": zod.array(zod.string()).nullish()
-})
+  success: zod.boolean(),
+  data: zod
+    .object({
+      id: zod.number(),
+      title: zod.string(),
+      description: zod.string().nullish(),
+      isCompleted: zod.boolean(),
+      dueDate: zod.iso.datetime({}).nullish(),
+      createdAt: zod.iso.datetime({}),
+      updatedAt: zod.iso.datetime({}).nullish(),
+    })
+    .optional(),
+  message: zod.string().nullish(),
+  errors: zod.array(zod.string()).nullish(),
+});
 
 export const PutApiTodosIdWithJsonParams = zod.object({
-  "id": zod.number()
-})
+  id: zod.number(),
+});
 
 export const PutApiTodosIdWithJsonBody = zod.object({
-  "title": zod.string(),
-  "description": zod.string().nullish(),
-  "dueDate": zod.iso.datetime({}).nullish()
-})
+  title: zod.string(),
+  description: zod.string().nullish(),
+  dueDate: zod.iso.datetime({}).nullish(),
+});
 
 export const PutApiTodosIdWithJsonResponse = zod.object({
-  "success": zod.boolean(),
-  "data": zod.object({
-  "id": zod.number(),
-  "title": zod.string(),
-  "description": zod.string().nullish(),
-  "isCompleted": zod.boolean(),
-  "dueDate": zod.iso.datetime({}).nullish(),
-  "createdAt": zod.iso.datetime({}),
-  "updatedAt": zod.iso.datetime({}).nullish()
-}).optional(),
-  "message": zod.string().nullish(),
-  "errors": zod.array(zod.string()).nullish()
-})
+  success: zod.boolean(),
+  data: zod
+    .object({
+      id: zod.number(),
+      title: zod.string(),
+      description: zod.string().nullish(),
+      isCompleted: zod.boolean(),
+      dueDate: zod.iso.datetime({}).nullish(),
+      createdAt: zod.iso.datetime({}),
+      updatedAt: zod.iso.datetime({}).nullish(),
+    })
+    .optional(),
+  message: zod.string().nullish(),
+  errors: zod.array(zod.string()).nullish(),
+});
 
 export const PutApiTodosIdWithTextJsonParams = zod.object({
-  "id": zod.number()
-})
+  id: zod.number(),
+});
 
 export const PutApiTodosIdWithTextJsonBody = zod.object({
-  "title": zod.string(),
-  "description": zod.string().nullish(),
-  "dueDate": zod.iso.datetime({}).nullish()
-})
+  title: zod.string(),
+  description: zod.string().nullish(),
+  dueDate: zod.iso.datetime({}).nullish(),
+});
 
 export const PutApiTodosIdWithTextJsonResponse = zod.object({
-  "success": zod.boolean(),
-  "data": zod.object({
-  "id": zod.number(),
-  "title": zod.string(),
-  "description": zod.string().nullish(),
-  "isCompleted": zod.boolean(),
-  "dueDate": zod.iso.datetime({}).nullish(),
-  "createdAt": zod.iso.datetime({}),
-  "updatedAt": zod.iso.datetime({}).nullish()
-}).optional(),
-  "message": zod.string().nullish(),
-  "errors": zod.array(zod.string()).nullish()
-})
+  success: zod.boolean(),
+  data: zod
+    .object({
+      id: zod.number(),
+      title: zod.string(),
+      description: zod.string().nullish(),
+      isCompleted: zod.boolean(),
+      dueDate: zod.iso.datetime({}).nullish(),
+      createdAt: zod.iso.datetime({}),
+      updatedAt: zod.iso.datetime({}).nullish(),
+    })
+    .optional(),
+  message: zod.string().nullish(),
+  errors: zod.array(zod.string()).nullish(),
+});
 
 export const PutApiTodosIdWithApplicationJsonParams = zod.object({
-  "id": zod.number()
-})
+  id: zod.number(),
+});
 
 export const PutApiTodosIdWithApplicationJsonBody = zod.object({
-  "title": zod.string(),
-  "description": zod.string().nullish(),
-  "dueDate": zod.iso.datetime({}).nullish()
-})
+  title: zod.string(),
+  description: zod.string().nullish(),
+  dueDate: zod.iso.datetime({}).nullish(),
+});
 
 export const PutApiTodosIdWithApplicationJsonResponse = zod.object({
-  "success": zod.boolean(),
-  "data": zod.object({
-  "id": zod.number(),
-  "title": zod.string(),
-  "description": zod.string().nullish(),
-  "isCompleted": zod.boolean(),
-  "dueDate": zod.iso.datetime({}).nullish(),
-  "createdAt": zod.iso.datetime({}),
-  "updatedAt": zod.iso.datetime({}).nullish()
-}).optional(),
-  "message": zod.string().nullish(),
-  "errors": zod.array(zod.string()).nullish()
-})
+  success: zod.boolean(),
+  data: zod
+    .object({
+      id: zod.number(),
+      title: zod.string(),
+      description: zod.string().nullish(),
+      isCompleted: zod.boolean(),
+      dueDate: zod.iso.datetime({}).nullish(),
+      createdAt: zod.iso.datetime({}),
+      updatedAt: zod.iso.datetime({}).nullish(),
+    })
+    .optional(),
+  message: zod.string().nullish(),
+  errors: zod.array(zod.string()).nullish(),
+});
 
 export const DeleteApiTodosIdParams = zod.object({
-  "id": zod.number()
-})
+  id: zod.number(),
+});
 
 export const PatchApiTodosIdToggleParams = zod.object({
-  "id": zod.number()
-})
+  id: zod.number(),
+});
 
 export const PatchApiTodosIdToggleResponse = zod.object({
-  "success": zod.boolean(),
-  "data": zod.object({
-  "id": zod.number(),
-  "title": zod.string(),
-  "description": zod.string().nullish(),
-  "isCompleted": zod.boolean(),
-  "dueDate": zod.iso.datetime({}).nullish(),
-  "createdAt": zod.iso.datetime({}),
-  "updatedAt": zod.iso.datetime({}).nullish()
-}).optional(),
-  "message": zod.string().nullish(),
-  "errors": zod.array(zod.string()).nullish()
-})
-
+  success: zod.boolean(),
+  data: zod
+    .object({
+      id: zod.number(),
+      title: zod.string(),
+      description: zod.string().nullish(),
+      isCompleted: zod.boolean(),
+      dueDate: zod.iso.datetime({}).nullish(),
+      createdAt: zod.iso.datetime({}),
+      updatedAt: zod.iso.datetime({}).nullish(),
+    })
+    .optional(),
+  message: zod.string().nullish(),
+  errors: zod.array(zod.string()).nullish(),
+});

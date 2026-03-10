@@ -61,7 +61,7 @@ export const getGetApiUsersUrl = (params?: GetApiUsersParams) => {
 
 export const getApiUsers = async (
   params?: GetApiUsersParams,
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<getApiUsersResponse> => {
   return apiFetch<getApiUsersResponse>(getGetApiUsersUrl(params), {
     ...options,
@@ -83,7 +83,7 @@ export const getGetApiUsersQueryOptions = <
       UseQueryOptions<Awaited<ReturnType<typeof getApiUsers>>, TError, TData>
     >;
     request?: SecondParameter<typeof apiFetch>;
-  },
+  }
 ) => {
   const { query: queryOptions, request: requestOptions } = options ?? {};
 
@@ -124,7 +124,7 @@ export function useGetApiUsers<
       >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): DefinedUseQueryResult<TData, TError> & {
   queryKey: DataTag<QueryKey, TData, TError>;
 };
@@ -147,7 +147,7 @@ export function useGetApiUsers<
       >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & {
   queryKey: DataTag<QueryKey, TData, TError>;
 };
@@ -162,7 +162,7 @@ export function useGetApiUsers<
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & {
   queryKey: DataTag<QueryKey, TData, TError>;
 };
@@ -178,7 +178,7 @@ export function useGetApiUsers<
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & {
   queryKey: DataTag<QueryKey, TData, TError>;
 } {
@@ -209,7 +209,7 @@ export const getPostApiUsersWithJsonUrl = () => {
 
 export const postApiUsersWithJson = async (
   createUserRequest: CreateUserRequest,
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<postApiUsersWithJsonResponse> => {
   return apiFetch<postApiUsersWithJsonResponse>(getPostApiUsersWithJsonUrl(), {
     ...options,
@@ -273,7 +273,7 @@ export const usePostApiUsersWithJson = <TError = unknown, TContext = unknown>(
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseMutationResult<
   Awaited<ReturnType<typeof postApiUsersWithJson>>,
   TError,
@@ -282,7 +282,7 @@ export const usePostApiUsersWithJson = <TError = unknown, TContext = unknown>(
 > => {
   return useMutation(
     getPostApiUsersWithJsonMutationOptions(options),
-    queryClient,
+    queryClient
   );
 };
 export type postApiUsersWithTextJsonResponse200 = {
@@ -302,14 +302,14 @@ export const getPostApiUsersWithTextJsonUrl = () => {
 };
 
 export const postApiUsersWithTextJson = async (
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<postApiUsersWithTextJsonResponse> => {
   return apiFetch<postApiUsersWithTextJsonResponse>(
     getPostApiUsersWithTextJsonUrl(),
     {
       ...options,
       method: "POST",
-    },
+    }
   );
 };
 
@@ -368,7 +368,7 @@ export const usePostApiUsersWithTextJson = <
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseMutationResult<
   Awaited<ReturnType<typeof postApiUsersWithTextJson>>,
   TError,
@@ -377,7 +377,7 @@ export const usePostApiUsersWithTextJson = <
 > => {
   return useMutation(
     getPostApiUsersWithTextJsonMutationOptions(options),
-    queryClient,
+    queryClient
   );
 };
 export type postApiUsersWithApplicationJsonResponse200 = {
@@ -397,14 +397,14 @@ export const getPostApiUsersWithApplicationJsonUrl = () => {
 };
 
 export const postApiUsersWithApplicationJson = async (
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<postApiUsersWithApplicationJsonResponse> => {
   return apiFetch<postApiUsersWithApplicationJsonResponse>(
     getPostApiUsersWithApplicationJsonUrl(),
     {
       ...options,
       method: "POST",
-    },
+    }
   );
 };
 
@@ -463,7 +463,7 @@ export const usePostApiUsersWithApplicationJson = <
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseMutationResult<
   Awaited<ReturnType<typeof postApiUsersWithApplicationJson>>,
   TError,
@@ -472,7 +472,7 @@ export const usePostApiUsersWithApplicationJson = <
 > => {
   return useMutation(
     getPostApiUsersWithApplicationJsonMutationOptions(options),
-    queryClient,
+    queryClient
   );
 };
 export type getApiUsersIdResponse200 = {
@@ -491,7 +491,7 @@ export const getGetApiUsersIdUrl = (id: number) => {
 
 export const getApiUsersId = async (
   id: number,
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<getApiUsersIdResponse> => {
   return apiFetch<getApiUsersIdResponse>(getGetApiUsersIdUrl(id), {
     ...options,
@@ -513,7 +513,7 @@ export const getGetApiUsersIdQueryOptions = <
       UseQueryOptions<Awaited<ReturnType<typeof getApiUsersId>>, TError, TData>
     >;
     request?: SecondParameter<typeof apiFetch>;
-  },
+  }
 ) => {
   const { query: queryOptions, request: requestOptions } = options ?? {};
 
@@ -559,7 +559,7 @@ export function useGetApiUsersId<
       >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): DefinedUseQueryResult<TData, TError> & {
   queryKey: DataTag<QueryKey, TData, TError>;
 };
@@ -582,7 +582,7 @@ export function useGetApiUsersId<
       >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & {
   queryKey: DataTag<QueryKey, TData, TError>;
 };
@@ -597,7 +597,7 @@ export function useGetApiUsersId<
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & {
   queryKey: DataTag<QueryKey, TData, TError>;
 };
@@ -613,7 +613,7 @@ export function useGetApiUsersId<
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & {
   queryKey: DataTag<QueryKey, TData, TError>;
 } {
@@ -646,7 +646,7 @@ export const getPutApiUsersIdWithJsonUrl = (id: number) => {
 export const putApiUsersIdWithJson = async (
   id: number,
   updateUserRequest: UpdateUserRequest,
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<putApiUsersIdWithJsonResponse> => {
   return apiFetch<putApiUsersIdWithJsonResponse>(
     getPutApiUsersIdWithJsonUrl(id),
@@ -655,7 +655,7 @@ export const putApiUsersIdWithJson = async (
       method: "PUT",
       headers: { "Content-Type": "application/json", ...options?.headers },
       body: JSON.stringify(updateUserRequest),
-    },
+    }
   );
 };
 
@@ -713,7 +713,7 @@ export const usePutApiUsersIdWithJson = <TError = unknown, TContext = unknown>(
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseMutationResult<
   Awaited<ReturnType<typeof putApiUsersIdWithJson>>,
   TError,
@@ -722,7 +722,7 @@ export const usePutApiUsersIdWithJson = <TError = unknown, TContext = unknown>(
 > => {
   return useMutation(
     getPutApiUsersIdWithJsonMutationOptions(options),
-    queryClient,
+    queryClient
   );
 };
 export type putApiUsersIdWithTextJsonResponse200 = {
@@ -743,14 +743,14 @@ export const getPutApiUsersIdWithTextJsonUrl = (id: number) => {
 
 export const putApiUsersIdWithTextJson = async (
   id: number,
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<putApiUsersIdWithTextJsonResponse> => {
   return apiFetch<putApiUsersIdWithTextJsonResponse>(
     getPutApiUsersIdWithTextJsonUrl(id),
     {
       ...options,
       method: "PUT",
-    },
+    }
   );
 };
 
@@ -811,7 +811,7 @@ export const usePutApiUsersIdWithTextJson = <
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseMutationResult<
   Awaited<ReturnType<typeof putApiUsersIdWithTextJson>>,
   TError,
@@ -820,7 +820,7 @@ export const usePutApiUsersIdWithTextJson = <
 > => {
   return useMutation(
     getPutApiUsersIdWithTextJsonMutationOptions(options),
-    queryClient,
+    queryClient
   );
 };
 export type putApiUsersIdWithApplicationJsonResponse200 = {
@@ -841,14 +841,14 @@ export const getPutApiUsersIdWithApplicationJsonUrl = (id: number) => {
 
 export const putApiUsersIdWithApplicationJson = async (
   id: number,
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<putApiUsersIdWithApplicationJsonResponse> => {
   return apiFetch<putApiUsersIdWithApplicationJsonResponse>(
     getPutApiUsersIdWithApplicationJsonUrl(id),
     {
       ...options,
       method: "PUT",
-    },
+    }
   );
 };
 
@@ -909,7 +909,7 @@ export const usePutApiUsersIdWithApplicationJson = <
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseMutationResult<
   Awaited<ReturnType<typeof putApiUsersIdWithApplicationJson>>,
   TError,
@@ -918,7 +918,7 @@ export const usePutApiUsersIdWithApplicationJson = <
 > => {
   return useMutation(
     getPutApiUsersIdWithApplicationJsonMutationOptions(options),
-    queryClient,
+    queryClient
   );
 };
 export type deleteApiUsersIdResponse200 = {
@@ -937,7 +937,7 @@ export const getDeleteApiUsersIdUrl = (id: number) => {
 
 export const deleteApiUsersId = async (
   id: number,
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<deleteApiUsersIdResponse> => {
   return apiFetch<deleteApiUsersIdResponse>(getDeleteApiUsersIdUrl(id), {
     ...options,
@@ -999,7 +999,7 @@ export const useDeleteApiUsersId = <TError = unknown, TContext = unknown>(
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseMutationResult<
   Awaited<ReturnType<typeof deleteApiUsersId>>,
   TError,

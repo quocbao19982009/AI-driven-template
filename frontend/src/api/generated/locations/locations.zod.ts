@@ -5,138 +5,154 @@
  * A simple ASP.NET Core Web API template with best practices for building scalable and maintainable applications.
  * OpenAPI spec version: v1
  */
-import * as zod from 'zod';
-
+import * as zod from "zod";
 
 export const GetApiLocationsResponse = zod.object({
-  "success": zod.boolean(),
-  "data": zod.array(zod.object({
-  "id": zod.number(),
-  "name": zod.string(),
-  "createdAt": zod.iso.datetime({})
-})).nullish(),
-  "message": zod.string().nullish(),
-  "errors": zod.array(zod.string()).nullish()
-})
+  success: zod.boolean(),
+  data: zod
+    .array(
+      zod.object({
+        id: zod.number(),
+        name: zod.string(),
+        createdAt: zod.iso.datetime({}),
+      })
+    )
+    .nullish(),
+  message: zod.string().nullish(),
+  errors: zod.array(zod.string()).nullish(),
+});
 
 export const PostApiLocationsWithJsonBody = zod.object({
-  "name": zod.string()
-})
+  name: zod.string(),
+});
 
 export const PostApiLocationsWithJsonResponse = zod.object({
-  "success": zod.boolean(),
-  "data": zod.object({
-  "id": zod.number(),
-  "name": zod.string(),
-  "createdAt": zod.iso.datetime({})
-}).optional(),
-  "message": zod.string().nullish(),
-  "errors": zod.array(zod.string()).nullish()
-})
+  success: zod.boolean(),
+  data: zod
+    .object({
+      id: zod.number(),
+      name: zod.string(),
+      createdAt: zod.iso.datetime({}),
+    })
+    .optional(),
+  message: zod.string().nullish(),
+  errors: zod.array(zod.string()).nullish(),
+});
 
 export const PostApiLocationsWithTextJsonBody = zod.object({
-  "name": zod.string()
-})
+  name: zod.string(),
+});
 
 export const PostApiLocationsWithTextJsonResponse = zod.object({
-  "success": zod.boolean(),
-  "data": zod.object({
-  "id": zod.number(),
-  "name": zod.string(),
-  "createdAt": zod.iso.datetime({})
-}).optional(),
-  "message": zod.string().nullish(),
-  "errors": zod.array(zod.string()).nullish()
-})
+  success: zod.boolean(),
+  data: zod
+    .object({
+      id: zod.number(),
+      name: zod.string(),
+      createdAt: zod.iso.datetime({}),
+    })
+    .optional(),
+  message: zod.string().nullish(),
+  errors: zod.array(zod.string()).nullish(),
+});
 
 export const PostApiLocationsWithApplicationJsonBody = zod.object({
-  "name": zod.string()
-})
+  name: zod.string(),
+});
 
 export const PostApiLocationsWithApplicationJsonResponse = zod.object({
-  "success": zod.boolean(),
-  "data": zod.object({
-  "id": zod.number(),
-  "name": zod.string(),
-  "createdAt": zod.iso.datetime({})
-}).optional(),
-  "message": zod.string().nullish(),
-  "errors": zod.array(zod.string()).nullish()
-})
+  success: zod.boolean(),
+  data: zod
+    .object({
+      id: zod.number(),
+      name: zod.string(),
+      createdAt: zod.iso.datetime({}),
+    })
+    .optional(),
+  message: zod.string().nullish(),
+  errors: zod.array(zod.string()).nullish(),
+});
 
 export const GetApiLocationsIdParams = zod.object({
-  "id": zod.number()
-})
+  id: zod.number(),
+});
 
 export const GetApiLocationsIdResponse = zod.object({
-  "success": zod.boolean(),
-  "data": zod.object({
-  "id": zod.number(),
-  "name": zod.string(),
-  "createdAt": zod.iso.datetime({})
-}).optional(),
-  "message": zod.string().nullish(),
-  "errors": zod.array(zod.string()).nullish()
-})
+  success: zod.boolean(),
+  data: zod
+    .object({
+      id: zod.number(),
+      name: zod.string(),
+      createdAt: zod.iso.datetime({}),
+    })
+    .optional(),
+  message: zod.string().nullish(),
+  errors: zod.array(zod.string()).nullish(),
+});
 
 export const PutApiLocationsIdWithJsonParams = zod.object({
-  "id": zod.number()
-})
+  id: zod.number(),
+});
 
 export const PutApiLocationsIdWithJsonBody = zod.object({
-  "name": zod.string()
-})
+  name: zod.string(),
+});
 
 export const PutApiLocationsIdWithJsonResponse = zod.object({
-  "success": zod.boolean(),
-  "data": zod.object({
-  "id": zod.number(),
-  "name": zod.string(),
-  "createdAt": zod.iso.datetime({})
-}).optional(),
-  "message": zod.string().nullish(),
-  "errors": zod.array(zod.string()).nullish()
-})
+  success: zod.boolean(),
+  data: zod
+    .object({
+      id: zod.number(),
+      name: zod.string(),
+      createdAt: zod.iso.datetime({}),
+    })
+    .optional(),
+  message: zod.string().nullish(),
+  errors: zod.array(zod.string()).nullish(),
+});
 
 export const PutApiLocationsIdWithTextJsonParams = zod.object({
-  "id": zod.number()
-})
+  id: zod.number(),
+});
 
 export const PutApiLocationsIdWithTextJsonBody = zod.object({
-  "name": zod.string()
-})
+  name: zod.string(),
+});
 
 export const PutApiLocationsIdWithTextJsonResponse = zod.object({
-  "success": zod.boolean(),
-  "data": zod.object({
-  "id": zod.number(),
-  "name": zod.string(),
-  "createdAt": zod.iso.datetime({})
-}).optional(),
-  "message": zod.string().nullish(),
-  "errors": zod.array(zod.string()).nullish()
-})
+  success: zod.boolean(),
+  data: zod
+    .object({
+      id: zod.number(),
+      name: zod.string(),
+      createdAt: zod.iso.datetime({}),
+    })
+    .optional(),
+  message: zod.string().nullish(),
+  errors: zod.array(zod.string()).nullish(),
+});
 
 export const PutApiLocationsIdWithApplicationJsonParams = zod.object({
-  "id": zod.number()
-})
+  id: zod.number(),
+});
 
 export const PutApiLocationsIdWithApplicationJsonBody = zod.object({
-  "name": zod.string()
-})
+  name: zod.string(),
+});
 
 export const PutApiLocationsIdWithApplicationJsonResponse = zod.object({
-  "success": zod.boolean(),
-  "data": zod.object({
-  "id": zod.number(),
-  "name": zod.string(),
-  "createdAt": zod.iso.datetime({})
-}).optional(),
-  "message": zod.string().nullish(),
-  "errors": zod.array(zod.string()).nullish()
-})
+  success: zod.boolean(),
+  data: zod
+    .object({
+      id: zod.number(),
+      name: zod.string(),
+      createdAt: zod.iso.datetime({}),
+    })
+    .optional(),
+  message: zod.string().nullish(),
+  errors: zod.array(zod.string()).nullish(),
+});
 
 export const DeleteApiLocationsIdParams = zod.object({
-  "id": zod.number()
-})
-
+  id: zod.number(),
+});

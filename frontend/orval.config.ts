@@ -10,8 +10,8 @@ export default defineConfig({
       target: "./src/api/generated/api.ts",
       schemas: "./src/api/generated/models",
       client: "react-query",
-      prettier: true,
       clean: true,
+      prettier: false,
       override: {
         mutator: {
           path: "./src/api/mutator/apiFetch.ts",
@@ -34,6 +34,7 @@ export default defineConfig({
       client: "zod",
       target: "./src/api/generated/api.ts",
       fileExtension: ".zod.ts",
+      prettier: false,
     },
   },
 });

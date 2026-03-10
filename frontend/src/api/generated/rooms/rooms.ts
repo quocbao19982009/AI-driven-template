@@ -62,7 +62,7 @@ export const getGetApiRoomsUrl = (params?: GetApiRoomsParams) => {
 
 export const getApiRooms = async (
   params?: GetApiRoomsParams,
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<getApiRoomsResponse> => {
   return apiFetch<getApiRoomsResponse>(getGetApiRoomsUrl(params), {
     ...options,
@@ -84,7 +84,7 @@ export const getGetApiRoomsQueryOptions = <
       UseQueryOptions<Awaited<ReturnType<typeof getApiRooms>>, TError, TData>
     >;
     request?: SecondParameter<typeof apiFetch>;
-  },
+  }
 ) => {
   const { query: queryOptions, request: requestOptions } = options ?? {};
 
@@ -125,7 +125,7 @@ export function useGetApiRooms<
       >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): DefinedUseQueryResult<TData, TError> & {
   queryKey: DataTag<QueryKey, TData, TError>;
 };
@@ -148,7 +148,7 @@ export function useGetApiRooms<
       >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & {
   queryKey: DataTag<QueryKey, TData, TError>;
 };
@@ -163,7 +163,7 @@ export function useGetApiRooms<
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & {
   queryKey: DataTag<QueryKey, TData, TError>;
 };
@@ -179,7 +179,7 @@ export function useGetApiRooms<
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & {
   queryKey: DataTag<QueryKey, TData, TError>;
 } {
@@ -209,7 +209,7 @@ export const getPostApiRoomsUrl = () => {
 
 export const postApiRooms = async (
   postApiRoomsBody: PostApiRoomsBody,
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<postApiRoomsResponse> => {
   const formData = new FormData();
   if (postApiRoomsBody.Name !== undefined) {
@@ -289,7 +289,7 @@ export const usePostApiRooms = <TError = unknown, TContext = unknown>(
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseMutationResult<
   Awaited<ReturnType<typeof postApiRooms>>,
   TError,
@@ -313,7 +313,7 @@ export const getGetApiRoomsAllUrl = () => {
 };
 
 export const getApiRoomsAll = async (
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<getApiRoomsAllResponse> => {
   return apiFetch<getApiRoomsAllResponse>(getGetApiRoomsAllUrl(), {
     ...options,
@@ -372,7 +372,7 @@ export function useGetApiRoomsAll<
       >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): DefinedUseQueryResult<TData, TError> & {
   queryKey: DataTag<QueryKey, TData, TError>;
 };
@@ -394,7 +394,7 @@ export function useGetApiRoomsAll<
       >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & {
   queryKey: DataTag<QueryKey, TData, TError>;
 };
@@ -408,7 +408,7 @@ export function useGetApiRoomsAll<
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & {
   queryKey: DataTag<QueryKey, TData, TError>;
 };
@@ -423,7 +423,7 @@ export function useGetApiRoomsAll<
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & {
   queryKey: DataTag<QueryKey, TData, TError>;
 } {
@@ -453,7 +453,7 @@ export const getGetApiRoomsIdUrl = (id: number) => {
 
 export const getApiRoomsId = async (
   id: number,
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<getApiRoomsIdResponse> => {
   return apiFetch<getApiRoomsIdResponse>(getGetApiRoomsIdUrl(id), {
     ...options,
@@ -475,7 +475,7 @@ export const getGetApiRoomsIdQueryOptions = <
       UseQueryOptions<Awaited<ReturnType<typeof getApiRoomsId>>, TError, TData>
     >;
     request?: SecondParameter<typeof apiFetch>;
-  },
+  }
 ) => {
   const { query: queryOptions, request: requestOptions } = options ?? {};
 
@@ -521,7 +521,7 @@ export function useGetApiRoomsId<
       >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): DefinedUseQueryResult<TData, TError> & {
   queryKey: DataTag<QueryKey, TData, TError>;
 };
@@ -544,7 +544,7 @@ export function useGetApiRoomsId<
       >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & {
   queryKey: DataTag<QueryKey, TData, TError>;
 };
@@ -559,7 +559,7 @@ export function useGetApiRoomsId<
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & {
   queryKey: DataTag<QueryKey, TData, TError>;
 };
@@ -575,7 +575,7 @@ export function useGetApiRoomsId<
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & {
   queryKey: DataTag<QueryKey, TData, TError>;
 } {
@@ -606,7 +606,7 @@ export const getPutApiRoomsIdUrl = (id: number) => {
 export const putApiRoomsId = async (
   id: number,
   putApiRoomsIdBody: PutApiRoomsIdBody,
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<putApiRoomsIdResponse> => {
   const formData = new FormData();
   if (putApiRoomsIdBody.Name !== undefined) {
@@ -686,7 +686,7 @@ export const usePutApiRoomsId = <TError = unknown, TContext = unknown>(
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseMutationResult<
   Awaited<ReturnType<typeof putApiRoomsId>>,
   TError,
@@ -711,7 +711,7 @@ export const getDeleteApiRoomsIdUrl = (id: number) => {
 
 export const deleteApiRoomsId = async (
   id: number,
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<deleteApiRoomsIdResponse> => {
   return apiFetch<deleteApiRoomsIdResponse>(getDeleteApiRoomsIdUrl(id), {
     ...options,
@@ -773,7 +773,7 @@ export const useDeleteApiRoomsId = <TError = unknown, TContext = unknown>(
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseMutationResult<
   Awaited<ReturnType<typeof deleteApiRoomsId>>,
   TError,

@@ -47,7 +47,7 @@ export const getGetApiLocationsUrl = () => {
 };
 
 export const getApiLocations = async (
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<getApiLocationsResponse> => {
   return apiFetch<getApiLocationsResponse>(getGetApiLocationsUrl(), {
     ...options,
@@ -110,7 +110,7 @@ export function useGetApiLocations<
       >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): DefinedUseQueryResult<TData, TError> & {
   queryKey: DataTag<QueryKey, TData, TError>;
 };
@@ -136,7 +136,7 @@ export function useGetApiLocations<
       >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & {
   queryKey: DataTag<QueryKey, TData, TError>;
 };
@@ -154,7 +154,7 @@ export function useGetApiLocations<
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & {
   queryKey: DataTag<QueryKey, TData, TError>;
 };
@@ -173,7 +173,7 @@ export function useGetApiLocations<
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & {
   queryKey: DataTag<QueryKey, TData, TError>;
 } {
@@ -205,7 +205,7 @@ export const getPostApiLocationsWithJsonUrl = () => {
 
 export const postApiLocationsWithJson = async (
   createLocationRequest: CreateLocationRequest,
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<postApiLocationsWithJsonResponse> => {
   return apiFetch<postApiLocationsWithJsonResponse>(
     getPostApiLocationsWithJsonUrl(),
@@ -214,7 +214,7 @@ export const postApiLocationsWithJson = async (
       method: "POST",
       headers: { "Content-Type": "application/json", ...options?.headers },
       body: JSON.stringify(createLocationRequest),
-    },
+    }
   );
 };
 
@@ -275,7 +275,7 @@ export const usePostApiLocationsWithJson = <
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseMutationResult<
   Awaited<ReturnType<typeof postApiLocationsWithJson>>,
   TError,
@@ -284,7 +284,7 @@ export const usePostApiLocationsWithJson = <
 > => {
   return useMutation(
     getPostApiLocationsWithJsonMutationOptions(options),
-    queryClient,
+    queryClient
   );
 };
 export type postApiLocationsWithTextJsonResponse200 = {
@@ -304,14 +304,14 @@ export const getPostApiLocationsWithTextJsonUrl = () => {
 };
 
 export const postApiLocationsWithTextJson = async (
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<postApiLocationsWithTextJsonResponse> => {
   return apiFetch<postApiLocationsWithTextJsonResponse>(
     getPostApiLocationsWithTextJsonUrl(),
     {
       ...options,
       method: "POST",
-    },
+    }
   );
 };
 
@@ -370,7 +370,7 @@ export const usePostApiLocationsWithTextJson = <
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseMutationResult<
   Awaited<ReturnType<typeof postApiLocationsWithTextJson>>,
   TError,
@@ -379,7 +379,7 @@ export const usePostApiLocationsWithTextJson = <
 > => {
   return useMutation(
     getPostApiLocationsWithTextJsonMutationOptions(options),
-    queryClient,
+    queryClient
   );
 };
 export type postApiLocationsWithApplicationJsonResponse200 = {
@@ -399,14 +399,14 @@ export const getPostApiLocationsWithApplicationJsonUrl = () => {
 };
 
 export const postApiLocationsWithApplicationJson = async (
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<postApiLocationsWithApplicationJsonResponse> => {
   return apiFetch<postApiLocationsWithApplicationJsonResponse>(
     getPostApiLocationsWithApplicationJsonUrl(),
     {
       ...options,
       method: "POST",
-    },
+    }
   );
 };
 
@@ -465,7 +465,7 @@ export const usePostApiLocationsWithApplicationJson = <
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseMutationResult<
   Awaited<ReturnType<typeof postApiLocationsWithApplicationJson>>,
   TError,
@@ -474,7 +474,7 @@ export const usePostApiLocationsWithApplicationJson = <
 > => {
   return useMutation(
     getPostApiLocationsWithApplicationJsonMutationOptions(options),
-    queryClient,
+    queryClient
   );
 };
 export type getApiLocationsIdResponse200 = {
@@ -493,7 +493,7 @@ export const getGetApiLocationsIdUrl = (id: number) => {
 
 export const getApiLocationsId = async (
   id: number,
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<getApiLocationsIdResponse> => {
   return apiFetch<getApiLocationsIdResponse>(getGetApiLocationsIdUrl(id), {
     ...options,
@@ -519,7 +519,7 @@ export const getGetApiLocationsIdQueryOptions = <
       >
     >;
     request?: SecondParameter<typeof apiFetch>;
-  },
+  }
 ) => {
   const { query: queryOptions, request: requestOptions } = options ?? {};
 
@@ -569,7 +569,7 @@ export function useGetApiLocationsId<
       >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): DefinedUseQueryResult<TData, TError> & {
   queryKey: DataTag<QueryKey, TData, TError>;
 };
@@ -596,7 +596,7 @@ export function useGetApiLocationsId<
       >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & {
   queryKey: DataTag<QueryKey, TData, TError>;
 };
@@ -615,7 +615,7 @@ export function useGetApiLocationsId<
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & {
   queryKey: DataTag<QueryKey, TData, TError>;
 };
@@ -635,7 +635,7 @@ export function useGetApiLocationsId<
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & {
   queryKey: DataTag<QueryKey, TData, TError>;
 } {
@@ -668,7 +668,7 @@ export const getPutApiLocationsIdWithJsonUrl = (id: number) => {
 export const putApiLocationsIdWithJson = async (
   id: number,
   updateLocationRequest: UpdateLocationRequest,
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<putApiLocationsIdWithJsonResponse> => {
   return apiFetch<putApiLocationsIdWithJsonResponse>(
     getPutApiLocationsIdWithJsonUrl(id),
@@ -677,7 +677,7 @@ export const putApiLocationsIdWithJson = async (
       method: "PUT",
       headers: { "Content-Type": "application/json", ...options?.headers },
       body: JSON.stringify(updateLocationRequest),
-    },
+    }
   );
 };
 
@@ -738,7 +738,7 @@ export const usePutApiLocationsIdWithJson = <
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseMutationResult<
   Awaited<ReturnType<typeof putApiLocationsIdWithJson>>,
   TError,
@@ -747,7 +747,7 @@ export const usePutApiLocationsIdWithJson = <
 > => {
   return useMutation(
     getPutApiLocationsIdWithJsonMutationOptions(options),
-    queryClient,
+    queryClient
   );
 };
 export type putApiLocationsIdWithTextJsonResponse200 = {
@@ -768,14 +768,14 @@ export const getPutApiLocationsIdWithTextJsonUrl = (id: number) => {
 
 export const putApiLocationsIdWithTextJson = async (
   id: number,
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<putApiLocationsIdWithTextJsonResponse> => {
   return apiFetch<putApiLocationsIdWithTextJsonResponse>(
     getPutApiLocationsIdWithTextJsonUrl(id),
     {
       ...options,
       method: "PUT",
-    },
+    }
   );
 };
 
@@ -836,7 +836,7 @@ export const usePutApiLocationsIdWithTextJson = <
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseMutationResult<
   Awaited<ReturnType<typeof putApiLocationsIdWithTextJson>>,
   TError,
@@ -845,7 +845,7 @@ export const usePutApiLocationsIdWithTextJson = <
 > => {
   return useMutation(
     getPutApiLocationsIdWithTextJsonMutationOptions(options),
-    queryClient,
+    queryClient
   );
 };
 export type putApiLocationsIdWithApplicationJsonResponse200 = {
@@ -866,14 +866,14 @@ export const getPutApiLocationsIdWithApplicationJsonUrl = (id: number) => {
 
 export const putApiLocationsIdWithApplicationJson = async (
   id: number,
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<putApiLocationsIdWithApplicationJsonResponse> => {
   return apiFetch<putApiLocationsIdWithApplicationJsonResponse>(
     getPutApiLocationsIdWithApplicationJsonUrl(id),
     {
       ...options,
       method: "PUT",
-    },
+    }
   );
 };
 
@@ -934,7 +934,7 @@ export const usePutApiLocationsIdWithApplicationJson = <
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseMutationResult<
   Awaited<ReturnType<typeof putApiLocationsIdWithApplicationJson>>,
   TError,
@@ -943,7 +943,7 @@ export const usePutApiLocationsIdWithApplicationJson = <
 > => {
   return useMutation(
     getPutApiLocationsIdWithApplicationJsonMutationOptions(options),
-    queryClient,
+    queryClient
   );
 };
 export type deleteApiLocationsIdResponse200 = {
@@ -963,14 +963,14 @@ export const getDeleteApiLocationsIdUrl = (id: number) => {
 
 export const deleteApiLocationsId = async (
   id: number,
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<deleteApiLocationsIdResponse> => {
   return apiFetch<deleteApiLocationsIdResponse>(
     getDeleteApiLocationsIdUrl(id),
     {
       ...options,
       method: "DELETE",
-    },
+    }
   );
 };
 
@@ -1028,7 +1028,7 @@ export const useDeleteApiLocationsId = <TError = unknown, TContext = unknown>(
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseMutationResult<
   Awaited<ReturnType<typeof deleteApiLocationsId>>,
   TError,
@@ -1037,6 +1037,6 @@ export const useDeleteApiLocationsId = <TError = unknown, TContext = unknown>(
 > => {
   return useMutation(
     getDeleteApiLocationsIdMutationOptions(options),
-    queryClient,
+    queryClient
   );
 };

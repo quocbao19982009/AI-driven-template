@@ -7,5 +7,6 @@
  */
 
 export interface CreateFeatureRequest {
+  /** @minLength 1 */
   name: string;
 }

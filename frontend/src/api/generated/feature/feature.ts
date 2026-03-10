@@ -61,7 +61,7 @@ export const getGetApiFeaturesUrl = (params?: GetApiFeaturesParams) => {
 
 export const getApiFeatures = async (
   params?: GetApiFeaturesParams,
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<getApiFeaturesResponse> => {
   return apiFetch<getApiFeaturesResponse>(getGetApiFeaturesUrl(params), {
     ...options,
@@ -83,7 +83,7 @@ export const getGetApiFeaturesQueryOptions = <
       UseQueryOptions<Awaited<ReturnType<typeof getApiFeatures>>, TError, TData>
     >;
     request?: SecondParameter<typeof apiFetch>;
-  },
+  }
 ) => {
   const { query: queryOptions, request: requestOptions } = options ?? {};
 
@@ -124,7 +124,7 @@ export function useGetApiFeatures<
       >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): DefinedUseQueryResult<TData, TError> & {
   queryKey: DataTag<QueryKey, TData, TError>;
 };
@@ -147,7 +147,7 @@ export function useGetApiFeatures<
       >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & {
   queryKey: DataTag<QueryKey, TData, TError>;
 };
@@ -162,7 +162,7 @@ export function useGetApiFeatures<
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & {
   queryKey: DataTag<QueryKey, TData, TError>;
 };
@@ -178,7 +178,7 @@ export function useGetApiFeatures<
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & {
   queryKey: DataTag<QueryKey, TData, TError>;
 } {
@@ -210,7 +210,7 @@ export const getPostApiFeaturesWithJsonUrl = () => {
 
 export const postApiFeaturesWithJson = async (
   createFeatureRequest: CreateFeatureRequest,
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<postApiFeaturesWithJsonResponse> => {
   return apiFetch<postApiFeaturesWithJsonResponse>(
     getPostApiFeaturesWithJsonUrl(),
@@ -219,7 +219,7 @@ export const postApiFeaturesWithJson = async (
       method: "POST",
       headers: { "Content-Type": "application/json", ...options?.headers },
       body: JSON.stringify(createFeatureRequest),
-    },
+    }
   );
 };
 
@@ -280,7 +280,7 @@ export const usePostApiFeaturesWithJson = <
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseMutationResult<
   Awaited<ReturnType<typeof postApiFeaturesWithJson>>,
   TError,
@@ -289,7 +289,7 @@ export const usePostApiFeaturesWithJson = <
 > => {
   return useMutation(
     getPostApiFeaturesWithJsonMutationOptions(options),
-    queryClient,
+    queryClient
   );
 };
 export type postApiFeaturesWithTextJsonResponse200 = {
@@ -309,14 +309,14 @@ export const getPostApiFeaturesWithTextJsonUrl = () => {
 };
 
 export const postApiFeaturesWithTextJson = async (
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<postApiFeaturesWithTextJsonResponse> => {
   return apiFetch<postApiFeaturesWithTextJsonResponse>(
     getPostApiFeaturesWithTextJsonUrl(),
     {
       ...options,
       method: "POST",
-    },
+    }
   );
 };
 
@@ -375,7 +375,7 @@ export const usePostApiFeaturesWithTextJson = <
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseMutationResult<
   Awaited<ReturnType<typeof postApiFeaturesWithTextJson>>,
   TError,
@@ -384,7 +384,7 @@ export const usePostApiFeaturesWithTextJson = <
 > => {
   return useMutation(
     getPostApiFeaturesWithTextJsonMutationOptions(options),
-    queryClient,
+    queryClient
   );
 };
 export type postApiFeaturesWithApplicationJsonResponse200 = {
@@ -404,14 +404,14 @@ export const getPostApiFeaturesWithApplicationJsonUrl = () => {
 };
 
 export const postApiFeaturesWithApplicationJson = async (
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<postApiFeaturesWithApplicationJsonResponse> => {
   return apiFetch<postApiFeaturesWithApplicationJsonResponse>(
     getPostApiFeaturesWithApplicationJsonUrl(),
     {
       ...options,
       method: "POST",
-    },
+    }
   );
 };
 
@@ -470,7 +470,7 @@ export const usePostApiFeaturesWithApplicationJson = <
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseMutationResult<
   Awaited<ReturnType<typeof postApiFeaturesWithApplicationJson>>,
   TError,
@@ -479,7 +479,7 @@ export const usePostApiFeaturesWithApplicationJson = <
 > => {
   return useMutation(
     getPostApiFeaturesWithApplicationJsonMutationOptions(options),
-    queryClient,
+    queryClient
   );
 };
 export type getApiFeaturesIdResponse200 = {
@@ -498,7 +498,7 @@ export const getGetApiFeaturesIdUrl = (id: number) => {
 
 export const getApiFeaturesId = async (
   id: number,
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<getApiFeaturesIdResponse> => {
   return apiFetch<getApiFeaturesIdResponse>(getGetApiFeaturesIdUrl(id), {
     ...options,
@@ -524,7 +524,7 @@ export const getGetApiFeaturesIdQueryOptions = <
       >
     >;
     request?: SecondParameter<typeof apiFetch>;
-  },
+  }
 ) => {
   const { query: queryOptions, request: requestOptions } = options ?? {};
 
@@ -574,7 +574,7 @@ export function useGetApiFeaturesId<
       >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): DefinedUseQueryResult<TData, TError> & {
   queryKey: DataTag<QueryKey, TData, TError>;
 };
@@ -601,7 +601,7 @@ export function useGetApiFeaturesId<
       >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & {
   queryKey: DataTag<QueryKey, TData, TError>;
 };
@@ -620,7 +620,7 @@ export function useGetApiFeaturesId<
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & {
   queryKey: DataTag<QueryKey, TData, TError>;
 };
@@ -640,7 +640,7 @@ export function useGetApiFeaturesId<
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseQueryResult<TData, TError> & {
   queryKey: DataTag<QueryKey, TData, TError>;
 } {
@@ -673,7 +673,7 @@ export const getPutApiFeaturesIdWithJsonUrl = (id: number) => {
 export const putApiFeaturesIdWithJson = async (
   id: number,
   updateFeatureRequest: UpdateFeatureRequest,
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<putApiFeaturesIdWithJsonResponse> => {
   return apiFetch<putApiFeaturesIdWithJsonResponse>(
     getPutApiFeaturesIdWithJsonUrl(id),
@@ -682,7 +682,7 @@ export const putApiFeaturesIdWithJson = async (
       method: "PUT",
       headers: { "Content-Type": "application/json", ...options?.headers },
       body: JSON.stringify(updateFeatureRequest),
-    },
+    }
   );
 };
 
@@ -743,7 +743,7 @@ export const usePutApiFeaturesIdWithJson = <
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseMutationResult<
   Awaited<ReturnType<typeof putApiFeaturesIdWithJson>>,
   TError,
@@ -752,7 +752,7 @@ export const usePutApiFeaturesIdWithJson = <
 > => {
   return useMutation(
     getPutApiFeaturesIdWithJsonMutationOptions(options),
-    queryClient,
+    queryClient
   );
 };
 export type putApiFeaturesIdWithTextJsonResponse200 = {
@@ -773,14 +773,14 @@ export const getPutApiFeaturesIdWithTextJsonUrl = (id: number) => {
 
 export const putApiFeaturesIdWithTextJson = async (
   id: number,
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<putApiFeaturesIdWithTextJsonResponse> => {
   return apiFetch<putApiFeaturesIdWithTextJsonResponse>(
     getPutApiFeaturesIdWithTextJsonUrl(id),
     {
       ...options,
       method: "PUT",
-    },
+    }
   );
 };
 
@@ -841,7 +841,7 @@ export const usePutApiFeaturesIdWithTextJson = <
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseMutationResult<
   Awaited<ReturnType<typeof putApiFeaturesIdWithTextJson>>,
   TError,
@@ -850,7 +850,7 @@ export const usePutApiFeaturesIdWithTextJson = <
 > => {
   return useMutation(
     getPutApiFeaturesIdWithTextJsonMutationOptions(options),
-    queryClient,
+    queryClient
   );
 };
 export type putApiFeaturesIdWithApplicationJsonResponse200 = {
@@ -871,14 +871,14 @@ export const getPutApiFeaturesIdWithApplicationJsonUrl = (id: number) => {
 
 export const putApiFeaturesIdWithApplicationJson = async (
   id: number,
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<putApiFeaturesIdWithApplicationJsonResponse> => {
   return apiFetch<putApiFeaturesIdWithApplicationJsonResponse>(
     getPutApiFeaturesIdWithApplicationJsonUrl(id),
     {
       ...options,
       method: "PUT",
-    },
+    }
   );
 };
 
@@ -939,7 +939,7 @@ export const usePutApiFeaturesIdWithApplicationJson = <
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseMutationResult<
   Awaited<ReturnType<typeof putApiFeaturesIdWithApplicationJson>>,
   TError,
@@ -948,7 +948,7 @@ export const usePutApiFeaturesIdWithApplicationJson = <
 > => {
   return useMutation(
     getPutApiFeaturesIdWithApplicationJsonMutationOptions(options),
-    queryClient,
+    queryClient
   );
 };
 export type deleteApiFeaturesIdResponse200 = {
@@ -968,7 +968,7 @@ export const getDeleteApiFeaturesIdUrl = (id: number) => {
 
 export const deleteApiFeaturesId = async (
   id: number,
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<deleteApiFeaturesIdResponse> => {
   return apiFetch<deleteApiFeaturesIdResponse>(getDeleteApiFeaturesIdUrl(id), {
     ...options,
@@ -1030,7 +1030,7 @@ export const useDeleteApiFeaturesId = <TError = unknown, TContext = unknown>(
     >;
     request?: SecondParameter<typeof apiFetch>;
   },
-  queryClient?: QueryClient,
+  queryClient?: QueryClient
 ): UseMutationResult<
   Awaited<ReturnType<typeof deleteApiFeaturesId>>,
   TError,
@@ -1039,6 +1039,6 @@ export const useDeleteApiFeaturesId = <TError = unknown, TContext = unknown>(
 > => {
   return useMutation(
     getDeleteApiFeaturesIdMutationOptions(options),
-    queryClient,
+    queryClient
   );
 };
