@@ -222,7 +222,7 @@ function RoomFormContent({ room, open, onOpenChange }: RoomFormDialogProps) {
                 <img
                   src={imagePreview}
                   alt="Preview"
-                  className="h-16 w-16 rounded object-cover border"
+                  className="h-16 w-16 rounded border object-cover"
                 />
                 <Button
                   type="button"

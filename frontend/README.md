@@ -89,10 +89,10 @@ Colors are defined as CSS variables in `src/index.css`. The project uses the sha
 
 ```css
 :root {
-  --primary: oklch(0.21 0.006 285.885);         /* main brand color */
-  --primary-foreground: oklch(0.985 0 0);        /* text on primary */
-  --background: oklch(1 0 0);                    /* page background */
-  --foreground: oklch(0.141 0.005 285.823);      /* default text */
+  --primary: oklch(0.21 0.006 285.885); /* main brand color */
+  --primary-foreground: oklch(0.985 0 0); /* text on primary */
+  --background: oklch(1 0 0); /* page background */
+  --foreground: oklch(0.141 0.005 285.823); /* default text */
   /* ... */
 }
 ```

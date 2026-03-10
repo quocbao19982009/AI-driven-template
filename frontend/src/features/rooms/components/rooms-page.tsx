@@ -10,7 +10,7 @@ export function RoomsPage() {
   const activeTab = useAppSelector((s) => s.rooms.activeTab);
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="space-y-6 p-6">
       <div>
         <h1 className="text-2xl font-bold tracking-tight">
           {t("rooms.title")}
@@ -24,10 +24,10 @@ export function RoomsPage() {
             key={tab}
             onClick={() => dispatch(setActiveTab(tab))}
             className={[
-              "px-4 py-2 text-sm font-medium -mb-px border-b-2 transition-colors",
+              "-mb-px border-b-2 px-4 py-2 text-sm font-medium transition-colors",
               activeTab === tab
                 ? "border-primary text-foreground"
-                : "border-transparent text-muted-foreground hover:text-foreground",
+                : "text-muted-foreground hover:text-foreground border-transparent",
             ].join(" ")}
           >
             {t(`rooms.tabs.${tab}`)}

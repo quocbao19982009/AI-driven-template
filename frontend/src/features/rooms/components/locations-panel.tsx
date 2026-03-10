@@ -160,7 +160,7 @@ export function LocationsPanel({ open, onOpenChange }: LocationsPanelProps) {
                         <div>
                           <span>{loc.name}</span>
                           {deleteError[loc.id!] && (
-                            <p className="text-xs text-destructive mt-0.5">
+                            <p className="text-destructive mt-0.5 text-xs">
                               {deleteError[loc.id!]}
                             </p>
                           )}
@@ -168,7 +168,7 @@ export function LocationsPanel({ open, onOpenChange }: LocationsPanelProps) {
                       )}
                     </TableCell>
                     <TableCell>
-                      <div className="flex gap-1 justify-end">
+                      <div className="flex justify-end gap-1">
                         {editingId === loc.id ? (
                           <>
                             <Button
@@ -204,7 +204,7 @@ export function LocationsPanel({ open, onOpenChange }: LocationsPanelProps) {
                               }
                               disabled={deleteMutation.isPending}
                             >
-                              <Trash2 className="h-3.5 w-3.5 text-destructive" />
+                              <Trash2 className="text-destructive h-3.5 w-3.5" />
                             </Button>
                           </>
                         )}

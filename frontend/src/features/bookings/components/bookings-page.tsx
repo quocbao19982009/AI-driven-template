@@ -43,7 +43,7 @@ export function BookingsPage() {
   const totalPages = pagedResult?.totalPages ?? 1;
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="space-y-6 p-6">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold tracking-tight">
@@ -59,7 +59,7 @@ export function BookingsPage() {
 
       <div className="flex flex-wrap items-end gap-3">
         <div className="grid gap-1">
-          <Label className="text-xs text-muted-foreground">
+          <Label className="text-muted-foreground text-xs">
             {t("bookings.filter.room")}
           </Label>
           <Select
@@ -86,7 +86,7 @@ export function BookingsPage() {
         </div>
 
         <div className="grid gap-1">
-          <Label htmlFor="from-date" className="text-xs text-muted-foreground">
+          <Label htmlFor="from-date" className="text-muted-foreground text-xs">
             {t("bookings.filter.from")}
           </Label>
           <Input
@@ -102,7 +102,7 @@ export function BookingsPage() {
         </div>
 
         <div className="grid gap-1">
-          <Label htmlFor="to-date" className="text-xs text-muted-foreground">
+          <Label htmlFor="to-date" className="text-muted-foreground text-xs">
             {t("bookings.filter.to")}
           </Label>
           <Input

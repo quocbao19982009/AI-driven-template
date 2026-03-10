@@ -85,7 +85,7 @@ export function TodosTable({
               <TableRow>
                 <TableCell
                   colSpan={6}
-                  className="text-center text-muted-foreground h-24"
+                  className="text-muted-foreground h-24 text-center"
                 >
                   {t("todos.table.empty")}
                 </TableCell>
@@ -94,7 +94,7 @@ export function TodosTable({
               todos.map((todo) => (
                 <TableRow key={todo.id}>
                   <TableCell className="font-medium">{todo.title}</TableCell>
-                  <TableCell className="max-w-xs truncate text-muted-foreground">
+                  <TableCell className="text-muted-foreground max-w-xs truncate">
                     {todo.description ?? "—"}
                   </TableCell>
                   <TableCell>
@@ -162,7 +162,7 @@ export function TodosTable({
         >
           {t("common.previous")}
         </Button>
-        <span className="text-sm text-muted-foreground">
+        <span className="text-muted-foreground text-sm">
           {t("common.page", { page, total: totalPages || 1 })}
         </span>
         <Button

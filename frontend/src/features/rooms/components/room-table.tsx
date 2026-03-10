@@ -19,9 +19,9 @@ function SortIcon({
 }) {
   if (sortBy !== col) return null;
   return sortDir === "asc" ? (
-    <ChevronUp className="inline h-3.5 w-3.5 ml-0.5" />
+    <ChevronUp className="ml-0.5 inline h-3.5 w-3.5" />
   ) : (
-    <ChevronDown className="inline h-3.5 w-3.5 ml-0.5" />
+    <ChevronDown className="ml-0.5 inline h-3.5 w-3.5" />
   );
 }
 import {
@@ -94,7 +94,7 @@ export function RoomTable({
                 <SortIcon col="name" sortBy={sortBy} sortDir={sortDir} />
               </TableHead>
               <TableHead
-                className="cursor-pointer select-none w-28"
+                className="w-28 cursor-pointer select-none"
                 onClick={() => handleSort("capacity")}
               >
                 {t("rooms.table.capacity")}
@@ -110,7 +110,7 @@ export function RoomTable({
               <TableRow>
                 <TableCell
                   colSpan={6}
-                  className="text-center text-muted-foreground h-24"
+                  className="text-muted-foreground h-24 text-center"
                 >
                   {t("rooms.table.empty")}
                 </TableCell>
@@ -126,7 +126,7 @@ export function RoomTable({
                         className="h-10 w-10 rounded object-cover"
                       />
                     ) : (
-                      <div className="h-10 w-10 rounded bg-muted flex items-center justify-center text-muted-foreground text-xs">
+                      <div className="bg-muted text-muted-foreground flex h-10 w-10 items-center justify-center rounded text-xs">
                         —
                       </div>
                     )}
@@ -134,7 +134,7 @@ export function RoomTable({
                   <TableCell className="font-medium">{room.name}</TableCell>
                   <TableCell>{room.capacity}</TableCell>
                   <TableCell>{room.locationName}</TableCell>
-                  <TableCell className="max-w-48 truncate text-muted-foreground">
+                  <TableCell className="text-muted-foreground max-w-48 truncate">
                     {room.purpose ?? "—"}
                   </TableCell>
                   <TableCell>
@@ -175,7 +175,7 @@ export function RoomTable({
         >
           {t("common.previous")}
         </Button>
-        <span className="text-sm text-muted-foreground">
+        <span className="text-muted-foreground text-sm">
           {t("common.page", { page, total: totalPages || 1 })}
         </span>
         <Button

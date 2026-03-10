@@ -106,7 +106,7 @@ export function CalendarTab() {
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center gap-3 flex-wrap">
+      <div className="flex flex-wrap items-center gap-3">
         <Select
           value={selectedRoomId ? String(selectedRoomId) : ""}
           onValueChange={(v) =>
@@ -125,7 +125,7 @@ export function CalendarTab() {
           </SelectContent>
         </Select>
 
-        <div className="flex items-center gap-1 ml-auto">
+        <div className="ml-auto flex items-center gap-1">
           <Button
             variant="outline"
             size="icon"
@@ -133,7 +133,7 @@ export function CalendarTab() {
           >
             <ChevronLeft className="h-4 w-4" />
           </Button>
-          <span className="text-sm font-medium px-2">
+          <span className="px-2 text-sm font-medium">
             {weekStart.toLocaleDateString()} –{" "}
             {addDays(weekStart, 6).toLocaleDateString()}
           </span>
@@ -156,19 +156,19 @@ export function CalendarTab() {
       </div>
 
       {!selectedRoomId ? (
-        <div className="flex h-48 items-center justify-center text-muted-foreground">
+        <div className="text-muted-foreground flex h-48 items-center justify-center">
           {t("rooms.calendar.selectRoomPrompt")}
         </div>
       ) : (
-        <div className="overflow-auto border rounded-md">
-          <table className="w-full text-xs border-collapse">
+        <div className="overflow-auto rounded-md border">
+          <table className="w-full border-collapse text-xs">
             <thead>
               <tr>
-                <th className="w-14 border-b border-r p-1 bg-muted text-muted-foreground font-normal" />
+                <th className="bg-muted text-muted-foreground w-14 border-r border-b p-1 font-normal" />
                 {days.map((day, i) => (
                   <th
                     key={i}
-                    className="border-b border-r p-1 bg-muted text-center font-medium min-w-[100px]"
+                    className="bg-muted min-w-[100px] border-r border-b p-1 text-center font-medium"
                   >
                     <div>{DAYS[day.getDay()]}</div>
                     <div className="text-muted-foreground">{day.getDate()}</div>
@@ -179,7 +179,7 @@ export function CalendarTab() {
             <tbody>
               {HOURS.map((hour) => (
                 <tr key={hour}>
-                  <td className="border-b border-r p-1 text-right text-muted-foreground align-top w-14">
+                  <td className="text-muted-foreground w-14 border-r border-b p-1 text-right align-top">
                     {String(hour).padStart(2, "0")}:00
                   </td>
                   {days.map((day, di) => {
@@ -187,7 +187,7 @@ export function CalendarTab() {
                     return (
                       <td
                         key={di}
-                        className="border-b border-r p-0.5 align-top cursor-pointer hover:bg-muted/50 h-10"
+                        className="hover:bg-muted/50 h-10 cursor-pointer border-r border-b p-0.5 align-top"
                         onClick={() =>
                           slotBookings.length === 0 &&
                           handleSlotClick(day, hour)
@@ -196,7 +196,7 @@ export function CalendarTab() {
                         {slotBookings.map((b) => (
                           <button
                             key={b.id}
-                            className="w-full rounded text-left px-1 py-0.5 bg-primary/20 text-primary hover:bg-primary/30 truncate block"
+                            className="bg-primary/20 text-primary hover:bg-primary/30 block w-full truncate rounded px-1 py-0.5 text-left"
                             onClick={(e) => {
                               e.stopPropagation();
                               setDetailBooking(b);

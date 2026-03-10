@@ -65,7 +65,7 @@ export function BookingTable({
               <TableRow>
                 <TableCell
                   colSpan={6}
-                  className="text-center text-muted-foreground h-24"
+                  className="text-muted-foreground h-24 text-center"
                 >
                   {t("bookings.table.empty")}
                 </TableCell>
@@ -77,7 +77,7 @@ export function BookingTable({
                   <TableCell>{fmt(b.startTime)}</TableCell>
                   <TableCell>{fmt(b.endTime)}</TableCell>
                   <TableCell>{b.bookedBy}</TableCell>
-                  <TableCell className="max-w-40 truncate text-muted-foreground">
+                  <TableCell className="text-muted-foreground max-w-40 truncate">
                     {b.purpose ?? "—"}
                   </TableCell>
                   <TableCell>
@@ -118,7 +118,7 @@ export function BookingTable({
         >
           {t("common.previous")}
         </Button>
-        <span className="text-sm text-muted-foreground">
+        <span className="text-muted-foreground text-sm">
           {t("common.page", { page, total: totalPages || 1 })}
         </span>
         <Button

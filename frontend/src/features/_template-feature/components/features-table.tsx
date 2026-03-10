@@ -61,7 +61,7 @@ export function FeaturesTable({
               <TableRow>
                 <TableCell
                   colSpan={4}
-                  className="text-center text-muted-foreground h-24"
+                  className="text-muted-foreground h-24 text-center"
                 >
                   {t("features.table.empty")}
                 </TableCell>
@@ -69,7 +69,7 @@ export function FeaturesTable({
             ) : (
               features.map((feature) => (
                 <TableRow key={feature.id}>
-                  <TableCell className="font-mono text-muted-foreground">
+                  <TableCell className="text-muted-foreground font-mono">
                     {feature.id}
                   </TableCell>
                   <TableCell className="font-medium">{feature.name}</TableCell>
@@ -118,7 +118,7 @@ export function FeaturesTable({
         >
           {t("common.previous")}
         </Button>
-        <span className="text-sm text-muted-foreground">
+        <span className="text-muted-foreground text-sm">
           {t("common.page", { page, total: totalPages || 1 })}
         </span>
         <Button

@@ -254,7 +254,7 @@ function BookingFormContent({
           </div>
 
           {overlapError && (
-            <p className="text-sm text-destructive">{overlapError}</p>
+            <p className="text-destructive text-sm">{overlapError}</p>
           )}
         </div>
 

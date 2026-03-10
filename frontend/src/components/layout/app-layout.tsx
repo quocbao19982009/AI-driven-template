@@ -7,7 +7,7 @@ export function AppLayout() {
 
   return (
     <>
-      <nav className="p-2 flex items-center gap-2">
+      <nav className="flex items-center gap-2 p-2">
         <Link to="/" className="[&.active]:font-bold">
           {t("nav.home")}
         </Link>{" "}
