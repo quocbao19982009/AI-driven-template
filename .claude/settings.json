@@ -22,9 +22,7 @@
       "Bash(git status:*)",
       "Ls -la *"
     ],
-    "deny": [
-      "Read(./.env*)"
-    ]
+    "deny": ["Read(./.env*)"]
   },
   "enableAllProjectMcpServers": true,
   "plansDirectory": "./claude-plans",
@@ -53,5 +51,11 @@
         ]
       }
     ]
+  },
+  "enabledPlugins": {
+    "skill-creator@claude-plugins-official": true,
+    "frontend-design@claude-plugins-official": true,
+    "context7@claude-plugins-official": true,
+    "code-review@claude-plugins-official": true
   }
 }

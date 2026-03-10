@@ -79,6 +79,124 @@ src/
 - **Always import DTO types from `@/api/generated/models`** — never redefine them locally
 - **Add shadcn components** with `npx shadcn add [component]` (run from `frontend/`)
 
+## Customization
+
+### Color Scheme & Theme
+
+Colors are defined as CSS variables in `src/index.css`. The project uses the shadcn/ui token system with Tailwind CSS v4 and `oklch` color values.
+
+**To change the color scheme**, edit the `:root` (light) and `.dark` (dark mode) blocks in `src/index.css`:
+
+```css
+:root {
+  --primary: oklch(0.21 0.006 285.885);         /* main brand color */
+  --primary-foreground: oklch(0.985 0 0);        /* text on primary */
+  --background: oklch(1 0 0);                    /* page background */
+  --foreground: oklch(0.141 0.005 285.823);      /* default text */
+  /* ... */
+}
+```
+
+The easiest way to generate a new palette is the [shadcn themes tool](https://ui.shadcn.com/themes) — paste the generated CSS variables directly into `src/index.css`.
+
+**To change border radius**, edit the `--radius` variable:
+
+```css
+:root {
+  --radius: 0.625rem; /* increase for rounder, decrease for sharper */
+}
+```
+
+All radius variants (`--radius-sm`, `--radius-lg`, etc.) are derived from this single value.
+
+---
+
+### Adding shadcn Components
+
+```bash
+npx shadcn add <component>   # run from frontend/
+```
+
+Components are added to `src/components/ui/`. Browse available components at [ui.shadcn.com/docs/components](https://ui.shadcn.com/docs/components).
+
+---
+
+### Tailwind CSS
+
+This project uses **Tailwind CSS v4** with CSS-first configuration — there is no `tailwind.config.js`. All customization is done in `src/index.css` under `@theme inline`:
+
+```css
+@theme inline {
+  /* add custom design tokens here */
+  --color-brand: oklch(0.55 0.2 250);
+  --font-display: "Inter", sans-serif;
+}
+```
+
+Custom tokens added here are automatically available as Tailwind utility classes (e.g., `text-brand`, `font-display`).
+
+---
+
+### Prettier
+
+Formatting rules are in `frontend/.prettierrc`:
+
+```json
+{
+  "singleQuote": false,
+  "semi": true,
+  "tabWidth": 2,
+  "trailingComma": "es5"
+}
+```
+
+Files ignored by Prettier are listed in `frontend/.prettierignore` (Orval output and TanStack Router generated files are excluded by default).
+
+Run formatting:
+
+```bash
+npm run format        # fix files in place
+npm run format:check  # check only (CI)
+```
+
+---
+
+### ESLint
+
+Rules are in `frontend/eslint.config.js`. The config includes:
+
+- `typescript-eslint` — TypeScript-aware rules
+- `eslint-plugin-react-hooks` — hooks rules
+- `eslint-plugin-react-refresh` — HMR safety
+- `@tanstack/eslint-plugin-query` — React Query best practices
+- `eslint-config-prettier` — disables rules that conflict with Prettier
+
+To add a custom rule, add it to the main `rules` block:
+
+```js
+{
+  files: ["**/*.{ts,tsx}"],
+  rules: {
+    "no-console": "warn",
+  },
+}
+```
+
+---
+
+### Translations / Locales
+
+Supported languages are defined in `src/locales/`. Currently: `en.json` (English) and `fi.json` (Finnish).
+
+**To add a new language:**
+
+1. Create `src/locales/<locale>.json` with the same keys as `en.json`
+2. Import and register it in `src/providers/i18n.ts`
+
+**To change the default language**, update the `lng` option in the i18n provider.
+
+---
+
 ## Adding a New Feature
 
 The full workflow is AI-driven. From the repo root:
