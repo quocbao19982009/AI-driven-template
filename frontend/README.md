@@ -1,75 +1,89 @@
-# React + TypeScript + Vite
+# Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React + TypeScript + Vite frontend for the AI-Driven Full-Stack Template.
 
-Currently, two official plugins are available:
+## Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **React 19** with React Compiler enabled
+- **TypeScript**
+- **Vite** — dev server and build tool
+- **TanStack Router** — file-based routing
+- **React Query** — server state (API data)
+- **Redux Toolkit** — UI-only state (search, selected IDs, open panels)
+- **shadcn/ui** — component library (Radix UI + Tailwind CSS)
+- **react-i18next** — translations (English + Finnish)
+- **Orval** — auto-generated React Query hooks from the backend OpenAPI spec
 
-## React Compiler
+## Getting Started
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+**1. Create the env file**
 
-Note: This will impact Vite dev & build performances.
+Create `frontend/.env` with:
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+VITE_API_URL=http://localhost:5054
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+**2. Install dependencies**
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
+
+**3. Run the dev server**
+
+```bash
+npm run dev
+```
+
+App runs at http://localhost:5173. The backend must be running at `VITE_API_URL` for API calls to work.
+
+## Key Commands
+
+| Command             | What it does                  |
+| ------------------- | ----------------------------- |
+| `npm run dev`       | Start dev server              |
+| `npm run build`     | TypeScript check + Vite build |
+| `npm run lint`      | ESLint                        |
+| `npm run test`      | Vitest unit tests             |
+| `npm run typecheck` | TypeScript type check only    |
+
+> `api:sync` is run from the **repo root**, not from `frontend/`. See root README.
+
+## Project Structure
+
+```
+src/
+├── api/
+│   ├── generated/          # Orval output — NEVER edit manually
+│   └── mutator/apiFetch.ts # Base HTTP client — all requests go through here
+├── components/
+│   ├── layout/             # App shell and navigation
+│   └── ui/                 # shadcn/ui components
+├── features/
+│   └── _template-feature/  # Template — AI copies this when scaffolding
+├── hooks/                  # Shared hooks (useDebounce, etc.)
+├── locales/                # en.json, fi.json — all UI strings
+├── providers/              # React context providers (Query, Store, i18n)
+├── routes/                 # TanStack Router file-based routes
+├── store/                  # Redux root store + typed hooks
+└── types/                  # Shared TypeScript types
+```
+
+## Important Conventions
+
+- **Never edit `api/generated/`** — overwritten by `npm run api:sync` on every backend change
+- **All UI strings use `t()`** from `useTranslation()` — never hardcode visible text
+- **Server state lives in React Query** — never duplicate API data into Redux
+- **Redux slices hold UI-only state** — search query, selected IDs, active tab, open panels
+- **Always import DTO types from `@/api/generated/models`** — never redefine them locally
+- **Add shadcn components** with `npx shadcn add [component]` (run from `frontend/`)
+
+## Adding a New Feature
+
+The full workflow is AI-driven. From the repo root:
+
+1. `/scaffold-feature-frontend <feature-name>` — after `api:sync` has been run
+2. `/add-translations <feature-name>` — adds keys to both `en.json` and `fi.json`
+
+See the root `README.md` and `docs/ai-workflow.md` for the complete workflow.

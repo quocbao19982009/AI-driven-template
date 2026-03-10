@@ -26,7 +26,9 @@
       "Bash(find:*)",
       "Bash(grep:*)",
       "WebSearch",
-      "WebFetch(domain:ieeexplore.ieee.org)"
+      "WebFetch(domain:ieeexplore.ieee.org)",
+      "Bash(node -e \"require\\('prettier'\\)\" 2>&1)",
+      "Bash(node -e \"require\\('./node_modules/prettier/index.cjs'\\)\" 2>&1)"
     ],
     "deny": [
       "Read(./.env*)"
