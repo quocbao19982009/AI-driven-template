@@ -1,6 +1,6 @@
 ---
 name: add-migration
-description: Create and apply an EF Core migration. Shows the migration file for review before applying.
+description: Create an EF Core migration and show the file for review. Never applies the migration — database updates are done manually by the user only.
 argument-hint: "[MigrationName]"
 disable-model-invocation: true
 allowed-tools: "Bash, Read"
@@ -8,7 +8,7 @@ allowed-tools: "Bash, Read"
 
 # Add EF Core Migration
 
-Create a new migration named `$ARGUMENTS` and optionally apply it.
+Create a new migration named `$ARGUMENTS` and show it for review.
 
 ## Steps
 
@@ -29,20 +29,14 @@ Read the newly created migration file for the user to review:
 - It will be the most recent file matching `*_$ARGUMENTS.cs`
 - Show the `Up()` and `Down()` methods
 
-### 3. Ask Before Applying
+### 3. Remind the User to Apply Manually
 
-Ask the user: "The migration looks correct. Apply it to the database with `dotnet ef database update`?"
+> **Action required (manual):** Run the following command yourself to apply the migration:
+> ```bash
+> cd backend && dotnet ef database update
+> ```
+> The AI will never run this command — database updates are the user's responsibility.
 
-Only proceed if the user confirms.
-
-### 4. Apply the Migration
-
-```bash
-cd backend && dotnet ef database update
-```
-
-### 5. Remind About API Sync
-
-After applying:
+### 4. Remind About API Sync
 
 > **Reminder:** If this migration changed entity fields that affect the API, run `npm run api:sync` (or `/api-sync`) from the repo root before working on the frontend.

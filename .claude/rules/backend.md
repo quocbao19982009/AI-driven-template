@@ -4,6 +4,7 @@ globs: backend/**/*.cs
 
 # Backend Critical Conventions (DO NOT DEVIATE)
 
+- **NEVER run database-modifying commands** — `dotnet ef database update`, `dotnet ef database drop`, `dotnet ef migrations remove`, or any destructive SQL. The AI may only run `dotnet ef migrations add <Name>`. All database changes are applied manually by the user only.
 - Never hash passwords with SHA256 — use `BCrypt.Net-Next` (`BCrypt.HashPassword` / `BCrypt.Verify`)
   > Why: SHA256 is a fast hash — attackers can try billions of guesses per second offline. BCrypt is designed to be slow (tunable cost factor), making brute-force infeasible. This applies to passwords only; fast hashes are fine for non-secret digests (e.g., ETags, cache keys).
 - All read-only EF queries MUST use `.AsNoTracking()` (see `UsersRepository.GetAllAsync`)

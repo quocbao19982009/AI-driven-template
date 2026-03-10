@@ -64,6 +64,18 @@ Specs live in `feature_docs/` — one subfolder per feature (e.g. `feature_docs/
 
 ---
 
+## Database Safety (HARD RULE — NEVER VIOLATE)
+
+- The AI may ONLY run `dotnet ef migrations add <Name>` to create migration files
+- The AI must NEVER run any of the following — these are reserved for the user only:
+  - `dotnet ef database update`
+  - `dotnet ef database drop`
+  - `dotnet ef migrations remove`
+  - Any raw SQL that modifies schema or data (`DROP`, `DELETE`, `TRUNCATE`, `ALTER`, `UPDATE` outside of normal application code)
+- After creating a migration, always tell the user to run `dotnet ef database update` themselves
+
+---
+
 ## Tooling
 
 - Always use Context7 MCP when library/API documentation, code generation, or configuration steps are needed — do not ask, just use it if available

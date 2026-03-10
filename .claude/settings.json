@@ -22,7 +22,12 @@
       "Bash(git status:*)",
       "Ls -la *"
     ],
-    "deny": ["Read(./.env*)"]
+    "deny": [
+      "Read(./.env*)",
+      "Bash(dotnet ef database update*)",
+      "Bash(dotnet ef database drop*)",
+      "Bash(dotnet ef migrations remove*)"
+    ]
   },
   "enableAllProjectMcpServers": true,
   "plansDirectory": "./claude-plans",
@@ -56,6 +61,7 @@
     "skill-creator@claude-plugins-official": true,
     "frontend-design@claude-plugins-official": true,
     "context7@claude-plugins-official": true,
-    "code-review@claude-plugins-official": true
+    "code-review@claude-plugins-official": true,
+    "claude-code-setup@claude-plugins-official": true
   }
 }
