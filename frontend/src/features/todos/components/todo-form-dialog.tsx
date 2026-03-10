@@ -65,9 +65,7 @@ export function TodoFormDialog({
       },
       onError: (error) => {
         toast.error(
-          error instanceof Error
-            ? error.message
-            : t("todos.toast.createError"),
+          error instanceof Error ? error.message : t("todos.toast.createError")
         );
       },
     },
@@ -84,9 +82,7 @@ export function TodoFormDialog({
       },
       onError: (error) => {
         toast.error(
-          error instanceof Error
-            ? error.message
-            : t("todos.toast.updateError"),
+          error instanceof Error ? error.message : t("todos.toast.updateError")
         );
       },
     },
@@ -166,15 +162,13 @@ export function TodoFormDialog({
                         {...field}
                         value={
                           field.value
-                            ? new Date(field.value)
-                                .toISOString()
-                                .slice(0, 16)
+                            ? new Date(field.value).toISOString().slice(0, 16)
                             : ""
                         }
                         onChange={(e) => {
                           const val = e.target.value;
                           field.onChange(
-                            val ? new Date(val).toISOString() : null,
+                            val ? new Date(val).toISOString() : null
                           );
                         }}
                       />

@@ -27,7 +27,12 @@ import {
   getGetApiBookingsQueryKey,
 } from "@/api/generated/bookings/bookings";
 import { useGetApiRoomsAll } from "@/api/generated/rooms/rooms";
-import type { BookingDto, CreateBookingRequest, RoomDto, UpdateBookingRequest } from "@/api/generated/models";
+import type {
+  BookingDto,
+  CreateBookingRequest,
+  RoomDto,
+  UpdateBookingRequest,
+} from "@/api/generated/models";
 
 interface BookingFormDialogProps {
   booking?: BookingDto | null;
@@ -76,13 +81,21 @@ function BookingFormContent({
   const rooms: RoomDto[] = roomsRes?.data?.data ?? [];
 
   const [roomId, setRoomId] = useState<string>(
-    booking?.roomId ? String(booking.roomId) : defaults?.roomId ? String(defaults.roomId) : "",
+    booking?.roomId
+      ? String(booking.roomId)
+      : defaults?.roomId
+        ? String(defaults.roomId)
+        : ""
   );
   const [startTime, setStartTime] = useState(
-    booking?.startTime ? toInputDatetime(booking.startTime) : defaults?.startTime ?? "",
+    booking?.startTime
+      ? toInputDatetime(booking.startTime)
+      : (defaults?.startTime ?? "")
   );
   const [endTime, setEndTime] = useState(
-    booking?.endTime ? toInputDatetime(booking.endTime) : defaults?.endTime ?? "",
+    booking?.endTime
+      ? toInputDatetime(booking.endTime)
+      : (defaults?.endTime ?? "")
   );
   const [bookedBy, setBookedBy] = useState(booking?.bookedBy ?? "");
   const [purpose, setPurpose] = useState(booking?.purpose ?? "");
@@ -99,8 +112,12 @@ function BookingFormContent({
         toast.success(t("bookings.toast.created"));
       },
       onError: (err) => {
-        const msg = err instanceof Error ? err.message : t("bookings.toast.createError");
-        if (msg.toLowerCase().includes("overlap") || msg.toLowerCase().includes("booked")) {
+        const msg =
+          err instanceof Error ? err.message : t("bookings.toast.createError");
+        if (
+          msg.toLowerCase().includes("overlap") ||
+          msg.toLowerCase().includes("booked")
+        ) {
           setOverlapError(msg);
         } else {
           toast.error(msg);
@@ -117,8 +134,12 @@ function BookingFormContent({
         toast.success(t("bookings.toast.updated"));
       },
       onError: (err) => {
-        const msg = err instanceof Error ? err.message : t("bookings.toast.updateError");
-        if (msg.toLowerCase().includes("overlap") || msg.toLowerCase().includes("booked")) {
+        const msg =
+          err instanceof Error ? err.message : t("bookings.toast.updateError");
+        if (
+          msg.toLowerCase().includes("overlap") ||
+          msg.toLowerCase().includes("booked")
+        ) {
           setOverlapError(msg);
         } else {
           toast.error(msg);
@@ -152,97 +173,107 @@ function BookingFormContent({
     <DialogContent className="sm:max-w-lg">
       <form onSubmit={handleSubmit}>
         <DialogHeader>
-            <DialogTitle>
-              {isEditing ? t("bookings.form.editTitle") : t("bookings.form.createTitle")}
-            </DialogTitle>
-            <DialogDescription>
-              {isEditing ? t("bookings.form.editDescription") : t("bookings.form.createDescription")}
-            </DialogDescription>
-          </DialogHeader>
+          <DialogTitle>
+            {isEditing
+              ? t("bookings.form.editTitle")
+              : t("bookings.form.createTitle")}
+          </DialogTitle>
+          <DialogDescription>
+            {isEditing
+              ? t("bookings.form.editDescription")
+              : t("bookings.form.createDescription")}
+          </DialogDescription>
+        </DialogHeader>
 
-          <div className="grid gap-4 py-4">
+        <div className="grid gap-4 py-4">
+          <div className="grid gap-1.5">
+            <Label>{t("bookings.form.roomLabel")}</Label>
+            <Select value={roomId} onValueChange={setRoomId} required>
+              <SelectTrigger>
+                <SelectValue placeholder={t("bookings.form.roomPlaceholder")} />
+              </SelectTrigger>
+              <SelectContent>
+                {rooms.map((r) => (
+                  <SelectItem key={r.id} value={String(r.id)}>
+                    {r.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="grid grid-cols-2 gap-3">
             <div className="grid gap-1.5">
-              <Label>{t("bookings.form.roomLabel")}</Label>
-              <Select value={roomId} onValueChange={setRoomId} required>
-                <SelectTrigger>
-                  <SelectValue placeholder={t("bookings.form.roomPlaceholder")} />
-                </SelectTrigger>
-                <SelectContent>
-                  {rooms.map((r) => (
-                    <SelectItem key={r.id} value={String(r.id)}>
-                      {r.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-
-            <div className="grid grid-cols-2 gap-3">
-              <div className="grid gap-1.5">
-                <Label htmlFor="start-time">{t("bookings.form.startLabel")}</Label>
-                <Input
-                  id="start-time"
-                  type="datetime-local"
-                  value={startTime}
-                  onChange={(e) => setStartTime(e.target.value)}
-                  required
-                />
-              </div>
-              <div className="grid gap-1.5">
-                <Label htmlFor="end-time">{t("bookings.form.endLabel")}</Label>
-                <Input
-                  id="end-time"
-                  type="datetime-local"
-                  value={endTime}
-                  onChange={(e) => setEndTime(e.target.value)}
-                  required
-                />
-              </div>
-            </div>
-
-            <div className="grid gap-1.5">
-              <Label htmlFor="booked-by">{t("bookings.form.bookedByLabel")}</Label>
+              <Label htmlFor="start-time">
+                {t("bookings.form.startLabel")}
+              </Label>
               <Input
-                id="booked-by"
-                value={bookedBy}
-                onChange={(e) => setBookedBy(e.target.value)}
-                placeholder={t("bookings.form.bookedByPlaceholder")}
+                id="start-time"
+                type="datetime-local"
+                value={startTime}
+                onChange={(e) => setStartTime(e.target.value)}
                 required
               />
             </div>
-
             <div className="grid gap-1.5">
-              <Label htmlFor="booking-purpose">{t("bookings.form.purposeLabel")}</Label>
-              <Textarea
-                id="booking-purpose"
-                value={purpose}
-                onChange={(e) => setPurpose(e.target.value)}
-                placeholder={t("bookings.form.purposePlaceholder")}
-                rows={2}
+              <Label htmlFor="end-time">{t("bookings.form.endLabel")}</Label>
+              <Input
+                id="end-time"
+                type="datetime-local"
+                value={endTime}
+                onChange={(e) => setEndTime(e.target.value)}
+                required
               />
             </div>
-
-            {overlapError && (
-              <p className="text-sm text-destructive">{overlapError}</p>
-            )}
           </div>
 
-          <DialogFooter>
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => onOpenChange(false)}
-              disabled={isPending}
-            >
-              {t("common.cancel")}
-            </Button>
-            <Button type="submit" disabled={isPending || !roomId}>
-              {isPending
-                ? t("common.saving")
-                : isEditing
-                  ? t("common.save")
-                  : t("common.create")}
-            </Button>
+          <div className="grid gap-1.5">
+            <Label htmlFor="booked-by">
+              {t("bookings.form.bookedByLabel")}
+            </Label>
+            <Input
+              id="booked-by"
+              value={bookedBy}
+              onChange={(e) => setBookedBy(e.target.value)}
+              placeholder={t("bookings.form.bookedByPlaceholder")}
+              required
+            />
+          </div>
+
+          <div className="grid gap-1.5">
+            <Label htmlFor="booking-purpose">
+              {t("bookings.form.purposeLabel")}
+            </Label>
+            <Textarea
+              id="booking-purpose"
+              value={purpose}
+              onChange={(e) => setPurpose(e.target.value)}
+              placeholder={t("bookings.form.purposePlaceholder")}
+              rows={2}
+            />
+          </div>
+
+          {overlapError && (
+            <p className="text-sm text-destructive">{overlapError}</p>
+          )}
+        </div>
+
+        <DialogFooter>
+          <Button
+            type="button"
+            variant="outline"
+            onClick={() => onOpenChange(false)}
+            disabled={isPending}
+          >
+            {t("common.cancel")}
+          </Button>
+          <Button type="submit" disabled={isPending || !roomId}>
+            {isPending
+              ? t("common.saving")
+              : isEditing
+                ? t("common.save")
+                : t("common.create")}
+          </Button>
         </DialogFooter>
       </form>
     </DialogContent>

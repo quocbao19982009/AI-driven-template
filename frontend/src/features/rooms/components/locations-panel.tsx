@@ -57,7 +57,9 @@ export function LocationsPanel({ open, onOpenChange }: LocationsPanelProps) {
       },
       onError: (err) =>
         toast.error(
-          err instanceof Error ? err.message : t("rooms.locations.toast.createError"),
+          err instanceof Error
+            ? err.message
+            : t("rooms.locations.toast.createError")
         ),
     },
   });
@@ -71,7 +73,9 @@ export function LocationsPanel({ open, onOpenChange }: LocationsPanelProps) {
       },
       onError: (err) =>
         toast.error(
-          err instanceof Error ? err.message : t("rooms.locations.toast.updateError"),
+          err instanceof Error
+            ? err.message
+            : t("rooms.locations.toast.updateError")
         ),
     },
   });
@@ -89,7 +93,9 @@ export function LocationsPanel({ open, onOpenChange }: LocationsPanelProps) {
       },
       onError: (err, { id }) => {
         const msg =
-          err instanceof Error ? err.message : t("rooms.locations.toast.deleteError");
+          err instanceof Error
+            ? err.message
+            : t("rooms.locations.toast.deleteError");
         setDeleteError((prev) => ({ ...prev, [id]: msg }));
       },
     },
@@ -102,7 +108,10 @@ export function LocationsPanel({ open, onOpenChange }: LocationsPanelProps) {
 
   function commitEdit() {
     if (!editingId || !editingName.trim()) return;
-    updateMutation.mutate({ id: editingId, data: { name: editingName.trim() } });
+    updateMutation.mutate({
+      id: editingId,
+      data: { name: editingName.trim() },
+    });
   }
 
   function handleAdd() {
@@ -190,7 +199,9 @@ export function LocationsPanel({ open, onOpenChange }: LocationsPanelProps) {
                             <Button
                               size="icon-xs"
                               variant="ghost"
-                              onClick={() => deleteMutation.mutate({ id: loc.id! })}
+                              onClick={() =>
+                                deleteMutation.mutate({ id: loc.id! })
+                              }
                               disabled={deleteMutation.isPending}
                             >
                               <Trash2 className="h-3.5 w-3.5 text-destructive" />

@@ -56,7 +56,7 @@ export function TodosTable({
       },
       onError: (error) => {
         toast.error(
-          error instanceof Error ? error.message : t("todos.toast.toggleError"),
+          error instanceof Error ? error.message : t("todos.toast.toggleError")
         );
       },
     },
@@ -104,9 +104,13 @@ export function TodosTable({
                   </TableCell>
                   <TableCell>
                     {todo.isCompleted ? (
-                      <Badge variant="default">{t("todos.status.completed")}</Badge>
+                      <Badge variant="default">
+                        {t("todos.status.completed")}
+                      </Badge>
                     ) : (
-                      <Badge variant="secondary">{t("todos.status.pending")}</Badge>
+                      <Badge variant="secondary">
+                        {t("todos.status.pending")}
+                      </Badge>
                     )}
                   </TableCell>
                   <TableCell>
@@ -127,9 +131,7 @@ export function TodosTable({
                           {t("common.edit")}
                         </DropdownMenuItem>
                         <DropdownMenuItem
-                          onClick={() =>
-                            toggleMutation.mutate({ id: todo.id })
-                          }
+                          onClick={() => toggleMutation.mutate({ id: todo.id })}
                         >
                           <ToggleLeft className="mr-2 h-4 w-4" />
                           {t("todos.actions.toggleComplete")}

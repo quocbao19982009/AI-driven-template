@@ -50,7 +50,7 @@ export function CalendarTab() {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const selectedRoomId = useAppSelector(
-    (s) => s.rooms.selectedRoomIdForCalendar,
+    (s) => s.rooms.selectedRoomIdForCalendar
   );
   const [weekStart, setWeekStart] = useState(() => startOfWeek(new Date()));
 
@@ -74,7 +74,7 @@ export function CalendarTab() {
       toDate: weekEnd.toISOString(),
       pageSize: 100,
     },
-    { query: { enabled: !!selectedRoomId } },
+    { query: { enabled: !!selectedRoomId } }
   );
   const bookings: BookingDto[] = bookingsRes?.data?.data?.items ?? [];
 

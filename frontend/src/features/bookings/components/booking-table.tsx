@@ -33,7 +33,13 @@ function fmt(iso: string | undefined | null) {
   return iso ? new Date(iso).toLocaleString() : "—";
 }
 
-export function BookingTable({ bookings, isLoading, page, totalPages, onPageChange }: BookingTableProps) {
+export function BookingTable({
+  bookings,
+  isLoading,
+  page,
+  totalPages,
+  onPageChange,
+}: BookingTableProps) {
   const { t } = useTranslation();
   const [editBooking, setEditBooking] = useState<BookingDto | null>(null);
   const [deleteBooking, setDeleteBooking] = useState<BookingDto | null>(null);
@@ -57,7 +63,10 @@ export function BookingTable({ bookings, isLoading, page, totalPages, onPageChan
           <TableBody>
             {bookings.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={6} className="text-center text-muted-foreground h-24">
+                <TableCell
+                  colSpan={6}
+                  className="text-center text-muted-foreground h-24"
+                >
                   {t("bookings.table.empty")}
                 </TableCell>
               </TableRow>
@@ -101,13 +110,23 @@ export function BookingTable({ bookings, isLoading, page, totalPages, onPageChan
       </div>
 
       <div className="flex items-center justify-end gap-2 pt-4">
-        <Button variant="outline" size="sm" onClick={() => onPageChange(page - 1)} disabled={page <= 1}>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => onPageChange(page - 1)}
+          disabled={page <= 1}
+        >
           {t("common.previous")}
         </Button>
         <span className="text-sm text-muted-foreground">
           {t("common.page", { page, total: totalPages || 1 })}
         </span>
-        <Button variant="outline" size="sm" onClick={() => onPageChange(page + 1)} disabled={page >= totalPages}>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => onPageChange(page + 1)}
+          disabled={page >= totalPages}
+        >
           {t("common.next")}
         </Button>
       </div>
@@ -143,12 +162,24 @@ function BookingTableSkeleton() {
         <TableBody>
           {Array.from({ length: 5 }).map((_, i) => (
             <TableRow key={i}>
-              <TableCell><Skeleton className="h-4 w-24" /></TableCell>
-              <TableCell><Skeleton className="h-4 w-32" /></TableCell>
-              <TableCell><Skeleton className="h-4 w-32" /></TableCell>
-              <TableCell><Skeleton className="h-4 w-24" /></TableCell>
-              <TableCell><Skeleton className="h-4 w-36" /></TableCell>
-              <TableCell><Skeleton className="h-4 w-4" /></TableCell>
+              <TableCell>
+                <Skeleton className="h-4 w-24" />
+              </TableCell>
+              <TableCell>
+                <Skeleton className="h-4 w-32" />
+              </TableCell>
+              <TableCell>
+                <Skeleton className="h-4 w-32" />
+              </TableCell>
+              <TableCell>
+                <Skeleton className="h-4 w-24" />
+              </TableCell>
+              <TableCell>
+                <Skeleton className="h-4 w-36" />
+              </TableCell>
+              <TableCell>
+                <Skeleton className="h-4 w-4" />
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

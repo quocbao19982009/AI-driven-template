@@ -21,6 +21,6 @@ if (!rootElement.innerHTML) {
       <AppProvider>
         <RouterProvider router={router} />
       </AppProvider>
-    </StrictMode>,
+    </StrictMode>
   );
 }

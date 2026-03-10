@@ -28,6 +28,7 @@ export const bookingsSlice = createSlice({
   },
 });
 
-export const { setRoomIdFilter, setFromDate, setToDate } = bookingsSlice.actions;
+export const { setRoomIdFilter, setFromDate, setToDate } =
+  bookingsSlice.actions;
 
 export default bookingsSlice.reducer;

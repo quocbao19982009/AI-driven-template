@@ -22,8 +22,6 @@ describe("FeaturesPage", () => {
 
   it("renders the description text", () => {
     render(<FeaturesPage />);
-    expect(
-      screen.getByText("features.description"),
-    ).toBeInTheDocument();
+    expect(screen.getByText("features.description")).toBeInTheDocument();
   });
 });

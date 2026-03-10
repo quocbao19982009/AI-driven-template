@@ -39,7 +39,7 @@ export function TodoDeleteDialog({
       },
       onError: (error) => {
         toast.error(
-          error instanceof Error ? error.message : t("todos.toast.deleteError"),
+          error instanceof Error ? error.message : t("todos.toast.deleteError")
         );
       },
     },
@@ -78,7 +78,9 @@ export function TodoDeleteDialog({
             onClick={handleDelete}
             disabled={deleteMutation.isPending}
           >
-            {deleteMutation.isPending ? t("common.deleting") : t("common.delete")}
+            {deleteMutation.isPending
+              ? t("common.deleting")
+              : t("common.delete")}
           </Button>
         </DialogFooter>
       </DialogContent>

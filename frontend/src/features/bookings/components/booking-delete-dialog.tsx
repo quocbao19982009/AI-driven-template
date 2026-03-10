@@ -22,19 +22,27 @@ interface BookingDeleteDialogProps {
   onOpenChange: (open: boolean) => void;
 }
 
-export function BookingDeleteDialog({ booking, open, onOpenChange }: BookingDeleteDialogProps) {
+export function BookingDeleteDialog({
+  booking,
+  open,
+  onOpenChange,
+}: BookingDeleteDialogProps) {
   const { t } = useTranslation();
   const queryClient = useQueryClient();
 
   const deleteMutation = useDeleteApiBookingsId({
     mutation: {
       onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: getGetApiBookingsQueryKey() });
+        queryClient.invalidateQueries({
+          queryKey: getGetApiBookingsQueryKey(),
+        });
         onOpenChange(false);
         toast.success(t("bookings.toast.deleted"));
       },
       onError: (err) =>
-        toast.error(err instanceof Error ? err.message : t("bookings.toast.deleteError")),
+        toast.error(
+          err instanceof Error ? err.message : t("bookings.toast.deleteError")
+        ),
     },
   });
 
@@ -44,7 +52,9 @@ export function BookingDeleteDialog({ booking, open, onOpenChange }: BookingDele
         <DialogHeader>
           <DialogTitle>{t("bookings.delete.title")}</DialogTitle>
           <DialogDescription>
-            {t("bookings.delete.description", { room: booking?.roomName ?? "" })}
+            {t("bookings.delete.description", {
+              room: booking?.roomName ?? "",
+            })}
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
@@ -58,10 +68,14 @@ export function BookingDeleteDialog({ booking, open, onOpenChange }: BookingDele
           </Button>
           <Button
             variant="destructive"
-            onClick={() => booking?.id && deleteMutation.mutate({ id: booking.id })}
+            onClick={() =>
+              booking?.id && deleteMutation.mutate({ id: booking.id })
+            }
             disabled={deleteMutation.isPending}
           >
-            {deleteMutation.isPending ? t("common.deleting") : t("common.delete")}
+            {deleteMutation.isPending
+              ? t("common.deleting")
+              : t("common.delete")}
           </Button>
         </DialogFooter>
       </DialogContent>

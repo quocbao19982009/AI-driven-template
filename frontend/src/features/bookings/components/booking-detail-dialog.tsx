@@ -18,7 +18,11 @@ interface BookingDetailDialogProps {
   onOpenChange: (open: boolean) => void;
 }
 
-export function BookingDetailDialog({ booking, open, onOpenChange }: BookingDetailDialogProps) {
+export function BookingDetailDialog({
+  booking,
+  open,
+  onOpenChange,
+}: BookingDetailDialogProps) {
   const { t } = useTranslation();
   const [editOpen, setEditOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
@@ -38,24 +42,34 @@ export function BookingDetailDialog({ booking, open, onOpenChange }: BookingDeta
 
           <div className="grid gap-3 py-2 text-sm">
             <div className="grid grid-cols-3 gap-1">
-              <span className="text-muted-foreground">{t("bookings.table.room")}</span>
+              <span className="text-muted-foreground">
+                {t("bookings.table.room")}
+              </span>
               <span className="col-span-2 font-medium">{booking.roomName}</span>
             </div>
             <div className="grid grid-cols-3 gap-1">
-              <span className="text-muted-foreground">{t("bookings.form.startLabel")}</span>
+              <span className="text-muted-foreground">
+                {t("bookings.form.startLabel")}
+              </span>
               <span className="col-span-2">{fmt(booking.startTime)}</span>
             </div>
             <div className="grid grid-cols-3 gap-1">
-              <span className="text-muted-foreground">{t("bookings.form.endLabel")}</span>
+              <span className="text-muted-foreground">
+                {t("bookings.form.endLabel")}
+              </span>
               <span className="col-span-2">{fmt(booking.endTime)}</span>
             </div>
             <div className="grid grid-cols-3 gap-1">
-              <span className="text-muted-foreground">{t("bookings.table.bookedBy")}</span>
+              <span className="text-muted-foreground">
+                {t("bookings.table.bookedBy")}
+              </span>
               <span className="col-span-2">{booking.bookedBy}</span>
             </div>
             {booking.purpose && (
               <div className="grid grid-cols-3 gap-1">
-                <span className="text-muted-foreground">{t("bookings.table.purpose")}</span>
+                <span className="text-muted-foreground">
+                  {t("bookings.table.purpose")}
+                </span>
                 <span className="col-span-2">{booking.purpose}</span>
               </div>
             )}

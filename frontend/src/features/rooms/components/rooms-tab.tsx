@@ -24,7 +24,9 @@ const PAGE_SIZE = 10;
 export function RoomsTab() {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const { searchQuery, locationIdFilter, sortBy, sortDir } = useAppSelector((s) => s.rooms);
+  const { searchQuery, locationIdFilter, sortBy, sortDir } = useAppSelector(
+    (s) => s.rooms
+  );
   const debouncedSearch = useDebounce(searchQuery, 300);
 
   const [page, setPage] = useState(1);
@@ -70,7 +72,9 @@ export function RoomsTab() {
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">{t("rooms.search.allLocations")}</SelectItem>
+            <SelectItem value="all">
+              {t("rooms.search.allLocations")}
+            </SelectItem>
             {locations.map((loc) => (
               <SelectItem key={loc.id} value={String(loc.id)}>
                 {loc.name}

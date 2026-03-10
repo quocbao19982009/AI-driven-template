@@ -46,7 +46,9 @@ export function BookingsPage() {
     <div className="p-6 space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">{t("bookings.title")}</h1>
+          <h1 className="text-2xl font-bold tracking-tight">
+            {t("bookings.title")}
+          </h1>
           <p className="text-muted-foreground">{t("bookings.description")}</p>
         </div>
         <Button onClick={() => setCreateOpen(true)}>
@@ -57,7 +59,9 @@ export function BookingsPage() {
 
       <div className="flex flex-wrap items-end gap-3">
         <div className="grid gap-1">
-          <Label className="text-xs text-muted-foreground">{t("bookings.filter.room")}</Label>
+          <Label className="text-xs text-muted-foreground">
+            {t("bookings.filter.room")}
+          </Label>
           <Select
             value={roomIdFilter ? String(roomIdFilter) : "all"}
             onValueChange={(v) => {
@@ -69,7 +73,9 @@ export function BookingsPage() {
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">{t("bookings.filter.allRooms")}</SelectItem>
+              <SelectItem value="all">
+                {t("bookings.filter.allRooms")}
+              </SelectItem>
               {rooms.map((r) => (
                 <SelectItem key={r.id} value={String(r.id)}>
                   {r.name}

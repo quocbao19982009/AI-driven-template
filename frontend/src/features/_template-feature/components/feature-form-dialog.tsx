@@ -63,7 +63,7 @@ export function FeatureFormDialog({
         toast.error(
           error instanceof Error
             ? error.message
-            : t("features.toast.createError"),
+            : t("features.toast.createError")
         );
       },
     },
@@ -82,7 +82,7 @@ export function FeatureFormDialog({
         toast.error(
           error instanceof Error
             ? error.message
-            : t("features.toast.updateError"),
+            : t("features.toast.updateError")
         );
       },
     },

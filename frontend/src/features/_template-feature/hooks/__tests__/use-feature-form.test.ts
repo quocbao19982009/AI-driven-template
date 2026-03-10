@@ -20,7 +20,11 @@ describe("useFeatureForm", () => {
   });
 
   it("pre-fills name when editing an existing feature", () => {
-    const feature = { id: 1, name: "Existing", createdAt: new Date().toISOString() };
+    const feature = {
+      id: 1,
+      name: "Existing",
+      createdAt: new Date().toISOString(),
+    };
     const { result } = renderHook(() => useFeatureForm(feature));
     expect(result.current.getValues("name")).toBe("Existing");
   });

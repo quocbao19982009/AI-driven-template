@@ -33,12 +33,18 @@ export function FeatureDeleteDialog({
   const deleteMutation = useDeleteApiFeaturesId({
     mutation: {
       onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: getGetApiFeaturesQueryKey() });
+        queryClient.invalidateQueries({
+          queryKey: getGetApiFeaturesQueryKey(),
+        });
         onOpenChange(false);
         toast.success(t("features.toast.deleted"));
       },
       onError: (error) => {
-        toast.error(error instanceof Error ? error.message : t("features.toast.deleteError"));
+        toast.error(
+          error instanceof Error
+            ? error.message
+            : t("features.toast.deleteError")
+        );
       },
     },
   });
@@ -56,7 +62,9 @@ export function FeatureDeleteDialog({
           <DialogTitle>{t("features.delete.title")}</DialogTitle>
           <DialogDescription
             dangerouslySetInnerHTML={{
-              __html: t("features.delete.description", { name: feature?.name ?? "" }),
+              __html: t("features.delete.description", {
+                name: feature?.name ?? "",
+              }),
             }}
           />
         </DialogHeader>
@@ -74,7 +82,9 @@ export function FeatureDeleteDialog({
             onClick={handleDelete}
             disabled={deleteMutation.isPending}
           >
-            {deleteMutation.isPending ? t("common.deleting") : t("common.delete")}
+            {deleteMutation.isPending
+              ? t("common.deleting")
+              : t("common.delete")}
           </Button>
         </DialogFooter>
       </DialogContent>

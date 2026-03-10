@@ -13,7 +13,7 @@ export class ApiError extends Error {
 
 export const apiFetch = async <T>(
   url: string,
-  options?: RequestInit,
+  options?: RequestInit
 ): Promise<T> => {
   const response = await fetch(`${BASE_URL}${url}`, {
     ...options,
@@ -27,7 +27,7 @@ export const apiFetch = async <T>(
     throw new ApiError(
       response.status,
       body?.message || `${response.status} ${response.statusText}`,
-      body?.errors ?? null,
+      body?.errors ?? null
     );
   }
 

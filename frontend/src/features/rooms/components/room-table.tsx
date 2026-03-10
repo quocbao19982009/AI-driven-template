@@ -1,8 +1,22 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { MoreHorizontal, Pencil, Trash2, ChevronUp, ChevronDown } from "lucide-react";
+import {
+  MoreHorizontal,
+  Pencil,
+  Trash2,
+  ChevronUp,
+  ChevronDown,
+} from "lucide-react";
 
-function SortIcon({ col, sortBy, sortDir }: { col: string; sortBy: string; sortDir: string }) {
+function SortIcon({
+  col,
+  sortBy,
+  sortDir,
+}: {
+  col: string;
+  sortBy: string;
+  sortDir: string;
+}) {
   if (sortBy !== col) return null;
   return sortDir === "asc" ? (
     <ChevronUp className="inline h-3.5 w-3.5 ml-0.5" />
@@ -41,7 +55,13 @@ interface RoomTableProps {
   onPageChange: (page: number) => void;
 }
 
-export function RoomTable({ rooms, isLoading, page, totalPages, onPageChange }: RoomTableProps) {
+export function RoomTable({
+  rooms,
+  isLoading,
+  page,
+  totalPages,
+  onPageChange,
+}: RoomTableProps) {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { sortBy, sortDir } = useAppSelector((s) => s.rooms);
@@ -88,7 +108,10 @@ export function RoomTable({ rooms, isLoading, page, totalPages, onPageChange }: 
           <TableBody>
             {rooms.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={6} className="text-center text-muted-foreground h-24">
+                <TableCell
+                  colSpan={6}
+                  className="text-center text-muted-foreground h-24"
+                >
                   {t("rooms.table.empty")}
                 </TableCell>
               </TableRow>
@@ -196,12 +219,24 @@ function RoomTableSkeleton() {
         <TableBody>
           {Array.from({ length: 5 }).map((_, i) => (
             <TableRow key={i}>
-              <TableCell><Skeleton className="h-10 w-10 rounded" /></TableCell>
-              <TableCell><Skeleton className="h-4 w-32" /></TableCell>
-              <TableCell><Skeleton className="h-4 w-12" /></TableCell>
-              <TableCell><Skeleton className="h-4 w-24" /></TableCell>
-              <TableCell><Skeleton className="h-4 w-40" /></TableCell>
-              <TableCell><Skeleton className="h-4 w-4" /></TableCell>
+              <TableCell>
+                <Skeleton className="h-10 w-10 rounded" />
+              </TableCell>
+              <TableCell>
+                <Skeleton className="h-4 w-32" />
+              </TableCell>
+              <TableCell>
+                <Skeleton className="h-4 w-12" />
+              </TableCell>
+              <TableCell>
+                <Skeleton className="h-4 w-24" />
+              </TableCell>
+              <TableCell>
+                <Skeleton className="h-4 w-40" />
+              </TableCell>
+              <TableCell>
+                <Skeleton className="h-4 w-4" />
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
