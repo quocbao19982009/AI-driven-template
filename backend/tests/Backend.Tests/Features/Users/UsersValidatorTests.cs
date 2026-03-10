@@ -33,8 +33,10 @@ public class CreateUserRequestValidatorTests
     {
         var request = new CreateUserRequest
         {
-            FirstName = firstName!, LastName = "Doe",
-            Email = "john@example.com", Password = "Password1"
+            FirstName = firstName!,
+            LastName = "Doe",
+            Email = "john@example.com",
+            Password = "Password1"
         };
 
         var result = await _validator.TestValidateAsync(request);
@@ -48,8 +50,10 @@ public class CreateUserRequestValidatorTests
     {
         var request = new CreateUserRequest
         {
-            FirstName = new string('A', 101), LastName = "Doe",
-            Email = "john@example.com", Password = "Password1"
+            FirstName = new string('A', 101),
+            LastName = "Doe",
+            Email = "john@example.com",
+            Password = "Password1"
         };
 
         var result = await _validator.TestValidateAsync(request);
@@ -67,8 +71,10 @@ public class CreateUserRequestValidatorTests
     {
         var request = new CreateUserRequest
         {
-            FirstName = "John", LastName = lastName!,
-            Email = "john@example.com", Password = "Password1"
+            FirstName = "John",
+            LastName = lastName!,
+            Email = "john@example.com",
+            Password = "Password1"
         };
 
         var result = await _validator.TestValidateAsync(request);
@@ -82,8 +88,10 @@ public class CreateUserRequestValidatorTests
     {
         var request = new CreateUserRequest
         {
-            FirstName = "John", LastName = new string('A', 101),
-            Email = "john@example.com", Password = "Password1"
+            FirstName = "John",
+            LastName = new string('A', 101),
+            Email = "john@example.com",
+            Password = "Password1"
         };
 
         var result = await _validator.TestValidateAsync(request);
@@ -101,8 +109,10 @@ public class CreateUserRequestValidatorTests
     {
         var request = new CreateUserRequest
         {
-            FirstName = "John", LastName = "Doe",
-            Email = email!, Password = "Password1"
+            FirstName = "John",
+            LastName = "Doe",
+            Email = email!,
+            Password = "Password1"
         };
 
         var result = await _validator.TestValidateAsync(request);
@@ -116,8 +126,10 @@ public class CreateUserRequestValidatorTests
     {
         var request = new CreateUserRequest
         {
-            FirstName = "John", LastName = "Doe",
-            Email = "not-an-email", Password = "Password1"
+            FirstName = "John",
+            LastName = "Doe",
+            Email = "not-an-email",
+            Password = "Password1"
         };
 
         var result = await _validator.TestValidateAsync(request);
@@ -131,8 +143,10 @@ public class CreateUserRequestValidatorTests
     {
         var request = new CreateUserRequest
         {
-            FirstName = "John", LastName = "Doe",
-            Email = new string('a', 245) + "@example.com", Password = "Password1"
+            FirstName = "John",
+            LastName = "Doe",
+            Email = new string('a', 245) + "@example.com",
+            Password = "Password1"
         };
 
         var result = await _validator.TestValidateAsync(request);
@@ -150,8 +164,10 @@ public class CreateUserRequestValidatorTests
     {
         var request = new CreateUserRequest
         {
-            FirstName = "John", LastName = "Doe",
-            Email = "john@example.com", Password = password!
+            FirstName = "John",
+            LastName = "Doe",
+            Email = "john@example.com",
+            Password = password!
         };
 
         var result = await _validator.TestValidateAsync(request);
@@ -165,8 +181,10 @@ public class CreateUserRequestValidatorTests
     {
         var request = new CreateUserRequest
         {
-            FirstName = "John", LastName = "Doe",
-            Email = "john@example.com", Password = "Pass1"
+            FirstName = "John",
+            LastName = "Doe",
+            Email = "john@example.com",
+            Password = "Pass1"
         };
 
         var result = await _validator.TestValidateAsync(request);
@@ -180,8 +198,10 @@ public class CreateUserRequestValidatorTests
     {
         var request = new CreateUserRequest
         {
-            FirstName = "John", LastName = "Doe",
-            Email = "john@example.com", Password = "password1"
+            FirstName = "John",
+            LastName = "Doe",
+            Email = "john@example.com",
+            Password = "password1"
         };
 
         var result = await _validator.TestValidateAsync(request);
@@ -195,8 +215,10 @@ public class CreateUserRequestValidatorTests
     {
         var request = new CreateUserRequest
         {
-            FirstName = "John", LastName = "Doe",
-            Email = "john@example.com", Password = "PASSWORD1"
+            FirstName = "John",
+            LastName = "Doe",
+            Email = "john@example.com",
+            Password = "PASSWORD1"
         };
 
         var result = await _validator.TestValidateAsync(request);
@@ -210,8 +232,10 @@ public class CreateUserRequestValidatorTests
     {
         var request = new CreateUserRequest
         {
-            FirstName = "John", LastName = "Doe",
-            Email = "john@example.com", Password = "Passwordd"
+            FirstName = "John",
+            LastName = "Doe",
+            Email = "john@example.com",
+            Password = "Passwordd"
         };
 
         var result = await _validator.TestValidateAsync(request);
@@ -247,7 +271,9 @@ public class UpdateUserRequestValidatorTests
     {
         var request = new UpdateUserRequest
         {
-            FirstName = firstName!, LastName = "Doe", Email = "john@example.com"
+            FirstName = firstName!,
+            LastName = "Doe",
+            Email = "john@example.com"
         };
 
         var result = await _validator.TestValidateAsync(request);
@@ -261,7 +287,9 @@ public class UpdateUserRequestValidatorTests
     {
         var request = new UpdateUserRequest
         {
-            FirstName = new string('A', 101), LastName = "Doe", Email = "john@example.com"
+            FirstName = new string('A', 101),
+            LastName = "Doe",
+            Email = "john@example.com"
         };
 
         var result = await _validator.TestValidateAsync(request);
@@ -277,7 +305,9 @@ public class UpdateUserRequestValidatorTests
     {
         var request = new UpdateUserRequest
         {
-            FirstName = "John", LastName = lastName!, Email = "john@example.com"
+            FirstName = "John",
+            LastName = lastName!,
+            Email = "john@example.com"
         };
 
         var result = await _validator.TestValidateAsync(request);
@@ -291,7 +321,9 @@ public class UpdateUserRequestValidatorTests
     {
         var request = new UpdateUserRequest
         {
-            FirstName = "John", LastName = new string('A', 101), Email = "john@example.com"
+            FirstName = "John",
+            LastName = new string('A', 101),
+            Email = "john@example.com"
         };
 
         var result = await _validator.TestValidateAsync(request);
@@ -307,7 +339,9 @@ public class UpdateUserRequestValidatorTests
     {
         var request = new UpdateUserRequest
         {
-            FirstName = "John", LastName = "Doe", Email = email!
+            FirstName = "John",
+            LastName = "Doe",
+            Email = email!
         };
 
         var result = await _validator.TestValidateAsync(request);
@@ -321,7 +355,9 @@ public class UpdateUserRequestValidatorTests
     {
         var request = new UpdateUserRequest
         {
-            FirstName = "John", LastName = "Doe", Email = "not-an-email"
+            FirstName = "John",
+            LastName = "Doe",
+            Email = "not-an-email"
         };
 
         var result = await _validator.TestValidateAsync(request);
@@ -335,7 +371,8 @@ public class UpdateUserRequestValidatorTests
     {
         var request = new UpdateUserRequest
         {
-            FirstName = "John", LastName = "Doe",
+            FirstName = "John",
+            LastName = "Doe",
             Email = new string('a', 245) + "@example.com"
         };
 

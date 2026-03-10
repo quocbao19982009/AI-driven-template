@@ -2,16 +2,16 @@ using System.Reflection;
 using Backend.Common.Extensions;
 using Backend.Common.Middleware;
 using Backend.Common.Swagger;
-using Backend.Features.Users;
+using Backend.Data;
 using Backend.Features._FeatureTemplate;
-using Backend.Features.Todos;
+using Backend.Features.Bookings;
 using Backend.Features.Locations;
 using Backend.Features.Rooms;
-using Backend.Features.Bookings;
+using Backend.Features.Todos;
+using Backend.Features.Users;
 using Backend.Identity;
 using Microsoft.OpenApi;
 using Serilog;
-using Backend.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 

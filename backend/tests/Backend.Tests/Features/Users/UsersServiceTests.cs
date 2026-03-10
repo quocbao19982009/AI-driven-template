@@ -81,8 +81,12 @@ public class UsersServiceTests
     {
         var entity = new User
         {
-            Id = 1, FirstName = "John", LastName = "Doe",
-            Email = "john@example.com", PasswordHash = "hash", CreatedAt = DateTime.UtcNow
+            Id = 1,
+            FirstName = "John",
+            LastName = "Doe",
+            Email = "john@example.com",
+            PasswordHash = "hash",
+            CreatedAt = DateTime.UtcNow
         };
         _repositoryMock
             .Setup(r => r.GetByIdAsync(1, It.IsAny<CancellationToken>()))
@@ -113,8 +117,10 @@ public class UsersServiceTests
     {
         var request = new CreateUserRequest
         {
-            FirstName = "John", LastName = "Doe",
-            Email = "john@example.com", Password = "Password1"
+            FirstName = "John",
+            LastName = "Doe",
+            Email = "john@example.com",
+            Password = "Password1"
         };
         SetupValidValidator(_createValidatorMock, request);
         _repositoryMock
@@ -153,8 +159,10 @@ public class UsersServiceTests
     {
         var request = new CreateUserRequest
         {
-            FirstName = "John", LastName = "Doe",
-            Email = "john@example.com", Password = "Password1"
+            FirstName = "John",
+            LastName = "Doe",
+            Email = "john@example.com",
+            Password = "Password1"
         };
         SetupValidValidator(_createValidatorMock, request);
         _repositoryMock
@@ -174,12 +182,18 @@ public class UsersServiceTests
     {
         var request = new UpdateUserRequest
         {
-            FirstName = "Jane", LastName = "Doe", Email = "jane@example.com"
+            FirstName = "Jane",
+            LastName = "Doe",
+            Email = "jane@example.com"
         };
         var entity = new User
         {
-            Id = 1, FirstName = "John", LastName = "Doe",
-            Email = "john@example.com", PasswordHash = "hash", CreatedAt = DateTime.UtcNow
+            Id = 1,
+            FirstName = "John",
+            LastName = "Doe",
+            Email = "john@example.com",
+            PasswordHash = "hash",
+            CreatedAt = DateTime.UtcNow
         };
 
         SetupValidValidator(_updateValidatorMock, request);
@@ -202,7 +216,9 @@ public class UsersServiceTests
     {
         var request = new UpdateUserRequest
         {
-            FirstName = "Jane", LastName = "Doe", Email = "jane@example.com"
+            FirstName = "Jane",
+            LastName = "Doe",
+            Email = "jane@example.com"
         };
         SetupValidValidator(_updateValidatorMock, request);
         _repositoryMock
@@ -231,12 +247,18 @@ public class UsersServiceTests
     {
         var request = new UpdateUserRequest
         {
-            FirstName = "Jane", LastName = "Doe", Email = "existing@example.com"
+            FirstName = "Jane",
+            LastName = "Doe",
+            Email = "existing@example.com"
         };
         var entity = new User
         {
-            Id = 1, FirstName = "John", LastName = "Doe",
-            Email = "john@example.com", PasswordHash = "hash", CreatedAt = DateTime.UtcNow
+            Id = 1,
+            FirstName = "John",
+            LastName = "Doe",
+            Email = "john@example.com",
+            PasswordHash = "hash",
+            CreatedAt = DateTime.UtcNow
         };
 
         SetupValidValidator(_updateValidatorMock, request);
@@ -260,8 +282,11 @@ public class UsersServiceTests
     {
         var entity = new User
         {
-            Id = 1, FirstName = "John", LastName = "Doe",
-            Email = "john@example.com", PasswordHash = "hash"
+            Id = 1,
+            FirstName = "John",
+            LastName = "Doe",
+            Email = "john@example.com",
+            PasswordHash = "hash"
         };
         _repositoryMock
             .Setup(r => r.GetByIdAsync(1, It.IsAny<CancellationToken>()))

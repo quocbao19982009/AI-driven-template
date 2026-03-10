@@ -7,7 +7,13 @@
     "api:generate": "cd frontend && npm run api:generate",
     "api:sync": "npm run api:export && npm run api:generate",
     "api:check": "npm run api:sync && git diff --exit-code frontend/src/api/generated",
-    "prebuild": "npm run api:sync"
+    "prebuild": "npm run api:sync",
+    "format:backend": "dotnet format backend/Backend.sln",
+    "format:backend:check": "dotnet format backend/Backend.sln --verify-no-changes",
+    "format:frontend": "npm run format --prefix frontend",
+    "format:frontend:check": "npm run format:check --prefix frontend",
+    "format": "npm run format:backend && npm run format:frontend",
+    "format:check": "npm run format:backend:check && npm run format:frontend:check"
   },
   "devDependencies": {
     "concurrently": "^9.2.1"
