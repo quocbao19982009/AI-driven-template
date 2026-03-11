@@ -3,7 +3,6 @@ using Backend.Common.Extensions;
 using Backend.Common.Middleware;
 using Backend.Common.Swagger;
 using Backend.Data;
-using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
 using Backend.Features._FeatureTemplate;
 using Backend.Features.Bookings;
 using Backend.Features.Locations;
@@ -11,6 +10,7 @@ using Backend.Features.Rooms;
 using Backend.Features.Todos;
 using Backend.Features.Users;
 using Backend.Identity;
+using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
 using Microsoft.OpenApi;
 using Serilog;
 
