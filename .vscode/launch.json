@@ -1,27 +1,30 @@
 {
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": ".NET Core Launch (web)",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "build",
-            "program": "${workspaceFolder}/backend/src/Backend.Api/bin/Debug/net10.0/Backend.Api.dll",
-            "args": [],
-            "cwd": "${workspaceFolder}/backend/src/Backend.Api",
-            "stopAtEntry": false,
-            "serverReadyAction": {
-                "action": "openExternally",
-                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
-            },
-            "env": {
-                "ASPNETCORE_ENVIRONMENT": "Development"
-            }
-        },
-        {
-            "name": ".NET Core Attach",
-            "type": "coreclr",
-            "request": "attach"
-        }
-    ]
+  "version": "0.2.0",
+  // Debug configurations — F5 launches the .NET backend with the debugger attached.
+  "configurations": [
+    {
+      // Builds, then launches the API; auto-opens the browser when the server is ready.
+      "name": ".NET Core Launch (web)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/backend/src/Backend.Api/bin/Debug/net10.0/Backend.Api.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/backend/src/Backend.Api",
+      "stopAtEntry": false,
+      "serverReadyAction": {
+        "action": "openExternally",
+        "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+      },
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    {
+      // Attaches to an already-running .NET process (useful for Docker or manual starts).
+      "name": ".NET Core Attach",
+      "type": "coreclr",
+      "request": "attach"
+    }
+  ]
 }

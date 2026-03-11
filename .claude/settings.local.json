@@ -49,9 +49,7 @@
       "Bash(/tmp/skill-optimizer/run_opt.sh 2>&1 | tee /tmp/skill-optimizer/run_loop_create-spec.log)",
       "Bash(echo \"ANTHROPIC_API_KEY set: ${ANTHROPIC_API_KEY:+yes}\" && printenv | grep -i anthropic | grep -v \"KEY=\" || echo \"not found in env\")"
     ],
-    "deny": [
-      "Read(./.env*)"
-    ],
+    "deny": ["Read(./.env*)"],
     "mode": "bypassPermissions"
   }
 }

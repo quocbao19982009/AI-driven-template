@@ -17,11 +17,20 @@
   "i18n-ally.enabledFrameworks": ["react-i18next"],
   "i18n-ally.namespace": false,
   // Github Copilot setting (mirror Claude Code)
-  "files.exclude": {
-    "**/.env*": true
-  },
+  // Right now I don't see anyway to block Github Copilot from reading secert file
   "chat.tools.terminal.autoApprove": {
     "/^dotnet ef database (update|drop)/i": false,
     "/^dotnet ef migrations remove\\b/i": false
+  },
+  "chat.tools.edits.autoApprove": {
+    "**/.env": false,
+    "**/.vscode/*.json": false
+  },
+  // Link to Claude Hooks: More infomation here https://code.visualstudio.com/docs/copilot/customization/hooks
+  "chat.hookFilesLocations": {
+    ".github/hooks": true,
+    ".claude/settings.local.json": true,
+    ".claude/settings.json": true,
+    "~/.claude/settings.json": true
   }
 }
