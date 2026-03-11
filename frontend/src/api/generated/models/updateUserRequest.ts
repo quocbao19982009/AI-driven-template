@@ -7,8 +7,20 @@
  */
 
 export interface UpdateUserRequest {
+  /**
+   * @minLength 1
+   * @maxLength 100
+   */
   firstName: string;
+  /**
+   * @minLength 1
+   * @maxLength 100
+   */
   lastName: string;
+  /**
+   * @minLength 1
+   * @maxLength 256
+   */
   email: string;
   /** @nullable */
   role?: string | null;

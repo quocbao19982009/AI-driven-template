@@ -46,11 +46,15 @@ export const GetApiBookingsResponse = zod.object({
   errors: zod.array(zod.string()).nullish(),
 });
 
+export const postApiBookingsWithJsonBodyRoomIdExclusiveMin = 0;
+
+export const postApiBookingsWithJsonBodyBookedByMax = 200;
+
 export const PostApiBookingsWithJsonBody = zod.object({
-  roomId: zod.number(),
-  startTime: zod.iso.datetime({}),
-  endTime: zod.iso.datetime({}),
-  bookedBy: zod.string(),
+  roomId: zod.number().gt(postApiBookingsWithJsonBodyRoomIdExclusiveMin),
+  startTime: zod.iso.datetime({}).min(1),
+  endTime: zod.iso.datetime({}).min(1),
+  bookedBy: zod.string().min(1).max(postApiBookingsWithJsonBodyBookedByMax),
   purpose: zod.string().nullish(),
 });
 
@@ -72,11 +76,15 @@ export const PostApiBookingsWithJsonResponse = zod.object({
   errors: zod.array(zod.string()).nullish(),
 });
 
+export const postApiBookingsWithTextJsonBodyRoomIdExclusiveMin = 0;
+
+export const postApiBookingsWithTextJsonBodyBookedByMax = 200;
+
 export const PostApiBookingsWithTextJsonBody = zod.object({
-  roomId: zod.number(),
-  startTime: zod.iso.datetime({}),
-  endTime: zod.iso.datetime({}),
-  bookedBy: zod.string(),
+  roomId: zod.number().gt(postApiBookingsWithTextJsonBodyRoomIdExclusiveMin),
+  startTime: zod.iso.datetime({}).min(1),
+  endTime: zod.iso.datetime({}).min(1),
+  bookedBy: zod.string().min(1).max(postApiBookingsWithTextJsonBodyBookedByMax),
   purpose: zod.string().nullish(),
 });
 
@@ -98,11 +106,20 @@ export const PostApiBookingsWithTextJsonResponse = zod.object({
   errors: zod.array(zod.string()).nullish(),
 });
 
+export const postApiBookingsWithApplicationJsonBodyRoomIdExclusiveMin = 0;
+
+export const postApiBookingsWithApplicationJsonBodyBookedByMax = 200;
+
 export const PostApiBookingsWithApplicationJsonBody = zod.object({
-  roomId: zod.number(),
-  startTime: zod.iso.datetime({}),
-  endTime: zod.iso.datetime({}),
-  bookedBy: zod.string(),
+  roomId: zod
+    .number()
+    .gt(postApiBookingsWithApplicationJsonBodyRoomIdExclusiveMin),
+  startTime: zod.iso.datetime({}).min(1),
+  endTime: zod.iso.datetime({}).min(1),
+  bookedBy: zod
+    .string()
+    .min(1)
+    .max(postApiBookingsWithApplicationJsonBodyBookedByMax),
   purpose: zod.string().nullish(),
 });
 
@@ -150,11 +167,15 @@ export const PutApiBookingsIdWithJsonParams = zod.object({
   id: zod.number(),
 });
 
+export const putApiBookingsIdWithJsonBodyRoomIdExclusiveMin = 0;
+
+export const putApiBookingsIdWithJsonBodyBookedByMax = 200;
+
 export const PutApiBookingsIdWithJsonBody = zod.object({
-  roomId: zod.number(),
-  startTime: zod.iso.datetime({}),
-  endTime: zod.iso.datetime({}),
-  bookedBy: zod.string(),
+  roomId: zod.number().gt(putApiBookingsIdWithJsonBodyRoomIdExclusiveMin),
+  startTime: zod.iso.datetime({}).min(1),
+  endTime: zod.iso.datetime({}).min(1),
+  bookedBy: zod.string().min(1).max(putApiBookingsIdWithJsonBodyBookedByMax),
   purpose: zod.string().nullish(),
 });
 
@@ -180,11 +201,18 @@ export const PutApiBookingsIdWithTextJsonParams = zod.object({
   id: zod.number(),
 });
 
+export const putApiBookingsIdWithTextJsonBodyRoomIdExclusiveMin = 0;
+
+export const putApiBookingsIdWithTextJsonBodyBookedByMax = 200;
+
 export const PutApiBookingsIdWithTextJsonBody = zod.object({
-  roomId: zod.number(),
-  startTime: zod.iso.datetime({}),
-  endTime: zod.iso.datetime({}),
-  bookedBy: zod.string(),
+  roomId: zod.number().gt(putApiBookingsIdWithTextJsonBodyRoomIdExclusiveMin),
+  startTime: zod.iso.datetime({}).min(1),
+  endTime: zod.iso.datetime({}).min(1),
+  bookedBy: zod
+    .string()
+    .min(1)
+    .max(putApiBookingsIdWithTextJsonBodyBookedByMax),
   purpose: zod.string().nullish(),
 });
 
@@ -210,11 +238,20 @@ export const PutApiBookingsIdWithApplicationJsonParams = zod.object({
   id: zod.number(),
 });
 
+export const putApiBookingsIdWithApplicationJsonBodyRoomIdExclusiveMin = 0;
+
+export const putApiBookingsIdWithApplicationJsonBodyBookedByMax = 200;
+
 export const PutApiBookingsIdWithApplicationJsonBody = zod.object({
-  roomId: zod.number(),
-  startTime: zod.iso.datetime({}),
-  endTime: zod.iso.datetime({}),
-  bookedBy: zod.string(),
+  roomId: zod
+    .number()
+    .gt(putApiBookingsIdWithApplicationJsonBodyRoomIdExclusiveMin),
+  startTime: zod.iso.datetime({}).min(1),
+  endTime: zod.iso.datetime({}).min(1),
+  bookedBy: zod
+    .string()
+    .min(1)
+    .max(putApiBookingsIdWithApplicationJsonBodyBookedByMax),
   purpose: zod.string().nullish(),
 });
 

@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "concurrently --names \"backend,frontend\" --prefix-colors \"cyan,magenta\" \"dotnet watch --project backend/src/Backend.Api/Backend.Api.csproj\" \"npm run dev --prefix frontend\"",
     "api:export": "dotnet build backend/Backend.sln && npm run swagger:export --prefix backend",
-    "api:generate": "cd frontend && npm run api:generate && npm run format -- --write src/api/generated",
+    "api:generate": "cd frontend && npm run api:generate",
     "api:sync": "npm run api:export && npm run api:generate",
     "api:check": "npm run api:sync && git diff --exit-code frontend/src/api/generated",
     "prebuild": "npm run api:sync",

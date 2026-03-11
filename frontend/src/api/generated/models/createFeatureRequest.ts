@@ -7,6 +7,9 @@
  */
 
 export interface CreateFeatureRequest {
-  /** @minLength 1 */
+  /**
+   * @minLength 1
+   * @maxLength 200
+   */
   name: string;
 }

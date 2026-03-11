@@ -22,8 +22,10 @@ export const GetApiLocationsResponse = zod.object({
   errors: zod.array(zod.string()).nullish(),
 });
 
+export const postApiLocationsWithJsonBodyNameMax = 200;
+
 export const PostApiLocationsWithJsonBody = zod.object({
-  name: zod.string(),
+  name: zod.string().min(1).max(postApiLocationsWithJsonBodyNameMax),
 });
 
 export const PostApiLocationsWithJsonResponse = zod.object({
@@ -39,8 +41,10 @@ export const PostApiLocationsWithJsonResponse = zod.object({
   errors: zod.array(zod.string()).nullish(),
 });
 
+export const postApiLocationsWithTextJsonBodyNameMax = 200;
+
 export const PostApiLocationsWithTextJsonBody = zod.object({
-  name: zod.string(),
+  name: zod.string().min(1).max(postApiLocationsWithTextJsonBodyNameMax),
 });
 
 export const PostApiLocationsWithTextJsonResponse = zod.object({
@@ -56,8 +60,10 @@ export const PostApiLocationsWithTextJsonResponse = zod.object({
   errors: zod.array(zod.string()).nullish(),
 });
 
+export const postApiLocationsWithApplicationJsonBodyNameMax = 200;
+
 export const PostApiLocationsWithApplicationJsonBody = zod.object({
-  name: zod.string(),
+  name: zod.string().min(1).max(postApiLocationsWithApplicationJsonBodyNameMax),
 });
 
 export const PostApiLocationsWithApplicationJsonResponse = zod.object({
@@ -94,8 +100,10 @@ export const PutApiLocationsIdWithJsonParams = zod.object({
   id: zod.number(),
 });
 
+export const putApiLocationsIdWithJsonBodyNameMax = 200;
+
 export const PutApiLocationsIdWithJsonBody = zod.object({
-  name: zod.string(),
+  name: zod.string().min(1).max(putApiLocationsIdWithJsonBodyNameMax),
 });
 
 export const PutApiLocationsIdWithJsonResponse = zod.object({
@@ -115,8 +123,10 @@ export const PutApiLocationsIdWithTextJsonParams = zod.object({
   id: zod.number(),
 });
 
+export const putApiLocationsIdWithTextJsonBodyNameMax = 200;
+
 export const PutApiLocationsIdWithTextJsonBody = zod.object({
-  name: zod.string(),
+  name: zod.string().min(1).max(putApiLocationsIdWithTextJsonBodyNameMax),
 });
 
 export const PutApiLocationsIdWithTextJsonResponse = zod.object({
@@ -136,8 +146,13 @@ export const PutApiLocationsIdWithApplicationJsonParams = zod.object({
   id: zod.number(),
 });
 
+export const putApiLocationsIdWithApplicationJsonBodyNameMax = 200;
+
 export const PutApiLocationsIdWithApplicationJsonBody = zod.object({
-  name: zod.string(),
+  name: zod
+    .string()
+    .min(1)
+    .max(putApiLocationsIdWithApplicationJsonBodyNameMax),
 });
 
 export const PutApiLocationsIdWithApplicationJsonResponse = zod.object({

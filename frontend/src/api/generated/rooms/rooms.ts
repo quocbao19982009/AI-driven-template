@@ -212,9 +212,7 @@ export const postApiRooms = async (
   options?: RequestInit
 ): Promise<postApiRoomsResponse> => {
   const formData = new FormData();
-  if (postApiRoomsBody.Name !== undefined) {
-    formData.append(`Name`, postApiRoomsBody.Name);
-  }
+  formData.append(`Name`, postApiRoomsBody.Name);
   if (postApiRoomsBody.Capacity !== undefined) {
     formData.append(`Capacity`, postApiRoomsBody.Capacity.toString());
   }
@@ -609,9 +607,7 @@ export const putApiRoomsId = async (
   options?: RequestInit
 ): Promise<putApiRoomsIdResponse> => {
   const formData = new FormData();
-  if (putApiRoomsIdBody.Name !== undefined) {
-    formData.append(`Name`, putApiRoomsIdBody.Name);
-  }
+  formData.append(`Name`, putApiRoomsIdBody.Name);
   if (putApiRoomsIdBody.Capacity !== undefined) {
     formData.append(`Capacity`, putApiRoomsIdBody.Capacity.toString());
   }

@@ -7,5 +7,9 @@
  */
 
 export interface CreateLocationRequest {
+  /**
+   * @minLength 1
+   * @maxLength 200
+   */
   name: string;
 }

@@ -7,9 +7,25 @@
  */
 
 export interface CreateUserRequest {
+  /**
+   * @minLength 1
+   * @maxLength 100
+   */
   firstName: string;
+  /**
+   * @minLength 1
+   * @maxLength 100
+   */
   lastName: string;
+  /**
+   * @minLength 1
+   * @maxLength 256
+   */
   email: string;
+  /**
+   * @minLength 8
+   * @pattern (?=.*[A-Z])(?=.*[a-z])(?=.*\d)
+   */
   password: string;
   /** @nullable */
   role?: string | null;

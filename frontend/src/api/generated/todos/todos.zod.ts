@@ -42,8 +42,10 @@ export const GetApiTodosResponse = zod.object({
   errors: zod.array(zod.string()).nullish(),
 });
 
+export const postApiTodosWithJsonBodyTitleMax = 200;
+
 export const PostApiTodosWithJsonBody = zod.object({
-  title: zod.string(),
+  title: zod.string().min(1).max(postApiTodosWithJsonBodyTitleMax),
   description: zod.string().nullish(),
   dueDate: zod.iso.datetime({}).nullish(),
 });
@@ -65,8 +67,10 @@ export const PostApiTodosWithJsonResponse = zod.object({
   errors: zod.array(zod.string()).nullish(),
 });
 
+export const postApiTodosWithTextJsonBodyTitleMax = 200;
+
 export const PostApiTodosWithTextJsonBody = zod.object({
-  title: zod.string(),
+  title: zod.string().min(1).max(postApiTodosWithTextJsonBodyTitleMax),
   description: zod.string().nullish(),
   dueDate: zod.iso.datetime({}).nullish(),
 });
@@ -88,8 +92,10 @@ export const PostApiTodosWithTextJsonResponse = zod.object({
   errors: zod.array(zod.string()).nullish(),
 });
 
+export const postApiTodosWithApplicationJsonBodyTitleMax = 200;
+
 export const PostApiTodosWithApplicationJsonBody = zod.object({
-  title: zod.string(),
+  title: zod.string().min(1).max(postApiTodosWithApplicationJsonBodyTitleMax),
   description: zod.string().nullish(),
   dueDate: zod.iso.datetime({}).nullish(),
 });
@@ -136,8 +142,10 @@ export const PutApiTodosIdWithJsonParams = zod.object({
   id: zod.number(),
 });
 
+export const putApiTodosIdWithJsonBodyTitleMax = 200;
+
 export const PutApiTodosIdWithJsonBody = zod.object({
-  title: zod.string(),
+  title: zod.string().min(1).max(putApiTodosIdWithJsonBodyTitleMax),
   description: zod.string().nullish(),
   dueDate: zod.iso.datetime({}).nullish(),
 });
@@ -163,8 +171,10 @@ export const PutApiTodosIdWithTextJsonParams = zod.object({
   id: zod.number(),
 });
 
+export const putApiTodosIdWithTextJsonBodyTitleMax = 200;
+
 export const PutApiTodosIdWithTextJsonBody = zod.object({
-  title: zod.string(),
+  title: zod.string().min(1).max(putApiTodosIdWithTextJsonBodyTitleMax),
   description: zod.string().nullish(),
   dueDate: zod.iso.datetime({}).nullish(),
 });
@@ -190,8 +200,10 @@ export const PutApiTodosIdWithApplicationJsonParams = zod.object({
   id: zod.number(),
 });
 
+export const putApiTodosIdWithApplicationJsonBodyTitleMax = 200;
+
 export const PutApiTodosIdWithApplicationJsonBody = zod.object({
-  title: zod.string(),
+  title: zod.string().min(1).max(putApiTodosIdWithApplicationJsonBodyTitleMax),
   description: zod.string().nullish(),
   dueDate: zod.iso.datetime({}).nullish(),
 });

@@ -7,9 +7,16 @@
  */
 
 export interface CreateBookingRequest {
+  /** @exclusiveMinimum 0 */
   roomId: number;
+  /** @minLength 1 */
   startTime: string;
+  /** @minLength 1 */
   endTime: string;
+  /**
+   * @minLength 1
+   * @maxLength 200
+   */
   bookedBy: string;
   /** @nullable */
   purpose?: string | null;

@@ -42,11 +42,26 @@ export const GetApiUsersResponse = zod.object({
   errors: zod.array(zod.string()).nullish(),
 });
 
+export const postApiUsersWithJsonBodyFirstNameMax = 100;
+
+export const postApiUsersWithJsonBodyLastNameMax = 100;
+
+export const postApiUsersWithJsonBodyEmailMax = 256;
+
+export const postApiUsersWithJsonBodyPasswordMin = 8;
+
+export const postApiUsersWithJsonBodyPasswordRegExp = new RegExp(
+  "(?=.\*[A-Z])(?=.\*[a-z])(?=.\*\\d)"
+);
+
 export const PostApiUsersWithJsonBody = zod.object({
-  firstName: zod.string(),
-  lastName: zod.string(),
-  email: zod.string(),
-  password: zod.string(),
+  firstName: zod.string().min(1).max(postApiUsersWithJsonBodyFirstNameMax),
+  lastName: zod.string().min(1).max(postApiUsersWithJsonBodyLastNameMax),
+  email: zod.email().min(1).max(postApiUsersWithJsonBodyEmailMax),
+  password: zod
+    .string()
+    .min(postApiUsersWithJsonBodyPasswordMin)
+    .regex(postApiUsersWithJsonBodyPasswordRegExp),
   role: zod.string().nullish(),
 });
 
@@ -67,11 +82,26 @@ export const PostApiUsersWithJsonResponse = zod.object({
   errors: zod.array(zod.string()).nullish(),
 });
 
+export const postApiUsersWithTextJsonBodyFirstNameMax = 100;
+
+export const postApiUsersWithTextJsonBodyLastNameMax = 100;
+
+export const postApiUsersWithTextJsonBodyEmailMax = 256;
+
+export const postApiUsersWithTextJsonBodyPasswordMin = 8;
+
+export const postApiUsersWithTextJsonBodyPasswordRegExp = new RegExp(
+  "(?=.\*[A-Z])(?=.\*[a-z])(?=.\*\\d)"
+);
+
 export const PostApiUsersWithTextJsonBody = zod.object({
-  firstName: zod.string(),
-  lastName: zod.string(),
-  email: zod.string(),
-  password: zod.string(),
+  firstName: zod.string().min(1).max(postApiUsersWithTextJsonBodyFirstNameMax),
+  lastName: zod.string().min(1).max(postApiUsersWithTextJsonBodyLastNameMax),
+  email: zod.email().min(1).max(postApiUsersWithTextJsonBodyEmailMax),
+  password: zod
+    .string()
+    .min(postApiUsersWithTextJsonBodyPasswordMin)
+    .regex(postApiUsersWithTextJsonBodyPasswordRegExp),
   role: zod.string().nullish(),
 });
 
@@ -92,11 +122,32 @@ export const PostApiUsersWithTextJsonResponse = zod.object({
   errors: zod.array(zod.string()).nullish(),
 });
 
+export const postApiUsersWithApplicationJsonBodyFirstNameMax = 100;
+
+export const postApiUsersWithApplicationJsonBodyLastNameMax = 100;
+
+export const postApiUsersWithApplicationJsonBodyEmailMax = 256;
+
+export const postApiUsersWithApplicationJsonBodyPasswordMin = 8;
+
+export const postApiUsersWithApplicationJsonBodyPasswordRegExp = new RegExp(
+  "(?=.\*[A-Z])(?=.\*[a-z])(?=.\*\\d)"
+);
+
 export const PostApiUsersWithApplicationJsonBody = zod.object({
-  firstName: zod.string(),
-  lastName: zod.string(),
-  email: zod.string(),
-  password: zod.string(),
+  firstName: zod
+    .string()
+    .min(1)
+    .max(postApiUsersWithApplicationJsonBodyFirstNameMax),
+  lastName: zod
+    .string()
+    .min(1)
+    .max(postApiUsersWithApplicationJsonBodyLastNameMax),
+  email: zod.email().min(1).max(postApiUsersWithApplicationJsonBodyEmailMax),
+  password: zod
+    .string()
+    .min(postApiUsersWithApplicationJsonBodyPasswordMin)
+    .regex(postApiUsersWithApplicationJsonBodyPasswordRegExp),
   role: zod.string().nullish(),
 });
 
@@ -142,10 +193,16 @@ export const PutApiUsersIdWithJsonParams = zod.object({
   id: zod.number(),
 });
 
+export const putApiUsersIdWithJsonBodyFirstNameMax = 100;
+
+export const putApiUsersIdWithJsonBodyLastNameMax = 100;
+
+export const putApiUsersIdWithJsonBodyEmailMax = 256;
+
 export const PutApiUsersIdWithJsonBody = zod.object({
-  firstName: zod.string(),
-  lastName: zod.string(),
-  email: zod.string(),
+  firstName: zod.string().min(1).max(putApiUsersIdWithJsonBodyFirstNameMax),
+  lastName: zod.string().min(1).max(putApiUsersIdWithJsonBodyLastNameMax),
+  email: zod.email().min(1).max(putApiUsersIdWithJsonBodyEmailMax),
   role: zod.string().nullish(),
 });
 
@@ -170,10 +227,16 @@ export const PutApiUsersIdWithTextJsonParams = zod.object({
   id: zod.number(),
 });
 
+export const putApiUsersIdWithTextJsonBodyFirstNameMax = 100;
+
+export const putApiUsersIdWithTextJsonBodyLastNameMax = 100;
+
+export const putApiUsersIdWithTextJsonBodyEmailMax = 256;
+
 export const PutApiUsersIdWithTextJsonBody = zod.object({
-  firstName: zod.string(),
-  lastName: zod.string(),
-  email: zod.string(),
+  firstName: zod.string().min(1).max(putApiUsersIdWithTextJsonBodyFirstNameMax),
+  lastName: zod.string().min(1).max(putApiUsersIdWithTextJsonBodyLastNameMax),
+  email: zod.email().min(1).max(putApiUsersIdWithTextJsonBodyEmailMax),
   role: zod.string().nullish(),
 });
 
@@ -198,10 +261,22 @@ export const PutApiUsersIdWithApplicationJsonParams = zod.object({
   id: zod.number(),
 });
 
+export const putApiUsersIdWithApplicationJsonBodyFirstNameMax = 100;
+
+export const putApiUsersIdWithApplicationJsonBodyLastNameMax = 100;
+
+export const putApiUsersIdWithApplicationJsonBodyEmailMax = 256;
+
 export const PutApiUsersIdWithApplicationJsonBody = zod.object({
-  firstName: zod.string(),
-  lastName: zod.string(),
-  email: zod.string(),
+  firstName: zod
+    .string()
+    .min(1)
+    .max(putApiUsersIdWithApplicationJsonBodyFirstNameMax),
+  lastName: zod
+    .string()
+    .min(1)
+    .max(putApiUsersIdWithApplicationJsonBodyLastNameMax),
+  email: zod.email().min(1).max(putApiUsersIdWithApplicationJsonBodyEmailMax),
   role: zod.string().nullish(),
 });
 

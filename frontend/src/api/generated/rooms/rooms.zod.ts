@@ -49,10 +49,19 @@ export const GetApiRoomsResponse = zod.object({
   errors: zod.array(zod.string()).nullish(),
 });
 
+export const postApiRoomsBodyNameMax = 200;
+
+export const postApiRoomsBodyCapacityExclusiveMin = 0;
+
+export const postApiRoomsBodyLocationIdExclusiveMin = 0;
+
 export const PostApiRoomsBody = zod.object({
-  Name: zod.string().optional(),
-  Capacity: zod.number().optional(),
-  LocationId: zod.number().optional(),
+  Name: zod.string().min(1).max(postApiRoomsBodyNameMax),
+  Capacity: zod.number().gt(postApiRoomsBodyCapacityExclusiveMin).optional(),
+  LocationId: zod
+    .number()
+    .gt(postApiRoomsBodyLocationIdExclusiveMin)
+    .optional(),
   Purpose: zod.string().optional(),
   image: zod.instanceof(File).optional(),
 });
@@ -121,10 +130,19 @@ export const PutApiRoomsIdParams = zod.object({
   id: zod.number(),
 });
 
+export const putApiRoomsIdBodyNameMax = 200;
+
+export const putApiRoomsIdBodyCapacityExclusiveMin = 0;
+
+export const putApiRoomsIdBodyLocationIdExclusiveMin = 0;
+
 export const PutApiRoomsIdBody = zod.object({
-  Name: zod.string().optional(),
-  Capacity: zod.number().optional(),
-  LocationId: zod.number().optional(),
+  Name: zod.string().min(1).max(putApiRoomsIdBodyNameMax),
+  Capacity: zod.number().gt(putApiRoomsIdBodyCapacityExclusiveMin).optional(),
+  LocationId: zod
+    .number()
+    .gt(putApiRoomsIdBodyLocationIdExclusiveMin)
+    .optional(),
   Purpose: zod.string().optional(),
   image: zod.instanceof(File).optional(),
 });

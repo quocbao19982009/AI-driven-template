@@ -3,6 +3,7 @@ using Backend.Common.Extensions;
 using Backend.Common.Middleware;
 using Backend.Common.Swagger;
 using Backend.Data;
+using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
 using Backend.Features._FeatureTemplate;
 using Backend.Features.Bookings;
 using Backend.Features.Locations;
@@ -24,6 +25,10 @@ builder.Services.AddScoped<JwtService>();
 
 // Validation
 builder.Services.AddValidation();
+builder.Services.AddFluentValidationRulesToSwagger(options =>
+    {
+        options.SetNotNullableIfMinLengthGreaterThenZero = true;
+    });
 
 // CORS
 builder.Services.AddCorsPolicy(builder.Configuration);
@@ -60,6 +65,7 @@ builder.Services.AddSwaggerGen(options =>
 {
     options.SupportNonNullableReferenceTypes();
     options.SchemaFilter<RequiredSchemaFilter>();
+    options.DocumentFilter<FluentValidationPatternMergeFilter>();
 
     options.SwaggerDoc("v1", new OpenApiInfo
     {
@@ -91,7 +97,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI(c =>
     {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Backend API V1");
+        c.SwaggerEndpoint("/swagger/v1/swagger.yaml", "Backend API V1");
         c.RoutePrefix = "swagger"; // Set Swagger UI at /swagger
     });
 }

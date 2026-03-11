@@ -7,8 +7,14 @@
  */
 
 export type PutApiRoomsIdBody = {
-  Name?: string;
+  /**
+   * @minLength 1
+   * @maxLength 200
+   */
+  Name: string;
+  /** @exclusiveMinimum 0 */
   Capacity?: number;
+  /** @exclusiveMinimum 0 */
   LocationId?: number;
   Purpose?: string;
   image?: Blob;

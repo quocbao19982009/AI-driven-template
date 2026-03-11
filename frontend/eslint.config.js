@@ -21,6 +21,9 @@ export default defineConfig([
       ecmaVersion: 2020,
       globals: globals.browser,
     },
+    rules: {
+      "no-useless-escape": "warn",
+    },
   },
   // shadcn-generated UI files export variant constants alongside components — expected pattern
   {

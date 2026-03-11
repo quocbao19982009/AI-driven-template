@@ -38,8 +38,10 @@ export const GetApiFeaturesResponse = zod.object({
   errors: zod.array(zod.string()).nullish(),
 });
 
+export const postApiFeaturesWithJsonBodyNameMax = 200;
+
 export const PostApiFeaturesWithJsonBody = zod.object({
-  name: zod.string().min(1),
+  name: zod.string().min(1).max(postApiFeaturesWithJsonBodyNameMax),
 });
 
 export const PostApiFeaturesWithJsonResponse = zod.object({
@@ -55,8 +57,10 @@ export const PostApiFeaturesWithJsonResponse = zod.object({
   errors: zod.array(zod.string()).nullish(),
 });
 
+export const postApiFeaturesWithTextJsonBodyNameMax = 200;
+
 export const PostApiFeaturesWithTextJsonBody = zod.object({
-  name: zod.string().min(1),
+  name: zod.string().min(1).max(postApiFeaturesWithTextJsonBodyNameMax),
 });
 
 export const PostApiFeaturesWithTextJsonResponse = zod.object({
@@ -72,8 +76,10 @@ export const PostApiFeaturesWithTextJsonResponse = zod.object({
   errors: zod.array(zod.string()).nullish(),
 });
 
+export const postApiFeaturesWithApplicationJsonBodyNameMax = 200;
+
 export const PostApiFeaturesWithApplicationJsonBody = zod.object({
-  name: zod.string().min(1),
+  name: zod.string().min(1).max(postApiFeaturesWithApplicationJsonBodyNameMax),
 });
 
 export const PostApiFeaturesWithApplicationJsonResponse = zod.object({
@@ -110,8 +116,10 @@ export const PutApiFeaturesIdWithJsonParams = zod.object({
   id: zod.number(),
 });
 
+export const putApiFeaturesIdWithJsonBodyNameMax = 200;
+
 export const PutApiFeaturesIdWithJsonBody = zod.object({
-  name: zod.string().min(1),
+  name: zod.string().min(1).max(putApiFeaturesIdWithJsonBodyNameMax),
 });
 
 export const PutApiFeaturesIdWithJsonResponse = zod.object({
@@ -131,8 +139,10 @@ export const PutApiFeaturesIdWithTextJsonParams = zod.object({
   id: zod.number(),
 });
 
+export const putApiFeaturesIdWithTextJsonBodyNameMax = 200;
+
 export const PutApiFeaturesIdWithTextJsonBody = zod.object({
-  name: zod.string().min(1),
+  name: zod.string().min(1).max(putApiFeaturesIdWithTextJsonBodyNameMax),
 });
 
 export const PutApiFeaturesIdWithTextJsonResponse = zod.object({
@@ -152,8 +162,10 @@ export const PutApiFeaturesIdWithApplicationJsonParams = zod.object({
   id: zod.number(),
 });
 
+export const putApiFeaturesIdWithApplicationJsonBodyNameMax = 200;
+
 export const PutApiFeaturesIdWithApplicationJsonBody = zod.object({
-  name: zod.string().min(1),
+  name: zod.string().min(1).max(putApiFeaturesIdWithApplicationJsonBodyNameMax),
 });
 
 export const PutApiFeaturesIdWithApplicationJsonResponse = zod.object({
