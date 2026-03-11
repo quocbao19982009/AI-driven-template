@@ -15,5 +15,13 @@
   "i18n-ally.sourceLanguage": "en",
   "i18n-ally.displayLanguage": "en",
   "i18n-ally.enabledFrameworks": ["react-i18next"],
-  "i18n-ally.namespace": false
+  "i18n-ally.namespace": false,
+  // Github Copilot setting (mirror Claude Code)
+  "files.exclude": {
+    "**/.env*": true
+  },
+  "chat.tools.terminal.autoApprove": {
+    "/^dotnet ef database (update|drop)/i": false,
+    "/^dotnet ef migrations remove\\b/i": false
+  }
 }
