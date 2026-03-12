@@ -19,7 +19,6 @@ vi.mock("@tanstack/react-router", async (importOriginal) => {
 vi.mock("@/auth/auth-context", () => ({
   useAuth: () => ({
     accessToken: null,
-    user: null,
     isLoading: false,
     login: vi.fn(),
     logout: vi.fn(),

@@ -1,9 +1,17 @@
-import { useState, useEffect, useCallback, useRef, type ReactNode } from "react";
+import {
+  useState,
+  useEffect,
+  useCallback,
+  useRef,
+  type ReactNode,
+} from "react";
 import { AuthContext } from "./auth-context";
 import type { AuthContextValue } from "./auth-context";
 import type { MeDto } from "@/api/generated/models";
-import { postApiAuthRefresh } from "@/api/generated/auth/auth";
+import { postApiAuthRefresh, getApiAuthMe } from "@/api/generated/auth/auth";
 import { setApiFetchToken } from "@/api/mutator/apiFetch";
+import { useAppDispatch } from "@/store/hooks";
+import { setUser, clearUser } from "@/features/auth/store/auth-slice";
 
 interface AuthProviderProps {
   children: ReactNode;
@@ -11,9 +19,9 @@ interface AuthProviderProps {
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const [accessToken, setAccessToken] = useState<string | null>(null);
-  const [user, setUser] = useState<MeDto | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const didSilentRefresh = useRef(false);
+  const dispatch = useAppDispatch();
 
   // Silent refresh on mount — tries to get a new access token using the HttpOnly cookie
   useEffect(() => {
@@ -21,11 +29,20 @@ export function AuthProvider({ children }: AuthProviderProps) {
     didSilentRefresh.current = true;
 
     postApiAuthRefresh()
-      .then((res) => {
+      .then(async (res) => {
         const token = res.data?.data?.accessToken;
         if (token) {
           setAccessToken(token);
           setApiFetchToken(token);
+
+          // Fetch user profile and store in Redux
+          try {
+            const meRes = await getApiAuthMe();
+            const userData = meRes.data?.data ?? null;
+            dispatch(setUser(userData as MeDto | null));
+          } catch {
+            // Token is valid but /me failed — user stays null, not critical
+          }
         }
       })
       .catch(() => {
@@ -34,23 +51,21 @@ export function AuthProvider({ children }: AuthProviderProps) {
       .finally(() => {
         setIsLoading(false);
       });
-  }, []);
+  }, [dispatch]);
 
-  const login = useCallback((token: string, userData: MeDto) => {
+  const login = useCallback((token: string) => {
     setAccessToken(token);
-    setUser(userData);
     setApiFetchToken(token);
   }, []);
 
   const logout = useCallback(() => {
     setAccessToken(null);
-    setUser(null);
     setApiFetchToken(null);
-  }, []);
+    dispatch(clearUser());
+  }, [dispatch]);
 
   const value: AuthContextValue = {
     accessToken,
-    user,
     isLoading,
     login,
     logout,

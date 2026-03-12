@@ -15,7 +15,6 @@ public class RefreshTokensRepository : IRefreshTokensRepository
     public async Task<RefreshToken?> GetByTokenHashAsync(string tokenHash, CancellationToken cancellationToken = default)
     {
         return await _context.RefreshTokens
-            .AsNoTracking()
             .Include(t => t.User)
             .FirstOrDefaultAsync(t => t.Token == tokenHash, cancellationToken);
     }
@@ -23,7 +22,6 @@ public class RefreshTokensRepository : IRefreshTokensRepository
     public async Task<List<RefreshToken>> GetActiveByUserIdAsync(int userId, CancellationToken cancellationToken = default)
     {
         return await _context.RefreshTokens
-            .AsNoTracking()
             .Where(t => t.UserId == userId && t.RevokedAt == null && t.ExpiresAt > DateTime.UtcNow)
             .ToListAsync(cancellationToken);
     }

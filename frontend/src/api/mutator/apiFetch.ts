@@ -27,7 +27,7 @@ async function silentRefresh(): Promise<string | null> {
     return _refreshPromise;
   }
   _isRefreshing = true;
-  _refreshPromise = fetch(`${BASE_URL}/api/auth/refresh`, { method: "POST" })
+  _refreshPromise = fetch(`${BASE_URL}/api/auth/refresh`, { method: "POST", credentials: "include" })
     .then(async (res) => {
       if (!res.ok) return null;
       const body = await res.json().catch(() => null);
@@ -53,6 +53,7 @@ export const apiFetch = async <T>(
 
   const response = await fetch(`${BASE_URL}${url}`, {
     ...options,
+    credentials: "include",
     headers: {
       ...authHeader,
       ...options?.headers,
@@ -65,6 +66,7 @@ export const apiFetch = async <T>(
     if (newToken) {
       const retryResponse = await fetch(`${BASE_URL}${url}`, {
         ...options,
+        credentials: "include",
         headers: {
           Authorization: `Bearer ${newToken}`,
           ...options?.headers,

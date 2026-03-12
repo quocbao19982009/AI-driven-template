@@ -10,14 +10,20 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as SplatRouteImport } from './routes/$'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LoginIndexRouteImport } from './routes/login/index'
 import { Route as FeaturesIndexRouteImport } from './routes/features/index'
+import { Route as AuthenticatedTemplateProtectedIndexRouteImport } from './routes/_authenticated/template-protected/index'
 
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRoute = AuthenticatedRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SplatRoute = SplatRouteImport.update({
@@ -40,6 +46,12 @@ const FeaturesIndexRoute = FeaturesIndexRouteImport.update({
   path: '/features/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedTemplateProtectedIndexRoute =
+  AuthenticatedTemplateProtectedIndexRouteImport.update({
+    id: '/template-protected/',
+    path: '/template-protected/',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -47,6 +59,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/features/': typeof FeaturesIndexRoute
   '/login/': typeof LoginIndexRoute
+  '/template-protected/': typeof AuthenticatedTemplateProtectedIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -54,26 +67,44 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/features': typeof FeaturesIndexRoute
   '/login': typeof LoginIndexRoute
+  '/template-protected': typeof AuthenticatedTemplateProtectedIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
+  '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/about': typeof AboutRoute
   '/features/': typeof FeaturesIndexRoute
   '/login/': typeof LoginIndexRoute
+  '/_authenticated/template-protected/': typeof AuthenticatedTemplateProtectedIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/$' | '/about' | '/features/' | '/login/'
+  fullPaths:
+    | '/'
+    | '/$'
+    | '/about'
+    | '/features/'
+    | '/login/'
+    | '/template-protected/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/$' | '/about' | '/features' | '/login'
-  id: '__root__' | '/' | '/$' | '/about' | '/features/' | '/login/'
+  to: '/' | '/$' | '/about' | '/features' | '/login' | '/template-protected'
+  id:
+    | '__root__'
+    | '/'
+    | '/$'
+    | '/_authenticated'
+    | '/about'
+    | '/features/'
+    | '/login/'
+    | '/_authenticated/template-protected/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   SplatRoute: typeof SplatRoute
+  AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
   AboutRoute: typeof AboutRoute
   FeaturesIndexRoute: typeof FeaturesIndexRoute
   LoginIndexRoute: typeof LoginIndexRoute
@@ -86,6 +117,13 @@ declare module '@tanstack/react-router' {
       path: '/about'
       fullPath: '/about'
       preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/$': {
@@ -116,12 +154,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FeaturesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/template-protected/': {
+      id: '/_authenticated/template-protected/'
+      path: '/template-protected'
+      fullPath: '/template-protected/'
+      preLoaderRoute: typeof AuthenticatedTemplateProtectedIndexRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
   }
 }
+
+interface AuthenticatedRouteChildren {
+  AuthenticatedTemplateProtectedIndexRoute: typeof AuthenticatedTemplateProtectedIndexRoute
+}
+
+const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
+  AuthenticatedTemplateProtectedIndexRoute:
+    AuthenticatedTemplateProtectedIndexRoute,
+}
+
+const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
+  AuthenticatedRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   SplatRoute: SplatRoute,
+  AuthenticatedRoute: AuthenticatedRouteWithChildren,
   AboutRoute: AboutRoute,
   FeaturesIndexRoute: FeaturesIndexRoute,
   LoginIndexRoute: LoginIndexRoute,

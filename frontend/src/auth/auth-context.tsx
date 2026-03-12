@@ -1,11 +1,9 @@
 import { createContext, useContext } from "react";
-import type { MeDto } from "@/api/generated/models";
 
 export interface AuthContextValue {
   accessToken: string | null;
-  user: MeDto | null;
   isLoading: boolean;
-  login: (token: string, user: MeDto) => void;
+  login: (token: string) => void;
   logout: () => void;
 }
 

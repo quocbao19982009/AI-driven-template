@@ -19,7 +19,9 @@ export function LoginPage() {
   // Read the returnUrl from the query string (TanStack Router)
   const search = useSearch({ strict: false }) as { returnUrl?: string };
   const returnUrl =
-    search.returnUrl && search.returnUrl.startsWith("/")
+    search.returnUrl &&
+    search.returnUrl.startsWith("/") &&
+    !search.returnUrl.startsWith("//")
       ? search.returnUrl
       : "/";
 

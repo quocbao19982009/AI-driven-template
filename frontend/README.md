@@ -50,6 +50,23 @@ App runs at http://localhost:5173. The backend must be running at `VITE_API_URL`
 
 > `api:sync` is run from the **repo root**, not from `frontend/`. See root README.
 
+## Built-in Frontend Features
+
+These capabilities are already wired up in the template. Read this before building new features on top.
+
+| Feature | Description | Key files |
+| --- | --- | --- |
+| **Authentication** | Silent refresh on mount via HttpOnly cookies. `useAuth()` hook exposes `user`, `login()`, `logout()`. Protected routes redirect to `/login?returnUrl=<path>`. | `src/auth/auth-provider.tsx`, `src/auth/auth-context.tsx`, `src/components/protected-route.tsx` |
+| **API Client** | `apiFetch` injects Bearer token, handles 401 with one silent refresh + retry, auto-shows error toasts on 403 and 5xx. | `src/api/mutator/apiFetch.ts` |
+| **Toast Notifications** | Sonner toasts with custom icons (success, info, warning, error, loading). Auto-triggered by `apiFetch` for common errors. | `src/components/ui/sonner.tsx` |
+| **Internationalization** | English and Finnish out of the box. Language selection persisted to localStorage. Language switcher in app header. | `src/locales/en.json`, `src/locales/fi.json`, `src/components/ui/language-switcher.tsx` |
+| **Dark/Light Theme** | CSS variable-based theming (oklch). Swap palettes by editing `:root` and `.dark` blocks in `src/index.css`. | `src/index.css` |
+| **Form Handling** | react-hook-form + Zod. Extend Orval-generated schemas with `.extend()` for translated validation messages. | Pattern in `src/features/auth/hooks/use-login-form.ts` |
+| **Error Boundary** | Catches React render errors. Dev: shows stack trace. Prod: shows generic message + reset button. | `src/components/error-boundary.tsx` |
+| **Loading States** | `<Spinner>` for full-screen loads, `<Skeleton>` for inline placeholders. Root layout uses `<Suspense>` wrapping routes. | `src/components/ui/spinner.tsx`, `src/components/ui/skeleton.tsx` |
+| **Shared Hooks** | `useDebounce` (300ms default), `useMediaQuery` for responsive logic. | `src/hooks/use-debounce.ts`, `src/hooks/use-media-query.ts` |
+| **Utilities** | `cn()` for Tailwind class merging, `assetUrl()` for constructing full API asset URLs. | `src/lib/utils.ts` |
+
 ## Project Structure
 
 ```
@@ -57,12 +74,14 @@ src/
 ├── api/
 │   ├── generated/          # Orval output — NEVER edit manually
 │   └── mutator/apiFetch.ts # Base HTTP client — all requests go through here
+├── auth/                   # Auth context, provider, and useAuth hook
 ├── components/
 │   ├── layout/             # App shell and navigation
 │   └── ui/                 # shadcn/ui components
 ├── features/
 │   └── _template-feature/  # Template — AI copies this when scaffolding
-├── hooks/                  # Shared hooks (useDebounce, etc.)
+├── hooks/                  # Shared hooks (useDebounce, useMediaQuery, etc.)
+├── lib/                    # Utility functions (cn, assetUrl, etc.)
 ├── locales/                # en.json, fi.json — all UI strings
 ├── providers/              # React context providers (Query, Store, i18n)
 ├── routes/                 # TanStack Router file-based routes

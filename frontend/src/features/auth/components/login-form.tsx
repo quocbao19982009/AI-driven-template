@@ -7,11 +7,12 @@ import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
 import { useLoginForm } from "../hooks/use-login-form";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { setLoggingIn, setLoginError, clearLoginError } from "../store/auth-slice";
+import { setLoggingIn, setLoginError, clearLoginError, setUser } from "../store/auth-slice";
 import { usePostApiAuthLoginWithJson } from "@/api/generated/auth/auth";
 import { useGetApiAuthMe } from "@/api/generated/auth/auth";
 import { useAuth } from "@/auth/auth-context";
-import { ApiError } from "@/api/mutator/apiFetch";
+import { ApiError, setApiFetchToken } from "@/api/mutator/apiFetch";
+import type { MeDto } from "@/api/generated/models";
 
 interface LoginFormProps {
   onSuccess: () => void;
@@ -49,18 +50,21 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
           return;
         }
 
-        // Fetch user profile
+        // Set token immediately so the /me request is authenticated
+        setApiFetchToken(token);
+
+        // Fetch user profile and store in Redux
         try {
           const meRes = await meQuery.refetch();
-          const user = meRes.data?.data?.data ?? null;
-          login(token, user as Parameters<typeof login>[1]);
-          dispatch(setLoggingIn(false));
-          onSuccess();
+          const userData = (meRes.data?.data?.data ?? null) as MeDto | null;
+          dispatch(setUser(userData));
         } catch {
-          login(token, null as unknown as Parameters<typeof login>[1]);
-          dispatch(setLoggingIn(false));
-          onSuccess();
+          // /me failed — user stays null, not critical
         }
+
+        login(token);
+        dispatch(setLoggingIn(false));
+        onSuccess();
       },
       onError: (error: unknown) => {
         dispatch(setLoggingIn(false));

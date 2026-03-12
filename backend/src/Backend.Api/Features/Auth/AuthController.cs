@@ -10,19 +10,14 @@ namespace Backend.Features.Auth;
 public class AuthController : ControllerBase
 {
     private const string RefreshTokenCookieName = "refreshToken";
-    private static readonly CookieOptions RefreshTokenCookieOptions = new()
-    {
-        HttpOnly = true,
-        Secure = true,
-        SameSite = SameSiteMode.Strict,
-        Path = "/api/auth"
-    };
 
     private readonly IAuthService _authService;
+    private readonly bool _secureCookie;
 
-    public AuthController(IAuthService authService)
+    public AuthController(IAuthService authService, IWebHostEnvironment env)
     {
         _authService = authService;
+        _secureCookie = !env.IsDevelopment();
     }
 
     /// <summary>
@@ -97,10 +92,10 @@ public class AuthController : ControllerBase
     {
         var options = new CookieOptions
         {
-            HttpOnly = RefreshTokenCookieOptions.HttpOnly,
-            Secure = RefreshTokenCookieOptions.Secure,
-            SameSite = RefreshTokenCookieOptions.SameSite,
-            Path = RefreshTokenCookieOptions.Path,
+            HttpOnly = true,
+            Secure = _secureCookie,
+            SameSite = SameSiteMode.Strict,
+            Path = "/api/auth",
             Expires = DateTimeOffset.UtcNow.AddDays(7)
         };
         Response.Cookies.Append(RefreshTokenCookieName, rawToken, options);
@@ -110,10 +105,10 @@ public class AuthController : ControllerBase
     {
         var options = new CookieOptions
         {
-            HttpOnly = RefreshTokenCookieOptions.HttpOnly,
-            Secure = RefreshTokenCookieOptions.Secure,
-            SameSite = RefreshTokenCookieOptions.SameSite,
-            Path = RefreshTokenCookieOptions.Path,
+            HttpOnly = true,
+            Secure = _secureCookie,
+            SameSite = SameSiteMode.Strict,
+            Path = "/api/auth",
             Expires = DateTimeOffset.UnixEpoch
         };
         Response.Cookies.Append(RefreshTokenCookieName, string.Empty, options);

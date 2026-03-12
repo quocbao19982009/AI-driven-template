@@ -3,6 +3,7 @@ import { Link, Outlet } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { LanguageSwitcher } from "@/components/ui/language-switcher";
 import { useAuth } from "@/auth/auth-context";
+import { useAppSelector } from "@/store/hooks";
 import { usePostApiAuthLogout } from "@/api/generated/auth/auth";
 import { Button } from "@/components/ui/button";
 import {
@@ -16,7 +17,8 @@ import { ErrorBoundary } from "@/components/error-boundary";
 
 export function AppLayout() {
   const { t } = useTranslation();
-  const { accessToken, user, logout } = useAuth();
+  const { accessToken, logout } = useAuth();
+  const user = useAppSelector((s) => s.auth.user);
 
   const logoutMutation = usePostApiAuthLogout({
     mutation: {

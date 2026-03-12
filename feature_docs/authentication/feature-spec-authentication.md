@@ -228,8 +228,8 @@ On application startup in the **Development** environment only, `DataSeeder.Seed
 - **Revoked refresh token (reuse detected):** Revoke ALL active refresh tokens for that user, return `401 Unauthorized` with message `"Session invalidated due to suspicious activity"` — forces full re-login on all devices
 - **Refresh token hash:** Store `SHA256(rawToken)` in the DB — the raw token travels only over the wire and in the cookie; the DB stores only its hash
 - **BCrypt cost factor:** Minimum 12 in production
-- **JWT claims:** `sub` (userId), `email`, `iat`, `exp`
-- **Cookie settings:** `HttpOnly=true`, `Secure=true` (HTTPS only), `SameSite=Strict`, `Path=/api/auth`
+- **JWT claims:** `sub` (userId), `email`, `role`, `jti` (unique token ID), `iat`, `exp` — `iat`/`exp` are added automatically by `JwtSecurityToken`
+- **Cookie settings:** `HttpOnly=true`, `Secure=true` in production / `false` in development (env-conditional), `SameSite=Strict`, `Path=/api/auth`
 
 ### Acceptance Scenarios
 
@@ -344,10 +344,11 @@ Full-page centered login card (not a dialog). Layout:
 
 ### Redux UI state
 
+- `user: MeDto | null` — current authenticated user profile (id, email, firstName, lastName, role)
 - `isLoggingIn: boolean` — true while login request is in-flight
 - `loginError: string | null` — current error message to display
 
-> Access token itself is NOT in Redux — it lives in a React auth context to avoid serialization into the store.
+> Access token itself is NOT in Redux — it lives in a React auth context to avoid serialization/DevTools exposure. User profile (non-secret) lives in Redux for easy global access via `useAppSelector(s => s.auth.user)`.
 
 ---
 
@@ -365,7 +366,7 @@ Full-page centered login card (not a dialog). Layout:
 | Service interface    | `backend/src/Backend.Api/Features/Auth/IAuthService.cs`             |
 | Service              | `backend/src/Backend.Api/Features/Auth/AuthService.cs`              |
 | Controller           | `backend/src/Backend.Api/Features/Auth/AuthController.cs`           |
-| JWT config           | `backend/src/Backend.Api/Common/Auth/JwtSettings.cs`                |
+| JWT service          | `backend/src/Backend.Api/Identity/JwtService.cs`                    |
 | Data seeder          | `backend/src/Backend.Api/Data/DataSeeder.cs`                        |
 
 ### Frontend
