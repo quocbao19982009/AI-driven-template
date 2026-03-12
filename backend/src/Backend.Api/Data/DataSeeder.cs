@@ -1,18 +1,57 @@
 using Backend.Features._FeatureTemplate;
+using Backend.Features.Users;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 
 namespace Backend.Data;
 
 public static class DataSeeder
 {
-    public static async Task SeedAsync(ApplicationDbContext context, ILogger logger)
+    public static async Task SeedAsync(ApplicationDbContext context, ILogger logger, IConfiguration configuration)
     {
         logger.LogInformation("DataSeeder: Running development seed...");
 
+        await SeedAdminUserAsync(context, logger, configuration);
         await SeedFeaturesAsync(context, logger);
         // TODO: Add new seed methods here as you add new features
         // await SeedProductsAsync(context, logger);
+    }
+
+    private static async Task SeedAdminUserAsync(ApplicationDbContext context, ILogger logger, IConfiguration configuration)
+    {
+        const string adminEmail = "admin@example.com";
+
+        if (await context.Users.AnyAsync(u => u.Email == adminEmail))
+        {
+            logger.LogInformation("DataSeeder: Admin user already exists — skipping");
+            return;
+        }
+
+        var rawPassword = "password123"; // Default password for development
+        if (string.IsNullOrWhiteSpace(rawPassword))
+        {
+            logger.LogWarning(
+                "DataSeeder: Seed:AdminPassword is not configured — admin user will NOT be seeded. " +
+                "Set it via environment variable (Seed__AdminPassword) or dotnet user-secrets.");
+            return;
+        }
+
+        var passwordHash = BCrypt.Net.BCrypt.HashPassword(rawPassword, workFactor: 12);
+
+        var adminUser = new User
+        {
+            FirstName = "Admin",
+            LastName = "User",
+            Email = adminEmail,
+            PasswordHash = passwordHash,
+            Role = "Admin",
+            IsActive = true,
+            CreatedAt = DateTime.UtcNow,
+        };
+
+        context.Users.Add(adminUser);
+        await context.SaveChangesAsync();
+
+        logger.LogInformation("DataSeeder: Seeded admin user ({Email})", adminEmail);
     }
 
     private static async Task SeedFeaturesAsync(ApplicationDbContext context, ILogger logger)

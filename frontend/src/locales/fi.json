@@ -9,12 +9,40 @@
     "deleting": "Poistetaan...",
     "previous": "Edellinen",
     "next": "Seuraava",
-    "page": "Sivu {{page}} / {{total}}"
+    "page": "Sivu {{page}} / {{total}}",
+    "dismiss": "Sulje"
   },
   "nav": {
     "home": "Etusivu",
     "about": "Tietoja",
-    "features": "Ominaisuudet"
+    "features": "Ominaisuudet",
+    "login": "Kirjaudu sisään",
+    "logout": "Kirjaudu ulos"
+  },
+  "auth": {
+    "page": {
+      "title": "Kirjaudu sisään",
+      "description": "Syötä sähköpostiosoitteesi ja salasanasi kirjautuaksesi tilillesi."
+    },
+    "form": {
+      "emailLabel": "Sähköposti",
+      "emailPlaceholder": "sinä@esimerkki.fi",
+      "passwordLabel": "Salasana",
+      "passwordPlaceholder": "••••••••",
+      "showPassword": "Näytä salasana",
+      "hidePassword": "Piilota salasana",
+      "submitButton": "Kirjaudu sisään"
+    },
+    "validation": {
+      "emailRequired": "Sähköposti on pakollinen",
+      "emailInvalid": "Syötä kelvollinen sähköpostiosoite",
+      "emailTooLong": "Sähköposti saa olla enintään 256 merkkiä",
+      "passwordRequired": "Salasana on pakollinen",
+      "passwordTooLong": "Salasana saa olla enintään 200 merkkiä"
+    },
+    "error": {
+      "generic": "Jotain meni pieleen. Yritä uudelleen."
+    }
   },
   "features": {
     "title": "Ominaisuudet",

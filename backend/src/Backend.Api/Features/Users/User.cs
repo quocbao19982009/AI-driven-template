@@ -17,8 +17,9 @@ public class User : BaseEntity
     [MaxLength(256)]
     public string Email { get; set; } = string.Empty;
 
-    [Required]
-    public string PasswordHash { get; set; } = string.Empty;
+    // Nullable to support OAuth-only users who never set a password.
+    // Local login must reject with 401 if this is null.
+    public string? PasswordHash { get; set; }
 
     [MaxLength(50)]
     public string Role { get; set; } = "User";

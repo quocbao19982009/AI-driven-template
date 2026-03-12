@@ -40,6 +40,10 @@ public class ErrorHandlingMiddleware
                 HttpStatusCode.BadRequest,
                 ApiResponse<object>.Fail(ex.Message, ex.Errors)
             ),
+            UnauthorizedAccessException ex => (
+                HttpStatusCode.Unauthorized,
+                ApiResponse<object>.Fail(ex.Message)
+            ),
             _ => (
                 HttpStatusCode.InternalServerError,
                 ApiResponse<object>.Fail("An unexpected error occurred.")
@@ -53,6 +57,7 @@ public class ErrorHandlingMiddleware
                 break;
             case HttpStatusCode.NotFound:
             case HttpStatusCode.BadRequest:
+            case HttpStatusCode.Unauthorized:
                 _logger.LogWarning("Request failed with {StatusCode}: {Message}", (int)statusCode, exception.Message);
                 break;
         }

@@ -4,6 +4,7 @@ using Backend.Common.Middleware;
 using Backend.Common.Swagger;
 using Backend.Data;
 using Backend.Features._FeatureTemplate;
+using Backend.Features.Auth;
 using Backend.Features.Users;
 using Backend.Identity;
 using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
@@ -37,6 +38,8 @@ builder.Services.AddScoped<IUsersRepository, UsersRepository>();
 builder.Services.AddScoped<IUsersService, UsersService>();
 builder.Services.AddScoped<IFeatureRepository, FeatureRepository>();
 builder.Services.AddScoped<IFeatureService, FeatureService>();
+builder.Services.AddScoped<IRefreshTokensRepository, RefreshTokensRepository>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 // Logging
 builder.Host.UseSerilog((context, loggerConfig) => loggerConfig.ReadFrom.Configuration(context.Configuration));
 
@@ -95,7 +98,8 @@ if (app.Environment.IsDevelopment())
     var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
     var seederLogger = scope.ServiceProvider.GetRequiredService<ILoggerFactory>()
         .CreateLogger(nameof(DataSeeder));
-    await DataSeeder.SeedAsync(db, seederLogger);
+    var seederConfig = scope.ServiceProvider.GetRequiredService<IConfiguration>();
+    await DataSeeder.SeedAsync(db, seederLogger, seederConfig);
 }
 
 app.Run();

@@ -9,12 +9,40 @@
     "deleting": "Deleting...",
     "previous": "Previous",
     "next": "Next",
-    "page": "Page {{page}} of {{total}}"
+    "page": "Page {{page}} of {{total}}",
+    "dismiss": "Dismiss"
   },
   "nav": {
     "home": "Home",
     "about": "About",
-    "features": "Features"
+    "features": "Features",
+    "login": "Sign in",
+    "logout": "Sign out"
+  },
+  "auth": {
+    "page": {
+      "title": "Sign in",
+      "description": "Enter your email and password to access your account."
+    },
+    "form": {
+      "emailLabel": "Email",
+      "emailPlaceholder": "you@example.com",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "••••••••",
+      "showPassword": "Show password",
+      "hidePassword": "Hide password",
+      "submitButton": "Sign in"
+    },
+    "validation": {
+      "emailRequired": "Email is required",
+      "emailInvalid": "Enter a valid email address",
+      "emailTooLong": "Email must be at most 256 characters",
+      "passwordRequired": "Password is required",
+      "passwordTooLong": "Password must be at most 200 characters"
+    },
+    "error": {
+      "generic": "Something went wrong. Please try again."
+    }
   },
   "features": {
     "title": "Features",

@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import featuresReducer from "@/features/_template-feature/store/features-slice";
+import authReducer from "@/features/auth/store/auth-slice";
 
 function createTestQueryClient() {
   return new QueryClient({
@@ -18,6 +19,7 @@ function createTestStore() {
   return configureStore({
     reducer: {
       features: featuresReducer,
+      auth: authReducer,
     },
   });
 }

@@ -1,5 +1,6 @@
 using Backend.Common.Models;
 using Backend.Features._FeatureTemplate;
+using Backend.Features.Auth;
 using Backend.Features.Users;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +16,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<User> Users => Set<User>();
     // TODO: Mock remove this when we have real features
     public DbSet<Feature> Features => Set<Feature>();
+    public DbSet<RefreshToken> RefreshTokens => Set<RefreshToken>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -23,6 +25,15 @@ public class ApplicationDbContext : DbContext
         modelBuilder.Entity<User>(entity =>
         {
             entity.HasIndex(u => u.Email).IsUnique();
+        });
+
+        modelBuilder.Entity<RefreshToken>(entity =>
+        {
+            entity.HasIndex(t => t.Token).IsUnique();
+            entity.HasOne(t => t.User)
+                .WithMany()
+                .HasForeignKey(t => t.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
         });
     }
 
