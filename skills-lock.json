@@ -1,6 +1,11 @@
 {
   "version": 1,
   "skills": {
+    "mermaid-diagrams": {
+      "source": "davila7/claude-code-templates",
+      "sourceType": "github",
+      "computedHash": "8f59e878e4ecdb6205c968dc6eb92aca1d1d5c949ce4dfd8cef06208bffbc10b"
+    },
     "shadcn": {
       "source": "shadcn/ui",
       "sourceType": "github",
