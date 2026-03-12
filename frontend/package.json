@@ -10,7 +10,7 @@
     "preview": "vite preview",
     "generate-routes": "tsr generate",
     "watch-routes": "tsr watch",
-    "api:generate": "npx orval && npm run format -- --write src/api/generated",
+    "api:generate": "npx orval && prettier --write src/api/generated",
     "api:generate:watch": "npx orval --watch",
     "test": "vitest",
     "test:run": "vitest run",

@@ -28,9 +28,9 @@ public class RequiredSchemaFilter : ISchemaFilter
 
             var isNullable = IsNullableProperty(property);
 
-            if (!isNullable)
+            if (!isNullable && schema is OpenApiSchema concreteSchema)
             {
-                schema.Required.Add(schemaPropertyName);
+                concreteSchema.Required!.Add(schemaPropertyName);
             }
         }
     }

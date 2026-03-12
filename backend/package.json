@@ -2,6 +2,6 @@
   "name": "backend",
   "private": true,
   "scripts": {
-    "swagger:export": "dotnet swagger tofile --output swagger.json $(find ./src/Backend.Api/bin -name 'Backend.Api.dll' | head -1) v1"
+    "swagger:export": "dotnet swagger tofile --output swagger.json ./src/Backend.Api/bin/Debug/net10.0/Backend.Api.dll v1"
   }
 }

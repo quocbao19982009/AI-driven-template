@@ -5,9 +5,6 @@ import { PostApiFeaturesWithJsonBody } from "@/api/generated/feature/feature.zod
 import type { FeatureDto } from "@/api/generated/models";
 
 export const featureFormSchema = PostApiFeaturesWithJsonBody;
-// export const featureFormSchema = PostApiFeaturesWithJsonBody.extend({
-//   name: z.string().min(1, "Name is required"),
-// });
 
 export type FeatureFormValues = z.infer<typeof featureFormSchema>;
 

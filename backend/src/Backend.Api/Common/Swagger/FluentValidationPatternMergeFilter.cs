@@ -16,7 +16,7 @@ public class FluentValidationPatternMergeFilter : IDocumentFilter
 {
     public void Apply(OpenApiDocument swaggerDoc, DocumentFilterContext context)
     {
-        foreach (IOpenApiSchema schema in swaggerDoc.Components.Schemas.Values)
+        foreach (IOpenApiSchema schema in swaggerDoc.Components?.Schemas?.Values ?? [])
             MergePatterns(schema);
     }
 

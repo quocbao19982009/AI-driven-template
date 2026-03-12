@@ -4,10 +4,6 @@ using Backend.Common.Middleware;
 using Backend.Common.Swagger;
 using Backend.Data;
 using Backend.Features._FeatureTemplate;
-using Backend.Features.Bookings;
-using Backend.Features.Locations;
-using Backend.Features.Rooms;
-using Backend.Features.Todos;
 using Backend.Features.Users;
 using Backend.Identity;
 using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
@@ -41,22 +37,6 @@ builder.Services.AddScoped<IUsersRepository, UsersRepository>();
 builder.Services.AddScoped<IUsersService, UsersService>();
 builder.Services.AddScoped<IFeatureRepository, FeatureRepository>();
 builder.Services.AddScoped<IFeatureService, FeatureService>();
-builder.Services.AddScoped<ITodosRepository, TodosRepository>();
-builder.Services.AddScoped<ITodosService, TodosService>();
-
-// Locations
-builder.Services.AddScoped<ILocationsRepository, LocationsRepository>();
-builder.Services.AddScoped<ILocationsService, LocationsService>();
-
-// Rooms
-builder.Services.AddScoped<IRoomsRepository, RoomsRepository>();
-builder.Services.AddScoped<IRoomsService, RoomsService>();
-builder.Services.AddSingleton<IFileStorageService, FileStorageService>();
-
-// Bookings
-builder.Services.AddScoped<IBookingsRepository, BookingsRepository>();
-builder.Services.AddScoped<IBookingsService, BookingsService>();
-
 // Logging
 builder.Host.UseSerilog((context, loggerConfig) => loggerConfig.ReadFrom.Configuration(context.Configuration));
 
@@ -103,15 +83,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseStaticFiles();
 app.UseCors();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
-
-// Ensure upload directory exists
-var webRoot = app.Environment.WebRootPath ?? Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
-Directory.CreateDirectory(Path.Combine(webRoot, "uploads", "rooms"));
 app.MapHealthChecks("/health");
 
 if (app.Environment.IsDevelopment())
