@@ -1,4 +1,6 @@
 const BASE_URL = import.meta.env.VITE_API_URL! ?? "http://localhost:5054";
+import { toast } from "sonner";
+import i18n from "@/lib/i18n";
 
 export class ApiError extends Error {
   status: number;
@@ -96,11 +98,19 @@ export const apiFetch = async <T>(
 
   if (!response.ok) {
     const body = await response.json().catch(() => null);
-    throw new ApiError(
+    const error = new ApiError(
       response.status,
       body?.message || `${response.status} ${response.statusText}`,
       body?.errors ?? null
     );
+
+    if (response.status === 403) {
+      toast.error(i18n.t("errors.forbidden"));
+    } else if (response.status >= 500) {
+      toast.error(i18n.t("errors.serverError"));
+    }
+
+    throw error;
   }
 
   const json = response.status === 204 ? undefined : await response.json();

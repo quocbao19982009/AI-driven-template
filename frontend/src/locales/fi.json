@@ -10,14 +10,26 @@
     "previous": "Edellinen",
     "next": "Seuraava",
     "page": "Sivu {{page}} / {{total}}",
-    "dismiss": "Sulje"
+    "dismiss": "Sulje",
+    "noResults": "Ei tuloksia",
+    "noResultsDescription": "Täällä ei ole vielä mitään."
   },
   "nav": {
     "home": "Etusivu",
     "about": "Tietoja",
     "features": "Ominaisuudet",
     "login": "Kirjaudu sisään",
-    "logout": "Kirjaudu ulos"
+    "logout": "Kirjaudu ulos",
+    "account": "Tili"
+  },
+  "errors": {
+    "notFound": "Sivua ei löydy",
+    "notFoundDescription": "Etsimääsi sivua ei ole olemassa.",
+    "goHome": "Takaisin etusivulle",
+    "somethingWentWrong": "Jotain meni pieleen",
+    "tryAgain": "Yritä uudelleen",
+    "forbidden": "Sinulla ei ole oikeutta tehdä tätä",
+    "serverError": "Palvelinvirhe, yritä uudelleen"
   },
   "auth": {
     "page": {

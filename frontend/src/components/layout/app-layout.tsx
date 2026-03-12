@@ -1,13 +1,22 @@
+import React from "react";
 import { Link, Outlet } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { LanguageSwitcher } from "@/components/ui/language-switcher";
 import { useAuth } from "@/auth/auth-context";
 import { usePostApiAuthLogout } from "@/api/generated/auth/auth";
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Spinner } from "@/components/ui/spinner";
+import { ErrorBoundary } from "@/components/error-boundary";
 
 export function AppLayout() {
   const { t } = useTranslation();
-  const { accessToken, logout } = useAuth();
+  const { accessToken, user, logout } = useAuth();
 
   const logoutMutation = usePostApiAuthLogout({
     mutation: {
@@ -36,21 +45,32 @@ export function AppLayout() {
             </Link>
           )}
           {accessToken && (
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => logoutMutation.mutate()}
-              disabled={logoutMutation.isPending}
-            >
-              {t("nav.logout")}
-            </Button>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="sm" className="max-w-40 truncate">
+                  {user?.email ?? t("nav.account")}
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem
+                  onClick={() => logoutMutation.mutate()}
+                  disabled={logoutMutation.isPending}
+                >
+                  {t("nav.logout")}
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           )}
           <LanguageSwitcher />
         </div>
       </nav>
       <hr />
       <main>
-        <Outlet />
+        <ErrorBoundary>
+          <React.Suspense fallback={<Spinner />}>
+            <Outlet />
+          </React.Suspense>
+        </ErrorBoundary>
       </main>
     </>
   );

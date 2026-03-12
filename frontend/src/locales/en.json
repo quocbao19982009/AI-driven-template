@@ -10,14 +10,26 @@
     "previous": "Previous",
     "next": "Next",
     "page": "Page {{page}} of {{total}}",
-    "dismiss": "Dismiss"
+    "dismiss": "Dismiss",
+    "noResults": "No results",
+    "noResultsDescription": "There's nothing here yet."
   },
   "nav": {
     "home": "Home",
     "about": "About",
     "features": "Features",
     "login": "Sign in",
-    "logout": "Sign out"
+    "logout": "Sign out",
+    "account": "Account"
+  },
+  "errors": {
+    "notFound": "Page not found",
+    "notFoundDescription": "The page you're looking for doesn't exist.",
+    "goHome": "Go back home",
+    "somethingWentWrong": "Something went wrong",
+    "tryAgain": "Try again",
+    "forbidden": "You don't have permission to do that",
+    "serverError": "Server error, please try again"
   },
   "auth": {
     "page": {
