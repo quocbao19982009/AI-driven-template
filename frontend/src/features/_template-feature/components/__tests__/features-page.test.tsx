@@ -3,8 +3,8 @@ import { FeaturesPage } from "../features-page";
 
 vi.mock("@/api/generated/feature/feature", () => ({
   useGetApiFeatures: () => ({ data: undefined, isLoading: true }),
-  usePostApiFeaturesWithJson: () => ({ mutate: vi.fn(), isPending: false }),
-  usePutApiFeaturesIdWithJson: () => ({ mutate: vi.fn(), isPending: false }),
+  usePostApiFeatures: () => ({ mutate: vi.fn(), isPending: false }),
+  usePutApiFeaturesId: () => ({ mutate: vi.fn(), isPending: false }),
   useDeleteApiFeaturesId: () => ({ mutate: vi.fn(), isPending: false }),
   getGetApiFeaturesQueryKey: () => ["api", "features"],
 }));

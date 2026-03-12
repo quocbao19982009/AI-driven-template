@@ -2,7 +2,7 @@ import { render, screen } from "@/test/test-utils";
 import { LoginPage } from "../login-page";
 
 vi.mock("@/api/generated/auth/auth", () => ({
-  usePostApiAuthLoginWithJson: () => ({ mutate: vi.fn(), isPending: false }),
+  usePostApiAuthLogin: () => ({ mutate: vi.fn(), isPending: false }),
   useGetApiAuthMe: () => ({
     data: undefined,
     isLoading: false,

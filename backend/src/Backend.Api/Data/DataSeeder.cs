@@ -26,14 +26,7 @@ public static class DataSeeder
             return;
         }
 
-        var rawPassword = "password123"; // Default password for development
-        if (string.IsNullOrWhiteSpace(rawPassword))
-        {
-            logger.LogWarning(
-                "DataSeeder: Seed:AdminPassword is not configured — admin user will NOT be seeded. " +
-                "Set it via environment variable (Seed__AdminPassword) or dotnet user-secrets.");
-            return;
-        }
+        var rawPassword = configuration["Seed:AdminPassword"] ?? "password123";
 
         var passwordHash = BCrypt.Net.BCrypt.HashPassword(rawPassword, workFactor: 12);
 

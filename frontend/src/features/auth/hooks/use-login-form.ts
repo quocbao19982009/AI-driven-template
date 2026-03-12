@@ -2,12 +2,12 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useTranslation } from "react-i18next";
-import { PostApiAuthLoginWithJsonBody } from "@/api/generated/auth/auth.zod";
+import { PostApiAuthLoginBody } from "@/api/generated/auth/auth.zod";
 
 export function useLoginForm() {
   const { t } = useTranslation();
 
-  const schema = PostApiAuthLoginWithJsonBody.extend({
+  const schema = PostApiAuthLoginBody.extend({
     email: z
       .email(t("auth.validation.emailInvalid"))
       .min(1, t("auth.validation.emailRequired"))

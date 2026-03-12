@@ -13,7 +13,7 @@ import {
   clearLoginError,
   setUser,
 } from "../store/auth-slice";
-import { usePostApiAuthLoginWithJson } from "@/api/generated/auth/auth";
+import { usePostApiAuthLogin } from "@/api/generated/auth/auth";
 import { useGetApiAuthMe } from "@/api/generated/auth/auth";
 import { useAuth } from "@/auth/auth-context";
 import { ApiError, setApiFetchToken } from "@/api/mutator/apiFetch";
@@ -41,7 +41,7 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
   // We use the me query lazily after login to get user profile
   const meQuery = useGetApiAuthMe({ query: { enabled: false } });
 
-  const loginMutation = usePostApiAuthLoginWithJson({
+  const loginMutation = usePostApiAuthLogin({
     mutation: {
       onMutate: () => {
         dispatch(setLoggingIn(true));

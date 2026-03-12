@@ -1,6 +1,7 @@
 using Backend.Common.Models;
 using Backend.Features.Auth;
 using FluentAssertions;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
@@ -11,12 +12,15 @@ namespace Backend.Tests.Features.Auth;
 public class AuthControllerTests
 {
     private readonly Mock<IAuthService> _serviceMock;
+    private readonly Mock<IWebHostEnvironment> _envMock;
     private readonly AuthController _sut;
 
     public AuthControllerTests()
     {
         _serviceMock = new Mock<IAuthService>();
-        _sut = new AuthController(_serviceMock.Object);
+        _envMock = new Mock<IWebHostEnvironment>();
+        _envMock.Setup(e => e.EnvironmentName).Returns("Development");
+        _sut = new AuthController(_serviceMock.Object, _envMock.Object);
 
         // Set up a default HttpContext with response cookies
         var httpContext = new DefaultHttpContext();

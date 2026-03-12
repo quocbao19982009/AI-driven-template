@@ -17,7 +17,7 @@ globs: frontend/src/**/*.{ts,tsx}
 - Redux slices hold UI-only state only: search query, selected IDs, active tab, open panels
 - Never hardcode visible UI text — all strings must go through `t()` from `useTranslation()` (react-i18next)
 - When adding translation keys, always update BOTH `src/locales/en.json` AND `src/locales/fi.json`
-- For form validation schemas, always base them on the Orval-generated Zod schema (e.g. `PostApiFeatureWithJsonBody` from `api/generated/`) and use `.extend()` to override fields with translated error messages via `t()`. Never define a schema from scratch when a generated one exists.
+- For form validation schemas, always base them on the Orval-generated Zod schema (e.g. `PostApiFeatureBody` from `api/generated/`) and use `.extend()` to override fields with translated error messages via `t()`. Never define a schema from scratch when a generated one exists.
   > Why: The generated Zod schema mirrors the backend's validation contract. Starting from it ensures frontend and backend stay in sync automatically after every `api:sync`. Use `.extend()` only to add translated messages or stricter UI-only rules on top.
 
 ---

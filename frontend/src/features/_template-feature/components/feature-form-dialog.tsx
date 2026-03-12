@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import type { FeatureDto } from "@/api/generated/models";
 import {
-  usePostApiFeaturesWithJson,
-  usePutApiFeaturesIdWithJson,
+  usePostApiFeatures,
+  usePutApiFeaturesId,
   getGetApiFeaturesQueryKey,
 } from "@/api/generated/feature/feature";
 import {
@@ -51,7 +51,7 @@ export function FeatureFormDialog({
     }
   }, [open, feature, form]);
 
-  const createMutation = usePostApiFeaturesWithJson({
+  const createMutation = usePostApiFeatures({
     mutation: {
       onSuccess: () => {
         queryClient.invalidateQueries({
@@ -70,7 +70,7 @@ export function FeatureFormDialog({
     },
   });
 
-  const updateMutation = usePutApiFeaturesIdWithJson({
+  const updateMutation = usePutApiFeaturesId({
     mutation: {
       onSuccess: () => {
         queryClient.invalidateQueries({

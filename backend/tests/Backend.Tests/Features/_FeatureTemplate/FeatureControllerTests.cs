@@ -22,7 +22,7 @@ public class FeatureControllerTests
     [Fact]
     public async Task GetAll_ReturnsOkWithPagedResult()
     {
-        var items = new List<FeatureDto> { new(1, "Item", DateTime.UtcNow) };
+        var items = new List<FeatureDto> { new(1, "Item", DateTime.UtcNow, null) };
         var paged = new PagedResult<FeatureDto>(items, 1, 1, 20);
         _serviceMock
             .Setup(s => s.GetAllAsync(1, 20, It.IsAny<CancellationToken>()))
@@ -41,7 +41,7 @@ public class FeatureControllerTests
     [Fact]
     public async Task GetById_ReturnsOkWithDto()
     {
-        var dto = new FeatureDto(1, "Test", DateTime.UtcNow);
+        var dto = new FeatureDto(1, "Test", DateTime.UtcNow, null);
         _serviceMock
             .Setup(s => s.GetByIdAsync(1, It.IsAny<CancellationToken>()))
             .ReturnsAsync(dto);
@@ -59,7 +59,7 @@ public class FeatureControllerTests
     public async Task Create_ReturnsCreatedAtAction()
     {
         var request = new CreateFeatureRequest { Name = "New" };
-        var dto = new FeatureDto(1, "New", DateTime.UtcNow);
+        var dto = new FeatureDto(1, "New", DateTime.UtcNow, null);
         _serviceMock
             .Setup(s => s.CreateAsync(request, It.IsAny<CancellationToken>()))
             .ReturnsAsync(dto);
@@ -79,7 +79,7 @@ public class FeatureControllerTests
     public async Task Update_ReturnsOkWithUpdatedDto()
     {
         var request = new UpdateFeatureRequest { Name = "Updated" };
-        var dto = new FeatureDto(1, "Updated", DateTime.UtcNow);
+        var dto = new FeatureDto(1, "Updated", DateTime.UtcNow, null);
         _serviceMock
             .Setup(s => s.UpdateAsync(1, request, It.IsAny<CancellationToken>()))
             .ReturnsAsync(dto);

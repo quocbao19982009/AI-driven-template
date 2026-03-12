@@ -126,12 +126,9 @@ public class UsersService : IUsersService
         user.CreatedAt
     );
 
-    // TODO: Replace with proper BCrypt (e.g., BCrypt.Net-Next package)
     private static string BCryptHash(string password)
     {
-        return Convert.ToBase64String(
-            System.Security.Cryptography.SHA256.HashData(
-                System.Text.Encoding.UTF8.GetBytes(password)));
+        return BCrypt.Net.BCrypt.HashPassword(password, workFactor: 12);
     }
 
     private static async Task ValidateAndThrowAsync<T>(

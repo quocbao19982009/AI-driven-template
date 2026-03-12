@@ -1,13 +1,17 @@
 using Backend.Common.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Features._FeatureTemplate;
 
 // TODO: Rename to match your entity (e.g., ProductsController)
 // TODO: Update route to match your entity (e.g., "api/products")
+// TODO: Adjust [Authorize] per endpoint — use [AllowAnonymous] for public endpoints,
+//       [Authorize(Roles = "Admin")] for admin-only, or [Authorize] for any authenticated user.
 
 [ApiController]
 [Route("api/features")]
+[Authorize]
 public class FeatureController : ControllerBase
 {
     private readonly IFeatureService _featureService;

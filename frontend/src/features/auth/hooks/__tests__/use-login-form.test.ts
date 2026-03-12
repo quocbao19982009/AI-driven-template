@@ -1,10 +1,10 @@
 import { renderHook } from "@testing-library/react";
-import { PostApiAuthLoginWithJsonBody } from "@/api/generated/auth/auth.zod";
+import { PostApiAuthLoginBody } from "@/api/generated/auth/auth.zod";
 import { useLoginForm } from "../use-login-form";
 
-describe("PostApiAuthLoginWithJsonBody (Orval Zod schema)", () => {
+describe("PostApiAuthLoginBody (Orval Zod schema)", () => {
   it("accepts valid email and password", () => {
-    const result = PostApiAuthLoginWithJsonBody.safeParse({
+    const result = PostApiAuthLoginBody.safeParse({
       email: "user@example.com",
       password: "secret",
     });
@@ -12,12 +12,12 @@ describe("PostApiAuthLoginWithJsonBody (Orval Zod schema)", () => {
   });
 
   it("rejects missing email", () => {
-    const result = PostApiAuthLoginWithJsonBody.safeParse({ password: "secret" });
+    const result = PostApiAuthLoginBody.safeParse({ password: "secret" });
     expect(result.success).toBe(false);
   });
 
   it("rejects missing password", () => {
-    const result = PostApiAuthLoginWithJsonBody.safeParse({
+    const result = PostApiAuthLoginBody.safeParse({
       email: "user@example.com",
     });
     expect(result.success).toBe(false);

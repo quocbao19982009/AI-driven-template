@@ -104,7 +104,8 @@ public class FeatureService : IFeatureService
     private static FeatureDto MapToDto(Feature entity) => new(
         entity.Id,
         entity.Name,
-        entity.CreatedAt
+        entity.CreatedAt,
+        entity.UpdatedAt
     );
 
     private static async Task ValidateAndThrowAsync<T>(

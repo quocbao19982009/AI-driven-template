@@ -1,15 +1,15 @@
 import { renderHook } from "@testing-library/react";
-import { PostApiFeaturesWithJsonBody } from "@/api/generated/feature/feature.zod";
+import { PostApiFeaturesBody } from "@/api/generated/feature/feature.zod";
 import { useFeatureForm } from "../use-feature-form";
 
-describe("PostApiFeaturesWithJsonBody", () => {
+describe("PostApiFeaturesBody", () => {
   it("accepts a valid name", () => {
-    const result = PostApiFeaturesWithJsonBody.safeParse({ name: "My Feature" });
+    const result = PostApiFeaturesBody.safeParse({ name: "My Feature" });
     expect(result.success).toBe(true);
   });
 
   it("rejects a missing name", () => {
-    const result = PostApiFeaturesWithJsonBody.safeParse({});
+    const result = PostApiFeaturesBody.safeParse({});
     expect(result.success).toBe(false);
   });
 });

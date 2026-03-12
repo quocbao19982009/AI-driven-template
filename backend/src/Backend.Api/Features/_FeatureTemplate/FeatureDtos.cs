@@ -7,7 +7,8 @@ namespace Backend.Features._FeatureTemplate;
 public record FeatureDto(
     int Id,
     string Name,
-    DateTime CreatedAt
+    DateTime CreatedAt,
+    DateTime? UpdatedAt
 );
 
 public class CreateFeatureRequest
