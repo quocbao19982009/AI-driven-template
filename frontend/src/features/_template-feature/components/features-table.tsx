@@ -147,14 +147,15 @@ export function FeaturesTable({
 }
 
 function FeaturesTableSkeleton() {
+  const { t } = useTranslation();
   return (
     <div className="rounded-md border">
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-16">ID</TableHead>
-            <TableHead>Name</TableHead>
-            <TableHead>Created At</TableHead>
+            <TableHead className="w-16">{t("features.table.id")}</TableHead>
+            <TableHead>{t("features.table.name")}</TableHead>
+            <TableHead>{t("features.table.createdAt")}</TableHead>
             <TableHead className="w-16" />
           </TableRow>
         </TableHeader>

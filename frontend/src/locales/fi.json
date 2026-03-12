@@ -76,7 +76,7 @@
     },
     "delete": {
       "title": "Poista ominaisuus",
-      "description": "Haluatko varmasti poistaa <strong>{{name}}</strong>? Tätä toimintoa ei voi peruuttaa."
+      "description": "Haluatko varmasti poistaa \"{{name}}\"? Tätä toimintoa ei voi peruuttaa."
     },
     "validation": {
       "nameRequired": "Nimi on pakollinen"

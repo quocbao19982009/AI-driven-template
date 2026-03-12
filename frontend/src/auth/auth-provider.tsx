@@ -9,7 +9,7 @@ import { AuthContext } from "./auth-context";
 import type { AuthContextValue } from "./auth-context";
 import type { MeDto } from "@/api/generated/models";
 import { postApiAuthRefresh, getApiAuthMe } from "@/api/generated/auth/auth";
-import { setApiFetchToken } from "@/api/mutator/apiFetch";
+import { setApiFetchToken, setOnAuthFailure } from "@/api/mutator/apiFetch";
 import { useAppDispatch } from "@/store/hooks";
 import { setUser, clearUser } from "@/features/auth/store/auth-slice";
 
@@ -63,6 +63,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
     setApiFetchToken(null);
     dispatch(clearUser());
   }, [dispatch]);
+
+  // Register auth failure callback so apiFetch can trigger logout on refresh failure
+  useEffect(() => {
+    setOnAuthFailure(() => logout());
+    return () => setOnAuthFailure(null);
+  }, [logout]);
 
   const value: AuthContextValue = {
     accessToken,

@@ -60,13 +60,9 @@ export function FeatureDeleteDialog({
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>{t("features.delete.title")}</DialogTitle>
-          <DialogDescription
-            dangerouslySetInnerHTML={{
-              __html: t("features.delete.description", {
-                name: feature?.name ?? "",
-              }),
-            }}
-          />
+          <DialogDescription>
+            {t("features.delete.description", { name: feature?.name ?? "" })}
+          </DialogDescription>
         </DialogHeader>
         <DialogFooter>
           <Button

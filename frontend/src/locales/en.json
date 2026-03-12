@@ -76,7 +76,7 @@
     },
     "delete": {
       "title": "Delete Feature",
-      "description": "Are you sure you want to delete <strong>{{name}}</strong>? This action cannot be undone."
+      "description": "Are you sure you want to delete \"{{name}}\"? This action cannot be undone."
     },
     "validation": {
       "nameRequired": "Name is required"

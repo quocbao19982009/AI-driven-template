@@ -2,7 +2,7 @@ import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 interface FeaturesUiState {
   searchQuery: string;
-  selectedIds: string[];
+  selectedIds: number[];
 }
 
 const initialState: FeaturesUiState = {
@@ -17,7 +17,7 @@ export const featuresSlice = createSlice({
     setSearchQuery(state, action: PayloadAction<string>) {
       state.searchQuery = action.payload;
     },
-    toggleSelected(state, action: PayloadAction<string>) {
+    toggleSelected(state, action: PayloadAction<number>) {
       const id = action.payload;
       const index = state.selectedIds.indexOf(id);
       if (index === -1) {

@@ -13,8 +13,7 @@ import {
   clearLoginError,
   setUser,
 } from "../store/auth-slice";
-import { usePostApiAuthLogin } from "@/api/generated/auth/auth";
-import { useGetApiAuthMe } from "@/api/generated/auth/auth";
+import { usePostApiAuthLogin, getApiAuthMe } from "@/api/generated/auth/auth";
 import { useAuth } from "@/auth/auth-context";
 import { ApiError, setApiFetchToken } from "@/api/mutator/apiFetch";
 import type { MeDto } from "@/api/generated/models";
@@ -38,9 +37,6 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
     resetField,
   } = form;
 
-  // We use the me query lazily after login to get user profile
-  const meQuery = useGetApiAuthMe({ query: { enabled: false } });
-
   const loginMutation = usePostApiAuthLogin({
     mutation: {
       onMutate: () => {
@@ -60,8 +56,8 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
 
         // Fetch user profile and store in Redux
         try {
-          const meRes = await meQuery.refetch();
-          const userData = (meRes.data?.data?.data ?? null) as MeDto | null;
+          const meRes = await getApiAuthMe();
+          const userData = (meRes.data?.data ?? null) as MeDto | null;
           dispatch(setUser(userData));
         } catch {
           // /me failed — user stays null, not critical

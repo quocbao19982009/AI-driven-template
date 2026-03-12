@@ -1,7 +1,7 @@
-const BASE_URL = import.meta.env.VITE_API_URL! ?? "http://localhost:5054";
 import { toast } from "sonner";
 import i18n from "@/lib/i18n";
 
+const BASE_URL = import.meta.env.VITE_API_URL ?? "http://localhost:5054";
 export class ApiError extends Error {
   status: number;
   errors: string[] | null;
@@ -18,8 +18,15 @@ let _accessToken: string | null = null;
 let _isRefreshing = false;
 let _refreshPromise: Promise<string | null> | null = null;
 
+// Callback invoked when silent refresh fails (registered by AuthProvider)
+let _onAuthFailure: (() => void) | null = null;
+
 export function setApiFetchToken(token: string | null): void {
   _accessToken = token;
+}
+
+export function setOnAuthFailure(cb: (() => void) | null): void {
+  _onAuthFailure = cb;
 }
 
 async function silentRefresh(): Promise<string | null> {
@@ -27,7 +34,10 @@ async function silentRefresh(): Promise<string | null> {
     return _refreshPromise;
   }
   _isRefreshing = true;
-  _refreshPromise = fetch(`${BASE_URL}/api/auth/refresh`, { method: "POST", credentials: "include" })
+  _refreshPromise = fetch(`${BASE_URL}/api/auth/refresh`, {
+    method: "POST",
+    credentials: "include",
+  })
     .then(async (res) => {
       if (!res.ok) return null;
       const body = await res.json().catch(() => null);
@@ -77,7 +87,8 @@ export const apiFetch = async <T>(
         const body = await retryResponse.json().catch(() => null);
         throw new ApiError(
           retryResponse.status,
-          body?.message || `${retryResponse.status} ${retryResponse.statusText}`,
+          body?.message ||
+            `${retryResponse.status} ${retryResponse.statusText}`,
           body?.errors ?? null
         );
       }
@@ -91,10 +102,9 @@ export const apiFetch = async <T>(
       } as T;
     }
 
-    // Refresh failed — redirect to login
-    if (typeof window !== "undefined") {
-      window.location.href = `/login?returnUrl=${encodeURIComponent(window.location.pathname)}`;
-    }
+    // Refresh failed — clear auth state and let ProtectedRoute handle redirect
+    _accessToken = null;
+    _onAuthFailure?.();
     throw new ApiError(401, "Unauthorized");
   }
 
