@@ -38,6 +38,9 @@
       "title": "Delete Feature",
       "description": "Are you sure you want to delete <strong>{{name}}</strong>? This action cannot be undone."
     },
+    "validation": {
+      "nameRequired": "Name is required"
+    },
     "toast": {
       "created": "Feature created successfully.",
       "createError": "Failed to create feature.",

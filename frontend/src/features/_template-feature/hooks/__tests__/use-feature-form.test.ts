@@ -1,14 +1,15 @@
 import { renderHook } from "@testing-library/react";
-import { useFeatureForm, featureFormSchema } from "../use-feature-form";
+import { PostApiFeaturesWithJsonBody } from "@/api/generated/feature/feature.zod";
+import { useFeatureForm } from "../use-feature-form";
 
-describe("featureFormSchema", () => {
+describe("PostApiFeaturesWithJsonBody", () => {
   it("accepts a valid name", () => {
-    const result = featureFormSchema.safeParse({ name: "My Feature" });
+    const result = PostApiFeaturesWithJsonBody.safeParse({ name: "My Feature" });
     expect(result.success).toBe(true);
   });
 
-  it("rejects a missing name field", () => {
-    const result = featureFormSchema.safeParse({});
+  it("rejects a missing name", () => {
+    const result = PostApiFeaturesWithJsonBody.safeParse({});
     expect(result.success).toBe(false);
   });
 });

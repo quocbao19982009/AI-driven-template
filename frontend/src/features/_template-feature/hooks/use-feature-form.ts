@@ -1,16 +1,19 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { useTranslation } from "react-i18next";
 import { PostApiFeaturesWithJsonBody } from "@/api/generated/feature/feature.zod";
 import type { FeatureDto } from "@/api/generated/models";
 
-export const featureFormSchema = PostApiFeaturesWithJsonBody;
-
-export type FeatureFormValues = z.infer<typeof featureFormSchema>;
-
 export function useFeatureForm(feature?: FeatureDto | null) {
-  return useForm<FeatureFormValues>({
-    resolver: zodResolver(featureFormSchema),
+  const { t } = useTranslation();
+
+  const schema = PostApiFeaturesWithJsonBody.extend({
+    name: z.string().min(1, t("features.validation.nameRequired")),
+  });
+
+  return useForm({
+    resolver: zodResolver(schema),
     defaultValues: {
       name: feature?.name ?? "",
     },

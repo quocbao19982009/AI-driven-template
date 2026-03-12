@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import { FeaturesTable } from "./features-table";
 import { FeatureFormDialog } from "./feature-form-dialog";
-import { useFeaturePagination } from "../hooks";
+import { useFeaturePagination } from "../hooks/use-feature-pagination";
 
 export function FeaturesPage() {
   const { t } = useTranslation();

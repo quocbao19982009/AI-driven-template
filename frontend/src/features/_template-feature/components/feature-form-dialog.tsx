@@ -24,7 +24,8 @@ import {
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useFeatureForm, type FeatureFormValues } from "../hooks";
+import { useFeatureForm } from "../hooks/use-feature-form";
+import type { CreateFeatureRequest } from "@/api/generated/models";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 
@@ -90,7 +91,7 @@ export function FeatureFormDialog({
 
   const isPending = createMutation.isPending || updateMutation.isPending;
 
-  function onSubmit(values: FeatureFormValues) {
+  function onSubmit(values: CreateFeatureRequest) {
     if (isEditing && feature?.id) {
       updateMutation.mutate({ id: feature.id, data: values });
     } else {
