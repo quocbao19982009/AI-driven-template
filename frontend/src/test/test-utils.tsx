@@ -3,7 +3,7 @@ import { render, type RenderOptions } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
-import { featuresReducer } from "@/features/_template-feature/store/features-slice";
+import featuresReducer from "@/features/_template-feature/store/features-slice";
 
 function createTestQueryClient() {
   return new QueryClient({

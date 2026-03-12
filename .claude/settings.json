@@ -20,7 +20,8 @@
       "Bash(git diff:*)",
       "Bash(git log:*)",
       "Bash(git status:*)",
-      "Ls -la *"
+      "Ls -la *",
+      "Read(*)"
     ],
     "deny": [
       "Read(./.env*)",
