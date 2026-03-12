@@ -3,12 +3,17 @@ import { LoginPage } from "../login-page";
 
 vi.mock("@/api/generated/auth/auth", () => ({
   usePostApiAuthLoginWithJson: () => ({ mutate: vi.fn(), isPending: false }),
-  useGetApiAuthMe: () => ({ data: undefined, isLoading: false, refetch: vi.fn() }),
+  useGetApiAuthMe: () => ({
+    data: undefined,
+    isLoading: false,
+    refetch: vi.fn(),
+  }),
   postApiAuthRefresh: () => Promise.reject(new Error("401")),
 }));
 
 vi.mock("@tanstack/react-router", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("@tanstack/react-router")>();
+  const actual =
+    await importOriginal<typeof import("@tanstack/react-router")>();
   return {
     ...actual,
     useNavigate: () => vi.fn(),
@@ -23,7 +28,9 @@ vi.mock("@/auth/auth-context", () => ({
     login: vi.fn(),
     logout: vi.fn(),
   }),
-  AuthContext: { Provider: ({ children }: { children: React.ReactNode }) => children },
+  AuthContext: {
+    Provider: ({ children }: { children: React.ReactNode }) => children,
+  },
 }));
 
 describe("LoginPage", () => {
@@ -35,11 +42,15 @@ describe("LoginPage", () => {
   it("renders email and password fields", () => {
     render(<LoginPage />);
     expect(screen.getByLabelText("auth.form.emailLabel")).toBeInTheDocument();
-    expect(screen.getByLabelText("auth.form.passwordLabel")).toBeInTheDocument();
+    expect(
+      screen.getByLabelText("auth.form.passwordLabel")
+    ).toBeInTheDocument();
   });
 
   it("renders the sign in button", () => {
     render(<LoginPage />);
-    expect(screen.getByRole("button", { name: "auth.form.submitButton" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "auth.form.submitButton" })
+    ).toBeInTheDocument();
   });
 });

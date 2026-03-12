@@ -206,16 +206,17 @@ sequenceDiagram
 
 On application startup in the **Development** environment only, `DataSeeder.SeedAdminUserAsync` runs and creates one admin user if none exists:
 
-| Field          | Value                                     |
-| -------------- | ----------------------------------------- |
-| `Email`        | `admin@example.com`                       |
-| `FirstName`    | `"Admin"`                                 |
-| `LastName`     | `"User"`                                  |
-| `Role`         | `"Admin"`                                 |
-| `PasswordHash` | BCrypt hash (cost 12) of `"password123"`  |
-| `IsActive`     | `true`                                    |
+| Field          | Value                                    |
+| -------------- | ---------------------------------------- |
+| `Email`        | `admin@example.com`                      |
+| `FirstName`    | `"Admin"`                                |
+| `LastName`     | `"User"`                                 |
+| `Role`         | `"Admin"`                                |
+| `PasswordHash` | BCrypt hash (cost 12) of `"password123"` |
+| `IsActive`     | `true`                                   |
 
 **Rules:**
+
 - The password is the hardcoded development default `"password123"` — this is intentional for the Development environment only and must never be used in production.
 - The check is by email (`admin@example.com`) — if a user with that email already exists, the method is a no-op (idempotent).
 - The `IConfiguration` parameter is accepted by the method signature (for future use), but the password is not currently read from config. A guard for a blank password is present as dead code, kept for when config-driven seeding is adopted.

@@ -7,7 +7,12 @@ import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
 import { useLoginForm } from "../hooks/use-login-form";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { setLoggingIn, setLoginError, clearLoginError, setUser } from "../store/auth-slice";
+import {
+  setLoggingIn,
+  setLoginError,
+  clearLoginError,
+  setUser,
+} from "../store/auth-slice";
 import { usePostApiAuthLoginWithJson } from "@/api/generated/auth/auth";
 import { useGetApiAuthMe } from "@/api/generated/auth/auth";
 import { useAuth } from "@/auth/auth-context";
@@ -87,7 +92,7 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
       {loginError && (
         <div
           role="alert"
-          className="flex items-start gap-2 rounded-md border border-destructive/50 bg-destructive/10 px-3 py-2 text-sm text-destructive"
+          className="border-destructive/50 bg-destructive/10 text-destructive flex items-start gap-2 rounded-md border px-3 py-2 text-sm"
         >
           <span className="flex-1">{loginError}</span>
           <button
@@ -113,7 +118,7 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
           {...register("email")}
         />
         {errors.email && (
-          <p className="text-xs text-destructive">{errors.email.message}</p>
+          <p className="text-destructive text-xs">{errors.email.message}</p>
         )}
       </div>
 
@@ -138,7 +143,7 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
             }
             onClick={() => setShowPassword((v) => !v)}
             className={cn(
-              "absolute inset-y-0 right-0 flex items-center px-3 text-muted-foreground hover:text-foreground"
+              "text-muted-foreground hover:text-foreground absolute inset-y-0 right-0 flex items-center px-3"
             )}
           >
             {showPassword ? (
@@ -149,7 +154,7 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
           </button>
         </div>
         {errors.password && (
-          <p className="text-xs text-destructive">{errors.password.message}</p>
+          <p className="text-destructive text-xs">{errors.password.message}</p>
         )}
       </div>
 
