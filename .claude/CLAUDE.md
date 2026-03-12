@@ -51,6 +51,7 @@ Specs live in `feature_docs/` — one subfolder per feature (e.g. `feature_docs/
 3. **NEVER make any code change before reading that feature's spec file.** Read it in full.
 4. Make changes
 5. **ALWAYS update the spec before responding to the user** if the task changed any of: entity fields, validation or business rules, endpoints or auth, UI behavior or Redux state, architecture. Use the `spec-sync` agent to do this. **Do NOT consider the task complete until the spec is up to date.**
+6. **ALWAYS update `feature_docs/FEATURES.md`** as part of spec-sync — keep the row's Data Model, Summary, and Status columns in sync with the spec after every change.
 
 **No update needed for:** code quality fixes with no behavior impact.
 

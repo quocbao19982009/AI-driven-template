@@ -117,14 +117,27 @@ Mark superseded decisions with **[Superseded]** prefix rather than deleting them
 
 Update the `Last Updated` date at the top of the spec.
 
-### Step 5: Report
+### Step 5: Update FEATURES.md
+
+After updating the spec, always read `feature_docs/FEATURES.md` and update the feature's row if any of these changed:
+
+| Column | Update when |
+|--------|-------------|
+| **Data Model** | Entity names added, removed, or renamed |
+| **Summary** | Core behavior changed (login field, auth flow, key rules) |
+| **Status** | Feature progressed (e.g., `Spec only` → `Scaffolded` → `Complete`) |
+
+Only edit the row(s) for the feature(s) that were synced. Do not rewrite other rows.
+
+### Step 6: Report
 
 Tell the user what was updated:
 - Which spec file(s) were modified
 - Which sections were changed and why
+- Whether `FEATURES.md` was updated and what changed
 - Any specs that should exist but don't
 
-### Step 6: Spec Consistency Check
+### Step 7: Spec Consistency Check
 
 After updating all sections, verify cross-section consistency (non-blocking — report warnings but do not refuse to complete):
 
@@ -136,6 +149,6 @@ After updating all sections, verify cross-section consistency (non-blocking — 
 
 4. **File Locations → API Endpoints**: The File Locations section lists a controller file for every endpoint that was added or modified. Missing controller or service entries are flagged.
 
-Include any warnings in the Step 5 report under a **"⚠ Consistency Warnings"** heading. If no issues are found, omit the heading entirely.
+Include any warnings in the Step 6 report under a **"⚠ Consistency Warnings"** heading. If no issues are found, omit the heading entirely.
 
 These checks are **warnings only** — the agent always finishes its updates. The workflow is never blocked by consistency issues.
