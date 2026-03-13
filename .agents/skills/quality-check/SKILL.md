@@ -1,6 +1,6 @@
 ---
 name: quality-check
-description: Run full quality checks — backend build, frontend lint, TypeScript check, tests, and translation validation. Use after completing code changes.
+description: Run full quality checks — backend build, frontend lint, TypeScript check, frontend build, tests, and translation validation. Use after completing code changes.
 allowed-tools: "Bash, Read, Grep, Glob"
 context: fork
 ---
@@ -35,13 +35,19 @@ cd frontend && npm run lint
 cd frontend && npx tsc --noEmit
 ```
 
-### 5. Frontend Tests
+### 5. Frontend Build
+
+```bash
+cd frontend && npm run build
+```
+
+### 6. Frontend Tests
 
 ```bash
 cd frontend && npm run test:run
 ```
 
-### 6. Translation Validation
+### 7. Translation Validation
 
 Check that every top-level key in `en.json` also exists in `fi.json` and vice versa:
 
@@ -50,7 +56,7 @@ Check that every top-level key in `en.json` also exists in `fi.json` and vice ve
 - For each shared top-level key, do a deep comparison of nested keys
 - Report any translation keys missing from either file
 
-### 7. API Sync Check
+### 8. API Sync Check
 
 ```bash
 npm run api:check
@@ -71,6 +77,7 @@ After running all checks, output a summary:
 | Backend Tests    | PASS   | 24 passed        |
 | Frontend Lint    | FAIL   | 3 errors         |
 | TypeScript       | PASS   |                  |
+| Frontend Build   | PASS   |                  |
 | Frontend Tests   | PASS   | 18 passed        |
 | Translations     | FAIL   | 2 keys missing   |
 | API Sync         | PASS   |                  |
