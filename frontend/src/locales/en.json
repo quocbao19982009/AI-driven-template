@@ -18,6 +18,7 @@
     "home": "Home",
     "about": "About",
     "features": "Features",
+    "expenseTrackers": "Expenses",
     "login": "Sign in",
     "logout": "Sign out",
     "account": "Account"
@@ -88,6 +89,62 @@
       "updateError": "Failed to update feature.",
       "deleted": "Feature deleted successfully.",
       "deleteError": "Failed to delete feature."
+    }
+  },
+  "expenseTrackers": {
+    "title": "Expense Tracker",
+    "description": "View and manage shared expenses.",
+    "newExpense": "New Expense",
+    "searchPlaceholder": "Search by description…",
+    "filter": {
+      "category": "Category",
+      "all": "All Categories",
+      "food": "Food",
+      "transport": "Transport",
+      "utilities": "Utilities",
+      "entertainment": "Entertainment",
+      "other": "Other"
+    },
+    "table": {
+      "amount": "Amount",
+      "category": "Category",
+      "description": "Description",
+      "date": "Date",
+      "submittedBy": "Submitted By",
+      "empty": "No expenses found."
+    },
+    "form": {
+      "createTitle": "Add Expense",
+      "editTitle": "Edit Expense",
+      "createDescription": "Fill in the details to add a new expense.",
+      "editDescription": "Update the expense details below.",
+      "amountLabel": "Amount",
+      "amountPlaceholder": "0.00",
+      "categoryLabel": "Category",
+      "categoryPlaceholder": "Select a category",
+      "descriptionLabel": "Description",
+      "descriptionPlaceholder": "What was this expense for?",
+      "dateLabel": "Date"
+    },
+    "delete": {
+      "title": "Delete Expense",
+      "description": "Are you sure you want to delete this {{category}} expense of {{amount}}? This action cannot be undone."
+    },
+    "validation": {
+      "amountRequired": "Amount is required",
+      "amountPositive": "Amount must be greater than 0",
+      "amountMax": "Amount must not exceed 999,999.99",
+      "categoryRequired": "Category is required",
+      "descriptionMax": "Description must not exceed 500 characters",
+      "dateRequired": "Date is required"
+    },
+    "toast": {
+      "created": "Expense created successfully.",
+      "createError": "Failed to create expense.",
+      "updated": "Expense updated successfully.",
+      "updateError": "Failed to update expense.",
+      "deleted": "Expense deleted successfully.",
+      "deleteError": "Failed to delete expense."
     }
   }
 }

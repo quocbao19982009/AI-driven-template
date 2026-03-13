@@ -5,6 +5,7 @@ using Backend.Common.Swagger;
 using Backend.Data;
 using Backend.Features._FeatureTemplate;
 using Backend.Features.Auth;
+using Backend.Features.ExpenseTrackers;
 using Backend.Features.Users;
 using Backend.Identity;
 using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
@@ -43,6 +44,8 @@ builder.Services.AddScoped<IFeatureRepository, FeatureRepository>();
 builder.Services.AddScoped<IFeatureService, FeatureService>();
 builder.Services.AddScoped<IRefreshTokensRepository, RefreshTokensRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IExpenseTrackersRepository, ExpenseTrackersRepository>();
+builder.Services.AddScoped<IExpenseTrackersService, ExpenseTrackersService>();
 
 // Logging
 builder.Host.UseSerilog((context, loggerConfig) => loggerConfig.ReadFrom.Configuration(context.Configuration));

@@ -40,6 +40,9 @@ export function AppLayout() {
         <Link to="/features" className="[&.active]:font-bold">
           {t("nav.features")}
         </Link>
+        <Link to="/expense-trackers" className="[&.active]:font-bold">
+          {t("nav.expenseTrackers")}
+        </Link>
         <div className="ml-auto flex items-center gap-2">
           {!accessToken && (
             <Link to="/login" className="[&.active]:font-bold">

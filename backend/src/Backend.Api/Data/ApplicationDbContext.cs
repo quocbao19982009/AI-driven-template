@@ -1,6 +1,7 @@
 using Backend.Common.Models;
 using Backend.Features._FeatureTemplate;
 using Backend.Features.Auth;
+using Backend.Features.ExpenseTrackers;
 using Backend.Features.Users;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,6 +17,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<User> Users => Set<User>();
     public DbSet<Feature> Features => Set<Feature>();
     public DbSet<RefreshToken> RefreshTokens => Set<RefreshToken>();
+    public DbSet<ExpenseTracker> ExpenseTrackers => Set<ExpenseTracker>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -32,6 +34,15 @@ public class ApplicationDbContext : DbContext
             entity.HasOne(t => t.User)
                 .WithMany()
                 .HasForeignKey(t => t.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+        });
+
+        modelBuilder.Entity<ExpenseTracker>(entity =>
+        {
+            entity.Property(e => e.Amount).HasColumnType("decimal(10,2)");
+            entity.HasOne(e => e.User)
+                .WithMany()
+                .HasForeignKey(e => e.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
         });
     }

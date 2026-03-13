@@ -6,12 +6,18 @@
  * OpenAPI spec version: v1
  */
 
+export * from "./createExpenseTrackerRequest";
 export * from "./createFeatureRequest";
 export * from "./createUserRequest";
+export * from "./expenseTrackerDto";
+export * from "./expenseTrackerDtoApiResponse";
+export * from "./expenseTrackerDtoPagedResult";
+export * from "./expenseTrackerDtoPagedResultApiResponse";
 export * from "./featureDto";
 export * from "./featureDtoApiResponse";
 export * from "./featureDtoPagedResult";
 export * from "./featureDtoPagedResultApiResponse";
+export * from "./getApiExpenseTrackersParams";
 export * from "./getApiFeaturesParams";
 export * from "./getApiUsersParams";
 export * from "./loginRequest";
@@ -19,6 +25,7 @@ export * from "./loginResultDto";
 export * from "./loginResultDtoApiResponse";
 export * from "./meDto";
 export * from "./meDtoApiResponse";
+export * from "./updateExpenseTrackerRequest";
 export * from "./updateFeatureRequest";
 export * from "./updateUserRequest";
 export * from "./userDto";

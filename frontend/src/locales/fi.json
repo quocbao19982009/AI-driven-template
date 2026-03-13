@@ -18,6 +18,7 @@
     "home": "Etusivu",
     "about": "Tietoja",
     "features": "Ominaisuudet",
+    "expenseTrackers": "Kulut",
     "login": "Kirjaudu sisään",
     "logout": "Kirjaudu ulos",
     "account": "Tili"
@@ -88,6 +89,62 @@
       "updateError": "Ominaisuuden päivittäminen epäonnistui.",
       "deleted": "Ominaisuus poistettu onnistuneesti.",
       "deleteError": "Ominaisuuden poistaminen epäonnistui."
+    }
+  },
+  "expenseTrackers": {
+    "title": "Kuluseuranta",
+    "description": "Tarkastele ja hallinnoi jaettuja kuluja.",
+    "newExpense": "Uusi kulu",
+    "searchPlaceholder": "Hae kuvauksella…",
+    "filter": {
+      "category": "Kategoria",
+      "all": "Kaikki kategoriat",
+      "food": "Ruoka",
+      "transport": "Liikenne",
+      "utilities": "Laskut",
+      "entertainment": "Viihde",
+      "other": "Muu"
+    },
+    "table": {
+      "amount": "Summa",
+      "category": "Kategoria",
+      "description": "Kuvaus",
+      "date": "Päivämäärä",
+      "submittedBy": "Lähettäjä",
+      "empty": "Kuluja ei löytynyt."
+    },
+    "form": {
+      "createTitle": "Lisää kulu",
+      "editTitle": "Muokkaa kulua",
+      "createDescription": "Täytä tiedot lisätäksesi uuden kulun.",
+      "editDescription": "Päivitä kulun tiedot alla.",
+      "amountLabel": "Summa",
+      "amountPlaceholder": "0,00",
+      "categoryLabel": "Kategoria",
+      "categoryPlaceholder": "Valitse kategoria",
+      "descriptionLabel": "Kuvaus",
+      "descriptionPlaceholder": "Mihin tämä kulu liittyi?",
+      "dateLabel": "Päivämäärä"
+    },
+    "delete": {
+      "title": "Poista kulu",
+      "description": "Haluatko varmasti poistaa tämän {{category}}-kulun ({{amount}})? Tätä toimintoa ei voi peruuttaa."
+    },
+    "validation": {
+      "amountRequired": "Summa on pakollinen",
+      "amountPositive": "Summan on oltava suurempi kuin 0",
+      "amountMax": "Summa saa olla enintään 999 999,99",
+      "categoryRequired": "Kategoria on pakollinen",
+      "descriptionMax": "Kuvaus saa olla enintään 500 merkkiä",
+      "dateRequired": "Päivämäärä on pakollinen"
+    },
+    "toast": {
+      "created": "Kulu luotu onnistuneesti.",
+      "createError": "Kulun luominen epäonnistui.",
+      "updated": "Kulu päivitetty onnistuneesti.",
+      "updateError": "Kulun päivittäminen epäonnistui.",
+      "deleted": "Kulu poistettu onnistuneesti.",
+      "deleteError": "Kulun poistaminen epäonnistui."
     }
   }
 }

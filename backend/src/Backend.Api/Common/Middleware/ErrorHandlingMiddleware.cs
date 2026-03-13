@@ -45,6 +45,10 @@ public class ErrorHandlingMiddleware
                 HttpStatusCode.BadRequest,
                 ApiResponse<object>.Fail(ex.Message, ex.Errors)
             ),
+            ForbiddenAccessException ex => (
+                HttpStatusCode.Forbidden,
+                ApiResponse<object>.Fail(ex.Message)
+            ),
             UnauthorizedAccessException ex => (
                 HttpStatusCode.Unauthorized,
                 ApiResponse<object>.Fail(ex.Message)
@@ -62,6 +66,7 @@ public class ErrorHandlingMiddleware
                 break;
             case HttpStatusCode.NotFound:
             case HttpStatusCode.BadRequest:
+            case HttpStatusCode.Forbidden:
             case HttpStatusCode.Unauthorized:
                 _logger.LogWarning("Request failed with {StatusCode}: {Message}", (int)statusCode, exception.Message);
                 break;

@@ -15,6 +15,7 @@ import { Route as SplatRouteImport } from './routes/$'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LoginIndexRouteImport } from './routes/login/index'
 import { Route as FeaturesIndexRouteImport } from './routes/features/index'
+import { Route as ExpenseTrackersIndexRouteImport } from './routes/expense-trackers/index'
 import { Route as AuthenticatedTemplateProtectedIndexRouteImport } from './routes/_authenticated/template-protected/index'
 
 const AboutRoute = AboutRouteImport.update({
@@ -46,6 +47,11 @@ const FeaturesIndexRoute = FeaturesIndexRouteImport.update({
   path: '/features/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ExpenseTrackersIndexRoute = ExpenseTrackersIndexRouteImport.update({
+  id: '/expense-trackers/',
+  path: '/expense-trackers/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthenticatedTemplateProtectedIndexRoute =
   AuthenticatedTemplateProtectedIndexRouteImport.update({
     id: '/template-protected/',
@@ -57,6 +63,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
   '/about': typeof AboutRoute
+  '/expense-trackers/': typeof ExpenseTrackersIndexRoute
   '/features/': typeof FeaturesIndexRoute
   '/login/': typeof LoginIndexRoute
   '/template-protected/': typeof AuthenticatedTemplateProtectedIndexRoute
@@ -65,6 +72,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
   '/about': typeof AboutRoute
+  '/expense-trackers': typeof ExpenseTrackersIndexRoute
   '/features': typeof FeaturesIndexRoute
   '/login': typeof LoginIndexRoute
   '/template-protected': typeof AuthenticatedTemplateProtectedIndexRoute
@@ -75,6 +83,7 @@ export interface FileRoutesById {
   '/$': typeof SplatRoute
   '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/about': typeof AboutRoute
+  '/expense-trackers/': typeof ExpenseTrackersIndexRoute
   '/features/': typeof FeaturesIndexRoute
   '/login/': typeof LoginIndexRoute
   '/_authenticated/template-protected/': typeof AuthenticatedTemplateProtectedIndexRoute
@@ -85,17 +94,26 @@ export interface FileRouteTypes {
     | '/'
     | '/$'
     | '/about'
+    | '/expense-trackers/'
     | '/features/'
     | '/login/'
     | '/template-protected/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/$' | '/about' | '/features' | '/login' | '/template-protected'
+  to:
+    | '/'
+    | '/$'
+    | '/about'
+    | '/expense-trackers'
+    | '/features'
+    | '/login'
+    | '/template-protected'
   id:
     | '__root__'
     | '/'
     | '/$'
     | '/_authenticated'
     | '/about'
+    | '/expense-trackers/'
     | '/features/'
     | '/login/'
     | '/_authenticated/template-protected/'
@@ -106,6 +124,7 @@ export interface RootRouteChildren {
   SplatRoute: typeof SplatRoute
   AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
   AboutRoute: typeof AboutRoute
+  ExpenseTrackersIndexRoute: typeof ExpenseTrackersIndexRoute
   FeaturesIndexRoute: typeof FeaturesIndexRoute
   LoginIndexRoute: typeof LoginIndexRoute
 }
@@ -154,6 +173,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FeaturesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/expense-trackers/': {
+      id: '/expense-trackers/'
+      path: '/expense-trackers'
+      fullPath: '/expense-trackers/'
+      preLoaderRoute: typeof ExpenseTrackersIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_authenticated/template-protected/': {
       id: '/_authenticated/template-protected/'
       path: '/template-protected'
@@ -182,6 +208,7 @@ const rootRouteChildren: RootRouteChildren = {
   SplatRoute: SplatRoute,
   AuthenticatedRoute: AuthenticatedRouteWithChildren,
   AboutRoute: AboutRoute,
+  ExpenseTrackersIndexRoute: ExpenseTrackersIndexRoute,
   FeaturesIndexRoute: FeaturesIndexRoute,
   LoginIndexRoute: LoginIndexRoute,
 }
