@@ -12,8 +12,6 @@ public static class DataSeeder
 
         await SeedAdminUserAsync(context, logger, configuration);
         await SeedFeaturesAsync(context, logger);
-        // TODO: Add new seed methods here as you add new features
-        // await SeedProductsAsync(context, logger);
     }
 
     private static async Task SeedAdminUserAsync(ApplicationDbContext context, ILogger logger, IConfiguration configuration)

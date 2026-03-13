@@ -14,7 +14,6 @@ public class ApplicationDbContext : DbContext
     }
 
     public DbSet<User> Users => Set<User>();
-    // TODO: Mock remove this when we have real features
     public DbSet<Feature> Features => Set<Feature>();
     public DbSet<RefreshToken> RefreshTokens => Set<RefreshToken>();
 

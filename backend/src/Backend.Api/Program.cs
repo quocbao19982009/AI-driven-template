@@ -13,12 +13,6 @@ using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var jwtKey = builder.Configuration["Jwt:Key"];
-if (string.IsNullOrWhiteSpace(jwtKey) || jwtKey.Length < 32)
-    throw new InvalidOperationException(
-        "Jwt:Key is missing or fewer than 32 characters. " +
-        "Set it via dotnet user-secrets (dev) or the Jwt__Key environment variable (prod).");
-
 // Database
 builder.Services.AddDatabase(builder.Configuration);
 
@@ -49,6 +43,7 @@ builder.Services.AddScoped<IFeatureRepository, FeatureRepository>();
 builder.Services.AddScoped<IFeatureService, FeatureService>();
 builder.Services.AddScoped<IRefreshTokensRepository, RefreshTokensRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+
 // Logging
 builder.Host.UseSerilog((context, loggerConfig) => loggerConfig.ReadFrom.Configuration(context.Configuration));
 
@@ -84,10 +79,7 @@ app.Use(async (context, next) =>
     context.Response.OnStarting(() =>
     {
         context.Response.Headers["X-Content-Type-Options"] = "nosniff";
-        context.Response.Headers["X-Frame-Options"] = "DENY";
         context.Response.Headers["Referrer-Policy"] = "strict-origin-when-cross-origin";
-        context.Response.Headers["X-Permitted-Cross-Domain-Policies"] = "none";
-        context.Response.Headers["Permissions-Policy"] = "geolocation=(), camera=(), microphone=()";
         return Task.CompletedTask;
     });
     await next();
@@ -116,6 +108,7 @@ app.UseAuthorization();
 app.MapControllers();
 app.MapHealthChecks("/health");
 
+// Seed data in development
 if (app.Environment.IsDevelopment())
 {
     using var scope = app.Services.CreateScope();

@@ -1,7 +1,7 @@
 {
-  "name": "backend",
-  "private": true,
-  "scripts": {
-    "swagger:export": "dotnet swagger tofile --output swagger.json ./src/Backend.Api/bin/Debug/net10.0/Backend.Api.dll v1"
-  }
+    "name": "backend",
+    "private": true,
+    "scripts": {
+        "swagger:export": "dotnet swagger tofile --output swagger.json ./src/Backend.Api/bin/Debug/net10.0/Backend.Api.dll v1"
+    }
 }
