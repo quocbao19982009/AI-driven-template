@@ -8,7 +8,7 @@ import { createFileRoute } from "@tanstack/react-router";
 
 function TemplateProtectedPage() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-[60vh] gap-3 text-center">
+    <div className="flex min-h-[60vh] flex-col items-center justify-center gap-3 text-center">
       <h1 className="text-2xl font-semibold">Protected Route</h1>
       <p className="text-muted-foreground max-w-sm">
         This route is protected. Only authenticated users can see this page.

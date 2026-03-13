@@ -40,16 +40,18 @@ export class ErrorBoundary extends Component<Props, State> {
       return (
         <div className="flex min-h-screen flex-col items-center justify-center gap-4 p-8 text-center">
           <h1 className="text-2xl font-bold">
-            {import.meta.env.DEV ? this.state.error.message : i18n.t("errors.somethingWentWrong")}
+            {import.meta.env.DEV
+              ? this.state.error.message
+              : i18n.t("errors.somethingWentWrong")}
           </h1>
           {import.meta.env.DEV && (
-            <pre className="max-w-xl overflow-auto rounded bg-muted p-4 text-left text-sm">
+            <pre className="bg-muted max-w-xl overflow-auto rounded p-4 text-left text-sm">
               {this.state.error.stack}
             </pre>
           )}
           <button
             onClick={this.reset}
-            className="rounded bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
+            className="bg-primary text-primary-foreground hover:bg-primary/90 rounded px-4 py-2"
           >
             {i18n.t("errors.tryAgain")}
           </button>
