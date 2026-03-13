@@ -1,6 +1,7 @@
 # Feature Specification: Feature
 
 **Last Updated:** `2026-02-19`
+**Tests written:** yes
 
 <!--
 This is the FILLED-IN EXAMPLE spec for the built-in Feature entity.
@@ -11,125 +12,111 @@ Use this as a reference when filling out your own feature-spec-[name].md.
 
 ---
 
-## Entity
+## 1. Entity
 
 **Name:** `Feature`
 **Table name (plural):** `Features`
 
 ### Fields
 
-| Property | C# Type  | Required | Constraints    | Notes |
-| -------- | -------- | -------- | -------------- | ----- |
-| `Name`   | `string` | yes      | max 200 chars  |       |
+| Property | C# Type  | Required | Constraints   | Notes |
+| -------- | -------- | -------- | ------------- | ----- |
+| `Name`   | `string` | yes      | max 200 chars |       |
 
 > `Id` (int), `CreatedAt`, `UpdatedAt` are inherited from `BaseEntity` — do not add them.
 
 ---
 
-## Core Values & Principles
+## Relationships
 
-- [Why this feature exists — design philosophy and goals]
-- [Concrete technical rules — the "how" constraints on implementation]
-
-> See `feature-spec-todos.md` for a filled-in example.
+- none
 
 ---
 
-## Architecture Decisions
+## 2. Core Values & Principles
 
-### [Decision Title]
-
-**Decision**: [What was decided]
-**Alternatives Considered**: [What else was evaluated]
-**Rationale**: [Why this was chosen]
-
-### [Decision Title]
-
-**Decision**: [What was decided]
-**Alternatives Considered**: [What else was evaluated]
-**Rationale**: [Why this was chosen]
-
-> Minimum 2 decisions. Focus on choices a new developer would question — "why not X instead?"
+- Serves as the built-in reference implementation — every pattern here is the canonical example for new features
+- Single `Name` field keeps the example minimal so developers focus on the layered architecture, not domain complexity
+- All CRUD operations are public (no auth) to simplify onboarding and testing
 
 ---
 
-## Data Flow
+## 3. Architecture Decisions
 
-```mermaid
-sequenceDiagram
-    participant Client
-    participant Controller
-    participant Service
-    participant Repository
-    participant DB
-
-    Client->>Controller: [HTTP request description]
-    Controller->>Service: [method call]
-    Service->>Repository: [repository call]
-    Repository->>DB: [query]
-    DB-->>Repository: [result]
-    Repository-->>Service: [entity]
-    Service-->>Controller: [DTO]
-    Controller-->>Client: ApiResponse<T>
-```
-
-**Flow walkthrough:**
-
-1. [Client sends request with ...]
-2. [Controller validates and delegates to Service]
-3. [Service applies business rules and calls Repository]
-4. [Repository queries the database; result mapped to DTO and returned]
+- Standard layered pattern: Controller → Service → Repository → EF Core
+- No custom business logic — this is a pure CRUD reference implementation
 
 ---
 
-## API Endpoints
+## 4. Data Flow
 
-| Method   | Route               | Description               | Auth required |
-| -------- | ------------------- | ------------------------- | ------------- |
-| `GET`    | `/api/features`     | Paginated list            | no            |
-| `GET`    | `/api/features/{id}`| Get single record         | no            |
-| `POST`   | `/api/features`     | Create new record         | no            |
-| `PUT`    | `/api/features/{id}`| Full update               | no            |
-| `DELETE` | `/api/features/{id}`| Delete record (204)       | no            |
+### Create
+
+1. Client POST `/api/features` with `{ "name": "..." }`
+2. Controller delegates to `FeaturesService.CreateAsync`
+3. Service validates via FluentValidation, maps to entity, calls `FeaturesRepository.CreateAsync`
+4. Repository saves to DB, returns entity
+5. Service maps to `FeatureDto`, returns `ApiResponse<FeatureDto>`
+
+### Read (list)
+
+1. Client GET `/api/features?page=1&pageSize=10`
+2. Repository applies `.OrderBy(f => f.Id)`, `.Skip()/.Take()`, returns `PagedResult<Feature>`
+3. Service maps to DTOs, returns `ApiResponse<PagedResult<FeatureDto>>`
 
 ---
 
-## Validation Rules
+## 5. API Endpoints
+
+| Method   | Route                | Description         | Auth required |
+| -------- | -------------------- | ------------------- | ------------- |
+| `GET`    | `/api/features`      | Paginated list      | no            |
+| `GET`    | `/api/features/{id}` | Get single record   | no            |
+| `POST`   | `/api/features`      | Create new record   | no            |
+| `PUT`    | `/api/features/{id}` | Full update         | no            |
+| `DELETE` | `/api/features/{id}` | Delete record (204) | no            |
+
+---
+
+## 6. Validation Rules
 
 - `Name`: required, not empty, max 200 characters (both Create and Update)
 
 ---
 
-## Business Rules
+## 7. Business Rules
 
 - none
 
 ### Acceptance Scenarios
 
 **Scenario: Create with valid data**
+
 - Given: a POST /api/features with Name = "My Feature" (≤ 200 chars)
 - When: the request is processed
 - Then: returns 201 with the created Feature entity wrapped in ApiResponse<FeatureDto>
 
 **Scenario: Create with empty name**
+
 - Given: a POST /api/features with Name = "" or whitespace only
 - When: the request is processed
 - Then: returns 400 with a validation error identifying the Name field
 
 **Scenario: Get by non-existent ID**
+
 - Given: a GET /api/features/{id} where no Feature with that ID exists
 - When: the request is processed
 - Then: returns 404 with NotFoundException message ("Feature {id} not found")
 
 ---
 
-## Authorization
+## 8. Authorization
 
 - none
 
 ---
 
-## Frontend UI
+## 9. Frontend UI
 
 ### Design reference
 
@@ -139,24 +126,51 @@ No Figma design — this is the built-in template example.
 
 Paginated table with header ("Features" title + "New Feature" button). Columns: ID, Name, Created At, and action dropdown (Edit / Delete). Create/Edit opens a modal with a single Name field. Delete opens a confirmation dialog. Skeleton loading while fetching; empty state message when no records.
 
-### Redux UI state
+### 10. Redux UI state
 
 - `searchQuery: string`
 - `selectedIds: string[]`
 
 ---
 
-## Migration Name
+## 11. File Locations
 
-`AddFeatureEntity`
+### Backend
+
+| File                 | Path                                                               |
+| -------------------- | ------------------------------------------------------------------ |
+| Entity               | `backend/src/Backend.Api/Features/Features/Feature.cs`             |
+| DTOs                 | `backend/src/Backend.Api/Features/Features/FeatureDtos.cs`         |
+| Validator            | `backend/src/Backend.Api/Features/Features/FeaturesValidator.cs`   |
+| Repository interface | `backend/src/Backend.Api/Features/Features/IFeaturesRepository.cs` |
+| Repository           | `backend/src/Backend.Api/Features/Features/FeaturesRepository.cs`  |
+| Service interface    | `backend/src/Backend.Api/Features/Features/IFeaturesService.cs`    |
+| Service              | `backend/src/Backend.Api/Features/Features/FeaturesService.cs`     |
+| Controller           | `backend/src/Backend.Api/Features/Features/FeaturesController.cs`  |
+
+### Frontend
+
+| File            | Path                                                                  |
+| --------------- | --------------------------------------------------------------------- |
+| Page component  | `frontend/src/features/features/components/features-page.tsx`         |
+| Table component | `frontend/src/features/features/components/features-table.tsx`        |
+| Form dialog     | `frontend/src/features/features/components/feature-form-dialog.tsx`   |
+| Delete dialog   | `frontend/src/features/features/components/feature-delete-dialog.tsx` |
+| Pagination hook | `frontend/src/features/features/hooks/use-features-pagination.ts`     |
+| Redux slice     | `frontend/src/features/features/store/features-slice.ts`              |
+| Route           | `frontend/src/routes/features/index.tsx`                              |
+| Generated API   | `frontend/src/api/generated/features/`                                |
 
 ---
 
-## Checklist
+## 12. Tests
 
-See `docs/feature-generation/implementation-checklist.md` for the full scaffolding checklist.
+**Tests written:** yes
 
-### Status (Feature example)
-- [x] Backend fully implemented
-- [x] API synced via Orval
-- [x] Frontend fully implemented
+### Backend Unit Tests
+
+| Test                                                 | Description            |
+| ---------------------------------------------------- | ---------------------- |
+| `CreateAsync_WithValidData_ReturnsFeatureDto`        | Happy path             |
+| `GetAllAsync_ReturnsPaginatedResult`                 | Correct page and total |
+| `GetByIdAsync_WithInvalidId_ThrowsNotFoundException` | 404 for missing entity |
