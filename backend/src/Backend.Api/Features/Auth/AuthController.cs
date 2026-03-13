@@ -2,6 +2,7 @@ using System.Security.Claims;
 using Backend.Common.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 
 namespace Backend.Features.Auth;
 
@@ -25,6 +26,7 @@ public class AuthController : ControllerBase
     /// and sets a HttpOnly refresh token cookie.
     /// </summary>
     [HttpPost("login")]
+    [EnableRateLimiting("login")]
     public async Task<ActionResult<ApiResponse<LoginResultDto>>> Login(
         [FromBody] LoginRequest request,
         CancellationToken cancellationToken = default)

@@ -13,6 +13,12 @@ using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var jwtKey = builder.Configuration["Jwt:Key"];
+if (string.IsNullOrWhiteSpace(jwtKey) || jwtKey.Length < 32)
+    throw new InvalidOperationException(
+        "Jwt:Key is missing or fewer than 32 characters. " +
+        "Set it via dotnet user-secrets (dev) or the Jwt__Key environment variable (prod).");
+
 // Database
 builder.Services.AddDatabase(builder.Configuration);
 
@@ -29,6 +35,9 @@ builder.Services.AddFluentValidationRulesToSwagger(options =>
 
 // CORS
 builder.Services.AddCorsPolicy(builder.Configuration);
+
+// Rate limiting
+builder.Services.AddRateLimiting();
 
 // Health checks
 builder.Services.AddHealthChecks();
@@ -70,6 +79,20 @@ builder.Services.AddControllers();
 var app = builder.Build();
 
 // Middleware
+app.Use(async (context, next) =>
+{
+    context.Response.OnStarting(() =>
+    {
+        context.Response.Headers["X-Content-Type-Options"] = "nosniff";
+        context.Response.Headers["X-Frame-Options"] = "DENY";
+        context.Response.Headers["Referrer-Policy"] = "strict-origin-when-cross-origin";
+        context.Response.Headers["X-Permitted-Cross-Domain-Policies"] = "none";
+        context.Response.Headers["Permissions-Policy"] = "geolocation=(), camera=(), microphone=()";
+        return Task.CompletedTask;
+    });
+    await next();
+});
+
 app.UseMiddleware<ErrorHandlingMiddleware>();
 
 app.UseSerilogRequestLogging();
@@ -86,6 +109,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseRateLimiter();
 app.UseCors();
 app.UseAuthentication();
 app.UseAuthorization();
