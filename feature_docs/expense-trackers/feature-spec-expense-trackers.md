@@ -2,6 +2,7 @@
 
 **Last Updated:** `2026-03-13`
 **Tests written:** no
+**Status:** Scaffolded (backend + frontend implemented)
 
 ---
 
@@ -41,42 +42,170 @@
 
 ## 3. Architecture Decisions
 
-- Standard layered pattern: Controller → Service → Repository → EF Core
-- Ownership and admin-override checks live in the **Service layer** (not controller or repository) to keep authorization logic centralized and testable
-- A new `ForbiddenAccessException` is introduced in `Common/Exceptions/` and mapped to HTTP 403 in `ErrorHandlingMiddleware`
-- Category is stored as a plain string (not a C# enum) for API simplicity; validated via FluentValidation `.Must()` rule
+### Authorization Enforcement Layer
+
+**Decision**: Ownership checks (`userId == expense.UserId || role == "Admin"`) are enforced in the **Service layer** (not in the controller or repository).
+
+**Alternatives Considered**:
+
+- Controller-level checks via custom `[AuthorizeOwner]` attribute — rejected because it requires reflection or multiple roundtrips to fetch the entity
+- Repository-level filtering — rejected because it spreads business logic into the data layer
+
+**Rationale**: Service layer is the correct place for business rules and authorization logic. It keeps the controller thin, the repository data-focused, and makes the authorization logic testable in isolation.
+
+---
+
+### ForbiddenAccessException as a New Exception Type
+
+**Decision**: Introduced a new `ForbiddenAccessException` in `Common/Exceptions/`, mapped to HTTP 403 in `ErrorHandlingMiddleware`.
+
+**Alternatives Considered**:
+
+- Reuse `UnauthorizedAccessException` (built-in .NET) — rejected because it's semantically for authentication failures (401), not authorization failures (403)
+- Return a custom result object from the service — rejected because exceptions are idiomatic for .NET error handling and integrate cleanly with middleware
+
+**Rationale**: HTTP 403 Forbidden is the correct status code when a user is authenticated but lacks permission to perform an action. A dedicated exception type makes intent explicit, improves logging clarity, and aligns with the existing exception handling pattern (`NotFoundException`, `ValidationException`).
+
+---
+
+### Category Stored as String (Not Enum)
+
+**Decision**: Category is stored as a `string` in the database and validated via FluentValidation `.Must()` rule, not as a C# enum.
+
+**Alternatives Considered**:
+
+- Enum stored as integer — rejected because OpenAPI/Orval integration works better with strings; enums require manual mapping in DTOs
+- Separate Category entity table — rejected because the list is small, fixed, and unlikely to require localization or per-user customization
+
+**Rationale**: Using strings keeps the API contract simple and avoids enum serialization complexity. FluentValidation ensures only valid values are accepted.
 
 ---
 
 ## 4. Data Flow
 
-### Create
+```mermaid
+sequenceDiagram
+    participant C as Client
+    participant Ctrl as Controller
+    participant Svc as Service
+    participant Repo as Repository
+    participant DB as Database
 
-1. Client POST `/api/expense-trackers` with `{ amount, category, description, date }`
-2. Controller extracts `userId` from JWT `sub` claim
-3. Controller calls `ExpenseTrackersService.CreateAsync(request, userId, ct)`
-4. Service validates via FluentValidation, maps to entity (sets `UserId`), calls Repository
-5. Repository saves to DB, returns entity
-6. Service maps to `ExpenseTrackerDto` (includes submitter name), returns `ApiResponse<ExpenseTrackerDto>`
+    Note over C,DB: Create Expense (POST /api/expense-trackers)
+    C->>Ctrl: POST with { amount, category, description, date }
+    Ctrl->>Ctrl: Extract userId from JWT "sub" claim
+    Ctrl->>Svc: CreateAsync(request, userId)
+    Svc->>Svc: Validate via FluentValidation
+    Svc->>Repo: CreateAsync(entity)
+    Repo->>DB: Insert ExpenseTracker
+    DB-->>Repo: Return entity (with Id)
+    Repo->>Repo: Load User navigation
+    Repo-->>Svc: Return entity with User
+    Svc->>Svc: Map to ExpenseTrackerDto (includes SubmittedBy)
+    Svc-->>Ctrl: Return ApiResponse<ExpenseTrackerDto>
+    Ctrl-->>C: 201 Created
 
-### Read (list)
+    Note over C,DB: Get All Expenses (GET /api/expense-trackers)
+    C->>Ctrl: GET ?page=1&pageSize=20 (no auth)
+    Ctrl->>Svc: GetAllAsync(page, pageSize)
+    Svc->>Repo: GetAllAsync(page, pageSize)
+    Repo->>DB: Query with .Include(User), .AsNoTracking(), .OrderByDescending(Date), .Skip/.Take
+    DB-->>Repo: Return list + total count
+    Repo-->>Svc: Return (entities, totalCount)
+    Svc->>Svc: Map to PagedResult<ExpenseTrackerDto>
+    Svc-->>Ctrl: Return PagedResult
+    Ctrl-->>C: 200 OK with ApiResponse<PagedResult>
 
-1. Client GET `/api/expense-trackers?page=1&pageSize=20` (no auth required)
-2. Repository queries with `.Include(e => e.User)`, `.AsNoTracking()`, `.OrderByDescending(e => e.Date)`, `.Skip()/.Take()`
-3. Service maps to DTOs with submitter name
+    Note over C,DB: Update Expense (PUT /api/expense-trackers/{id})
+    C->>Ctrl: PUT /{id} with { amount, category, description, date }
+    Ctrl->>Ctrl: Extract userId + role from JWT
+    Ctrl->>Svc: UpdateAsync(id, request, userId, userRole)
+    Svc->>Svc: Validate via FluentValidation
+    Svc->>Repo: GetByIdAsync(id)
+    Repo->>DB: Fetch expense with User
+    DB-->>Repo: Return entity
+    Repo-->>Svc: Return entity
+    alt Not owner and not admin
+        Svc->>Svc: throw ForbiddenAccessException
+        Svc-->>Ctrl: 403 Forbidden
+        Ctrl-->>C: 403 Forbidden
+    else Owner or admin
+        Svc->>Svc: Update entity fields
+        Svc->>Repo: UpdateAsync(entity)
+        Repo->>DB: Save changes
+        DB-->>Repo: Success
+        Repo-->>Svc: Success
+        Svc->>Svc: Map to ExpenseTrackerDto
+        Svc-->>Ctrl: Return ApiResponse<ExpenseTrackerDto>
+        Ctrl-->>C: 200 OK
+    end
 
-### Update
+    Note over C,DB: Delete Expense (DELETE /api/expense-trackers/{id})
+    C->>Ctrl: DELETE /{id}
+    Ctrl->>Ctrl: Extract userId + role from JWT
+    Ctrl->>Svc: DeleteAsync(id, userId, userRole)
+    Svc->>Repo: GetByIdAsync(id)
+    Repo->>DB: Fetch expense
+    DB-->>Repo: Return entity
+    Repo-->>Svc: Return entity
+    alt Not owner and not admin
+        Svc->>Svc: throw ForbiddenAccessException
+        Svc-->>Ctrl: 403 Forbidden
+        Ctrl-->>C: 403 Forbidden
+    else Owner or admin
+        Svc->>Repo: DeleteAsync(entity)
+        Repo->>DB: Delete entity
+        DB-->>Repo: Success
+        Repo-->>Svc: Success
+        Svc-->>Ctrl: Success
+        Ctrl-->>C: 204 No Content
+    end
+```
 
-1. Client PUT `/api/expense-trackers/{id}` with `{ amount, category, description, date }`
+### Walkthrough
+
+**Create Flow:**
+
+1. Client sends POST `/api/expense-trackers` with `{ amount, category, description, date }` and an Authorization header (JWT)
+2. Controller extracts `userId` from the JWT's `sub` claim (via `GetCurrentUserId()` helper)
+3. Controller passes the request + `userId` to `ExpenseTrackersService.CreateAsync()`
+4. Service validates the request using FluentValidation (`CreateExpenseTrackerRequestValidator`) — throws `ValidationException` if invalid
+5. Service creates a new `ExpenseTracker` entity, setting `UserId` from the parameter (never from request body)
+6. Service calls `Repository.CreateAsync()` which inserts the entity and reloads the `User` navigation property
+7. Service maps the entity to `ExpenseTrackerDto` (includes `SubmittedBy` = `User.FirstName + User.LastName`)
+8. Service returns `ApiResponse<ExpenseTrackerDto>`, controller returns 201 Created with the DTO
+
+**Read Flow (List):**
+
+1. Client sends GET `/api/expense-trackers?page=1&pageSize=20` — no authentication required (`[AllowAnonymous]`)
+2. Controller calls `ExpenseTrackersService.GetAllAsync(page, pageSize)`
+3. Service validates pagination parameters (page ≥ 1, pageSize 1-100) — throws `ValidationException` if invalid
+4. Repository queries with `.Include(e => e.User)` to load submitter, `.AsNoTracking()` for read-only efficiency, `.OrderByDescending(e => e.Date).ThenByDescending(e => e.Id)` for deterministic pagination, and `.Skip()/.Take()` for paging
+5. Repository returns `(List<ExpenseTracker>, int totalCount)`
+6. Service maps entities to `PagedResult<ExpenseTrackerDto>` and returns it wrapped in `ApiResponse`
+
+**Update Flow:**
+
+1. Client sends PUT `/api/expense-trackers/{id}` with `{ amount, category, description, date }` and JWT
+2. Controller extracts `userId` and `role` from JWT (via `GetCurrentUserId()` and `GetCurrentUserRole()` helpers)
+3. Controller passes `id`, `request`, `userId`, and `userRole` to `ExpenseTrackersService.UpdateAsync()`
+4. Service validates the request using FluentValidation — throws `ValidationException` if invalid
+5. Service fetches the expense via `Repository.GetByIdAsync(id)` — throws `NotFoundException` if not found
+6. Service calls `EnsureOwnerOrAdmin(entity, userId, userRole)` which checks `expense.UserId == userId || userRole == "Admin"` (case-insensitive) — throws `ForbiddenAccessException` if neither
+7. Service updates entity fields (`Amount`, `Category`, `Description`, `Date`), calls `Repository.UpdateAsync()`
+8. Repository updates the entity in the database (EF Core's change tracker automatically updates `UpdatedAt` via `SaveChangesAsync` override)
+9. Service maps the updated entity to `ExpenseTrackerDto` and returns it wrapped in `ApiResponse`, controller returns 200 OK
+
+**Delete Flow:**
+
+1. Client sends DELETE `/api/expense-trackers/{id}` with JWT
 2. Controller extracts `userId` and `role` from JWT
-3. Service fetches expense, checks `expense.UserId == userId || role == "Admin"` — throws `ForbiddenAccessException` if neither
-4. Service validates, updates, saves, returns updated DTO
-
-### Delete
-
-1. Client DELETE `/api/expense-trackers/{id}`
-2. Same ownership/admin check as Update
-3. Repository deletes, returns 204
+3. Controller passes `id`, `userId`, and `userRole` to `ExpenseTrackersService.DeleteAsync()`
+4. Service fetches the expense — throws `NotFoundException` if not found
+5. Service calls `EnsureOwnerOrAdmin()` — throws `ForbiddenAccessException` if not owner and not admin
+6. Service calls `Repository.DeleteAsync(entity)`
+7. Repository removes the entity and saves changes
+8. Controller returns 204 No Content
 
 ---
 
@@ -213,13 +342,38 @@ No Figma design — standard table + form dialog pattern.
 
 ### Description
 
-Page header with "Expense Tracker" title and a "New Expense" button (visible only when logged in). Below the header, a filter bar with a search input (searches description, debounced) and a category dropdown filter (options: All, Food, Transport, Utilities, Entertainment, Other).
+Page header with "Expense Tracker" title and a "New Expense" button (visible only when `accessToken` is present — hidden for anonymous users). Below the header, a filter bar with:
 
-Paginated table with columns: Amount (formatted as currency), Category, Description, Date (formatted), Submitted By (user's first + last name), and an Actions column with Edit/Delete dropdown (visible only if current user is the owner or an admin — hidden when not logged in).
+- Search input (searches for `description` or `category`, debounced 300ms) using `useDebounce` hook
+- Category dropdown filter (options: All, Food, Transport, Utilities, Entertainment, Other)
 
-Create/Edit opens a modal dialog with fields: Amount (number input), Category (select dropdown with the 5 allowed values), Description (textarea, optional), Date (date picker). Delete opens a confirmation dialog.
+Paginated table with columns:
 
-Skeleton loading while fetching. Empty state message when no expenses exist.
+- **Amount** — formatted as Euro currency (`Intl.NumberFormat` with `style: "currency", currency: "EUR"`)
+- **Category** — string value (Food/Transport/etc.)
+- **Description** — truncated with CSS (`max-w-[200px] truncate`), displays "—" if null
+- **Date** — formatted via `Date.toLocaleDateString()`
+- **Submitted By** — `expense.submittedBy` (user's `FirstName + LastName` from backend DTO)
+- **Actions** column — rendered only when user is logged in; shows Edit/Delete dropdown menu if `canModify(expense)` returns true (checked via `expense.userId === user.id || user.role === "Admin"`)
+
+Filtering is **client-side**: `useExpenseTrackersPagination` hook fetches paginated data from API, then applies search and category filters locally. This is acceptable for small datasets; for larger datasets, backend filtering would be required.
+
+Create/Edit dialog:
+
+- Reuses `ExpenseTrackerFormDialog` component with an optional `expense` prop (null for create, populated for edit)
+- Form fields: Amount (number input), Category (select dropdown with 5 allowed values), Description (textarea, optional), Date (HTML date input)
+- Form validation uses Zod schema extended from `PostApiExpenseTrackersBody` (Orval-generated) with translated error messages via `useTranslation()`
+- **Important**: Amount validation uses `z.number({ error: t(...) })` not `invalid_type_error` — this is because the schema is for form validation, and `error` is the correct syntax for custom error messages on type mismatch
+- On submit, creates or updates via Orval-generated mutations (`usePostApiExpenseTrackers` / `usePutApiExpenseTrackersId`), invalidates queries, and shows toast notification
+
+Delete dialog:
+
+- `ExpenseTrackerDeleteDialog` component shows expense amount and category in confirmation message
+- Uses `useDeleteApiExpenseTrackersId` mutation
+
+Skeleton loading (5 rows) while `isLoading` is true. Empty state message when `expenses.length === 0`.
+
+Pagination controls at bottom: Previous/Next buttons, page indicator ("Page X of Y"), disabled states when at first/last page.
 
 ### 10. Redux UI state
 
@@ -253,6 +407,7 @@ Skeleton loading while fetching. Empty state message when no expenses exist.
 | Form dialog     | `frontend/src/features/expense-trackers/components/expense-tracker-form-dialog.tsx`   |
 | Delete dialog   | `frontend/src/features/expense-trackers/components/expense-tracker-delete-dialog.tsx` |
 | Pagination hook | `frontend/src/features/expense-trackers/hooks/use-expense-trackers-pagination.ts`     |
+| Form hook       | `frontend/src/features/expense-trackers/hooks/use-expense-tracker-form.ts`            |
 | Redux slice     | `frontend/src/features/expense-trackers/store/expense-trackers-slice.ts`              |
 | Route           | `frontend/src/routes/expense-trackers/index.tsx`                                      |
 | Generated API   | `frontend/src/api/generated/expense-trackers/`                                        |
@@ -289,10 +444,21 @@ Skeleton loading while fetching. Empty state message when no expenses exist.
 
 ## Seed Data
 
-- Reuse existing `admin@example.com` admin user (seeded by `DataSeeder.SeedAdminUserAsync`)
-- Seed 3 regular users: `user1@example.com`, `user2@example.com`, `user3@example.com` (password: `password123`)
-- Seed ~10 sample expenses spread across all 4 users and all 5 categories
-- Follow existing idempotent pattern with `AnyAsync()` guard
+Implemented in `DataSeeder.SeedExpenseTrackersAsync()`:
+
+- Reuses existing admin user (`admin@example.com`) seeded by `DataSeeder.SeedAdminUserAsync()`
+- Reuses 3 test users seeded by `DataSeeder.SeedTestUsersAsync()`:
+  - `user1@example.com` — Alice Johnson
+  - `user2@example.com` — Bob Smith
+  - `user3@example.com` — Carol Williams
+  - All use password `password123` (hashed with BCrypt workFactor 12)
+- Seeds exactly 10 sample expenses distributed across all 4 users and all 5 categories:
+  - User1 (Alice): Food ($12.50 lunch), Transport ($45 taxi), Food ($30 team dinner)
+  - User2 (Bob): Utilities ($120 electricity), Entertainment ($8.99 movie), Utilities ($75 internet)
+  - User3 (Carol): Food ($25 groceries), Other ($15.50 office supplies)
+  - Admin: Transport ($200 bus pass), Entertainment ($55 concert)
+- All expenses use UTC dates in March 2026 (spans March 1-10)
+- Follows idempotent pattern: `if (await context.ExpenseTrackers.AnyAsync()) return;`
 
 ---
 
