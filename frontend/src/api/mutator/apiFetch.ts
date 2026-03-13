@@ -1,6 +1,9 @@
 import { toast } from "sonner";
 import i18n from "@/lib/i18n";
 
+if (!import.meta.env.VITE_API_URL && import.meta.env.PROD) {
+  console.error("VITE_API_URL is not set. API calls will fail in production.");
+}
 const BASE_URL = import.meta.env.VITE_API_URL ?? "http://localhost:5054";
 export class ApiError extends Error {
   status: number;

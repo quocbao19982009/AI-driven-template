@@ -56,7 +56,7 @@ public class UsersService : IUsersService
     {
         await ValidateAndThrowAsync(_createValidator, request, cancellationToken);
 
-        if (await _repository.EmailExistsAsync(request.Email, cancellationToken: cancellationToken))
+        if (await _repository.EmailExistsAsync(request.Email.ToLowerInvariant(), cancellationToken: cancellationToken))
         {
             throw new Common.Exceptions.ValidationException(
                 ["A user with this email already exists."]);
@@ -66,7 +66,7 @@ public class UsersService : IUsersService
         {
             FirstName = request.FirstName,
             LastName = request.LastName,
-            Email = request.Email,
+            Email = request.Email.ToLowerInvariant(),
             PasswordHash = BCryptHash(request.Password),
             Role = request.Role ?? "User"
         };
@@ -87,7 +87,7 @@ public class UsersService : IUsersService
             throw new NotFoundException("User", id);
         }
 
-        if (await _repository.EmailExistsAsync(request.Email, id, cancellationToken))
+        if (await _repository.EmailExistsAsync(request.Email.ToLowerInvariant(), id, cancellationToken))
         {
             throw new Common.Exceptions.ValidationException(
                 ["A user with this email already exists."]);
@@ -95,7 +95,7 @@ public class UsersService : IUsersService
 
         user.FirstName = request.FirstName;
         user.LastName = request.LastName;
-        user.Email = request.Email;
+        user.Email = request.Email.ToLowerInvariant();
         user.Role = request.Role ?? user.Role;
 
         await _repository.UpdateAsync(user, cancellationToken);

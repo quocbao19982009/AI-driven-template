@@ -15,7 +15,7 @@ export function ProtectedRoute() {
     if (!isLoading && !accessToken) {
       void navigate({
         to: "/login",
-        search: { returnUrl: location.pathname },
+        search: { returnUrl: location.pathname + location.search + location.hash },
       });
     }
   }, [isLoading, accessToken, navigate, location.pathname]);
