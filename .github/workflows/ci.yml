@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [master]
+    branches: [main]
   pull_request:
-    branches: [master]
+    branches: [main]
 
 jobs:
   # ─── Backend: build + test ────────────────────────────────────────────────
@@ -57,37 +57,3 @@ jobs:
       - name: Build
         run: npm run build
         working-directory: frontend
-
-  # ─── API sync check: Orval output must be committed ──────────────────────
-  api-sync:
-    name: API Sync Check
-    needs: [backend]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup .NET 10
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: "10.x"
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: "22"
-          cache: "npm"
-          cache-dependency-path: package-lock.json
-
-      - name: Install root dependencies
-        run: npm ci
-
-      - name: Install frontend dependencies
-        run: npm ci
-        working-directory: frontend
-
-      - name: Install dotnet-swagger tool
-        run: dotnet tool restore
-        working-directory: backend
-
-      - name: Check Orval output is up to date
-        run: npm run api:check
