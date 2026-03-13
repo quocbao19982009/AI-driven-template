@@ -42,7 +42,9 @@ function AllProviders({ children }: { children: ReactNode }) {
   return (
     <I18nextProvider i18n={i18n}>
       <Provider store={store}>
-        <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+        <QueryClientProvider client={queryClient}>
+          {children}
+        </QueryClientProvider>
       </Provider>
     </I18nextProvider>
   );

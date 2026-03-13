@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using Backend.Common.Models;
 using Backend.Features.Auth;
 using FluentAssertions;
@@ -5,7 +6,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
-using System.Security.Claims;
 
 namespace Backend.Tests.Features.Auth;
 
