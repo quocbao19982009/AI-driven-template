@@ -106,7 +106,7 @@ The Orval hooks are already generated in api/generated/products/.
 
 **After AI finishes — do manually:**
 
-1. Register the Redux slice in `store/index.ts`
+1. Register the Redux slice in `store/store.ts`
 2. Add a navigation link in `components/layout/app-layout.tsx` (use `t("nav.products")`)
 3. Add translation keys for the new feature in `frontend/src/locales/en.json` and `frontend/src/locales/fi.json`
 
@@ -391,7 +391,7 @@ then run `npm run api:sync` once before switching to the frontend.
 | Skipping `OrderBy` in paginated queries                   | Non-deterministic page results                         | Always `.OrderBy()` before `.Skip()/.Take()`        |
 | Putting new state in Redux instead of React Query         | Stale data, double source of truth                     | Server data → React Query, UI state → Redux         |
 | Forgetting to register service/repository in `Program.cs` | 500 on all endpoints for that feature                  | AI should do this — verify it did                   |
-| Forgetting to register Redux slice in `store/index.ts`    | Redux state silently missing                           | Do this manually after frontend scaffold            |
+| Forgetting to register Redux slice in `store/store.ts`    | Redux state silently missing                           | Do this manually after frontend scaffold            |
 | Hardcoding UI strings instead of using `t()`              | Strings not translatable, i18n Ally shows missing keys | Always use `useTranslation` + `t()` in components   |
 | Adding translation keys to only one locale file           | App crashes or falls back to key name in Finnish       | Always update both `en.json` and `fi.json` together |
 | Running `/scaffold-feature` on a spec with TODO markers   | Skill refuses — lists specific unresolved markers      | Resolve with `/clarify-spec` or edit spec directly  |

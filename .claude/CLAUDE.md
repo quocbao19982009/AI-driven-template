@@ -57,6 +57,20 @@ Specs live in `feature_docs/` — one subfolder per feature (e.g. `feature_docs/
 
 ---
 
+## Convention Changelog
+
+`docs/changelog.md` tracks project-wide convention and architectural changes.
+
+**At the end of any session that changed a convention** (CLAUDE.md, `.claude/rules/`, `docs/coding-style.md`, or a skill), append one row per distinct change to `docs/changelog.md`:
+
+| Date | Change | Reason |
+|---|---|---|
+| YYYY-MM-DD | What rule/convention changed | Why it was changed |
+
+**Skip it for:** feature additions, bug fixes, or code changes with no convention impact.
+
+---
+
 ## Coding Style
 
 → See `docs/coding-style.md` for all style rules (naming, formatting, Tailwind, testing).

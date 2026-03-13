@@ -25,15 +25,14 @@ PostgreSQL runs on port `5433`.
 
 **2. Set the JWT secret**
 
-Open `src/Backend.Api/appsettings.json` and replace the placeholder:
+`Jwt:Key` is intentionally empty in `appsettings.json`. Set it via user-secrets for local development:
 
-```json
-"Jwt": {
-  "Key": "CHANGE-THIS-TO-A-SECURE-KEY-AT-LEAST-32-CHARS!"
-}
+```bash
+cd backend/src/Backend.Api
+dotnet user-secrets set "Jwt:Key" "your-secure-random-key-here-at-least-32-chars"
 ```
 
-For production, use `dotnet user-secrets` or environment variables — never commit real secrets.
+For production, set the `Jwt__Key` environment variable. The app will refuse to start if the key is missing or shorter than 32 characters. See `.env.example` for details.
 
 **3. Restore, migrate, and run**
 
@@ -76,11 +75,8 @@ backend/
 ├── src/Backend.Api/
 │   ├── Features/
 │   │   ├── _FeatureTemplate/   # Template — AI copies this when scaffolding
-│   │   ├── Users/              # Example feature
-│   │   ├── Todos/
-│   │   ├── Rooms/
-│   │   ├── Bookings/
-│   │   └── Locations/
+│   │   ├── Auth/               # JWT + refresh token authentication
+│   │   └── Users/              # User accounts
 │   ├── Common/
 │   │   ├── Models/
 │   │   │   ├── BaseEntity.cs   # Base for all entities (Id, CreatedAt, UpdatedAt)
@@ -133,14 +129,14 @@ JWT settings live in `appsettings.json` under the `Jwt` key:
 
 ```json
 "Jwt": {
-  "Key": "your-secret-key-min-32-chars",
+  "Key": "",
   "Issuer": "Backend",
   "Audience": "Backend.Client",
   "ExpiryMinutes": "60"
 }
 ```
 
-- **Key** — signing secret, minimum 32 characters. Use `dotnet user-secrets` or an environment variable in production — never commit a real key.
+- **Key** — intentionally empty in `appsettings.json`. Must be set via `dotnet user-secrets` (dev) or `Jwt__Key` environment variable (prod). Minimum 32 characters — the app throws at startup if missing or too short.
 - **ExpiryMinutes** — how long a token is valid before the client must re-authenticate.
 - **Issuer / Audience** — validated on every request; change both here and in any client that verifies tokens.
 

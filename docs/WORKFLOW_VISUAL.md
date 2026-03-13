@@ -65,7 +65,7 @@ flowchart TD
         N3["⚠️ Developer only — AI does not run this step"]:::result
         D3["🧑 DEVELOPER Runs: dotnet ef migrations add AddProductEntity Reviews migration file to verify it looks correct Runs: dotnet ef database update"]:::dev
         R3["⚠️ AI STOPS HERE Migrations affect the real database Developer must verify before applying"]:::result
-        F3["📁 FILES CHANGED NEW: Migrations/[timestamp]_AddProductEntity.cs NEW: Migrations/[timestamp]_AddProductEntity.Designer.cs DB: Products table created in SQL Server"]:::files
+        F3["📁 FILES CHANGED NEW: Migrations/[timestamp]_AddProductEntity.cs NEW: Migrations/[timestamp]_AddProductEntity.Designer.cs DB: Products table created in PostgreSQL"]:::files
         N3 --> D3 --> R3 --> F3
     end
 

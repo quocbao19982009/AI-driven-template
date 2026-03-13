@@ -56,7 +56,7 @@ These capabilities are already wired up in the template. Read this before buildi
 
 | Feature | Description | Key files |
 | --- | --- | --- |
-| **Authentication** | Silent refresh on mount via HttpOnly cookies. `useAuth()` hook exposes `user`, `login()`, `logout()`. Protected routes redirect to `/login?returnUrl=<path>`. | `src/auth/auth-provider.tsx`, `src/auth/auth-context.tsx`, `src/components/protected-route.tsx` |
+| **Authentication** | Silent refresh on mount via HttpOnly cookies. `useAuth()` hook exposes `accessToken`, `isLoading`, `login()`, `logout()`. User profile is in Redux: `useAppSelector(s => s.auth.user)`. Protected routes redirect to `/login?returnUrl=<path>`. | `src/auth/auth-provider.tsx`, `src/auth/auth-context.tsx`, `src/components/protected-route.tsx` |
 | **API Client** | `apiFetch` injects Bearer token, handles 401 with one silent refresh + retry, auto-shows error toasts on 403 and 5xx. | `src/api/mutator/apiFetch.ts` |
 | **Toast Notifications** | Sonner toasts with custom icons (success, info, warning, error, loading). Auto-triggered by `apiFetch` for common errors. | `src/components/ui/sonner.tsx` |
 | **Internationalization** | English and Finnish out of the box. Language selection persisted to localStorage. Language switcher in app header. | `src/locales/en.json`, `src/locales/fi.json`, `src/components/ui/language-switcher.tsx` |

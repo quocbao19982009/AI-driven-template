@@ -47,12 +47,21 @@ public class AuthController : ControllerBase
         var rawToken = Request.Cookies[RefreshTokenCookieName];
         if (string.IsNullOrEmpty(rawToken))
         {
+            ClearRefreshTokenCookie();
             return Unauthorized(ApiResponse<LoginResultDto>.Fail("No refresh token provided"));
         }
 
-        var result = await _authService.RefreshAsync(rawToken, cancellationToken);
-        SetRefreshTokenCookie(result.RawRefreshToken);
-        return Ok(ApiResponse<LoginResultDto>.Ok(result));
+        try
+        {
+            var result = await _authService.RefreshAsync(rawToken, cancellationToken);
+            SetRefreshTokenCookie(result.RawRefreshToken);
+            return Ok(ApiResponse<LoginResultDto>.Ok(result));
+        }
+        catch (UnauthorizedAccessException ex)
+        {
+            ClearRefreshTokenCookie();
+            return Unauthorized(ApiResponse<LoginResultDto>.Fail(ex.Message));
+        }
     }
 
     /// <summary>

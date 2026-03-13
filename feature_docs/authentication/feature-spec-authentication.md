@@ -1,7 +1,7 @@
 # Feature Specification: Authentication
 
-**Last Updated:** `2026-03-12`
-**Tests written:** no
+**Last Updated:** `2026-03-13`
+**Tests written:** yes
 
 ---
 
@@ -58,10 +58,10 @@ The `User` entity already exists in `Features/Users/`. Authentication uses the e
 ## 2. Core Values & Principles
 
 - **Passwords are never stored in plaintext** — always hashed with BCrypt (cost factor ≥ 12)
-- **JWTs are short-lived** (15 minutes) to minimize the damage window of a leaked access token
+- **JWTs are short-lived** (60 minutes by default, configurable via `Jwt:ExpiryMinutes`) to minimize the damage window of a leaked access token
 - **Refresh tokens are long-lived** (7 days), stored as HttpOnly cookies to prevent JavaScript access — this is the primary XSS mitigation
 - **Refresh token rotation** — each use of a refresh token issues a new one and revokes the old; a reuse attempt invalidates the entire token family (detected theft)
-- **No secrets in config files** — JWT signing key and expiry settings come from environment variables / user-secrets only
+- **JWT signing key is not in `appsettings.json`** — `Jwt:Key` is empty in `appsettings.json` and must be provided via `dotnet user-secrets` (dev) or `Jwt__Key` environment variable (prod). The DB connection string and other non-secret config remain in `appsettings.json`.
 - **Return URL redirect** — after successful login, the frontend redirects to `returnUrl` (the page the user was trying to reach), defaulting to `/`
 - **OAuth-ready design** — `IssueTokensAsync(User user)` is a shared internal method; any future OAuth callback issues the same JWT + refresh token as local login
 
@@ -73,7 +73,7 @@ The `User` entity already exists in `Features/Users/`. Authentication uses the e
 
 **Decision:** Access token (JWT) is stored in JavaScript memory only; refresh token is stored in an HttpOnly, Secure, SameSite=Strict cookie.
 **Alternatives Considered:** Both in localStorage; both in cookies; both in memory.
-**Rationale:** localStorage is vulnerable to XSS — any injected script can steal tokens. HttpOnly cookies cannot be read by JavaScript, eliminating that attack vector. The short JWT lifetime (15 min) limits blast radius if it leaks through other means.
+**Rationale:** localStorage is vulnerable to XSS — any injected script can steal tokens. HttpOnly cookies cannot be read by JavaScript, eliminating that attack vector. The short JWT lifetime limits blast radius if it leaks through other means.
 
 ### Refresh token rotation with reuse detection
 
@@ -121,7 +121,7 @@ sequenceDiagram
     AuthService->>AuthService: Guard: if user.PasswordHash is null → 401 (OAuth-only account)
     AuthService->>AuthService: BCrypt.Verify(password, user.PasswordHash)
     AuthService->>AuthService: IssueTokensAsync(user, ct)
-    AuthService->>AuthService: GenerateJwt(user) → accessToken
+    AuthService->>AuthService: GenerateJwt(user) → accessToken (lifetime from Jwt:ExpiryMinutes)
     AuthService->>AuthService: GenerateRefreshToken() → refreshToken (random bytes)
     AuthService->>RefreshTokensRepository: CreateAsync(refreshTokenEntity, ct)
     RefreshTokensRepository->>DB: INSERT RefreshTokens
@@ -135,7 +135,7 @@ sequenceDiagram
 2. Service fetches User by email; returns 401 if not found (generic message — never reveal whether email exists)
 3. If `PasswordHash` is null (OAuth-only account), return 401 with generic message
 4. Service verifies BCrypt hash; returns 401 on mismatch
-5. `IssueTokensAsync` generates a signed JWT (15 min) and a cryptographically random refresh token (32 bytes → base64url)
+5. `IssueTokensAsync` generates a signed JWT (lifetime from `Jwt:ExpiryMinutes`, default 60 min) and a cryptographically random refresh token (32 bytes → base64url)
 6. Refresh token is hashed (SHA256 — not a password, a random secret) before storage
 7. Controller sets the refresh token as an HttpOnly cookie and returns the JWT in the body
 
@@ -217,16 +217,16 @@ On application startup in the **Development** environment only, `DataSeeder.Seed
 
 **Rules:**
 
-- The password is the hardcoded development default `"password123"` — this is intentional for the Development environment only and must never be used in production.
+- The password defaults to `"password123"` but can be overridden via `Seed:AdminPassword` in configuration (e.g. `dotnet user-secrets set "Seed:AdminPassword" "..."` for dev). This is for the Development environment only and the default must never be used in production.
 - The check is by email (`admin@example.com`) — if a user with that email already exists, the method is a no-op (idempotent).
-- The `IConfiguration` parameter is accepted by the method signature (for future use), but the password is not currently read from config. A guard for a blank password is present as dead code, kept for when config-driven seeding is adopted.
 
 ---
 
 - **Generic error on bad credentials:** Always return `401 Unauthorized` with the message `"Invalid email or password"` — never indicate whether the email exists or the password was wrong
 - **OAuth-only account login attempt:** If `user.PasswordHash` is null, return `401 Unauthorized` with the same generic message `"Invalid email or password"` — do not reveal the account exists or that it is OAuth-only
-- **Expired refresh token:** Returns `401 Unauthorized`; cookie is cleared
-- **Revoked refresh token (reuse detected):** Revoke ALL active refresh tokens for that user, return `401 Unauthorized` with message `"Session invalidated due to suspicious activity"` — forces full re-login on all devices
+- **Expired refresh token:** Returns `401 Unauthorized`; cookie is cleared by the controller
+- **Revoked refresh token (reuse detected):** Revoke ALL active refresh tokens for that user, return `401 Unauthorized` with message `"Session invalidated due to suspicious activity"`; cookie is cleared by the controller — forces full re-login on all devices
+- **Any refresh failure:** `AuthController.Refresh` catches `UnauthorizedAccessException` from the service, calls `ClearRefreshTokenCookie()`, and returns `401` — the cookie is always cleared on failure
 - **Refresh token hash:** Store `SHA256(rawToken)` in the DB — the raw token travels only over the wire and in the cookie; the DB stores only its hash
 - **BCrypt cost factor:** Minimum 12 in production
 - **JWT claims:** `sub` (userId), `email`, `role`, `jti` (unique token ID), `iat`, `exp` — `iat`/`exp` are added automatically by `JwtSecurityToken`
@@ -386,7 +386,7 @@ Full-page centered login card (not a dialog). Layout:
 
 ## 11. Tests
 
-**Tests written:** no
+**Tests written:** yes
 
 ### Backend Unit Tests
 

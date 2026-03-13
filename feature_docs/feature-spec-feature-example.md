@@ -137,29 +137,29 @@ Paginated table with header ("Features" title + "New Feature" button). Columns: 
 
 ### Backend
 
-| File                 | Path                                                               |
-| -------------------- | ------------------------------------------------------------------ |
-| Entity               | `backend/src/Backend.Api/Features/Features/Feature.cs`             |
-| DTOs                 | `backend/src/Backend.Api/Features/Features/FeatureDtos.cs`         |
-| Validator            | `backend/src/Backend.Api/Features/Features/FeaturesValidator.cs`   |
-| Repository interface | `backend/src/Backend.Api/Features/Features/IFeaturesRepository.cs` |
-| Repository           | `backend/src/Backend.Api/Features/Features/FeaturesRepository.cs`  |
-| Service interface    | `backend/src/Backend.Api/Features/Features/IFeaturesService.cs`    |
-| Service              | `backend/src/Backend.Api/Features/Features/FeaturesService.cs`     |
-| Controller           | `backend/src/Backend.Api/Features/Features/FeaturesController.cs`  |
+| File                 | Path                                                                       |
+| -------------------- | -------------------------------------------------------------------------- |
+| Entity               | `backend/src/Backend.Api/Features/_FeatureTemplate/Feature.cs`             |
+| DTOs                 | `backend/src/Backend.Api/Features/_FeatureTemplate/FeatureDtos.cs`         |
+| Validator            | `backend/src/Backend.Api/Features/_FeatureTemplate/FeaturesValidator.cs`   |
+| Repository interface | `backend/src/Backend.Api/Features/_FeatureTemplate/IFeatureRepository.cs`  |
+| Repository           | `backend/src/Backend.Api/Features/_FeatureTemplate/FeatureRepository.cs`   |
+| Service interface    | `backend/src/Backend.Api/Features/_FeatureTemplate/IFeatureService.cs`     |
+| Service              | `backend/src/Backend.Api/Features/_FeatureTemplate/FeatureService.cs`      |
+| Controller           | `backend/src/Backend.Api/Features/_FeatureTemplate/FeatureController.cs`   |
 
 ### Frontend
 
-| File            | Path                                                                  |
-| --------------- | --------------------------------------------------------------------- |
-| Page component  | `frontend/src/features/features/components/features-page.tsx`         |
-| Table component | `frontend/src/features/features/components/features-table.tsx`        |
-| Form dialog     | `frontend/src/features/features/components/feature-form-dialog.tsx`   |
-| Delete dialog   | `frontend/src/features/features/components/feature-delete-dialog.tsx` |
-| Pagination hook | `frontend/src/features/features/hooks/use-features-pagination.ts`     |
-| Redux slice     | `frontend/src/features/features/store/features-slice.ts`              |
-| Route           | `frontend/src/routes/features/index.tsx`                              |
-| Generated API   | `frontend/src/api/generated/features/`                                |
+| File            | Path                                                                          |
+| --------------- | ----------------------------------------------------------------------------- |
+| Page component  | `frontend/src/features/_template-feature/components/feature-page.tsx`         |
+| Table component | `frontend/src/features/_template-feature/components/feature-table.tsx`        |
+| Form dialog     | `frontend/src/features/_template-feature/components/feature-form-dialog.tsx`  |
+| Delete dialog   | `frontend/src/features/_template-feature/components/feature-delete-dialog.tsx`|
+| Pagination hook | `frontend/src/features/_template-feature/hooks/use-feature-pagination.ts`     |
+| Redux slice     | `frontend/src/features/_template-feature/store/feature-slice.ts`              |
+| Route           | `frontend/src/routes/features/index.tsx`                                      |
+| Generated API   | `frontend/src/api/generated/features/`                                        |
 
 ---
 
