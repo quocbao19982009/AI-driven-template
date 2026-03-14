@@ -64,6 +64,13 @@ public class AuthService : IAuthService
             throw new UnauthorizedAccessException(InvalidCredentialsMessage);
         }
 
+        // Guard: deactivated account
+        if (!user.IsActive)
+        {
+            _logger.LogWarning("Login attempt on deactivated account for user {UserId}", user.Id);
+            throw new UnauthorizedAccessException(InvalidCredentialsMessage);
+        }
+
         return await IssueTokensAsync(user, cancellationToken);
     }
 
@@ -131,7 +138,7 @@ public class AuthService : IAuthService
             throw new NotFoundException("User", userId);
         }
 
-        return new MeDto(user.Id, user.FirstName, user.LastName, user.Email, user.Role);
+        return new MeDto(user.Id, user.FirstName, user.LastName, user.Email, user.Role.ToString());
     }
 
     /// <summary>
@@ -140,7 +147,7 @@ public class AuthService : IAuthService
     /// </summary>
     internal async Task<LoginResultDto> IssueTokensAsync(Users.User user, CancellationToken cancellationToken = default)
     {
-        var accessToken = _jwtService.GenerateToken(user.Id, user.Email, user.Role);
+        var accessToken = _jwtService.GenerateToken(user.Id, user.Email, user.Role.ToString());
 
         var rawRefreshToken = GenerateRawRefreshToken();
         var refreshTokenHash = HashToken(rawRefreshToken);

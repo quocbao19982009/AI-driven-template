@@ -1,6 +1,6 @@
 # Feature Specification: Authentication
 
-**Last Updated:** `2026-03-13`
+**Last Updated:** `2026-03-14`
 **Tests written:** yes
 
 ---
@@ -120,6 +120,7 @@ sequenceDiagram
     UsersRepository-->>AuthService: User entity
     AuthService->>AuthService: Guard: if user.PasswordHash is null → 401 (OAuth-only account)
     AuthService->>AuthService: BCrypt.Verify(password, user.PasswordHash)
+    AuthService->>AuthService: Guard: if !user.IsActive → 401 (deactivated account)
     AuthService->>AuthService: IssueTokensAsync(user, ct)
     AuthService->>AuthService: GenerateJwt(user) → accessToken (lifetime from Jwt:ExpiryMinutes)
     AuthService->>AuthService: GenerateRefreshToken() → refreshToken (random bytes)
@@ -135,9 +136,10 @@ sequenceDiagram
 2. Service fetches User by email; returns 401 if not found (generic message — never reveal whether email exists)
 3. If `PasswordHash` is null (OAuth-only account), return 401 with generic message
 4. Service verifies BCrypt hash; returns 401 on mismatch
-5. `IssueTokensAsync` generates a signed JWT (lifetime from `Jwt:ExpiryMinutes`, default 60 min) and a cryptographically random refresh token (32 bytes → base64url)
-6. Refresh token is hashed (SHA256 — not a password, a random secret) before storage
-7. Controller sets the refresh token as an HttpOnly cookie and returns the JWT in the body
+5. If `user.IsActive` is false, return 401 with the same generic message — deactivated accounts cannot log in and the reason is not disclosed
+6. `IssueTokensAsync` generates a signed JWT (lifetime from `Jwt:ExpiryMinutes`, default 60 min) and a cryptographically random refresh token (32 bytes → base64url)
+7. Refresh token is hashed (SHA256 — not a password, a random secret) before storage
+8. Controller sets the refresh token as an HttpOnly cookie and returns the JWT in the body
 
 ### Refresh
 
@@ -211,7 +213,7 @@ On application startup in the **Development** environment only, `DataSeeder.Seed
 | `Email`        | `admin@example.com`                      |
 | `FirstName`    | `"Admin"`                                |
 | `LastName`     | `"User"`                                 |
-| `Role`         | `"Admin"`                                |
+| `Role`         | `UserRole.Admin` (serializes as `"Admin"`) |
 | `PasswordHash` | BCrypt hash (cost 12) of `"password123"` |
 | `IsActive`     | `true`                                   |
 
@@ -224,6 +226,7 @@ On application startup in the **Development** environment only, `DataSeeder.Seed
 
 - **Generic error on bad credentials:** Always return `401 Unauthorized` with the message `"Invalid email or password"` — never indicate whether the email exists or the password was wrong
 - **OAuth-only account login attempt:** If `user.PasswordHash` is null, return `401 Unauthorized` with the same generic message `"Invalid email or password"` — do not reveal the account exists or that it is OAuth-only
+- **Deactivated account login attempt:** If `user.IsActive` is false, return `401 Unauthorized` with the same generic message `"Invalid email or password"` — do not reveal the account exists or that it is deactivated. The `IsActive` check runs after the password verification check.
 - **Expired refresh token:** Returns `401 Unauthorized`; cookie is cleared by the controller
 - **Revoked refresh token (reuse detected):** Revoke ALL active refresh tokens for that user, return `401 Unauthorized` with message `"Session invalidated due to suspicious activity"`; cookie is cleared by the controller — forces full re-login on all devices
 - **Any refresh failure:** `AuthController.Refresh` catches `UnauthorizedAccessException` from the service, calls `ClearRefreshTokenCookie()`, and returns `401` — the cookie is always cleared on failure
@@ -257,6 +260,12 @@ On application startup in the **Development** environment only, `DataSeeder.Seed
 - Given: POST `/api/auth/login` with a valid email whose `User.PasswordHash` is null
 - When: the request is processed
 - Then: returns 401 with message `"Invalid email or password"` — no indication the account exists or is OAuth-only
+
+**Scenario: Deactivated account tries to log in**
+
+- Given: POST `/api/auth/login` with correct credentials for a user whose `IsActive = false`
+- When: the request is processed
+- Then: returns 401 with message `"Invalid email or password"` — no indication the account is deactivated
 
 **Scenario: Successful token refresh**
 

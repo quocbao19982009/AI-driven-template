@@ -3,6 +3,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Features.Auth;
 
+// TODO: Add a background hosted service to periodically purge expired/revoked refresh tokens.
+// Expired tokens accumulate over time and degrade query performance. A scheduled job
+// (e.g., IHostedService running daily) should delete tokens where ExpiresAt < UtcNow
+// and RevokedAt is not null, to maintain security and performance.
+
 public class RefreshTokensRepository : IRefreshTokensRepository
 {
     private readonly ApplicationDbContext _context;

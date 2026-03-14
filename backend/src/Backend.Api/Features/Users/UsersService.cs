@@ -68,7 +68,7 @@ public class UsersService : IUsersService
             LastName = request.LastName,
             Email = request.Email.ToLowerInvariant(),
             PasswordHash = BCryptHash(request.Password),
-            Role = request.Role ?? "User"
+            Role = request.Role ?? UserRole.User
         };
 
         var created = await _repository.CreateAsync(user, cancellationToken);
@@ -76,7 +76,7 @@ public class UsersService : IUsersService
         return MapToDto(created);
     }
 
-    public async Task<UserDto> UpdateAsync(int id, UpdateUserRequest request, CancellationToken cancellationToken = default)
+    public async Task<UserDto> UpdateAsync(int id, UpdateUserRequest request, bool isAdmin, CancellationToken cancellationToken = default)
     {
         await ValidateAndThrowAsync(_updateValidator, request, cancellationToken);
 
@@ -96,7 +96,12 @@ public class UsersService : IUsersService
         user.FirstName = request.FirstName;
         user.LastName = request.LastName;
         user.Email = request.Email.ToLowerInvariant();
-        user.Role = request.Role ?? user.Role;
+
+        // Only admins can change roles — non-admin callers silently keep the existing role
+        if (isAdmin && request.Role.HasValue)
+        {
+            user.Role = request.Role.Value;
+        }
 
         await _repository.UpdateAsync(user, cancellationToken);
         _logger.LogInformation("Updated User {UserId}", user.Id);
@@ -116,12 +121,12 @@ public class UsersService : IUsersService
         _logger.LogInformation("Deleted User {UserId}", id);
     }
 
-    private static UserDto MapToDto(User user) => new(
+    internal static UserDto MapToDto(User user) => new(
         user.Id,
         user.FirstName,
         user.LastName,
         user.Email,
-        user.Role,
+        user.Role.ToString(),
         user.IsActive,
         user.CreatedAt
     );

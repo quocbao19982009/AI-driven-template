@@ -22,7 +22,7 @@ public class User : BaseEntity
     public string? PasswordHash { get; set; }
 
     [MaxLength(50)]
-    public string Role { get; set; } = "User";
+    public UserRole Role { get; set; } = UserRole.User;
 
     public bool IsActive { get; set; } = true;
 }

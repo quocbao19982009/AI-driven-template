@@ -1,3 +1,4 @@
+using Backend.Common.Models;
 using Backend.Features._FeatureTemplate;
 using Backend.Features.Users;
 using Microsoft.EntityFrameworkCore;
@@ -34,7 +35,7 @@ public static class DataSeeder
             LastName = "User",
             Email = adminEmail,
             PasswordHash = passwordHash,
-            Role = "Admin",
+            Role = UserRole.Admin,
             IsActive = true,
             CreatedAt = DateTime.UtcNow,
         };

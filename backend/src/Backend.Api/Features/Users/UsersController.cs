@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using Backend.Common.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -28,11 +29,15 @@ public class UsersController : ControllerBase
     [Authorize]
     public async Task<ActionResult<ApiResponse<UserDto>>> GetById(int id, CancellationToken cancellationToken = default)
     {
+        if (!IsOwnerOrAdmin(id))
+            return Forbid();
+
         var user = await _service.GetByIdAsync(id, cancellationToken);
         return Ok(ApiResponse<UserDto>.Ok(user));
     }
 
     [HttpPost]
+    [Authorize(Roles = "Admin")]
     public async Task<ActionResult<ApiResponse<UserDto>>> Create(CreateUserRequest request, CancellationToken cancellationToken = default)
     {
         var user = await _service.CreateAsync(request, cancellationToken);
@@ -44,7 +49,11 @@ public class UsersController : ControllerBase
     [Authorize]
     public async Task<ActionResult<ApiResponse<UserDto>>> Update(int id, UpdateUserRequest request, CancellationToken cancellationToken = default)
     {
-        var user = await _service.UpdateAsync(id, request, cancellationToken);
+        if (!IsOwnerOrAdmin(id))
+            return Forbid();
+
+        var isAdmin = User.IsInRole(UserRole.Admin.ToString());
+        var user = await _service.UpdateAsync(id, request, isAdmin, cancellationToken);
         return Ok(ApiResponse<UserDto>.Ok(user));
     }
 
@@ -54,5 +63,16 @@ public class UsersController : ControllerBase
     {
         await _service.DeleteAsync(id, cancellationToken);
         return NoContent();
+    }
+
+    private bool IsOwnerOrAdmin(int resourceUserId)
+    {
+        var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier)
+            ?? User.FindFirstValue("sub");
+
+        if (!int.TryParse(userIdClaim, out var callerId))
+            return false;
+
+        return callerId == resourceUserId || User.IsInRole(UserRole.Admin.ToString());
     }
 }

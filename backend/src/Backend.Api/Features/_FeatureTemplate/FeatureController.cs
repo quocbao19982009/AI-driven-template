@@ -7,7 +7,7 @@ namespace Backend.Features._FeatureTemplate;
 // TODO: Rename to match your entity (e.g., ProductsController)
 // TODO: Update route to match your entity (e.g., "api/products")
 // TODO: Adjust [Authorize] per endpoint — use [AllowAnonymous] for public endpoints,
-//       [Authorize(Roles = "Admin")] for admin-only, or [Authorize] for any authenticated user.
+//       [Authorize(Roles = nameof(UserRole.Admin))] for admin-only, or [Authorize] for any authenticated user.
 
 [ApiController]
 [Route("api/features")]

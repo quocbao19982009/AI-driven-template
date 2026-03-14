@@ -24,6 +24,7 @@ public class ApplicationDbContext : DbContext
         modelBuilder.Entity<User>(entity =>
         {
             entity.HasIndex(u => u.Email).IsUnique();
+            entity.Property(u => u.Role).HasConversion<string>().HasMaxLength(50);
         });
 
         modelBuilder.Entity<RefreshToken>(entity =>
