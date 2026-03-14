@@ -30,18 +30,25 @@ The code (ASP.NET Core + React) is interchangeable — the AI workflow on top is
 ### Recommended Resources
 
 - **[spec-kit](https://github.com/github/spec-kit)** (76.4k stars) — GitHub's official toolkit for writing AI instruction files. Great starting point for structuring your `.github/copilot-instructions.md` and understanding what makes good AI instructions.
+- **[GitHub Copilot Best Practices](https://docs.github.com/en/copilot/get-started/best-practices)** — GitHub's official guide for getting the most out of Copilot: writing effective prompts, using context well, and building good AI-assisted workflows.
+- **[GitHub Copilot CLI](https://docs.github.com/copilot/how-tos/copilot-cli)** — Use Copilot directly in your terminal to explain commands, suggest shell commands, and run AI-assisted workflows without leaving the CLI.
 - **[Claude Code Best Practices](https://docs.anthropic.com/en/docs/claude-code/best-practices)** — Anthropic's official guide for writing effective `CLAUDE.md` files, structuring rules, and getting the most out of Claude Code.
 - **[skills.sh](https://skills.sh)** — A community registry of reusable AI skills you can install directly into your project. Browse existing skills before writing your own from scratch.
 
 ### Recommended VS Code Extensions
 
-| Extension                        | Purpose                               |
-| -------------------------------- | ------------------------------------- |
-| GitHub Copilot                   | AI code completion + chat             |
-| Markdown Preview Mermaid Support | Render Mermaid diagrams in spec files |
-| ESLint                           | Enforce frontend code quality         |
-| Prettier                         | Auto-format code on save              |
-| EditorConfig                     | Consistent formatting across editors  |
+| Extension                        | ID                                      | Purpose                                          |
+| -------------------------------- | --------------------------------------- | ------------------------------------------------ |
+| GitHub Copilot                   | `github.copilot-chat`                   | AI code completion + chat                        |
+| Claude Code                      | `anthropic.claude-code`                 | Alternative AI coding assistant                  |
+| Markdown Preview Mermaid Support | `bierner.markdown-mermaid`              | Render Mermaid diagrams in spec files            |
+| ESLint                           | `dbaeumer.vscode-eslint`                | Enforce frontend code quality                    |
+| Prettier                         | `esbenp.prettier-vscode`                | Auto-format code on save                         |
+| EditorConfig                     | `editorconfig.editorconfig`             | Consistent formatting across editors             |
+| Code Spell Checker               | `streetsidesoftware.code-spell-checker` | Catch typos in code and comments                 |
+| DotENV                           | `mikestead.dotenv`                      | Syntax highlighting for `.env` files             |
+| i18n Ally                        | `lokalise.i18n-ally`                    | Manage and preview translation keys inline       |
+| Color Highlight                  | `naumovs.color-highlight`               | Highlight color values (hex, rgb, etc.) in files |
 
 ---
 
@@ -102,6 +109,10 @@ Create a file (e.g., `docs/stack-decisions.md`) recording:
 - **Database:** [your choice] — [reason]
 - **Auth strategy:** [your choice] — [reason]
 ```
+
+> **Important:** Always document your _reason_ for each choice — not just what you picked. A reason forces you to think critically rather than just accepting a default.
+>
+> More importantly: **choose a stack you actually understand.** AI will confidently generate code, explain errors, and suggest patterns for any technology — but it is not infallible. If you are unfamiliar with the stack, you will have no way to tell when AI is wrong, outdated, or subtly misguiding you. Your own understanding is the final check. Pick a stack where you can read the generated code, spot mistakes, and verify the AI's reasoning yourself.
 
 ---
 
@@ -180,6 +191,17 @@ For GitHub Copilot: `.github/copilot-instructions.md`
 For Claude: `.claude/CLAUDE.md`
 For Cursor: `.cursorrules`
 
+> **This is the single most important step in the entire guide.** The instruction file is what makes the AI understand your project — without it, every response is generic and inconsistent. A well-written instruction file is the difference between an AI that follows your conventions and one that ignores them.
+>
+> **Follow official best practices when writing it:**
+>
+> - GitHub Copilot → [GitHub Copilot Best Practices](https://docs.github.com/en/copilot/get-started/best-practices) + [spec-kit](https://github.com/github/spec-kit)
+> - Claude → [Claude Code Best Practices](https://docs.anthropic.com/en/docs/claude-code/best-practices)
+>
+> **You do not have to write it from scratch.** Once you have made your stack decisions (Step 1) and set up your repository structure (Step 2), you can ask AI to generate a first draft of the instruction file for you — describe your stack, your layer pattern, and your key rules, and let it produce the skeleton. Then review it carefully, correct anything wrong, and add your project-specific hard rules on top.
+>
+> Treat this file as living documentation: update it whenever a convention changes, a new rule is added, or you discover the AI is consistently getting something wrong.
+
 ### 3.2 — Sections to Include
 
 Use this structure — adapt the content to your stack:
@@ -216,6 +238,12 @@ Specs live in `feature_docs/`. Each spec is the single source of truth.
 
 [Your database safety rules — e.g., never run destructive migrations automatically]
 
+## Secrets & API Keys (HARD RULE)
+
+- NEVER store API keys, tokens, or secrets in frontend code — they are visible to anyone who opens browser DevTools
+- NEVER commit secrets to source control — use environment variables, a secrets manager, or your platform's secret store (e.g., `.env` files that are git-ignored, Doppler, AWS Secrets Manager, Azure Key Vault)
+- All external API calls that require a secret key must go through the backend — the frontend calls your own API, your backend calls the third-party service
+
 ## Backend Rules
 
 [Your stack-specific backend rules]
@@ -224,6 +252,15 @@ Specs live in `feature_docs/`. Each spec is the single source of truth.
 
 [Your stack-specific client/mobile rules]
 ```
+
+> **Protect your secrets from AI too.** Your AI coding assistant reads the files you open and your workspace context. To prevent secrets from leaking into AI chat history or completions:
+>
+> - Add `.env` files to `.gitignore` and never open them in the editor when chatting with AI
+> - In VS Code, use `files.exclude` in `.vscode/settings.json` to hide secret files from the workspace
+> - In Copilot, use `.github/copilot-instructions.md` to explicitly state: "Never read, suggest, or output the contents of `.env` files"
+> - In Claude / Claude Code, similar rules can be added to `CLAUDE.md`
+>
+> The best defense is never having plaintext secrets in files the AI can reach. Use secret management tools (e.g., `dotnet user-secrets`, OS keychain, a vault service) so secrets are never written to disk in your project folder at all.
 
 ### 3.3 — Key Principles to Encode
 
@@ -555,6 +592,8 @@ Add a `.gitignore` entry or a comment header in generated files so developers kn
 
 Skills are reusable AI commands that follow a specific workflow. Each skill is a markdown file with instructions.
 
+> **Tip:** Before writing skills from scratch, check [skills.sh](https://skills.sh) — a community registry of open-source Claude Code skills. Many common workflows (spec generation, API sync, scaffolding, testing, etc.) already have published skills you can install directly instead of authoring them yourself.
+
 ### 8.1 — Essential Skills to Create
 
 | Skill                     | Purpose                                    | When to use               |
@@ -717,9 +756,69 @@ Follow the project's test framework and patterns.
 
 ---
 
-## Step 10: Create Documentation
+## Step 10: Configure MCP Servers
 
-### 10.1 — AI Workflow Guide (`docs/ai-workflow.md`)
+MCP (Model Context Protocol) servers extend the AI with live, tool-level access to external systems — databases, docs, APIs, design systems — without copy-pasting context into the chat.
+
+### 10.1 — What MCP Gives You
+
+| Without MCP | With MCP |
+| --- | --- |
+| Paste docs manually into chat | AI queries live docs on demand |
+| Describe your component library | AI reads your registry directly |
+| Copy-paste API schemas | AI fetches the schema itself |
+
+### 10.2 — Project-Level Config (`.mcp.json`)
+
+Create `.mcp.json` at the repo root. Claude Code picks this up automatically for all contributors.
+
+```json
+{
+  "mcpServers": {
+    "context7": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp", "--api-key", "YOUR_API_KEY_HERE"]
+    },
+    "shadcn": {
+      "command": "npx",
+      "args": ["shadcn@latest", "mcp"],
+      "cwd": "frontend"
+    }
+  }
+}
+```
+
+> On Windows wrap the command in `cmd /c`: `"command": "cmd", "args": ["/c", "npx", ...]`
+
+### 10.3 — Recommended MCP Servers
+
+| Server | Package | What it provides |
+| --- | --- | --- |
+| **Context7** | `@upstash/context7-mcp` | Up-to-date library docs & code examples (React, .NET, etc.) |
+| **shadcn** | `shadcn@latest mcp` | Live shadcn component registry, examples, and `add` commands |
+| **Postgres / SQLite** | `@modelcontextprotocol/server-postgres` | AI can query your DB schema and data directly |
+| **Filesystem** | `@modelcontextprotocol/server-filesystem` | Scoped file access outside the working directory |
+| **GitHub** | `@modelcontextprotocol/server-github` | Read issues, PRs, and code from GitHub repos |
+
+Browse the full community catalog at [mcp.so](https://mcp.so) or [glama.ai/mcp/servers](https://glama.ai/mcp/servers).
+
+### 10.4 — Wiring MCP Into CLAUDE.md
+
+Tell the AI when to use each server so it doesn't have to guess:
+
+```markdown
+## Tooling
+
+- Always use Context7 MCP when library/API documentation or configuration steps are needed — do not ask, just use it
+- Use the shadcn MCP when adding or configuring UI components
+```
+
+---
+
+## Step 11: Create Documentation
+
+### 11.1 — AI Workflow Guide (`docs/ai-workflow.md`)
 
 Document the workflows developers will use daily:
 
@@ -754,7 +853,7 @@ Step 3 — Verify the fix
 Step 4 — Update spec if behavior changed
 ```
 
-### 10.2 — Coding Style Guide (`docs/coding-style.md`)
+### 11.2 — Coding Style Guide (`docs/coding-style.md`)
 
 This is the single source of truth for all style rules. AI reads this file and follows it.
 
@@ -766,7 +865,7 @@ Include sections for:
 - Component structure
 - Test naming and organization
 
-### 10.3 — Feature Generation Guides
+### 11.3 — Feature Generation Guides
 
 Create `docs/feature-generation/backend.md` and `docs/feature-generation/client.md` describing:
 
@@ -774,7 +873,7 @@ Create `docs/feature-generation/backend.md` and `docs/feature-generation/client.
 - Exception/error handling patterns
 - The implementation checklist
 
-### 10.4 — Implementation Checklist
+### 11.4 — Implementation Checklist
 
 Create `docs/feature-generation/implementation-checklist.md` — a checkbox list for verifying a feature is complete:
 
@@ -813,9 +912,9 @@ Create `docs/feature-generation/implementation-checklist.md` — a checkbox list
 
 ---
 
-## Step 11: Set Up Root Automation Scripts
+## Step 12: Set Up Root Automation Scripts
 
-### 11.1 — Root `package.json` (or Makefile)
+### 12.1 — Root `package.json` (or Makefile)
 
 ```json
 {
@@ -830,7 +929,7 @@ Create `docs/feature-generation/implementation-checklist.md` — a checkbox list
 }
 ```
 
-### 11.2 — Enforce Strict Linting and Formatting (CRITICAL)
+### 12.2 — Enforce Strict Linting and Formatting (CRITICAL)
 
 Strict linting and formatting rules are not optional — they are the foundation of AI-generated code quality.
 
@@ -860,7 +959,7 @@ Add format-on-save to your editor config (`.vscode/settings.json`):
 }
 ```
 
-### 11.3 — Git Hooks (Optional)
+### 12.3 — Git Hooks (Optional)
 
 Set up pre-commit hooks to enforce quality:
 
@@ -870,11 +969,11 @@ Set up pre-commit hooks to enforce quality:
 
 ---
 
-## Step 12: Validate the Template
+## Step 13: Validate the Template
 
 Before considering the template done, verify these scenarios:
 
-### 12.1 — Smoke Test: Create a Sample Feature
+### 13.1 — Smoke Test: Create a Sample Feature
 
 1. Run `/create-spec sample-items` (or manually create the spec)
 2. Fill in the spec with a simple entity (Name, Description)
@@ -886,7 +985,7 @@ Before considering the template done, verify these scenarios:
 8. Run `/quality-check`
 9. Delete the sample feature
 
-### 12.2 — Verify AI Understands the Rules
+### 13.2 — Verify AI Understands the Rules
 
 Ask the AI:
 
@@ -896,7 +995,7 @@ Ask the AI:
 
 The AI should answer accurately based on your instruction files.
 
-### 12.3 — Verify Spec Sync
+### 13.3 — Verify Spec Sync
 
 1. Make a change to an existing feature (add a field)
 2. Verify the AI updates the spec file automatically
@@ -924,11 +1023,11 @@ The AI should answer accurately based on your instruction files.
 
 ---
 
-## Step 13: Maintain the Template Over Time
+## Step 14: Maintain the Template Over Time
 
 AI tools evolve rapidly. Instruction formats change, new capabilities appear, and models behave differently across versions. Your template is a living system that needs periodic maintenance.
 
-### 13.1 — Review Template Code Regularly
+### 14.1 — Review Template Code Regularly
 
 The `_FeatureTemplate` folder is the **single most important thing in your template.** Every feature AI generates is a copy-and-adapt of this code. If the template code has bugs, bad patterns, or outdated practices, every generated feature inherits those problems.
 
@@ -939,7 +1038,7 @@ The `_FeatureTemplate` folder is the **single most important thing in your templ
 - Update it when you discover better patterns
 - After updating, re-scaffold a test feature to verify the output is still correct
 
-### 13.2 — Track Convention Changes
+### 14.2 — Track Convention Changes
 
 Keep a changelog (`docs/changelog.md`) of convention changes:
 
@@ -952,14 +1051,14 @@ Keep a changelog (`docs/changelog.md`) of convention changes:
 
 This helps new team members understand why rules exist and prevents them from being accidentally removed.
 
-### 13.3 — Keep Up with AI Tool Changes
+### 14.3 — Keep Up with AI Tool Changes
 
 - **Instruction file formats** change — check your AI tool's docs quarterly for new features (e.g., new glob patterns, new skill capabilities, new agent syntax)
 - **Model upgrades** may change behavior — when a new model version is released, test your key workflows (scaffold, quality-check) to make sure they still work
 - **New community skills** appear on [skills.sh](https://skills.sh) — check periodically for skills that could replace your custom ones
 - **spec-kit** updates — [github/spec-kit](https://github.com/github/spec-kit) evolves alongside Copilot; update your instruction files when new best practices emerge
 
-### 13.4 — Different AI Models Behave Differently
+### 14.4 — Different AI Models Behave Differently
 
 This is the most important thing to understand about AI-driven development:
 
@@ -993,3 +1092,5 @@ This is the most important thing to understand about AI-driven development:
 9. **No strict linting** — Without ESLint/Prettier/formatters enforced, AI output drifts in style across features. Linting is your safety net.
 10. **Assuming all AI models are the same** — Test your template with the specific model you'll be using. Don't assume rules written for one model will work identically on another.
 11. **Not maintaining the template** — AI tools change fast. Instruction formats, model behavior, and best practices shift. Schedule quarterly reviews of your template.
+
+---

@@ -8,6 +8,10 @@
     "lokalise.i18n-ally",
     "esbenp.prettier-vscode",
     "rvest.vs-code-prettier-eslint",
-    "bradlc.vscode-tailwindcss"
+    "bradlc.vscode-tailwindcss",
+    "anthropic.claude-code",
+    "github.copilot-chat",
+    "ms-dotnettools.vscode-dotnet-runtime",
+    "naumovs.color-highlight"
   ]
 }
