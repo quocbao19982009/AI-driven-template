@@ -194,7 +194,9 @@ Examples:
 
 [NEEDS CLARIFICATION: UI description is missing — describe what the page looks like, key interactions, and empty state behavior]
 
-### 10. Redux UI state
+---
+
+## 10. Redux UI State
 
 <!--
 Only UI-only state belongs here (not server data — that's React Query).
@@ -298,6 +300,6 @@ Used in: dotnet ef migrations add [MigrationName]
 - [ ] `features/[feature]s/` folder created with all layers
 - [ ] Table columns match spec above
 - [ ] Form fields match spec above
-- [ ] Redux slice registered in `store/index.ts`
+- [ ] Redux slice registered in `store/store.ts`
 - [ ] Route added in `routes/[feature]s/index.tsx`
 - [ ] Link added to navigation in `components/layout/app-layout.tsx`

@@ -411,6 +411,6 @@ Admin-only user management table page. Layout:
 - [ ] `features/users/` folder created with all layers
 - [ ] Table columns match spec above
 - [ ] Form fields match spec above (Role field hidden/disabled for non-admin)
-- [ ] Redux slice registered in `store/index.ts`
+- [ ] Redux slice registered in `store/store.ts`
 - [ ] Route added (Admin-only guard)
 - [ ] Translations added to both `en.json` and `fi.json`

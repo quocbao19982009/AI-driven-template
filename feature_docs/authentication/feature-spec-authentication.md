@@ -460,7 +460,7 @@ Full-page centered login card (not a dialog). Layout:
 
 - [ ] `auth-context.tsx` + `auth-provider.tsx` created
 - [ ] `login-page.tsx` + `login-form.tsx` created (Email input, not Username)
-- [ ] Redux `auth-slice.ts` registered in `store/index.ts`
+- [ ] Redux `auth-slice.ts` registered in `store/store.ts`
 - [ ] `protected-route.tsx` wraps all authenticated routes
 - [ ] `/login` route added; redirect if already authenticated
 - [ ] All non-auth routes wrapped with `ProtectedRoute`

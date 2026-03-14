@@ -44,12 +44,14 @@ FeatureController.cs        → HTTP layer
 
 `IFeatureRepository.cs`:
 ```csharp
-Task<PagedResult<Feature>> GetAllAsync(int page, int pageSize, CancellationToken ct);
+Task<(List<Feature> Items, int TotalCount)> GetAllAsync(int page, int pageSize, CancellationToken ct);
 Task<Feature?> GetByIdAsync(int id, CancellationToken ct);
 Task<Feature> CreateAsync(Feature entity, CancellationToken ct);
-Task<Feature> UpdateAsync(Feature entity, CancellationToken ct);
+Task UpdateAsync(Feature entity, CancellationToken ct);
 Task DeleteAsync(Feature entity, CancellationToken ct);
 ```
+
+> The repository returns a tuple `(List<T>, int)`. The **service** wraps this into `PagedResult<TDto>` after mapping to DTOs.
 
 `FeatureRepository.cs`:
 - All read-only queries **must** use `.AsNoTracking()`

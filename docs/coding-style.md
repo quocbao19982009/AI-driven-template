@@ -42,9 +42,16 @@ This is the single source of truth for coding style across the project. All rule
 - Do **not** abbreviate — use meaningful full names
 
 ### `var` Usage
-- Avoid `var` when the type is not immediately obvious from the right-hand side
-- Use explicit types: `List<User> users = ...`, `string email = ...`
-- `var` is acceptable only when the type is self-evident: `var dto = new UserDto(...)`
+- Use `var` when the type is clear from the right-hand side (method name, constructor, cast)
+  ```csharp
+  var user = await _repository.GetByIdAsync(id, ct);   // obvious: returns User?
+  var dto = new UserDto(...);                           // obvious: constructor
+  var items = entities.Select(MapToDto).ToList();       // obvious: List<T>
+  ```
+- Use explicit types when `var` would be ambiguous:
+  ```csharp
+  List<string> errors = [];                             // [] alone doesn't convey type
+  ```
 
 ### Expression-Bodied Members
 - Use for simple, single-line implementations
@@ -74,7 +81,7 @@ This is the single source of truth for coding style across the project. All rule
 
 ### Null Checks & Patterns
 - Prefer `is null` / `is not null` over `== null` / `!= null`
-- Use null-coalescing: `request.Role ?? "User"`
+- Use null-coalescing: `request.Role ?? UserRole.User`
 - Use pattern matching and switch expressions over `as` + null checks
 
 ### DTOs & Records

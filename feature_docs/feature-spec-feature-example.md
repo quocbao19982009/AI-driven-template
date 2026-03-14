@@ -126,7 +126,9 @@ No Figma design — this is the built-in template example.
 
 Paginated table with header ("Features" title + "New Feature" button). Columns: ID, Name, Created At, and action dropdown (Edit / Delete). Create/Edit opens a modal with a single Name field. Delete opens a confirmation dialog. Skeleton loading while fetching; empty state message when no records.
 
-### 10. Redux UI state
+---
+
+## 10. Redux UI State
 
 - `searchQuery: string`
 - `selectedIds: string[]`
@@ -141,7 +143,7 @@ Paginated table with header ("Features" title + "New Feature" button). Columns: 
 | -------------------- | -------------------------------------------------------------------------- |
 | Entity               | `backend/src/Backend.Api/Features/_FeatureTemplate/Feature.cs`             |
 | DTOs                 | `backend/src/Backend.Api/Features/_FeatureTemplate/FeatureDtos.cs`         |
-| Validator            | `backend/src/Backend.Api/Features/_FeatureTemplate/FeaturesValidator.cs`   |
+| Validator            | `backend/src/Backend.Api/Features/_FeatureTemplate/FeatureValidator.cs`    |
 | Repository interface | `backend/src/Backend.Api/Features/_FeatureTemplate/IFeatureRepository.cs`  |
 | Repository           | `backend/src/Backend.Api/Features/_FeatureTemplate/FeatureRepository.cs`   |
 | Service interface    | `backend/src/Backend.Api/Features/_FeatureTemplate/IFeatureService.cs`     |
@@ -152,12 +154,12 @@ Paginated table with header ("Features" title + "New Feature" button). Columns: 
 
 | File            | Path                                                                          |
 | --------------- | ----------------------------------------------------------------------------- |
-| Page component  | `frontend/src/features/_template-feature/components/feature-page.tsx`         |
-| Table component | `frontend/src/features/_template-feature/components/feature-table.tsx`        |
-| Form dialog     | `frontend/src/features/_template-feature/components/feature-form-dialog.tsx`  |
-| Delete dialog   | `frontend/src/features/_template-feature/components/feature-delete-dialog.tsx`|
-| Pagination hook | `frontend/src/features/_template-feature/hooks/use-feature-pagination.ts`     |
-| Redux slice     | `frontend/src/features/_template-feature/store/feature-slice.ts`              |
+| Page component  | `frontend/src/features/_template-feature/components/features-page.tsx`         |
+| Table component | `frontend/src/features/_template-feature/components/features-table.tsx`        |
+| Form dialog     | `frontend/src/features/_template-feature/components/feature-form-dialog.tsx`   |
+| Delete dialog   | `frontend/src/features/_template-feature/components/feature-delete-dialog.tsx` |
+| Pagination hook | `frontend/src/features/_template-feature/hooks/use-feature-pagination.ts`      |
+| Redux slice     | `frontend/src/features/_template-feature/store/features-slice.ts`              |
 | Route           | `frontend/src/routes/features/index.tsx`                                      |
 | Generated API   | `frontend/src/api/generated/features/`                                        |
 

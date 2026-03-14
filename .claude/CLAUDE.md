@@ -81,12 +81,10 @@ Specs live in `feature_docs/` — one subfolder per feature (e.g. `feature_docs/
 
 ## Database Safety (HARD RULE — NEVER VIOLATE)
 
+→ Full details in `.claude/rules/backend.md` (auto-loaded for `.cs` files). Summary for non-backend contexts:
+
 - The AI may ONLY run `dotnet ef migrations add <Name>` to create migration files
-- The AI must NEVER run any of the following — these are reserved for the user only:
-  - `dotnet ef database update`
-  - `dotnet ef database drop`
-  - `dotnet ef migrations remove`
-  - Any raw SQL that modifies schema or data (`DROP`, `DELETE`, `TRUNCATE`, `ALTER`, `UPDATE` outside of normal application code)
+- The AI must NEVER run `dotnet ef database update`, `dotnet ef database drop`, `dotnet ef migrations remove`, or any destructive SQL
 - After creating a migration, always tell the user to run `dotnet ef database update` themselves
 
 ---

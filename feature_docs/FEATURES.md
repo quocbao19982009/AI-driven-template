@@ -3,6 +3,8 @@
 > **AI Workflow:** Read this file first on every request. Identify the relevant feature, then read only its spec file. Do not read all spec files. When a new feature spec is created, add a row to the table below. There is no separate `architectures/` folder — specs in `feature_docs/` are the single source of truth.
 >
 > **Spec structure:** Each spec file is a single combined document covering both behavior (entity fields, endpoints, validation, UI) and architecture (Core Values & Principles, Architecture Decisions, Data Flow).
+>
+> **Status values:** `Draft` → `Spec Complete` → `Scaffolded` → `Implemented` → `Tested` | `Example only` for template references.
 
 | Feature               | Spec File                                       | Data Model                               | Summary                                                                                                                                                                                                                                                                                                       | Status       |
 | --------------------- | ----------------------------------------------- | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
