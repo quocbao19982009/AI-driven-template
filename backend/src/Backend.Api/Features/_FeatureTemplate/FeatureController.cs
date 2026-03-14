@@ -11,7 +11,7 @@ namespace Backend.Features._FeatureTemplate;
 
 [ApiController]
 [Route("api/features")]
-[Authorize]
+[AllowAnonymous]
 public class FeatureController : ControllerBase
 {
     private readonly IFeatureService _featureService;

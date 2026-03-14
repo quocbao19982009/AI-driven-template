@@ -4,3 +4,4 @@ claude-plans/*
 /templates/*
 /thesis-writing/*
 .claude/settings.local.json
+agent-memory*
