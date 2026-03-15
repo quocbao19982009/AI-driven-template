@@ -21,3 +21,4 @@
 | 2026-03-14 | Fixed repository return type in `backend.md` feature-generation guide | Guide showed `PagedResult<Feature>` but actual pattern returns `(List<Feature>, int)` tuple; service wraps into `PagedResult<TDto>` |
 | 2026-03-14 | Added status legend to `FEATURES.md` | Status values were undefined; AI was guessing inconsistently |
 | 2026-03-14 | Deduplicated DB safety rule — CLAUDE.md now references `backend.md` instead of repeating it | Two copies of the same rule would diverge if only one was updated |
+| 2026-03-15 | Added PR template; branch protection for main enforced at repo level | Enforce PR-only workflow for all changes |
