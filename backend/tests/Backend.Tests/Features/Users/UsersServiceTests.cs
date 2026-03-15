@@ -204,7 +204,7 @@ public class UsersServiceTests
             .Setup(r => r.EmailExistsAsync(request.Email, 1, It.IsAny<CancellationToken>()))
             .ReturnsAsync(false);
 
-        var result = await _sut.UpdateAsync(1, request);
+        var result = await _sut.UpdateAsync(1, request, false);
 
         result.FirstName.Should().Be("Jane");
         result.Email.Should().Be("jane@example.com");
@@ -225,7 +225,7 @@ public class UsersServiceTests
             .Setup(r => r.GetByIdAsync(999, It.IsAny<CancellationToken>()))
             .ReturnsAsync((User?)null);
 
-        var act = () => _sut.UpdateAsync(999, request);
+        var act = () => _sut.UpdateAsync(999, request, false);
 
         await act.Should().ThrowAsync<NotFoundException>();
     }
@@ -236,7 +236,7 @@ public class UsersServiceTests
         var request = new UpdateUserRequest { FirstName = "", LastName = "", Email = "" };
         SetupInvalidValidator(_updateValidatorMock, request, "First name is required.");
 
-        var act = () => _sut.UpdateAsync(1, request);
+        var act = () => _sut.UpdateAsync(1, request, false);
 
         await act.Should().ThrowAsync<ValidationException>();
         _repositoryMock.Verify(r => r.GetByIdAsync(It.IsAny<int>(), It.IsAny<CancellationToken>()), Times.Never);
@@ -269,7 +269,7 @@ public class UsersServiceTests
             .Setup(r => r.EmailExistsAsync(request.Email, 1, It.IsAny<CancellationToken>()))
             .ReturnsAsync(true);
 
-        var act = () => _sut.UpdateAsync(1, request);
+        var act = () => _sut.UpdateAsync(1, request, false);
 
         var ex = await act.Should().ThrowAsync<ValidationException>();
         ex.Which.Errors.Should().Contain("A user with this email already exists.");

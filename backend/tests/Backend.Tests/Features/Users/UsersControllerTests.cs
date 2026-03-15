@@ -1,6 +1,8 @@
+using System.Security.Claims;
 using Backend.Common.Models;
 using Backend.Features.Users;
 using FluentAssertions;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 
@@ -15,6 +17,18 @@ public class UsersControllerTests
     {
         _serviceMock = new Mock<IUsersService>();
         _sut = new UsersController(_serviceMock.Object);
+
+        // Set up an authenticated user (id=1, role=Admin) so IsOwnerOrAdmin succeeds
+        var claims = new List<Claim>
+        {
+            new(ClaimTypes.NameIdentifier, "1"),
+            new(ClaimTypes.Role, "Admin")
+        };
+        var identity = new ClaimsIdentity(claims, "TestAuth");
+        _sut.ControllerContext = new ControllerContext
+        {
+            HttpContext = new DefaultHttpContext { User = new ClaimsPrincipal(identity) }
+        };
     }
 
     // --- GetAll ---
@@ -92,7 +106,7 @@ public class UsersControllerTests
         };
         var dto = new UserDto(1, "Jane", "Doe", "jane@example.com", "User", true, DateTime.UtcNow);
         _serviceMock
-            .Setup(s => s.UpdateAsync(1, request, It.IsAny<CancellationToken>()))
+            .Setup(s => s.UpdateAsync(1, request, It.IsAny<bool>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(dto);
 
         var result = await _sut.Update(1, request);

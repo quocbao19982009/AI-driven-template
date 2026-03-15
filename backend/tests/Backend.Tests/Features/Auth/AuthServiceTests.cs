@@ -1,4 +1,5 @@
 using Backend.Common.Exceptions;
+using Backend.Common.Models;
 using Backend.Features.Auth;
 using Backend.Features.Users;
 using Backend.Identity;
@@ -272,7 +273,7 @@ public class AuthServiceTests
             LastName = "Smith",
             Email = "alice@example.com",
             PasswordHash = passwordHash,
-            Role = "User"
+            Role = UserRole.User
         };
     }
 
