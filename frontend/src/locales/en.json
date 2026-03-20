@@ -18,6 +18,8 @@
     "home": "Home",
     "about": "About",
     "features": "Features",
+    "rooms": "Rooms",
+    "bookings": "Bookings",
     "login": "Sign in",
     "logout": "Sign out",
     "account": "Account"
@@ -54,6 +56,127 @@
     },
     "error": {
       "generic": "Something went wrong. Please try again."
+    }
+  },
+  "locations": {
+    "title": "Manage Locations",
+    "description": "Add, edit, or remove room locations.",
+    "addLocation": "Add Location",
+    "table": {
+      "name": "Name",
+      "empty": "No locations yet."
+    },
+    "form": {
+      "namePlaceholder": "Location name"
+    },
+    "delete": {
+      "title": "Delete Location",
+      "description": "Are you sure you want to delete \"{{name}}\"? This action cannot be undone."
+    },
+    "toast": {
+      "created": "Location created.",
+      "createError": "Failed to create location.",
+      "updated": "Location updated.",
+      "updateError": "Failed to update location.",
+      "deleted": "Location deleted.",
+      "deleteError": "Failed to delete location."
+    }
+  },
+  "rooms": {
+    "title": "Rooms",
+    "description": "Browse and manage meeting rooms.",
+    "newRoom": "New Room",
+    "manageLocations": "Manage Locations",
+    "searchPlaceholder": "Search rooms...",
+    "allLocations": "All Locations",
+    "tabs": {
+      "rooms": "Rooms",
+      "calendar": "Calendar"
+    },
+    "table": {
+      "image": "",
+      "name": "Name",
+      "capacity": "Capacity",
+      "location": "Location",
+      "purpose": "Purpose",
+      "empty": "No rooms found."
+    },
+    "form": {
+      "createTitle": "Create Room",
+      "editTitle": "Edit Room",
+      "createDescription": "Fill in the details to create a new room.",
+      "editDescription": "Update the room details below.",
+      "nameLabel": "Name",
+      "namePlaceholder": "Room name",
+      "capacityLabel": "Capacity",
+      "locationLabel": "Location",
+      "locationPlaceholder": "Select a location",
+      "purposeLabel": "Purpose",
+      "purposePlaceholder": "e.g. Meeting, Training...",
+      "imageLabel": "Image (optional)",
+      "imagePreviewAlt": "Room image preview"
+    },
+    "delete": {
+      "title": "Delete Room",
+      "description": "Are you sure you want to delete \"{{name}}\"? This action cannot be undone."
+    },
+    "toast": {
+      "created": "Room created.",
+      "createError": "Failed to create room.",
+      "updated": "Room updated.",
+      "updateError": "Failed to update room.",
+      "deleted": "Room deleted.",
+      "deleteError": "Failed to delete room."
+    },
+    "calendar": {
+      "roomLabel": "Room",
+      "selectRoom": "Select a room",
+      "selectRoomPrompt": "Select a room to view its calendar."
+    }
+  },
+  "bookings": {
+    "title": "Bookings",
+    "description": "View and manage room bookings.",
+    "newBooking": "New Booking",
+    "allRooms": "All Rooms",
+    "from": "From",
+    "to": "To",
+    "table": {
+      "room": "Room",
+      "start": "Start",
+      "end": "End",
+      "bookedBy": "Booked By",
+      "purpose": "Purpose",
+      "empty": "No bookings found."
+    },
+    "form": {
+      "createTitle": "Create Booking",
+      "editTitle": "Edit Booking",
+      "createDescription": "Fill in the details to create a new booking.",
+      "editDescription": "Update the booking details below.",
+      "roomLabel": "Room",
+      "roomPlaceholder": "Select a room",
+      "startTimeLabel": "Start Time",
+      "endTimeLabel": "End Time",
+      "bookedByLabel": "Booked By",
+      "bookedByPlaceholder": "Your name",
+      "purposeLabel": "Purpose",
+      "purposePlaceholder": "e.g. Team meeting..."
+    },
+    "delete": {
+      "title": "Delete Booking",
+      "description": "Are you sure you want to delete the booking for \"{{room}}\"?"
+    },
+    "detail": {
+      "title": "Booking Detail"
+    },
+    "toast": {
+      "created": "Booking created.",
+      "createError": "Failed to create booking.",
+      "updated": "Booking updated.",
+      "updateError": "Failed to update booking.",
+      "deleted": "Booking deleted.",
+      "deleteError": "Failed to delete booking."
     }
   },
   "features": {

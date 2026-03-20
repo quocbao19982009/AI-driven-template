@@ -18,6 +18,8 @@
     "home": "Etusivu",
     "about": "Tietoja",
     "features": "Ominaisuudet",
+    "rooms": "Huoneet",
+    "bookings": "Varaukset",
     "login": "Kirjaudu sisään",
     "logout": "Kirjaudu ulos",
     "account": "Tili"
@@ -54,6 +56,127 @@
     },
     "error": {
       "generic": "Jotain meni pieleen. Yritä uudelleen."
+    }
+  },
+  "locations": {
+    "title": "Hallinnoi sijainteja",
+    "description": "Lisää, muokkaa tai poista huoneiden sijainteja.",
+    "addLocation": "Lisää sijainti",
+    "table": {
+      "name": "Nimi",
+      "empty": "Ei sijainteja vielä."
+    },
+    "form": {
+      "namePlaceholder": "Sijainnin nimi"
+    },
+    "delete": {
+      "title": "Poista sijainti",
+      "description": "Haluatko varmasti poistaa sijainnin \"{{name}}\"? Tätä toimintoa ei voi peruuttaa."
+    },
+    "toast": {
+      "created": "Sijainti luotu.",
+      "createError": "Sijainnin luominen epäonnistui.",
+      "updated": "Sijainti päivitetty.",
+      "updateError": "Sijainnin päivittäminen epäonnistui.",
+      "deleted": "Sijainti poistettu.",
+      "deleteError": "Sijainnin poistaminen epäonnistui."
+    }
+  },
+  "rooms": {
+    "title": "Huoneet",
+    "description": "Selaa ja hallinnoi kokoushuoneita.",
+    "newRoom": "Uusi huone",
+    "manageLocations": "Hallinnoi sijainteja",
+    "searchPlaceholder": "Hae huoneita...",
+    "allLocations": "Kaikki sijainnit",
+    "tabs": {
+      "rooms": "Huoneet",
+      "calendar": "Kalenteri"
+    },
+    "table": {
+      "image": "",
+      "name": "Nimi",
+      "capacity": "Kapasiteetti",
+      "location": "Sijainti",
+      "purpose": "Käyttötarkoitus",
+      "empty": "Huoneita ei löydy."
+    },
+    "form": {
+      "createTitle": "Luo huone",
+      "editTitle": "Muokkaa huonetta",
+      "createDescription": "Täytä tiedot luodaksesi uuden huoneen.",
+      "editDescription": "Päivitä huoneen tiedot alla.",
+      "nameLabel": "Nimi",
+      "namePlaceholder": "Huoneen nimi",
+      "capacityLabel": "Kapasiteetti",
+      "locationLabel": "Sijainti",
+      "locationPlaceholder": "Valitse sijainti",
+      "purposeLabel": "Käyttötarkoitus",
+      "purposePlaceholder": "esim. Kokous, Koulutus...",
+      "imageLabel": "Kuva (valinnainen)",
+      "imagePreviewAlt": "Huoneen kuvan esikatselu"
+    },
+    "delete": {
+      "title": "Poista huone",
+      "description": "Haluatko varmasti poistaa huoneen \"{{name}}\"? Tätä toimintoa ei voi peruuttaa."
+    },
+    "toast": {
+      "created": "Huone luotu.",
+      "createError": "Huoneen luominen epäonnistui.",
+      "updated": "Huone päivitetty.",
+      "updateError": "Huoneen päivittäminen epäonnistui.",
+      "deleted": "Huone poistettu.",
+      "deleteError": "Huoneen poistaminen epäonnistui."
+    },
+    "calendar": {
+      "roomLabel": "Huone",
+      "selectRoom": "Valitse huone",
+      "selectRoomPrompt": "Valitse huone nähdäksesi sen kalenterin."
+    }
+  },
+  "bookings": {
+    "title": "Varaukset",
+    "description": "Tarkastele ja hallinnoi huonevarauksia.",
+    "newBooking": "Uusi varaus",
+    "allRooms": "Kaikki huoneet",
+    "from": "Alkaen",
+    "to": "Päättyen",
+    "table": {
+      "room": "Huone",
+      "start": "Alkaa",
+      "end": "Päättyy",
+      "bookedBy": "Varaaja",
+      "purpose": "Käyttötarkoitus",
+      "empty": "Varauksia ei löydy."
+    },
+    "form": {
+      "createTitle": "Luo varaus",
+      "editTitle": "Muokkaa varausta",
+      "createDescription": "Täytä tiedot luodaksesi uuden varauksen.",
+      "editDescription": "Päivitä varauksen tiedot alla.",
+      "roomLabel": "Huone",
+      "roomPlaceholder": "Valitse huone",
+      "startTimeLabel": "Alkamisaika",
+      "endTimeLabel": "Päättymisaika",
+      "bookedByLabel": "Varaajan nimi",
+      "bookedByPlaceholder": "Nimesi",
+      "purposeLabel": "Käyttötarkoitus",
+      "purposePlaceholder": "esim. Tiimikokous..."
+    },
+    "delete": {
+      "title": "Poista varaus",
+      "description": "Haluatko varmasti poistaa varauksen huoneelle \"{{room}}\"?"
+    },
+    "detail": {
+      "title": "Varauksen tiedot"
+    },
+    "toast": {
+      "created": "Varaus luotu.",
+      "createError": "Varauksen luominen epäonnistui.",
+      "updated": "Varaus päivitetty.",
+      "updateError": "Varauksen päivittäminen epäonnistui.",
+      "deleted": "Varaus poistettu.",
+      "deleteError": "Varauksen poistaminen epäonnistui."
     }
   },
   "features": {

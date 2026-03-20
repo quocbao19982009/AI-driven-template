@@ -13,8 +13,10 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as SplatRouteImport } from './routes/$'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as RoomsIndexRouteImport } from './routes/rooms/index'
 import { Route as LoginIndexRouteImport } from './routes/login/index'
 import { Route as FeaturesIndexRouteImport } from './routes/features/index'
+import { Route as BookingsIndexRouteImport } from './routes/bookings/index'
 import { Route as AuthenticatedTemplateProtectedIndexRouteImport } from './routes/_authenticated/template-protected/index'
 
 const AboutRoute = AboutRouteImport.update({
@@ -36,6 +38,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RoomsIndexRoute = RoomsIndexRouteImport.update({
+  id: '/rooms/',
+  path: '/rooms/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LoginIndexRoute = LoginIndexRouteImport.update({
   id: '/login/',
   path: '/login/',
@@ -44,6 +51,11 @@ const LoginIndexRoute = LoginIndexRouteImport.update({
 const FeaturesIndexRoute = FeaturesIndexRouteImport.update({
   id: '/features/',
   path: '/features/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BookingsIndexRoute = BookingsIndexRouteImport.update({
+  id: '/bookings/',
+  path: '/bookings/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedTemplateProtectedIndexRoute =
@@ -57,16 +69,20 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
   '/about': typeof AboutRoute
+  '/bookings/': typeof BookingsIndexRoute
   '/features/': typeof FeaturesIndexRoute
   '/login/': typeof LoginIndexRoute
+  '/rooms/': typeof RoomsIndexRoute
   '/template-protected/': typeof AuthenticatedTemplateProtectedIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
   '/about': typeof AboutRoute
+  '/bookings': typeof BookingsIndexRoute
   '/features': typeof FeaturesIndexRoute
   '/login': typeof LoginIndexRoute
+  '/rooms': typeof RoomsIndexRoute
   '/template-protected': typeof AuthenticatedTemplateProtectedIndexRoute
 }
 export interface FileRoutesById {
@@ -75,8 +91,10 @@ export interface FileRoutesById {
   '/$': typeof SplatRoute
   '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/about': typeof AboutRoute
+  '/bookings/': typeof BookingsIndexRoute
   '/features/': typeof FeaturesIndexRoute
   '/login/': typeof LoginIndexRoute
+  '/rooms/': typeof RoomsIndexRoute
   '/_authenticated/template-protected/': typeof AuthenticatedTemplateProtectedIndexRoute
 }
 export interface FileRouteTypes {
@@ -85,19 +103,31 @@ export interface FileRouteTypes {
     | '/'
     | '/$'
     | '/about'
+    | '/bookings/'
     | '/features/'
     | '/login/'
+    | '/rooms/'
     | '/template-protected/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/$' | '/about' | '/features' | '/login' | '/template-protected'
+  to:
+    | '/'
+    | '/$'
+    | '/about'
+    | '/bookings'
+    | '/features'
+    | '/login'
+    | '/rooms'
+    | '/template-protected'
   id:
     | '__root__'
     | '/'
     | '/$'
     | '/_authenticated'
     | '/about'
+    | '/bookings/'
     | '/features/'
     | '/login/'
+    | '/rooms/'
     | '/_authenticated/template-protected/'
   fileRoutesById: FileRoutesById
 }
@@ -106,8 +136,10 @@ export interface RootRouteChildren {
   SplatRoute: typeof SplatRoute
   AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
   AboutRoute: typeof AboutRoute
+  BookingsIndexRoute: typeof BookingsIndexRoute
   FeaturesIndexRoute: typeof FeaturesIndexRoute
   LoginIndexRoute: typeof LoginIndexRoute
+  RoomsIndexRoute: typeof RoomsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -140,6 +172,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/rooms/': {
+      id: '/rooms/'
+      path: '/rooms'
+      fullPath: '/rooms/'
+      preLoaderRoute: typeof RoomsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/login/': {
       id: '/login/'
       path: '/login'
@@ -152,6 +191,13 @@ declare module '@tanstack/react-router' {
       path: '/features'
       fullPath: '/features/'
       preLoaderRoute: typeof FeaturesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bookings/': {
+      id: '/bookings/'
+      path: '/bookings'
+      fullPath: '/bookings/'
+      preLoaderRoute: typeof BookingsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated/template-protected/': {
@@ -182,8 +228,10 @@ const rootRouteChildren: RootRouteChildren = {
   SplatRoute: SplatRoute,
   AuthenticatedRoute: AuthenticatedRouteWithChildren,
   AboutRoute: AboutRoute,
+  BookingsIndexRoute: BookingsIndexRoute,
   FeaturesIndexRoute: FeaturesIndexRoute,
   LoginIndexRoute: LoginIndexRoute,
+  RoomsIndexRoute: RoomsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
