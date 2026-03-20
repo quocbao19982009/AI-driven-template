@@ -98,7 +98,7 @@ flowchart TD
     subgraph STEP7["STEP 7 — Quality Check"]
         direction LR
         D7["🧑 DEVELOPER Runs: /quality-check"]:::dev
-        A7["🤖 AI  runs 7 checks in sequence 1. dotnet build 2. dotnet test 3. cd frontend && npm run lint 4. cd frontend && npx tsc --noEmit 5. cd frontend && npm run test:run 6. Validate en.json keys match fi.json 7. npm run api:check (Orval output committed?)"]:::ai
+        A7["🤖 AI  runs 7 checks in sequence 1. dotnet build 2. dotnet test 3. cd frontend && npm run lint 4. cd frontend && npx tsc --noEmit -p tsconfig.app.json 5. cd frontend && npm run test:run 6. Validate en.json keys match fi.json 7. npm run api:check (Orval output committed?)"]:::ai
         R7["📋 RESULT Summary table: PASS / FAIL per check Inline error details for any failures Actionable fix suggestions"]:::result
         D7 --> A7 --> R7
     end

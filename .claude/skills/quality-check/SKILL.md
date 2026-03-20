@@ -32,7 +32,7 @@ cd frontend && npm run lint
 ### 4. TypeScript Type Check
 
 ```bash
-cd frontend && npx tsc --noEmit
+cd frontend && npx tsc --noEmit -p tsconfig.app.json
 ```
 
 ### 5. Frontend Tests

@@ -40,7 +40,7 @@
 - [ ] No hardcoded visible strings (all use `t()`)
 - [ ] No server state duplicated into Redux
 - [ ] `npm run lint` — 0 errors
-- [ ] `npx tsc --noEmit` — 0 errors
+- [ ] `npx tsc --noEmit -p tsconfig.app.json` — 0 errors
 
 ## Spec
 

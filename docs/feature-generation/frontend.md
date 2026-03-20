@@ -62,6 +62,33 @@ routes/<feature-name>/index.tsx       → Thin route file — imports and render
 - `use-<feature>-pagination.ts` — wraps the Orval list hook; owns page/pageSize state
 - `use-<feature>-form.ts` — builds from the Orval-generated Zod schema using `.extend()` to add translated error messages
 
+#### Form validation schema rules
+
+Always start from the generated `Post<Feature>Body` schema (from `api/generated/<feature>/<feature>.zod.ts`) and use `.extend()` — never define a schema from scratch.
+
+```ts
+// Inside the component so t() is in scope
+const featureFormSchema = PostApiFeatureBody.extend({
+  name: z.string().min(1, t("feature.validation.nameRequired")).max(200),
+  // override other fields with translated messages as needed
+});
+type FeatureFormValues = z.infer<typeof featureFormSchema>;
+```
+
+**Zod v4 notes (the project uses Zod v4):**
+- Use `error:` not `invalid_type_error:` in `z.number({ error: "..." })`
+- For `datetime-local` inputs (which produce `"2024-01-01T10:00"` without a `Z`), override the datetime field to `z.string().min(1, t(...))` — the generated schema uses `zod.iso.datetime({})` which rejects local datetime strings
+
+**Cross-field validation** (e.g. start < end) is UI-only — add via `.refine()` after `.extend()`:
+```ts
+.refine(
+  (data) => new Date(data.startTime) < new Date(data.endTime),
+  { message: t("feature.validation.startBeforeEnd"), path: ["endTime"] }
+)
+```
+
+The schema and its `type FormValues` must be declared **inside** the component function so `t()` is in scope.
+
 ### 4. Components
 
 - All component files use **kebab-case** filenames (`feature-page.tsx`, not `FeaturePage.tsx`)
