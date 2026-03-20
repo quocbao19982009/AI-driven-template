@@ -52,7 +52,7 @@ export function RoomsCalendar() {
           toDate: weekEnd.toISOString(),
           pageSize: 100,
         }
-      : null,
+      : undefined,
     { query: { enabled: selectedRoomId !== null } }
   );
   const bookings: BookingDto[] = bookingsResponse?.data?.data?.items ?? [];

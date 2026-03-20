@@ -120,6 +120,14 @@
       "title": "Poista huone",
       "description": "Haluatko varmasti poistaa huoneen \"{{name}}\"? Tätä toimintoa ei voi peruuttaa."
     },
+    "validation": {
+      "nameRequired": "Nimi on pakollinen",
+      "nameTooLong": "Nimi saa olla enintään 200 merkkiä",
+      "capacityInvalid": "Kapasiteetin täytyy olla numero",
+      "capacityMin": "Kapasiteetin täytyy olla suurempi kuin 0",
+      "locationRequired": "Sijainti on pakollinen",
+      "purposeTooLong": "Käyttötarkoitus saa olla enintään 500 merkkiä"
+    },
     "toast": {
       "created": "Huone luotu.",
       "createError": "Huoneen luominen epäonnistui.",
@@ -169,6 +177,13 @@
     },
     "detail": {
       "title": "Varauksen tiedot"
+    },
+    "validation": {
+      "roomRequired": "Huone on pakollinen",
+      "startTimeRequired": "Alkamisaika on pakollinen",
+      "endTimeRequired": "Päättymisaika on pakollinen",
+      "bookedByRequired": "Varaajan nimi on pakollinen",
+      "startBeforeEnd": "Alkamisajan täytyy olla ennen päättymisaikaa"
     },
     "toast": {
       "created": "Varaus luotu.",

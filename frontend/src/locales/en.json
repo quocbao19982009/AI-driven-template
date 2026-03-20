@@ -120,6 +120,14 @@
       "title": "Delete Room",
       "description": "Are you sure you want to delete \"{{name}}\"? This action cannot be undone."
     },
+    "validation": {
+      "nameRequired": "Name is required",
+      "nameTooLong": "Name must not exceed 200 characters",
+      "capacityInvalid": "Capacity must be a number",
+      "capacityMin": "Capacity must be greater than 0",
+      "locationRequired": "Location is required",
+      "purposeTooLong": "Purpose must not exceed 500 characters"
+    },
     "toast": {
       "created": "Room created.",
       "createError": "Failed to create room.",
@@ -169,6 +177,13 @@
     },
     "detail": {
       "title": "Booking Detail"
+    },
+    "validation": {
+      "roomRequired": "Room is required",
+      "startTimeRequired": "Start time is required",
+      "endTimeRequired": "End time is required",
+      "bookedByRequired": "Booked by is required",
+      "startBeforeEnd": "Start time must be before end time"
     },
     "toast": {
       "created": "Booking created.",

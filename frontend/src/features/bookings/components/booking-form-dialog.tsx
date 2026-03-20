@@ -11,6 +11,7 @@ import {
   usePutApiBookingsId,
   getGetApiBookingsQueryKey,
 } from "@/api/generated/bookings/bookings";
+import { PostApiBookingsBody } from "@/api/generated/bookings/bookings.zod";
 import { useGetApiRoomsAll } from "@/api/generated/rooms/rooms";
 import {
   Dialog,
@@ -46,21 +47,6 @@ const toLocalDatetimeString = (d: Date) => {
   return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
 };
 
-const bookingFormSchema = z
-  .object({
-    roomId: z.number({ invalid_type_error: "Room is required" }).min(1, "Room is required"),
-    startTime: z.string().min(1, "Start time is required"),
-    endTime: z.string().min(1, "End time is required"),
-    bookedBy: z.string().min(1, "Booked by is required").max(200),
-    purpose: z.string().max(500).optional(),
-  })
-  .refine((data) => new Date(data.startTime) < new Date(data.endTime), {
-    message: "Start time must be before end time",
-    path: ["endTime"],
-  });
-
-type BookingFormValues = z.infer<typeof bookingFormSchema>;
-
 export function BookingFormDialog({
   booking,
   open,
@@ -70,6 +56,20 @@ export function BookingFormDialog({
   prefillEndTime,
 }: BookingFormDialogProps) {
   const { t } = useTranslation();
+
+  const bookingFormSchema = PostApiBookingsBody.extend({
+    roomId: z.number({ error: t("bookings.validation.roomRequired") }).min(1, t("bookings.validation.roomRequired")),
+    startTime: z.string().min(1, t("bookings.validation.startTimeRequired")),
+    endTime: z.string().min(1, t("bookings.validation.endTimeRequired")),
+    bookedBy: z.string().min(1, t("bookings.validation.bookedByRequired")).max(200),
+    purpose: z.string().max(500).optional(),
+  }).refine(
+    (data) => new Date(data.startTime) < new Date(data.endTime),
+    { message: t("bookings.validation.startBeforeEnd"), path: ["endTime"] }
+  );
+
+  type BookingFormValues = z.infer<typeof bookingFormSchema>;
+
   const isEditing = !!booking;
   const queryClient = useQueryClient();
 

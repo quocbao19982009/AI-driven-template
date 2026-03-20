@@ -13,6 +13,7 @@ import {
   getGetApiRoomsQueryKey,
   getGetApiRoomsAllQueryKey,
 } from "@/api/generated/rooms/rooms";
+import { PostApiRoomsBody } from "@/api/generated/rooms/rooms.zod";
 import { useGetApiLocations } from "@/api/generated/locations/locations";
 import {
   Dialog,
@@ -54,21 +55,6 @@ export function RoomFormDialog({ room, open, onOpenChange }: RoomFormDialogProps
   );
 }
 
-const roomFormSchema = z.object({
-  Name: z.string().min(1, "Name is required").max(200, "Name must not exceed 200 characters"),
-  Capacity: z
-    .number({ invalid_type_error: "Capacity must be a number" })
-    .int()
-    .min(1, "Capacity must be greater than 0"),
-  LocationId: z
-    .number({ invalid_type_error: "Location is required" })
-    .min(1, "Location is required"),
-  Purpose: z.string().max(500, "Purpose must not exceed 500 characters").optional(),
-  Image: z.instanceof(File).optional(),
-});
-
-type RoomFormValues = z.infer<typeof roomFormSchema>;
-
 interface RoomFormDialogContentProps {
   room?: RoomDto | null;
   onOpenChange: (open: boolean) => void;
@@ -76,6 +62,17 @@ interface RoomFormDialogContentProps {
 
 function RoomFormDialogContent({ room, onOpenChange }: RoomFormDialogContentProps) {
   const { t } = useTranslation();
+
+  const roomFormSchema = PostApiRoomsBody.extend({
+    Name: z.string().min(1, t("rooms.validation.nameRequired")).max(200, t("rooms.validation.nameTooLong")),
+    Capacity: z.number({ error: t("rooms.validation.capacityInvalid") }).int().min(1, t("rooms.validation.capacityMin")),
+    LocationId: z.number({ error: t("rooms.validation.locationRequired") }).min(1, t("rooms.validation.locationRequired")),
+    Purpose: z.string().max(500, t("rooms.validation.purposeTooLong")).optional(),
+    Image: z.instanceof(File).optional(),
+  });
+
+  type RoomFormValues = z.infer<typeof roomFormSchema>;
+
   const isEditing = !!room;
   const queryClient = useQueryClient();
   const fileInputRef = useRef<HTMLInputElement>(null);
