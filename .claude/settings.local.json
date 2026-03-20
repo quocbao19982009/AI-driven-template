@@ -1,6 +1,23 @@
 {
   "permissions": {
-    "allow": [],
-    "deny": ["Read(./.env)"]
+    "allow": [
+      "Read(*)",
+      "FileSystemAccess(./)",
+      "Bash(cd *)",
+      "Bash(cd \"C:\\\\Users\\\\Bao Nguyen\\\\Desktop\\\\Project Learning\\\\AI-driven-template\\\\backend\\\\src\\\\Backend.Api\" && dotnet build --no-restore 2>&1 | head -50)",
+      "Bash(ls -la \"C:/Users/Bao Nguyen/Desktop/Project Learning/AI-driven-template/frontend\" | grep -E \"\\\\.\\(ts|js|json\\)$\")",
+      "Bash(ls -la \"C:/Users/Bao Nguyen/Desktop/Project Learning/AI-driven-template/frontend\" | grep -E \"\\\\.\\(json|js|rc\\)$\")",
+      "Bash(cd:*)",
+      "Bash(python3:*)",
+      "Bash(dotnet build:*)",
+      "Bash(npx tsr:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npm run:*)",
+      "Bash(node -e \"const z = require\\(''''zod''''\\); console.log\\(z.version ?? ''''no version field''''\\)\")"
+    ],
+    "deny": [
+      "Read(./.env)"
+    ],
+    "mode": "bypassPermissions"
   }
 }
