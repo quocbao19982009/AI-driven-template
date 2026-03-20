@@ -11,5 +11,5 @@ export function assetUrl(
   relativePath: string | null | undefined
 ): string | undefined {
   if (!relativePath) return undefined;
-  return `${API_BASE_URL}${relativePath}`;
+  return `${API_BASE_URL}/${relativePath}`;
 }
