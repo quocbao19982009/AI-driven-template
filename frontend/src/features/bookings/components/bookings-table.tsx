@@ -71,7 +71,9 @@ export function BookingsTable({
             ) : (
               bookings.map((booking) => (
                 <TableRow key={booking.id}>
-                  <TableCell className="font-medium">{booking.roomName}</TableCell>
+                  <TableCell className="font-medium">
+                    {booking.roomName}
+                  </TableCell>
                   <TableCell>
                     {new Date(booking.startTime).toLocaleString()}
                   </TableCell>
@@ -90,7 +92,9 @@ export function BookingsTable({
                         </Button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end">
-                        <DropdownMenuItem onClick={() => setEditBooking(booking)}>
+                        <DropdownMenuItem
+                          onClick={() => setEditBooking(booking)}
+                        >
                           <Pencil className="mr-2 h-4 w-4" />
                           {t("common.edit")}
                         </DropdownMenuItem>
@@ -165,12 +169,24 @@ function BookingsTableSkeleton() {
         <TableBody>
           {Array.from({ length: 5 }).map((_, i) => (
             <TableRow key={i}>
-              <TableCell><Skeleton className="h-4 w-24" /></TableCell>
-              <TableCell><Skeleton className="h-4 w-32" /></TableCell>
-              <TableCell><Skeleton className="h-4 w-32" /></TableCell>
-              <TableCell><Skeleton className="h-4 w-24" /></TableCell>
-              <TableCell><Skeleton className="h-4 w-40" /></TableCell>
-              <TableCell><Skeleton className="h-4 w-4" /></TableCell>
+              <TableCell>
+                <Skeleton className="h-4 w-24" />
+              </TableCell>
+              <TableCell>
+                <Skeleton className="h-4 w-32" />
+              </TableCell>
+              <TableCell>
+                <Skeleton className="h-4 w-32" />
+              </TableCell>
+              <TableCell>
+                <Skeleton className="h-4 w-24" />
+              </TableCell>
+              <TableCell>
+                <Skeleton className="h-4 w-40" />
+              </TableCell>
+              <TableCell>
+                <Skeleton className="h-4 w-4" />
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

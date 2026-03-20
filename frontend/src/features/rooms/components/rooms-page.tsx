@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { setSearchQuery, setLocationFilter, setActiveTab } from "../store/rooms-slice";
+import {
+  setSearchQuery,
+  setLocationFilter,
+  setActiveTab,
+} from "../store/rooms-slice";
 import { useGetApiRooms } from "@/api/generated/rooms/rooms";
 import { useGetApiLocations } from "@/api/generated/locations/locations";
 import { Button } from "@/components/ui/button";
@@ -19,9 +23,8 @@ const PAGE_SIZE = 10;
 export function RoomsPage() {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const { searchQuery, locationFilter, sortBy, sortDir, activeTab } = useAppSelector(
-    (s) => s.rooms
-  );
+  const { searchQuery, locationFilter, sortBy, sortDir, activeTab } =
+    useAppSelector((s) => s.rooms);
   const [page, setPage] = useState(1);
   const [createOpen, setCreateOpen] = useState(false);
   const [locationsOpen, setLocationsOpen] = useState(false);
@@ -57,7 +60,9 @@ export function RoomsPage() {
     <div className="space-y-6 p-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">{t("rooms.title")}</h1>
+          <h1 className="text-2xl font-bold tracking-tight">
+            {t("rooms.title")}
+          </h1>
           <p className="text-muted-foreground">{t("rooms.description")}</p>
         </div>
         <div className="flex gap-2">
@@ -83,7 +88,7 @@ export function RoomsPage() {
                 "border-b-2 px-1 pb-2 text-sm font-medium transition-colors",
                 activeTab === tab
                   ? "border-primary text-foreground"
-                  : "border-transparent text-muted-foreground hover:text-foreground"
+                  : "text-muted-foreground hover:text-foreground border-transparent"
               )}
             >
               {t(`rooms.tabs.${tab}`)}

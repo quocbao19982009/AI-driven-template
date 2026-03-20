@@ -20,7 +20,14 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Skeleton } from "@/components/ui/skeleton";
-import { MoreHorizontal, Pencil, Trash2, ChevronUp, ChevronDown, Image } from "lucide-react";
+import {
+  MoreHorizontal,
+  Pencil,
+  Trash2,
+  ChevronUp,
+  ChevronDown,
+  Image,
+} from "lucide-react";
 import { RoomFormDialog } from "./room-form-dialog";
 import { RoomDeleteDialog } from "./room-delete-dialog";
 
@@ -32,7 +39,13 @@ interface RoomsTableProps {
   onPageChange: (page: number) => void;
 }
 
-export function RoomsTable({ rooms, isLoading, page, totalPages, onPageChange }: RoomsTableProps) {
+export function RoomsTable({
+  rooms,
+  isLoading,
+  page,
+  totalPages,
+  onPageChange,
+}: RoomsTableProps) {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { sortBy, sortDir } = useAppSelector((s) => s.rooms);
@@ -202,12 +215,24 @@ function RoomsTableSkeleton() {
         <TableBody>
           {Array.from({ length: 5 }).map((_, i) => (
             <TableRow key={i}>
-              <TableCell><Skeleton className="h-10 w-10 rounded" /></TableCell>
-              <TableCell><Skeleton className="h-4 w-32" /></TableCell>
-              <TableCell><Skeleton className="h-4 w-12" /></TableCell>
-              <TableCell><Skeleton className="h-4 w-24" /></TableCell>
-              <TableCell><Skeleton className="h-4 w-40" /></TableCell>
-              <TableCell><Skeleton className="h-4 w-4" /></TableCell>
+              <TableCell>
+                <Skeleton className="h-10 w-10 rounded" />
+              </TableCell>
+              <TableCell>
+                <Skeleton className="h-4 w-32" />
+              </TableCell>
+              <TableCell>
+                <Skeleton className="h-4 w-12" />
+              </TableCell>
+              <TableCell>
+                <Skeleton className="h-4 w-24" />
+              </TableCell>
+              <TableCell>
+                <Skeleton className="h-4 w-40" />
+              </TableCell>
+              <TableCell>
+                <Skeleton className="h-4 w-4" />
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

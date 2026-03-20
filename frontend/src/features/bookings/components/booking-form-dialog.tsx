@@ -58,15 +58,20 @@ export function BookingFormDialog({
   const { t } = useTranslation();
 
   const bookingFormSchema = PostApiBookingsBody.extend({
-    roomId: z.number({ error: t("bookings.validation.roomRequired") }).min(1, t("bookings.validation.roomRequired")),
+    roomId: z
+      .number({ error: t("bookings.validation.roomRequired") })
+      .min(1, t("bookings.validation.roomRequired")),
     startTime: z.string().min(1, t("bookings.validation.startTimeRequired")),
     endTime: z.string().min(1, t("bookings.validation.endTimeRequired")),
-    bookedBy: z.string().min(1, t("bookings.validation.bookedByRequired")).max(200),
+    bookedBy: z
+      .string()
+      .min(1, t("bookings.validation.bookedByRequired"))
+      .max(200),
     purpose: z.string().max(500).optional(),
-  }).refine(
-    (data) => new Date(data.startTime) < new Date(data.endTime),
-    { message: t("bookings.validation.startBeforeEnd"), path: ["endTime"] }
-  );
+  }).refine((data) => new Date(data.startTime) < new Date(data.endTime), {
+    message: t("bookings.validation.startBeforeEnd"),
+    path: ["endTime"],
+  });
 
   type BookingFormValues = z.infer<typeof bookingFormSchema>;
 
@@ -81,7 +86,9 @@ export function BookingFormDialog({
     resolver: zodResolver(bookingFormSchema),
     defaultValues: {
       roomId: prefillRoomId ?? undefined,
-      startTime: prefillStartTime ? toLocalDatetimeString(prefillStartTime) : toLocalDatetimeString(now),
+      startTime: prefillStartTime
+        ? toLocalDatetimeString(prefillStartTime)
+        : toLocalDatetimeString(now),
       endTime: prefillEndTime
         ? toLocalDatetimeString(prefillEndTime)
         : toLocalDatetimeString(new Date(now.getTime() + 60 * 60 * 1000)),
@@ -102,7 +109,8 @@ export function BookingFormDialog({
         });
       } else {
         const defaultStart = prefillStartTime ?? now;
-        const defaultEnd = prefillEndTime ?? new Date(now.getTime() + 60 * 60 * 1000);
+        const defaultEnd =
+          prefillEndTime ?? new Date(now.getTime() + 60 * 60 * 1000);
         form.reset({
           roomId: prefillRoomId ?? undefined,
           startTime: toLocalDatetimeString(defaultStart),
@@ -117,12 +125,18 @@ export function BookingFormDialog({
   const createMutation = usePostApiBookings({
     mutation: {
       onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: getGetApiBookingsQueryKey() });
+        queryClient.invalidateQueries({
+          queryKey: getGetApiBookingsQueryKey(),
+        });
         onOpenChange(false);
         toast.success(t("bookings.toast.created"));
       },
       onError: (error) => {
-        toast.error(error instanceof Error ? error.message : t("bookings.toast.createError"));
+        toast.error(
+          error instanceof Error
+            ? error.message
+            : t("bookings.toast.createError")
+        );
       },
     },
   });
@@ -130,12 +144,18 @@ export function BookingFormDialog({
   const updateMutation = usePutApiBookingsId({
     mutation: {
       onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: getGetApiBookingsQueryKey() });
+        queryClient.invalidateQueries({
+          queryKey: getGetApiBookingsQueryKey(),
+        });
         onOpenChange(false);
         toast.success(t("bookings.toast.updated"));
       },
       onError: (error) => {
-        toast.error(error instanceof Error ? error.message : t("bookings.toast.updateError"));
+        toast.error(
+          error instanceof Error
+            ? error.message
+            : t("bookings.toast.updateError")
+        );
       },
     },
   });
@@ -164,7 +184,9 @@ export function BookingFormDialog({
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <DialogHeader>
               <DialogTitle>
-                {isEditing ? t("bookings.form.editTitle") : t("bookings.form.createTitle")}
+                {isEditing
+                  ? t("bookings.form.editTitle")
+                  : t("bookings.form.createTitle")}
               </DialogTitle>
               <DialogDescription>
                 {isEditing
@@ -183,9 +205,13 @@ export function BookingFormDialog({
                       <select
                         className="border-input bg-background ring-offset-background focus-visible:ring-ring flex h-10 w-full rounded-md border px-3 py-2 text-sm focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
                         value={field.value ?? ""}
-                        onChange={(e) => field.onChange(Number(e.target.value) || undefined)}
+                        onChange={(e) =>
+                          field.onChange(Number(e.target.value) || undefined)
+                        }
                       >
-                        <option value="">{t("bookings.form.roomPlaceholder")}</option>
+                        <option value="">
+                          {t("bookings.form.roomPlaceholder")}
+                        </option>
                         {rooms.map((room) => (
                           <option key={room.id} value={room.id}>
                             {room.name}
@@ -230,7 +256,10 @@ export function BookingFormDialog({
                   <FormItem>
                     <FormLabel>{t("bookings.form.bookedByLabel")}</FormLabel>
                     <FormControl>
-                      <Input placeholder={t("bookings.form.bookedByPlaceholder")} {...field} />
+                      <Input
+                        placeholder={t("bookings.form.bookedByPlaceholder")}
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

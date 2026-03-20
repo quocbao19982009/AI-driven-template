@@ -23,7 +23,11 @@ interface RoomDeleteDialogProps {
   onOpenChange: (open: boolean) => void;
 }
 
-export function RoomDeleteDialog({ room, open, onOpenChange }: RoomDeleteDialogProps) {
+export function RoomDeleteDialog({
+  room,
+  open,
+  onOpenChange,
+}: RoomDeleteDialogProps) {
   const { t } = useTranslation();
   const queryClient = useQueryClient();
 
@@ -31,12 +35,16 @@ export function RoomDeleteDialog({ room, open, onOpenChange }: RoomDeleteDialogP
     mutation: {
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: getGetApiRoomsQueryKey() });
-        queryClient.invalidateQueries({ queryKey: getGetApiRoomsAllQueryKey() });
+        queryClient.invalidateQueries({
+          queryKey: getGetApiRoomsAllQueryKey(),
+        });
         onOpenChange(false);
         toast.success(t("rooms.toast.deleted"));
       },
       onError: (error) => {
-        toast.error(error instanceof Error ? error.message : t("rooms.toast.deleteError"));
+        toast.error(
+          error instanceof Error ? error.message : t("rooms.toast.deleteError")
+        );
       },
     },
   });
@@ -70,7 +78,9 @@ export function RoomDeleteDialog({ room, open, onOpenChange }: RoomDeleteDialogP
             onClick={handleDelete}
             disabled={deleteMutation.isPending}
           >
-            {deleteMutation.isPending ? t("common.deleting") : t("common.delete")}
+            {deleteMutation.isPending
+              ? t("common.deleting")
+              : t("common.delete")}
           </Button>
         </DialogFooter>
       </DialogContent>

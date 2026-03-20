@@ -19,7 +19,11 @@ interface BookingDetailDialogProps {
   onOpenChange: (open: boolean) => void;
 }
 
-export function BookingDetailDialog({ booking, open, onOpenChange }: BookingDetailDialogProps) {
+export function BookingDetailDialog({
+  booking,
+  open,
+  onOpenChange,
+}: BookingDetailDialogProps) {
   const { t } = useTranslation();
   const [editOpen, setEditOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
@@ -34,20 +38,28 @@ export function BookingDetailDialog({ booking, open, onOpenChange }: BookingDeta
           </DialogHeader>
           <div className="space-y-2 text-sm">
             <div>
-              <span className="text-muted-foreground">{t("bookings.table.start")}: </span>
+              <span className="text-muted-foreground">
+                {t("bookings.table.start")}:{" "}
+              </span>
               {new Date(booking.startTime).toLocaleString()}
             </div>
             <div>
-              <span className="text-muted-foreground">{t("bookings.table.end")}: </span>
+              <span className="text-muted-foreground">
+                {t("bookings.table.end")}:{" "}
+              </span>
               {new Date(booking.endTime).toLocaleString()}
             </div>
             <div>
-              <span className="text-muted-foreground">{t("bookings.table.bookedBy")}: </span>
+              <span className="text-muted-foreground">
+                {t("bookings.table.bookedBy")}:{" "}
+              </span>
               {booking.bookedBy}
             </div>
             {booking.purpose && (
               <div>
-                <span className="text-muted-foreground">{t("bookings.table.purpose")}: </span>
+                <span className="text-muted-foreground">
+                  {t("bookings.table.purpose")}:{" "}
+                </span>
                 {booking.purpose}
               </div>
             )}

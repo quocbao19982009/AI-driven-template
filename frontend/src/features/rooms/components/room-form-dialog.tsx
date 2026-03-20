@@ -41,7 +41,11 @@ interface RoomFormDialogProps {
   onOpenChange: (open: boolean) => void;
 }
 
-export function RoomFormDialog({ room, open, onOpenChange }: RoomFormDialogProps) {
+export function RoomFormDialog({
+  room,
+  open,
+  onOpenChange,
+}: RoomFormDialogProps) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       {open && (
@@ -60,14 +64,28 @@ interface RoomFormDialogContentProps {
   onOpenChange: (open: boolean) => void;
 }
 
-function RoomFormDialogContent({ room, onOpenChange }: RoomFormDialogContentProps) {
+function RoomFormDialogContent({
+  room,
+  onOpenChange,
+}: RoomFormDialogContentProps) {
   const { t } = useTranslation();
 
   const roomFormSchema = PostApiRoomsBody.extend({
-    Name: z.string().min(1, t("rooms.validation.nameRequired")).max(200, t("rooms.validation.nameTooLong")),
-    Capacity: z.number({ error: t("rooms.validation.capacityInvalid") }).int().min(1, t("rooms.validation.capacityMin")),
-    LocationId: z.number({ error: t("rooms.validation.locationRequired") }).min(1, t("rooms.validation.locationRequired")),
-    Purpose: z.string().max(500, t("rooms.validation.purposeTooLong")).optional(),
+    Name: z
+      .string()
+      .min(1, t("rooms.validation.nameRequired"))
+      .max(200, t("rooms.validation.nameTooLong")),
+    Capacity: z
+      .number({ error: t("rooms.validation.capacityInvalid") })
+      .int()
+      .min(1, t("rooms.validation.capacityMin")),
+    LocationId: z
+      .number({ error: t("rooms.validation.locationRequired") })
+      .min(1, t("rooms.validation.locationRequired")),
+    Purpose: z
+      .string()
+      .max(500, t("rooms.validation.purposeTooLong"))
+      .optional(),
     Image: z.instanceof(File).optional(),
   });
 
@@ -103,12 +121,16 @@ function RoomFormDialogContent({ room, onOpenChange }: RoomFormDialogContentProp
     mutation: {
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: getGetApiRoomsQueryKey() });
-        queryClient.invalidateQueries({ queryKey: getGetApiRoomsAllQueryKey() });
+        queryClient.invalidateQueries({
+          queryKey: getGetApiRoomsAllQueryKey(),
+        });
         onOpenChange(false);
         toast.success(t("rooms.toast.created"));
       },
       onError: (error) => {
-        toast.error(error instanceof Error ? error.message : t("rooms.toast.createError"));
+        toast.error(
+          error instanceof Error ? error.message : t("rooms.toast.createError")
+        );
       },
     },
   });
@@ -117,12 +139,16 @@ function RoomFormDialogContent({ room, onOpenChange }: RoomFormDialogContentProp
     mutation: {
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: getGetApiRoomsQueryKey() });
-        queryClient.invalidateQueries({ queryKey: getGetApiRoomsAllQueryKey() });
+        queryClient.invalidateQueries({
+          queryKey: getGetApiRoomsAllQueryKey(),
+        });
         onOpenChange(false);
         toast.success(t("rooms.toast.updated"));
       },
       onError: (error) => {
-        toast.error(error instanceof Error ? error.message : t("rooms.toast.updateError"));
+        toast.error(
+          error instanceof Error ? error.message : t("rooms.toast.updateError")
+        );
       },
     },
   });
@@ -159,10 +185,14 @@ function RoomFormDialogContent({ room, onOpenChange }: RoomFormDialogContentProp
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <DialogHeader>
             <DialogTitle>
-              {isEditing ? t("rooms.form.editTitle") : t("rooms.form.createTitle")}
+              {isEditing
+                ? t("rooms.form.editTitle")
+                : t("rooms.form.createTitle")}
             </DialogTitle>
             <DialogDescription>
-              {isEditing ? t("rooms.form.editDescription") : t("rooms.form.createDescription")}
+              {isEditing
+                ? t("rooms.form.editDescription")
+                : t("rooms.form.createDescription")}
             </DialogDescription>
           </DialogHeader>
           <div className="grid gap-4 py-4">
@@ -173,7 +203,10 @@ function RoomFormDialogContent({ room, onOpenChange }: RoomFormDialogContentProp
                 <FormItem>
                   <FormLabel>{t("rooms.form.nameLabel")}</FormLabel>
                   <FormControl>
-                    <Input placeholder={t("rooms.form.namePlaceholder")} {...field} />
+                    <Input
+                      placeholder={t("rooms.form.namePlaceholder")}
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -207,9 +240,13 @@ function RoomFormDialogContent({ room, onOpenChange }: RoomFormDialogContentProp
                     <select
                       className="border-input bg-background ring-offset-background focus-visible:ring-ring flex h-10 w-full rounded-md border px-3 py-2 text-sm focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
                       value={field.value ?? ""}
-                      onChange={(e) => field.onChange(Number(e.target.value) || undefined)}
+                      onChange={(e) =>
+                        field.onChange(Number(e.target.value) || undefined)
+                      }
                     >
-                      <option value="">{t("rooms.form.locationPlaceholder")}</option>
+                      <option value="">
+                        {t("rooms.form.locationPlaceholder")}
+                      </option>
                       {locations.map((loc) => (
                         <option key={loc.id} value={loc.id}>
                           {loc.name}

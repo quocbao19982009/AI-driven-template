@@ -36,7 +36,10 @@ interface LocationsManagerProps {
   onOpenChange: (open: boolean) => void;
 }
 
-export function LocationsManager({ open, onOpenChange }: LocationsManagerProps) {
+export function LocationsManager({
+  open,
+  onOpenChange,
+}: LocationsManagerProps) {
   const { t } = useTranslation();
   const queryClient = useQueryClient();
   const [editingId, setEditingId] = useState<number | null>(null);
@@ -52,13 +55,19 @@ export function LocationsManager({ open, onOpenChange }: LocationsManagerProps) 
   const createMutation = usePostApiLocations({
     mutation: {
       onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: getGetApiLocationsQueryKey() });
+        queryClient.invalidateQueries({
+          queryKey: getGetApiLocationsQueryKey(),
+        });
         setNewName("");
         setIsAddingNew(false);
         toast.success(t("locations.toast.created"));
       },
       onError: (error) => {
-        toast.error(error instanceof Error ? error.message : t("locations.toast.createError"));
+        toast.error(
+          error instanceof Error
+            ? error.message
+            : t("locations.toast.createError")
+        );
       },
     },
   });
@@ -66,12 +75,18 @@ export function LocationsManager({ open, onOpenChange }: LocationsManagerProps) 
   const updateMutation = usePutApiLocationsId({
     mutation: {
       onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: getGetApiLocationsQueryKey() });
+        queryClient.invalidateQueries({
+          queryKey: getGetApiLocationsQueryKey(),
+        });
         setEditingId(null);
         toast.success(t("locations.toast.updated"));
       },
       onError: (error) => {
-        toast.error(error instanceof Error ? error.message : t("locations.toast.updateError"));
+        toast.error(
+          error instanceof Error
+            ? error.message
+            : t("locations.toast.updateError")
+        );
       },
     },
   });
@@ -79,13 +94,19 @@ export function LocationsManager({ open, onOpenChange }: LocationsManagerProps) 
   const deleteMutation = useDeleteApiLocationsId({
     mutation: {
       onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: getGetApiLocationsQueryKey() });
+        queryClient.invalidateQueries({
+          queryKey: getGetApiLocationsQueryKey(),
+        });
         setDeleteTarget(null);
         setDeleteError(null);
         toast.success(t("locations.toast.deleted"));
       },
       onError: (error) => {
-        setDeleteError(error instanceof Error ? error.message : t("locations.toast.deleteError"));
+        setDeleteError(
+          error instanceof Error
+            ? error.message
+            : t("locations.toast.deleteError")
+        );
       },
     },
   });
@@ -144,7 +165,10 @@ export function LocationsManager({ open, onOpenChange }: LocationsManagerProps) 
                 <TableBody>
                   {locations.length === 0 && !isAddingNew && (
                     <TableRow>
-                      <TableCell colSpan={2} className="text-muted-foreground h-16 text-center">
+                      <TableCell
+                        colSpan={2}
+                        className="text-muted-foreground h-16 text-center"
+                      >
                         {t("locations.table.empty")}
                       </TableCell>
                     </TableRow>
@@ -179,7 +203,11 @@ export function LocationsManager({ open, onOpenChange }: LocationsManagerProps) 
                               >
                                 <Check className="h-4 w-4" />
                               </Button>
-                              <Button variant="ghost" size="icon-xs" onClick={cancelEdit}>
+                              <Button
+                                variant="ghost"
+                                size="icon-xs"
+                                onClick={cancelEdit}
+                              >
                                 <X className="h-4 w-4" />
                               </Button>
                             </>
@@ -200,7 +228,7 @@ export function LocationsManager({ open, onOpenChange }: LocationsManagerProps) 
                                   setDeleteError(null);
                                 }}
                               >
-                                <Trash2 className="h-4 w-4 text-destructive" />
+                                <Trash2 className="text-destructive h-4 w-4" />
                               </Button>
                             </>
                           )}
@@ -289,7 +317,9 @@ export function LocationsManager({ open, onOpenChange }: LocationsManagerProps) 
           <DialogHeader>
             <DialogTitle>{t("locations.delete.title")}</DialogTitle>
             <DialogDescription>
-              {t("locations.delete.description", { name: deleteTarget?.name ?? "" })}
+              {t("locations.delete.description", {
+                name: deleteTarget?.name ?? "",
+              })}
             </DialogDescription>
           </DialogHeader>
           {deleteError && (
@@ -312,7 +342,9 @@ export function LocationsManager({ open, onOpenChange }: LocationsManagerProps) 
               onClick={handleDeleteConfirm}
               disabled={deleteMutation.isPending}
             >
-              {deleteMutation.isPending ? t("common.deleting") : t("common.delete")}
+              {deleteMutation.isPending
+                ? t("common.deleting")
+                : t("common.delete")}
             </Button>
           </DialogFooter>
         </DialogContent>
