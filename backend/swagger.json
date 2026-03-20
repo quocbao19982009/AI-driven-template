@@ -135,7 +135,7 @@
         ],
         "parameters": [
           {
-            "name": "Page",
+            "name": "page",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -143,7 +143,7 @@
             }
           },
           {
-            "name": "PageSize",
+            "name": "pageSize",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -151,7 +151,7 @@
             }
           },
           {
-            "name": "RoomId",
+            "name": "roomId",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -159,7 +159,7 @@
             }
           },
           {
-            "name": "FromDate",
+            "name": "fromDate",
             "in": "query",
             "schema": {
               "type": "string",
@@ -167,7 +167,7 @@
             }
           },
           {
-            "name": "ToDate",
+            "name": "toDate",
             "in": "query",
             "schema": {
               "type": "string",
@@ -776,7 +776,7 @@
         ],
         "parameters": [
           {
-            "name": "Page",
+            "name": "page",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -784,7 +784,7 @@
             }
           },
           {
-            "name": "PageSize",
+            "name": "pageSize",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -792,14 +792,14 @@
             }
           },
           {
-            "name": "Search",
+            "name": "search",
             "in": "query",
             "schema": {
               "type": "string"
             }
           },
           {
-            "name": "LocationId",
+            "name": "locationId",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -807,14 +807,14 @@
             }
           },
           {
-            "name": "SortBy",
+            "name": "sortBy",
             "in": "query",
             "schema": {
               "type": "string"
             }
           },
           {
-            "name": "SortDir",
+            "name": "sortDir",
             "in": "query",
             "schema": {
               "type": "string"

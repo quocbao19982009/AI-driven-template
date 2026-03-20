@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import type { RoomDto } from "@/api/generated/models";
+import { assetUrl } from "@/lib/utils";
 import {
   usePostApiRooms,
   usePutApiRoomsId,
@@ -98,7 +99,7 @@ function RoomFormDialogContent({ room, onOpenChange }: RoomFormDialogContentProp
   const imagePreview = selectedFile
     ? URL.createObjectURL(selectedFile)
     : room?.imagePath
-      ? `${import.meta.env.VITE_API_BASE_URL ?? ""}/${room.imagePath}`
+      ? assetUrl(room.imagePath)
       : null;
 
   const createMutation = usePostApiRooms({

@@ -7,10 +7,10 @@
  */
 
 export type GetApiRoomsParams = {
-  Page?: number;
-  PageSize?: number;
-  Search?: string;
-  LocationId?: number;
-  SortBy?: string;
-  SortDir?: string;
+  page?: number;
+  pageSize?: number;
+  search?: string;
+  locationId?: number;
+  sortBy?: string;
+  sortDir?: string;
 };

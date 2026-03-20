@@ -8,11 +8,11 @@
 import * as zod from "zod";
 
 export const GetApiBookingsQueryParams = zod.object({
-  Page: zod.number().optional(),
-  PageSize: zod.number().optional(),
-  RoomId: zod.number().optional(),
-  FromDate: zod.iso.datetime({}).optional(),
-  ToDate: zod.iso.datetime({}).optional(),
+  page: zod.number().optional(),
+  pageSize: zod.number().optional(),
+  roomId: zod.number().optional(),
+  fromDate: zod.iso.datetime({}).optional(),
+  toDate: zod.iso.datetime({}).optional(),
 });
 
 export const GetApiBookingsResponse = zod.object({

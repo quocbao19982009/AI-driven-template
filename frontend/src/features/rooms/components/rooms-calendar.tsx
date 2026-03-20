@@ -32,8 +32,13 @@ export function RoomsCalendar() {
   const dispatch = useAppDispatch();
   const selectedRoomId = useAppSelector((s) => s.rooms.selectedRoomId);
   const [weekStart, setWeekStart] = useState(() => startOfWeek(new Date()));
-  const [createSlot, setCreateSlot] = useState<{ start: Date; end: Date } | null>(null);
-  const [selectedBooking, setSelectedBooking] = useState<BookingDto | null>(null);
+  const [createSlot, setCreateSlot] = useState<{
+    start: Date;
+    end: Date;
+  } | null>(null);
+  const [selectedBooking, setSelectedBooking] = useState<BookingDto | null>(
+    null
+  );
 
   const { data: roomsResponse } = useGetApiRoomsAll();
   const rooms = roomsResponse?.data?.data ?? [];
@@ -45,10 +50,10 @@ export function RoomsCalendar() {
           roomId: selectedRoomId,
           fromDate: weekStart.toISOString(),
           toDate: weekEnd.toISOString(),
-          pageSize: 200,
+          pageSize: 100,
         }
-      : { pageSize: 0 },
-    { enabled: selectedRoomId !== null }
+      : null,
+    { query: { enabled: selectedRoomId !== null } }
   );
   const bookings: BookingDto[] = bookingsResponse?.data?.data?.items ?? [];
 
@@ -90,11 +95,15 @@ export function RoomsCalendar() {
     <div className="space-y-4">
       <div className="flex items-center gap-4">
         <div className="flex items-center gap-2">
-          <label className="text-sm font-medium">{t("rooms.calendar.roomLabel")}</label>
+          <label className="text-sm font-medium">
+            {t("rooms.calendar.roomLabel")}
+          </label>
           <select
             className="border-input bg-background h-9 rounded-md border px-3 text-sm"
             value={selectedRoomId ?? ""}
-            onChange={(e) => dispatch(setSelectedRoomId(Number(e.target.value) || null))}
+            onChange={(e) =>
+              dispatch(setSelectedRoomId(Number(e.target.value) || null))
+            }
           >
             <option value="">{t("rooms.calendar.selectRoom")}</option>
             {rooms.map((room) => (
@@ -110,7 +119,8 @@ export function RoomsCalendar() {
             <ChevronLeft className="h-4 w-4" />
           </Button>
           <span className="text-sm font-medium">
-            {weekStart.toLocaleDateString()} – {addDays(weekStart, 6).toLocaleDateString()}
+            {weekStart.toLocaleDateString()} –{" "}
+            {addDays(weekStart, 6).toLocaleDateString()}
           </span>
           <Button variant="outline" size="sm" onClick={nextWeek}>
             <ChevronRight className="h-4 w-4" />
@@ -124,7 +134,10 @@ export function RoomsCalendar() {
         </div>
       ) : (
         <div className="overflow-auto rounded-md border">
-          <div className="grid" style={{ gridTemplateColumns: `60px repeat(7, 1fr)` }}>
+          <div
+            className="grid"
+            style={{ gridTemplateColumns: `60px repeat(7, 1fr)` }}
+          >
             {/* Header row */}
             <div className="border-b p-2" />
             {weekDays.map((day) => (
@@ -132,9 +145,14 @@ export function RoomsCalendar() {
                 key={day.toISOString()}
                 className="border-b border-l p-2 text-center text-xs font-medium"
               >
-                <div>{day.toLocaleDateString(undefined, { weekday: "short" })}</div>
+                <div>
+                  {day.toLocaleDateString(undefined, { weekday: "short" })}
+                </div>
                 <div className="text-muted-foreground">
-                  {day.toLocaleDateString(undefined, { month: "numeric", day: "numeric" })}
+                  {day.toLocaleDateString(undefined, {
+                    month: "numeric",
+                    day: "numeric",
+                  })}
                 </div>
               </div>
             ))}
@@ -153,9 +171,10 @@ export function RoomsCalendar() {
                   return (
                     <div
                       key={`${day.toISOString()}-${hour}`}
-                      className="relative h-12 cursor-pointer border-b border-l hover:bg-accent/30"
+                      className="hover:bg-accent/30 relative h-12 cursor-pointer border-b border-l"
                       onClick={() => {
-                        if (slotBookings.length === 0) handleSlotClick(day, hour);
+                        if (slotBookings.length === 0)
+                          handleSlotClick(day, hour);
                       }}
                     >
                       {slotBookings.map((b) => (
@@ -167,7 +186,9 @@ export function RoomsCalendar() {
                             setSelectedBooking(b);
                           }}
                         >
-                          <div className="truncate font-medium">{b.bookedBy}</div>
+                          <div className="truncate font-medium">
+                            {b.bookedBy}
+                          </div>
                           <div className="truncate opacity-80">{b.purpose}</div>
                         </div>
                       ))}
@@ -200,3 +221,4 @@ export function RoomsCalendar() {
     </div>
   );
 }
+

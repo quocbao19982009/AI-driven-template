@@ -7,9 +7,9 @@
  */
 
 export type GetApiBookingsParams = {
-  Page?: number;
-  PageSize?: number;
-  RoomId?: number;
-  FromDate?: string;
-  ToDate?: string;
+  page?: number;
+  pageSize?: number;
+  roomId?: number;
+  fromDate?: string;
+  toDate?: string;
 };

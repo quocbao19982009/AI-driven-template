@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { setSortBy, setSortDir } from "../store/rooms-slice";
 import type { RoomDto } from "@/api/generated/models";
+import { assetUrl } from "@/lib/utils";
 import {
   Table,
   TableBody,
@@ -102,7 +103,7 @@ export function RoomsTable({ rooms, isLoading, page, totalPages, onPageChange }:
                   <TableCell>
                     {room.imagePath ? (
                       <img
-                        src={`${import.meta.env.VITE_API_BASE_URL ?? ""}/${room.imagePath}`}
+                        src={assetUrl(room.imagePath)}
                         alt={room.name}
                         className="h-10 w-10 rounded object-cover"
                       />

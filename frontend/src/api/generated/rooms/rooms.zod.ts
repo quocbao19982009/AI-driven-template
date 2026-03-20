@@ -8,12 +8,12 @@
 import * as zod from "zod";
 
 export const GetApiRoomsQueryParams = zod.object({
-  Page: zod.number().optional(),
-  PageSize: zod.number().optional(),
-  Search: zod.string().optional(),
-  LocationId: zod.number().optional(),
-  SortBy: zod.string().optional(),
-  SortDir: zod.string().optional(),
+  page: zod.number().optional(),
+  pageSize: zod.number().optional(),
+  search: zod.string().optional(),
+  locationId: zod.number().optional(),
+  sortBy: zod.string().optional(),
+  sortDir: zod.string().optional(),
 });
 
 export const GetApiRoomsResponse = zod.object({
