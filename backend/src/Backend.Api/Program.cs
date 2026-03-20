@@ -1,4 +1,5 @@
 using System.Reflection;
+using System.Text.Json;
 using Backend.Common.Extensions;
 using Backend.Common.Middleware;
 using Backend.Common.Swagger;
@@ -62,6 +63,7 @@ builder.Services.AddSwaggerGen(options =>
     options.SupportNonNullableReferenceTypes();
     options.SchemaFilter<RequiredSchemaFilter>();
     options.DocumentFilter<FluentValidationPatternMergeFilter>();
+    options.OperationFilter<CamelCaseQueryParameterFilter>();
 
     options.SwaggerDoc("v1", new OpenApiInfo
     {
@@ -78,7 +80,12 @@ builder.Services.AddSwaggerGen(options =>
     }
 });
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+        options.JsonSerializerOptions.DictionaryKeyPolicy = JsonNamingPolicy.CamelCase;
+    });
 
 var app = builder.Build();
 
