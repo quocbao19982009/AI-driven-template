@@ -5,6 +5,7 @@
  * A simple ASP.NET Core Web API template with best practices for building scalable and maintainable applications.
  * OpenAPI spec version: v1
  */
+import type { UserRole } from "./userRole";
 
 export interface CreateUserRequest {
   /**
@@ -27,6 +28,5 @@ export interface CreateUserRequest {
    * @pattern (?=.*[A-Z])(?=.*[a-z])(?=.*\d)
    */
   password: string;
-  /** @nullable */
-  role?: string | null;
+  role?: UserRole;
 }

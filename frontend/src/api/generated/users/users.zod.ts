@@ -62,7 +62,7 @@ export const PostApiUsersBody = zod.object({
     .string()
     .min(postApiUsersBodyPasswordMin)
     .regex(postApiUsersBodyPasswordRegExp),
-  role: zod.string().nullish(),
+  role: zod.enum(["User", "Admin"]).optional(),
 });
 
 export const PostApiUsersResponse = zod.object({
@@ -117,7 +117,7 @@ export const PutApiUsersIdBody = zod.object({
   firstName: zod.string().min(1).max(putApiUsersIdBodyFirstNameMax),
   lastName: zod.string().min(1).max(putApiUsersIdBodyLastNameMax),
   email: zod.email().min(1).max(putApiUsersIdBodyEmailMax),
-  role: zod.string().nullish(),
+  role: zod.enum(["User", "Admin"]).optional(),
 });
 
 export const PutApiUsersIdResponse = zod.object({

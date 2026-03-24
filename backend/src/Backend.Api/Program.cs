@@ -6,6 +6,9 @@ using Backend.Common.Swagger;
 using Backend.Data;
 using Backend.Features._FeatureTemplate;
 using Backend.Features.Auth;
+using Backend.Features.Bookings;
+using Backend.Features.Locations;
+using Backend.Features.Rooms;
 using Backend.Features.Users;
 using Backend.Identity;
 using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
@@ -44,6 +47,12 @@ builder.Services.AddScoped<IFeatureRepository, FeatureRepository>();
 builder.Services.AddScoped<IFeatureService, FeatureService>();
 builder.Services.AddScoped<IRefreshTokensRepository, RefreshTokensRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<ILocationsRepository, LocationsRepository>();
+builder.Services.AddScoped<ILocationsService, LocationsService>();
+builder.Services.AddScoped<IRoomsRepository, RoomsRepository>();
+builder.Services.AddScoped<IRoomsService, RoomsService>();
+builder.Services.AddScoped<IBookingsRepository, BookingsRepository>();
+builder.Services.AddScoped<IBookingsService, BookingsService>();
 
 // Logging
 builder.Host.UseSerilog((context, loggerConfig) => loggerConfig.ReadFrom.Configuration(context.Configuration));
@@ -110,6 +119,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseRateLimiter();
 app.UseCors();
+app.UseStaticFiles();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
