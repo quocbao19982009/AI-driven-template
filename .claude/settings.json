@@ -9,7 +9,6 @@
     ]
   },
   "enableAllProjectMcpServers": true,
-  "plansDirectory": "./claude-plans",
   "hooks": {
     "PreToolUse": [
       {
@@ -41,6 +40,9 @@
     "frontend-design@claude-plugins-official": true,
     "context7@claude-plugins-official": true,
     "code-review@claude-plugins-official": true,
-    "claude-code-setup@claude-plugins-official": true
-  }
+    "claude-code-setup@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": true,
+    "csharp-lsp@claude-plugins-official": true
+  },
+  "plansDirectory": "./claude-plans"
 }

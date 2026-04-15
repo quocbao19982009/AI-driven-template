@@ -63,8 +63,8 @@ Specs live in `feature_docs/` — one subfolder per feature (e.g. `feature_docs/
 
 **At the end of any session that changed a convention** (CLAUDE.md, `.claude/rules/`, `docs/coding-style.md`, or a skill), append one row per distinct change to `docs/changelog.md`:
 
-| Date | Change | Reason |
-|---|---|---|
+| Date       | Change                       | Reason             |
+| ---------- | ---------------------------- | ------------------ |
 | YYYY-MM-DD | What rule/convention changed | Why it was changed |
 
 **Skip it for:** feature additions, bug fixes, or code changes with no convention impact.
@@ -93,3 +93,15 @@ Specs live in `feature_docs/` — one subfolder per feature (e.g. `feature_docs/
 
 - Always use Context7 MCP when library/API documentation, code generation, or configuration steps are needed — do not ask, just use it if available
 - Convention history and change rationale: see `docs/changelog.md`
+
+## Code Intelligence
+
+Prefer LSP over Grep/Read for code navigation - it's faster, precise and avoids reading entire files:
+
+- `workspaceSymbol` to find where something is defined
+- `findReferences` to see all usages across the codebase
+- `goToDefinition`/`goToImplementation` to jump to source
+- `hover` for type info without reading the file
+  Use Grep only when LSP isn't available or text/pattern searches (comments, string, config)
+
+after writing or editing code, check LSP diagnostics and fix errors before proceeding

@@ -86,6 +86,26 @@ npm run api:sync
 ```
 This should complete without errors. If it does, the Swagger → Orval pipeline is working correctly.
 
+**8. Install LSP language servers (required for AI code navigation)**
+
+The AI uses LSP to find definitions and references precisely instead of reading entire files. Without these, it falls back to slower, less accurate text search.
+
+```bash
+# TypeScript LSP — for all .ts / .tsx files
+npm install -g typescript-language-server typescript
+
+# C# LSP — for all .cs files
+dotnet tool install --global csharp-ls
+```
+
+Open a new terminal after installing, then verify:
+```bash
+typescript-language-server --version
+csharp-ls --version
+```
+
+Both should print a version number. If either says "not found", the global install directory is not on your PATH.
+
 ---
 
 ## AI Skills and Agents
