@@ -115,3 +115,15 @@ Specs live in `feature_docs/` — one subfolder per feature (e.g. `feature_docs/
 | `cn()`                              | `lib/utils.ts`            | Tailwind class merging utility                                                         |
 | `useDebounce`                       | `hooks/use-debounce.ts`   | Debounce input values before triggering queries                                        |
 | `useTranslation`                    | `react-i18next`           | All UI strings must use `const { t } = useTranslation()` — never hardcode visible text |
+
+## Code Intelligence
+
+Prefer LSP over Grep/Read for code navigation - it's faster, precise and avoids reading entire files:
+
+- `workspaceSymbol` to find where something is defined
+- `findReferences` to see all usages across the codebase
+- `goToDefinition`/`goToImplementation` to jump to source
+- `hover` for type info without reading the file
+  Use Grep only when LSP isn't available or text/pattern searches (comments, string, config)
+
+after writing or editing code, check LSP diagnostics and fix errors before proceeding

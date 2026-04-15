@@ -1,0 +1,81 @@
+version: 2
+
+updates:
+  # ── npm (frontend) ──────────────────────────────────────────────────────────
+  - package-ecosystem: "npm"
+    directory: "/frontend"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+    open-pull-requests-limit: 10
+    groups:
+      tanstack:
+        patterns:
+          - "@tanstack/*"
+      radix:
+        patterns:
+          - "radix-ui"
+          - "@radix-ui/*"
+      testing:
+        patterns:
+          - "vitest"
+          - "@testing-library/*"
+          - "jsdom"
+      vite-toolchain:
+        patterns:
+          - "vite"
+          - "@vitejs/*"
+          - "@tailwindcss/*"
+          - "tailwindcss"
+          - "typescript"
+          - "typescript-eslint"
+          - "eslint*"
+          - "globals"
+      i18n:
+        patterns:
+          - "i18next"
+          - "react-i18next"
+    ignore:
+      # Pin React 19 — major bumps require coordinated ecosystem updates
+      - dependency-name: "react"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "react-dom"
+        update-types: ["version-update:semver-major"]
+
+  # ── NuGet (backend) ─────────────────────────────────────────────────────────
+  - package-ecosystem: "nuget"
+    directory: "/backend"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+    open-pull-requests-limit: 10
+    groups:
+      microsoft-aspnetcore:
+        patterns:
+          - "Microsoft.AspNetCore.*"
+          - "Microsoft.EntityFrameworkCore*"
+          - "Microsoft.NET.*"
+      serilog:
+        patterns:
+          - "Serilog*"
+      swashbuckle:
+        patterns:
+          - "Swashbuckle*"
+          - "MicroElements.Swashbuckle*"
+      test-packages:
+        patterns:
+          - "Moq"
+          - "xunit*"
+          - "FluentAssertions"
+          - "coverlet*"
+
+  # ── GitHub Actions ───────────────────────────────────────────────────────────
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+    open-pull-requests-limit: 5

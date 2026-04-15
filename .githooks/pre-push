@@ -7,3 +7,15 @@ if [ $? -ne 0 ]; then
   echo "Run 'npm run format', then commit and push again."
   exit 1
 fi
+
+# Warn if backend files changed but api/generated/ is out of sync
+BACKEND_CHANGED=$(git diff --name-only origin/main...HEAD 2>/dev/null | grep -E "\.(cs|csproj)$")
+if [ -n "$BACKEND_CHANGED" ]; then
+  GENERATED_CHANGED=$(git diff --name-only origin/main...HEAD 2>/dev/null | grep "^frontend/src/api/generated/")
+  if [ -z "$GENERATED_CHANGED" ]; then
+    echo ""
+    echo "Warning: Backend files changed but frontend/src/api/generated/ was not updated."
+    echo "If you added or changed any endpoints or DTOs, run 'npm run api:sync' and commit the result."
+    echo ""
+  fi
+fi
