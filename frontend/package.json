@@ -41,7 +41,7 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
-    "@eslint/js": "^9.39.1",
+    "@eslint/js": "^10.0.1",
     "@tanstack/eslint-plugin-query": "^5.91.4",
     "@tanstack/react-router-devtools": "^1.159.10",
     "@tanstack/router-cli": "^1.159.9",
