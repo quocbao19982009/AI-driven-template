@@ -14,12 +14,17 @@
 4. **Endpoints** — Standard CRUD only, or are there custom actions (e.g., toggle, bulk delete)?
 5. **Frontend UI** — Table + form dialog (standard)? Or something different?
 6. **Authorization** — Public, authenticated only, or role-restricted?
+7. **Query invalidation** — After a mutation (create/update/delete), which queries need to be invalidated?
+   - Does this feature's own list/detail queries need revalidating after its mutations? (always yes — confirm the Orval query key)
+   - Does mutating this feature affect any *other* feature's cached data? (e.g. a parent count, a summary widget)
+   - Does this feature *display* data from another entity (e.g. User name, status)? If so, should that entity's mutations also invalidate this feature's query?
 
 **For changes to existing features, ask if any of these are unclear:**
 
 - What is the exact expected behavior after the change?
 - Does this affect any other feature or shared component?
 - Should old data be migrated or is this forward-only?
+- Does this change affect which queries should be invalidated on mutation?
 
 Ask all questions in a single message. Do not start coding until requirements are clear.
 

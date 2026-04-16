@@ -22,3 +22,4 @@
 | 2026-03-14 | Added status legend to `FEATURES.md` | Status values were undefined; AI was guessing inconsistently |
 | 2026-03-14 | Deduplicated DB safety rule — CLAUDE.md now references `backend.md` instead of repeating it | Two copies of the same rule would diverge if only one was updated |
 | 2026-03-15 | Added PR template; branch protection for main enforced at repo level | Enforce PR-only workflow for all changes |
+| 2026-04-16 | Added query invalidation as a mandatory clarification question (item 7) in CLAUDE.md; added Step 3.5 "Cache Invalidation Design" to `docs/feature-generation/frontend.md`; added 4 cache-invalidation checklist items to `implementation-checklist.md`; added cross-feature invalidation comments to template dialogs | AI was generating mutations without asking about cross-feature or reverse-dependency cache invalidation, causing stale data bugs when one feature's mutations affected another feature's cached queries |

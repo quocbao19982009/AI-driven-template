@@ -57,6 +57,8 @@ export function FeatureFormDialog({
         queryClient.invalidateQueries({
           queryKey: getGetApiFeaturesQueryKey(),
         });
+        // If this mutation also affects another feature's cached data, add:
+        // queryClient.invalidateQueries({ queryKey: getGetApi<OtherFeature>QueryKey() });
         onOpenChange(false);
         toast.success(t("features.toast.created"));
       },
@@ -76,6 +78,8 @@ export function FeatureFormDialog({
         queryClient.invalidateQueries({
           queryKey: getGetApiFeaturesQueryKey(),
         });
+        // If this mutation also affects another feature's cached data, add:
+        // queryClient.invalidateQueries({ queryKey: getGetApi<OtherFeature>QueryKey() });
         onOpenChange(false);
         toast.success(t("features.toast.updated"));
       },

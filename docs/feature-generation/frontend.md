@@ -89,6 +89,49 @@ type FeatureFormValues = z.infer<typeof featureFormSchema>;
 
 The schema and its `type FormValues` must be declared **inside** the component function so `t()` is in scope.
 
+### 3.5 Cache Invalidation Design
+
+Before writing any dialog component, answer these three questions and note the answers:
+
+1. **Self-invalidation** — Which Orval-generated query key covers this feature's list? (e.g. `getGetFactoriesQueryKey()`)
+   Every mutation must call `queryClient.invalidateQueries({ queryKey: getGet<Feature>QueryKey() })` in `onSuccess`.
+
+2. **Cross-feature invalidation** — Does mutating this feature change data displayed by *another* feature?
+   If yes, import that feature's query key function and add a second `invalidateQueries` call in the same `onSuccess`.
+
+3. **Reverse dependency** — Does this feature embed data from another entity (e.g. User name, category label)?
+   If yes, that other entity's mutation dialogs must also invalidate this feature's query key.
+
+#### Pattern (standard case)
+
+```ts
+import { useQueryClient } from "@tanstack/react-query";
+import {
+  usePostApiFactories,
+  getGetApiFactoriesQueryKey,
+} from "@/api/generated/factories/factories";
+
+const queryClient = useQueryClient();
+
+const createMutation = usePostApiFactories({
+  mutation: {
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: getGetApiFactoriesQueryKey() });
+      // If this mutation also affects another feature's cached data, add:
+      // queryClient.invalidateQueries({ queryKey: getGetApi<OtherFeature>QueryKey() });
+      onOpenChange(false);
+      toast.success(t("factories.toast.created"));
+    },
+  },
+});
+```
+
+Always use the Orval-generated `getGet<Feature>QueryKey()` — never hardcode query key strings.
+
+`invalidateQueries` marks the cache stale and triggers a background refetch the next time the query is observed. Use `refetchQueries` only if you need an immediate refetch even when the query is not currently mounted.
+
+---
+
 ### 4. Components
 
 - All component files use **kebab-case** filenames (`feature-page.tsx`, not `FeaturePage.tsx`)

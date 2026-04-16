@@ -39,6 +39,10 @@
 - [ ] Translation keys added to **both** `en.json` and `fi.json`
 - [ ] No hardcoded visible strings (all use `t()`)
 - [ ] No server state duplicated into Redux
+- [ ] All mutations (create/update/delete) call `queryClient.invalidateQueries` in `onSuccess`
+- [ ] Query keys use Orval-generated `getGet<Feature>QueryKey()` — no hardcoded strings
+- [ ] Cross-feature invalidation addressed: if this feature's mutations affect other features' cached data, those keys are also invalidated
+- [ ] Reverse dependencies addressed: if this feature displays data from another entity, a plan exists to invalidate this query when that entity changes
 - [ ] `npm run lint` — 0 errors
 - [ ] `npx tsc --noEmit -p tsconfig.app.json` — 0 errors
 
